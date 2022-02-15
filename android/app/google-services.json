@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "104585798912",
+    "project_id": "mezorn-flutter-dummy",
+    "storage_bucket": "mezorn-flutter-dummy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104585798912:android:e77a20fa420ae3d75bbfe5",
+        "android_client_info": {
+          "package_name": "mn.mezorn.mezorn_dummy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104585798912-b89v4mmcmrju57onq8qqrmddbtmlar45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAghUYRN5WSxpn9eacVX_XpTiVf4XNOvpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104585798912-b89v4mmcmrju57onq8qqrmddbtmlar45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
