@@ -3,9 +3,14 @@ import 'package:get/get.dart';
 import 'package:mezorn_dummy/demo/collection_divider.dart';
 import 'package:mezorn_dummy/demo/collection_title.dart';
 
-class TextCollection extends StatelessWidget {
+class TextCollection extends StatefulWidget {
   const TextCollection({Key? key}) : super(key: key);
 
+  @override
+  State<TextCollection> createState() => _TextCollectionState();
+}
+
+class _TextCollectionState extends State<TextCollection> {
   @override
   Widget build(BuildContext context) {
     return Column(

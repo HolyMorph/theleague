@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mezorn_dummy/onboarding/splash_screen.dart';
@@ -32,7 +34,7 @@ class _DemoScreenState extends State<DemoScreen> {
                 Get.to(const SplashScreen());
               },
               child: const Text('Start App'),
-            )
+            ),
           ],
         ),
       ),

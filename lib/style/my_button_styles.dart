@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mezorn_dummy/style/my_colors.dart';
 import 'package:mezorn_dummy/style/my_text_styles.dart';
 
 class MyButtonStyles {
   static const double buttonHeight = 48;
   static const double buttonMinWidth = 88;
-  static const Color buttonColor = MyColors.primaryColor;
-  static const Color disabledColor = MyColors.disabledColor;
   static EdgeInsets buttonPadding = const EdgeInsets.symmetric(horizontal: 12);
 
   static OutlinedBorder? buttonShape;
@@ -16,13 +15,13 @@ class MyButtonStyles {
     height: buttonHeight,
     shape: buttonShape,
     padding: buttonPadding,
-    buttonColor: buttonColor,
-    disabledColor: disabledColor,
+    buttonColor: Get.theme.primaryColor,
+    disabledColor: Get.theme.disabledColor,
     minWidth: double.infinity,
-    splashColor: MyColors.splashColor,
-    focusColor: MyColors.focusColor,
-    hoverColor: MyColors.hoverColor,
-    highlightColor: MyColors.highlightColor,
+    splashColor: Get.theme.splashColor,
+    focusColor: Get.theme.focusColor,
+    hoverColor: Get.theme.hoverColor,
+    highlightColor: Get.theme.highlightColor,
   );
 
   ///Товчлуурын үндсэн загвар.
@@ -33,10 +32,10 @@ class MyButtonStyles {
     backgroundColor: MaterialStateProperty.resolveWith<Color>(
       (Set<MaterialState> states) {
         ///Идэвхгүй үеийн өнгө
-        if (states.contains(MaterialState.disabled)) return disabledColor;
+        if (states.contains(MaterialState.disabled)) return Get.theme.disabledColor;
 
         ///Бусад үеийн өнгө
-        return buttonColor;
+        return Get.theme.primaryColor;
       },
     ),
 
@@ -44,7 +43,7 @@ class MyButtonStyles {
     padding: MaterialStateProperty.all(buttonPadding),
 
     ///Товчлуурын сүүдрийн өнгө
-    shadowColor: MaterialStateProperty.all(MyColors.shadowColor),
+    shadowColor: MaterialStateProperty.all(Get.theme.shadowColor),
 
     ///Товчлуурын хэлбэр
     shape: MaterialStateProperty.all(
@@ -83,14 +82,14 @@ class MyButtonStyles {
       (Set<MaterialState> states) {
         ///Идэвхгүй үеийн хүрээний загвар
         if (states.contains(MaterialState.disabled)) {
-          return const BorderSide(
-            color: MyColors.disabledColor,
+          return BorderSide(
+            color: Get.theme.disabledColor,
             width: 1,
           );
         }
 
         ///Бусад үеийн хүрээний загвар
-        return const BorderSide(color: MyColors.primaryColor, width: 1);
+        return BorderSide(color: Get.theme.primaryColor, width: 1);
       },
     ),
     minimumSize: MaterialStateProperty.all(

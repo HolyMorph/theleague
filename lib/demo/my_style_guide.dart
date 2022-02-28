@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mezorn_dummy/demo/demo_selectable_widgets/selectable_widget_collection.dart';
 import 'package:mezorn_dummy/demo/demo_texts/text_collection.dart';
 
@@ -20,30 +21,59 @@ class _MyStyleGuideState extends State<MyStyleGuide> {
         title: const Text('Style Guide'),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('Доорх виджетүүдийн энгийн хувилбарууд нь гаргасан дезайны загвартай таарч байх ёстой'),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            children: [
+              const Icon(Icons.star),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
+                    _rebuildAllChild();
+                  },
+                  child: const Text('Change theme'),
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text('Доорх виджетүүдийн энгийн хувилбарууд нь гаргасан дезайны загвартай таарч байх ёстой'),
 
-                ///Товчлууруудын загвар
-                ButtonCollection(),
+                      ///Товчлууруудын загвар
+                      ButtonCollection(),
 
-                ///TextField-ийн загварууд
-                TextFieldsCollection(),
+                      ///TextField-ийн загварууд
+                      TextFieldsCollection(),
 
-                ///Текстүүдийн загвар
-                TextCollection(),
+                      ///Текстүүдийн загвар
+                      TextCollection(),
 
-                ///Сонгогдох боломжтой виджетүүдийн загвар
-                SelectableWidgetCollection(),
-              ],
-            ),
+                      ///Сонгогдох боломжтой виджетүүдийн загвар
+                      SelectableWidgetCollection(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
+  }
+
+  ///Бүх виджетүүдийг хүчээр дахин зурах функц
+  _rebuildAllChild() {
+    Future.delayed(const Duration(milliseconds: 200), () {
+      void rebuild(Element el) {
+        el.markNeedsBuild();
+        el.visitChildren(rebuild);
+      }
+
+      (context as Element).visitChildren(rebuild);
+    });
   }
 }

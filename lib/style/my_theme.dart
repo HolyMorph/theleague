@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mezorn_dummy/style/my_button_styles.dart';
 import 'package:mezorn_dummy/style/my_colors.dart';
 import 'package:mezorn_dummy/style/my_text_styles.dart';
-import 'package:mezorn_dummy/style/my_textfield_styles.dart';
+import 'package:mezorn_dummy/style/my_text_field_style.dart';
 
-class MyThemes {
+class MyTheme {
   ///[TabBar]-ийн загвар
   static TabBarTheme tabBarTheme = TabBarTheme(
     ///Tab-ын сонгогдсон гарчигны өнгө
-    labelColor: MyColors.primaryColor,
+    labelColor: Get.theme.primaryColor,
 
     ///Tab-ын сонгогдсон гарчигны загвар
     labelStyle: MyTextStyles.selectedTabLabelStyle,
 
     ///Tab-ын сонгогдоогүй гарчигны өнгө
-    unselectedLabelColor: MyColors.unselectedWidgetColor,
+    unselectedLabelColor: Get.theme.unselectedWidgetColor,
 
     ///Tab-ын сонгогдоогүй гарчигны загвар
     unselectedLabelStyle: MyTextStyles.unselectedTabLabelStyle,
@@ -47,16 +48,16 @@ class MyThemes {
     type: BottomNavigationBarType.fixed,
 
     ///Сонгогдсон Tab-ийн Icon болон текстийн өнгө
-    selectedItemColor: MyColors.primaryColor,
+    selectedItemColor: Get.theme.primaryColor,
 
     ///Сонгогдоогүй Tab-ийн Icon болон текстийн өнгө
-    unselectedItemColor: MyColors.unselectedWidgetColor,
+    unselectedItemColor: Get.theme.unselectedWidgetColor,
 
     ///Сонгогдсон Tab-ийн Icon-ны загвар
-    selectedIconTheme: const IconThemeData(color: MyColors.primaryColor),
+    selectedIconTheme: IconThemeData(color: Get.theme.primaryColor),
 
     ///Сонгогдоогүй Tab-ийн Icon-ны загвар
-    unselectedIconTheme: const IconThemeData(color: MyColors.unselectedWidgetColor),
+    unselectedIconTheme: IconThemeData(color: Get.theme.unselectedWidgetColor),
 
     ///Сонгогдсон Tab-ийн гарчигны загвар
     selectedLabelStyle: MyTextStyles.selectedLabelStyle,
@@ -66,12 +67,12 @@ class MyThemes {
   );
 
   ///Апп-ын [AppBar]-ийн загвар
-  static AppBarTheme appBarTheme = const AppBarTheme(
+  static AppBarTheme appBarTheme = AppBarTheme(
     ///Дэвсгэр өнгө.
-    backgroundColor: MyColors.primaryColor,
+    backgroundColor: Get.theme.primaryColor,
 
     ///Товгорын хэмжээ 0-с их тохиолдолд ард нь тусах сүүдрийн өнгө
-    shadowColor: MyColors.shadowColor,
+    shadowColor: Get.theme.shadowColor,
 
     ///Өндрийн хэмжээ
     toolbarHeight: null,
@@ -260,11 +261,11 @@ class MyThemes {
     ),
 
     ///TextForm үндсэн стайл
-    inputDecorationTheme: MyTextFieldStyles.inputTheme,
+    inputDecorationTheme: MyTextFieldStyle.inputTheme,
 
     ///Апп-д ашиглах текстүүдийн стайл
     textTheme: textTheme,
-  );
 
-  static ThemeData darkTheme = mainTheme.copyWith();
+    brightness: Brightness.light,
+  );
 }

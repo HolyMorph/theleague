@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mezorn_dummy/demo/collection_divider.dart';
 import 'package:mezorn_dummy/demo/collection_title.dart';
-import 'package:mezorn_dummy/style/my_textfield_styles.dart';
 
 class TextFieldsCollection extends StatefulWidget {
   const TextFieldsCollection({Key? key}) : super(key: key);
@@ -22,6 +22,7 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
         TextFormField(
           decoration: const InputDecoration(
             hintText: 'Энгийн [TextFormField]',
+            border: InputBorder.none,
           ),
         ),
         const CollectionDivider(),
@@ -37,11 +38,15 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
 
         ///Доогуур зураастай үеийн харагдац
         TextFormField(
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: 'Доогуур зураастай',
             labelText: 'Underline border',
-            focusedBorder: UnderlineInputBorder(),
-            enabledBorder: UnderlineInputBorder(),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: Get.theme.inputDecorationTheme.border?.borderSide ?? const BorderSide(),
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: Get.theme.inputDecorationTheme.border?.borderSide ?? const BorderSide(),
+            ),
           ),
         ),
         const CollectionDivider(),
@@ -51,8 +56,6 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
           decoration: const InputDecoration(
             hintText: 'Хүрээтэй',
             labelText: 'Outlined border',
-            focusedBorder: OutlineInputBorder(),
-            enabledBorder: OutlineInputBorder(),
           ),
         ),
         const CollectionDivider(),
@@ -94,24 +97,6 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
             hintText: 'Алдаатай утга оруулсан',
             labelText: 'Error',
             errorText: 'Алдаа гарсан байна шүү',
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
-              borderSide: BorderSide(
-                color: Colors.red,
-                width: 2,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
-              borderSide: BorderSide(
-                color: Colors.red,
-                width: 1,
-              ),
-            ),
           ),
         ),
 
@@ -134,8 +119,6 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
             hintText: 'prefix icon',
             labelText: 'With prefix icon',
             prefixIcon: Icon(Icons.verified_user),
-            enabledBorder: OutlineInputBorder(),
-            focusedBorder: OutlineInputBorder(),
           ),
         ),
 
@@ -147,8 +130,6 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
             hintText: 'suffix text',
             labelText: 'With suffix text',
             suffixText: 'hp',
-            enabledBorder: OutlineInputBorder(),
-            focusedBorder: OutlineInputBorder(),
           ),
         ),
 
@@ -160,8 +141,6 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
             hintText: 'suffix icon',
             labelText: 'With suffix icon',
             suffixIcon: Icon(Icons.search),
-            enabledBorder: OutlineInputBorder(),
-            focusedBorder: OutlineInputBorder(),
           ),
         ),
       ],

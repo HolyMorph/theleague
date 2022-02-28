@@ -17,7 +17,6 @@ class CollectionTitle extends StatelessWidget {
           Text(
             name,
             style: const TextStyle(
-              color: Colors.black,
               fontWeight: FontWeight.w700,
             ),
           ),

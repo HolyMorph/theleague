@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api/mezorn_client.dart';
 import 'package:mezorn_dummy/demo/demo_screen.dart';
-import 'package:mezorn_dummy/onboarding/splash_screen.dart';
 import 'package:mezorn_dummy/service/api_list.dart';
 import 'package:mezorn_dummy/storage/local_storage.dart';
-import 'package:mezorn_dummy/style/my_themes.dart';
+import 'package:mezorn_dummy/style/my_theme_dark.dart';
+import 'package:mezorn_dummy/style/my_theme.dart';
 import 'package:mezorn_dummy/utils/constants.dart';
 import 'package:mezorn_fcm/mezorn_fcm.dart';
 
@@ -58,12 +58,12 @@ _initNotification() async {
     },
 
     ///Апп background үед мэдэгдэл ирвэл ажиллах функц
-    onBackgroundMessage: _handleBackgroundNotification,
+    onBackgroundMessage: handleBackgroundNotification,
   );
 }
 
 ///Апп background үед мэдэгдэл ирвэл ажиллах функц
-Future<void> _handleBackgroundNotification(dynamic message) async {
+Future<void> handleBackgroundNotification(dynamic message) async {
   //Апп background байгаа үед мэдэгдэл ирвэл юу хийх вэ гэдэг ээ шийднэ
   log('backgroundNotificationMessage = $message');
 }
@@ -75,10 +75,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       ///Апп-ын үндсэн загвар
-      theme: MyThemes.mainTheme,
+      theme: MyTheme.mainTheme,
 
       ///Апп-ын бараан загвар
-      darkTheme: MyThemes.darkTheme,
+      darkTheme: MyThemeDark.darkTheme,
 
       ///Апп ажиллаад хамгийн эхэнд харагдах дэлгэц
       home: const DemoScreen(),

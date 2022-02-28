@@ -1,16 +1,73 @@
 # mezorn_dummy
 
-A dummy project for flutter
+Flutter прожект үүсгэхэд зориулсан жишээ прожект.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Үндсэн тохиргоо
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+1. Source code-г zip байдлаар татаж аваад өөрийн ажлын хавтсанд задлана.
+2. Android package name болон IOS Bundle ID солих. [mezorn_common](https://gitlab.com/mezorn/android/flutter_packages/mezorn_flutter_common_library) санд хэрхэн солих заавар нь байгаа
+	Жишээ нь : **`flutter pub run mezorn_common:main mn.mezorn.hello`**
+3. [mezorn_fcm](https://gitlab.com/mezorn/android/flutter_fcm) сангын тохиргоонуудыг хийх ([firebase](https://firebase.google.com/) прожект үүсгэх, native тохиргоо хийх гэх мэт)
+4. Тухайн прожектод зориулсан git-ийн тохиргоонуудаа хийж push хийх. (init, add remote, set branch... гэх мэт)
+5. Дезайнерын гаргасан style guide-ийн дагуу прожектын `/style` хавтсан доторх загваруудыг өөрчилөх.
+6. 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Боломжит үйлдлүүд
+
+1. Device буюу төхөөрөмж дээр өгөгдөл хадгалах класс.
+
+	**Өгөгдөл хадгалах**
+```dart
+LocalStorage.saveData();
+```
+
+**Өгөгдөл авах**
+
+
+```dart
+LocalStorage.getData();
+```
+
+## Ашигласан mezorn сангууд
+
+1. [mezorn_fcm](https://gitlab.com/mezorn/android/flutter_fcm) буюу мэдэгдэлтэй холбоотой сан. Энэ сангийн тохиргоонуудыг хийх
+2. [mezorn_common](https://gitlab.com/mezorn/android/flutter_packages/mezorn_flutter_common_library) буюу бүх төрлийн апп-д зориулагдсан нийтлэг сан
+3. [mezorn_api_caller](https://gitlab.com/mezorn/android/flutter-api-caller) буюу RestApi, GraphQL, WebSocket ашиглан сервертэй ажиллах сан
+4. 
+
+## Ашигласан pub.dev сангууд
+
+1. [get](https://pub.dev/packages/get)
+2. [cached_network_image](https://pub.dev/packages/cached_network_image)
+3. [permission_handler](https://pub.dev/packages/permission_handler)
+4. [url_launcher](https://pub.dev/packages/url_launcher)
+5. [flutter_lints](https://pub.dev/packages/flutter_lints)
+
+## Дайвар сангууд буюу mezorn сангуудад ашиглаж буй сангууд
+
+*Доорх сангууд нь бүгд export хийгдсэн учир прожект дотор чөлөөтэй импорт хийгээд ашиглаж болно*
+
+**[mezorn_common](https://gitlab.com/mezorn/android/flutter_packages/mezorn_flutter_common_library) санд агуулагдсан**
+
+1. [intl](https://pub.dev/packages/intl) 
+2. [device_info_plus](https://pub.dev/packages/device_info_plus)
+3. [package_info_plus](https://pub.dev/packages/package_info_plus)
+
+**[mezorn_fcm](https://gitlab.com/mezorn/android/flutter_fcm) санд агуулагдсан**
+
+1. [firebase_messaging](https://pub.dev/packages/firebase_messaging)
+2. [firebase_core](https://pub.dev/packages/firebase_core)
+3. [firebase_analytics](https://pub.dev/packages/firebase_analytics)
+
+**[mezorn_api_caller](https://gitlab.com/mezorn/android/flutter-api-caller) санд агуулагдсан**
+
+1. [connectivity_plus](https://pub.dev/packages/connectivity_plus)
+2. [dio](https://pub.dev/packages/dio)
+3. [crypto](https://pub.dev/packages/crypto)
+4. [hive](https://pub.dev/packages/hive)
+5. [hive_flutter](https://pub.dev/packages/hive_flutter)
+6. [intl](https://pub.dev/packages/intl)
+7. [graphql](https://pub.dev/packages/graphql)
+8. [http](https://pub.dev/packages/http)

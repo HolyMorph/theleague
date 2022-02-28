@@ -1,43 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:mezorn_dummy/style/my_colors.dart';
+import 'package:get/get.dart';
+import 'package:mezorn_dummy/style/my_colors_dark.dart';
+
+import 'my_text_field_style.dart';
 
 //TextFormField-ийн стайл
 //-------------------------------------------------------------------------
 
-///[TextFormField]-ийн загварууд
-class MyTextFieldStyles {
+///[TextFormField]-ийн бараан загварууд
+class MyTextFieldStyleDark {
   //Доорх загваруудыг дезайнераас авах бөгөөд хэрвээ
   //ямар нэг утга өгөөгүй тохиолдолд default утгаараа харагдана.
   //Хэрвээ default утга нь гаргасан дезайнтай таарахгүй бол дезайн
   //хийж байгаа хүнээрээ стайл гаргуулах хэрэгтэй
   //----------------------------------------------------------
 
-  ///[TextFormField]-ийн тайлбар харуулах хэсгийн стайл
-  static TextStyle? hintStyle;
-
-  ///[TextFormField]-ийн алдааны мэссэжний загвар
-  static TextStyle? textFieldErrorStyle;
-
-  ///TextForm-ийн Label буюу юу гарчигны стайл
-  static TextStyle? labelStyle;
-
-  ///TextForm дээрх текстийн уртыг харуулах текстийн загвар
-  static TextStyle? textFieldCounterStyle;
-
-  ///TextForm-ийн prefix нь текст үед тухайн текстийн стайл
-  ///
-  /// Жишээлбэл утасны дугаар оруулах хэсэгт урд талд нь автоматаар 976 гэж харуулах бол
-  /// тухайн 976 гэсэн текстийн стайл гэсэн үг
-  static TextStyle? prefixStyle;
-
-  ///TextForm-ийн suffix нь текст үед тухайн текстийн стайл
-  static TextStyle? suffixStyle;
-
   ///TextFormField-ийн хүрээний зураасны загвар
   static BorderSide inputBorderSide = const BorderSide(
-    color: MyColors.primaryColor,
+    color: MyColorsDark.darkAccentColor,
     width: 1,
-    style: BorderStyle.none,
+    style: BorderStyle.solid,
   );
 
   ///TextFormField-ийн хүрээний загвар
@@ -55,11 +37,15 @@ class MyTextFieldStyles {
     isCollapsed: true,
     isDense: true,
 
+    iconColor: MyColorsDark.darkAccentColor,
+
+    hoverColor: MyColorsDark.darkAccentColor,
+
     ///TextForm дээрх алдааны мэдээний стайл
-    errorStyle: textFieldErrorStyle,
+    errorStyle: MyTextFieldStyle.textFieldErrorStyle,
 
     ///TextForm дээрх текстийн уртыг харуулах текстийн стайл
-    counterStyle: textFieldCounterStyle,
+    counterStyle: MyTextFieldStyle.textFieldCounterStyle,
 
     ///TextForm-ийн арын дэвсгэрийг өнгөтэй харуулах эсэх
     filled: false,
@@ -82,57 +68,65 @@ class MyTextFieldStyles {
     ///Focus хийгдсэн мөн алдаатай өгөгдөл байгаа үеийн хүрээ
     focusedErrorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
-        color: MyColors.errorColor,
+        color: Get.theme.errorColor,
       ),
     ),
 
     ///Идэвхтэй үеийн хүрээ
     enabledBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
-        color: MyColors.dividerColor,
+        color: MyColorsDark.darkAccentColor.withOpacity(0.3),
       ),
     ),
+
+    focusColor: MyColorsDark.darkAccentColor,
 
     ///Cursor идэвхтэй буюу Focus хийгдсэн үеийн хүрээ
     focusedBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
-        color: MyColors.primaryColor,
+        color: MyColorsDark.darkAccentColor,
       ),
     ),
 
     ///Алдаатай үеийн хүрээ
     errorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
-        color: MyColors.errorColor,
+        color: Get.theme.errorColor,
       ),
     ),
 
     ///Идэвхгүй болгосон үеийн хүрээ
     disabledBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
-        color: MyColors.disabledColor,
+        color: Get.theme.disabledColor,
       ),
     ),
 
     ///Hint буюу зөвлөмж харуулах хэсгийн стайл
-    hintStyle: hintStyle,
+    hintStyle: MyTextFieldStyle.hintStyle,
 
     ///Label буюу юу оруулах гарчигны стайл
-    labelStyle: labelStyle,
+    labelStyle: (MyTextFieldStyle.labelStyle ?? const TextStyle()).copyWith(
+      color: MyColorsDark.darkAccentColor,
+    ),
 
     ///TextForm-ийн prefix нь текст үед тухайн текстийн стайл
-    prefixStyle: prefixStyle,
+    prefixStyle: (MyTextFieldStyle.prefixStyle ?? const TextStyle()).copyWith(
+      color: MyColorsDark.darkAccentColor,
+    ),
 
     ///Алдааны мсж-ны дээд мөрийн тоо
     errorMaxLines: 1,
 
     ///Текстийн төгсгөлд харуулах текстийн загвар
-    suffixStyle: suffixStyle,
+    suffixStyle: (MyTextFieldStyle.suffixStyle ?? const TextStyle()).copyWith(
+      color: MyColorsDark.darkAccentColor,
+    ),
 
     ///Prefix нь icon буюу Widget үед тухайн icon-ы өнгө
-    prefixIconColor: null,
+    prefixIconColor: MyColorsDark.darkAccentColor,
 
     ///Suffix нь icon буюу Widget үед тухайн icon-ы өнгө
-    suffixIconColor: null,
+    suffixIconColor: MyColorsDark.darkAccentColor,
   );
 }
