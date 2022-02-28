@@ -39,10 +39,10 @@ class MyTheme {
     elevation: 0,
 
     ///Сонгогдсон гарчигийг харуулах эсэх
-    showSelectedLabels: false,
+    showSelectedLabels: true,
 
     ///Сонгогдоогүй гарчигийг харуулах эсэх
-    showUnselectedLabels: false,
+    showUnselectedLabels: true,
 
     ///Төрөл. Бүгд тэнцүү зайгаа хувааж авах эсвэл сонгогдсон нь арай илүү зай эзлэх гэх мэт
     type: BottomNavigationBarType.fixed,

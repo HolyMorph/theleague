@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mezorn_dummy/demo/demo_icons/my_icon_button_collection.dart';
 import 'package:mezorn_dummy/demo/demo_selectable_widgets/selectable_widget_collection.dart';
 import 'package:mezorn_dummy/demo/demo_texts/text_collection.dart';
 
+import 'demo_bottom_navigation/my_bottom_navigation_collection.dart';
 import 'demo_buttons/button_collection.dart';
+import 'demo_dialogs/my_dialog_collection.dart';
+import 'demo_icons/my_icon_collection.dart';
 import 'demo_textfield/textfields_collection.dart';
 
 class MyStyleGuide extends StatefulWidget {
@@ -25,7 +29,6 @@ class _MyStyleGuideState extends State<MyStyleGuide> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              const Icon(Icons.star),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 12),
                 child: ElevatedButton(
@@ -54,6 +57,18 @@ class _MyStyleGuideState extends State<MyStyleGuide> {
 
                       ///Сонгогдох боломжтой виджетүүдийн загвар
                       SelectableWidgetCollection(),
+
+                      ///Icon жагсаалтууд
+                      MyIconCollection(),
+
+                      ///IconButton жагсаалтууд
+                      MyIconButtonCollection(),
+
+                      ///[BottomNavigation] буюу хөл хэсгийн таб-ын загвар
+                      MyBottomNavigationCollection(),
+
+                      ///Dialog харуулах жагсаалтууд
+                      MyDialogCollection(),
                     ],
                   ),
                 ),

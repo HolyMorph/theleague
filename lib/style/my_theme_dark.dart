@@ -52,12 +52,22 @@ class MyThemeDark {
     fontFamily: MyTextStyles.baseFont,
 
     ///BottomNavigation-ны загвар
-    bottomNavigationBarTheme: MyTheme.bottomNavigationBarTheme,
+    bottomNavigationBarTheme: MyTheme.bottomNavigationBarTheme.copyWith(
+      selectedItemColor: MyColorsDark.darkAccentColor,
+      unselectedItemColor: MyColorsDark.darkAccentColor.withOpacity(0.4),
+      backgroundColor: MyColorsDark.primaryColorDark.withOpacity(0.4),
+      selectedIconTheme: const IconThemeData(color: MyColorsDark.darkAccentColor),
+      unselectedIconTheme: IconThemeData(color: MyColorsDark.darkAccentColor.withOpacity(0.4)),
+    ),
 
     ///[TextFormField] болон [SelectableText]-ийн select хийх загвар
     ///
-    ///Select хийх cursor-ийн өнгө, чирэх бондгорын өнгө гэх мэт
-    textSelectionTheme: null,
+    ///Select хийх cursor-ийн өнгө, чирэх бөөрөнхийн өнгө гэх мэт
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: MyColorsDark.darkAccentColor,
+      selectionColor: MyColorsDark.darkAccentColor,
+      selectionHandleColor: MyColorsDark.darkAccentColor,
+    ),
 
     ///[DiaLog]-ийн загвар
     dialogTheme: null,
