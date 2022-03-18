@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mezorn_dummy/demo/demo_alert/my_snack_bar_collection.dart';
 import 'package:mezorn_dummy/demo/demo_icons/my_icon_button_collection.dart';
 import 'package:mezorn_dummy/demo/demo_selectable_widgets/selectable_widget_collection.dart';
 import 'package:mezorn_dummy/demo/demo_texts/text_collection.dart';
@@ -74,6 +75,9 @@ class _MyStyleGuideState extends State<MyStyleGuide> {
 
                       ///BottomSheet харуулах жагсаалтууд
                       MyBottomSheetCollection(),
+
+                      ///SnackBar харуулах жагсаалтууд
+                      MySnackBarCollection(),
 
                       ///Slider загварууд
                       MySliderCollection(),

@@ -6,6 +6,13 @@ import 'package:mezorn_dummy/style/my_text_styles.dart';
 import 'package:mezorn_dummy/style/my_text_field_style.dart';
 
 class MyTheme {
+  ///[SnackBar]-ийн загвар
+  static SnackBarThemeData snackBarTheme = const SnackBarThemeData(
+    backgroundColor: Colors.black,
+    elevation: 2,
+    actionTextColor: Colors.white,
+  );
+
   ///[BottomSheet]-ийн загвар
   static BottomSheetThemeData bottomSheetData = BottomSheetThemeData(
     backgroundColor: MyColors.dialogBackgroundColor,
@@ -256,7 +263,7 @@ class MyTheme {
     checkboxTheme: null,
 
     ///SnackBar-ийн загвар
-    snackBarTheme: null,
+    snackBarTheme: snackBarTheme,
 
     ///Divider виджетийн загвар
     dividerTheme: null,

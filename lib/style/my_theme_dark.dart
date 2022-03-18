@@ -133,7 +133,11 @@ class MyThemeDark {
     ),
 
     ///SnackBar-ийн загвар
-    snackBarTheme: null,
+    snackBarTheme: MyTheme.snackBarTheme.copyWith(
+      backgroundColor: MyColorsDark.darkAccentColor,
+      behavior: SnackBarBehavior.fixed,
+      actionTextColor: Colors.black,
+    ),
 
     ///Divider виджетийн загвар
     dividerTheme: null,

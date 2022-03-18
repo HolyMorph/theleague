@@ -61,6 +61,20 @@ class _MyDialogCollectionState extends State<MyDialogCollection> {
         ),
         const CollectionDivider(),
 
+        ///Загвар өөрчилсөн том контенттой dialog харуулах
+        ElevatedButton(
+          onPressed: () {
+            AlertHelper.showAlert(
+              child: const DemoCustomAlertBody(
+                isScrollable: true,
+              ),
+              isScrollable: true,
+            );
+          },
+          child: const Text('Big content'),
+        ),
+        const CollectionDivider(),
+
         ///Загвар өөрчилсөн dialog харуулах
         ///
         /// Энэ тохиолдолд dialog-ийг тэр чигт өөрчилж харуулж байгаа

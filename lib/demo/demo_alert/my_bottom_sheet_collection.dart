@@ -47,7 +47,7 @@ class _MyBottomSheetCollectionState extends State<MyBottomSheetCollection> {
                   );
                 });
           },
-          child: const Text('Энгийн dialog харуулах'),
+          child: const Text('Энгийн bottom sheet харуулах'),
         ),
         const CollectionDivider(),
 
@@ -59,7 +59,22 @@ class _MyBottomSheetCollectionState extends State<MyBottomSheetCollection> {
               child: const DemoCustomAlertBody(),
             );
           },
-          child: const Text('Custom dialog 1'),
+          child: const Text('Custom bottom sheet 1'),
+        ),
+        const CollectionDivider(),
+
+        ///Загвар өөрчилсөн том контенттой [BottomSheet]
+        ElevatedButton(
+          onPressed: () {
+            AlertHelper.showAlert(
+              type: AlertType.bottomSheet,
+              child: const DemoCustomAlertBody(
+                isScrollable: true,
+              ),
+              isScrollable: true,
+            );
+          },
+          child: const Text('Big content'),
         ),
         const CollectionDivider(),
 
@@ -77,10 +92,9 @@ class _MyBottomSheetCollectionState extends State<MyBottomSheetCollection> {
               replaceWholeWidget: true,
             );
           },
-          child: const Text('Custom dialog 2'),
+          child: const Text('Custom bottom sheet 2'),
         ),
       ],
     );
   }
-
 }

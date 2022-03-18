@@ -16,7 +16,9 @@ class BaseAlertBody extends StatefulWidget {
   final Widget? child;
   final bool replaceWholeWidget;
   final dynamic response;
+  final bool isScrollable;
   final AlertType type;
+
   const BaseAlertBody({
     Key? key,
     this.title,
@@ -30,6 +32,7 @@ class BaseAlertBody extends StatefulWidget {
     this.replaceWholeWidget = false,
     this.response,
     this.type = AlertType.dialog,
+    this.isScrollable = false,
   }) : super(key: key);
 
   @override
@@ -59,10 +62,29 @@ class _BaseAlertBodyState extends State<BaseAlertBody> {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        ///Үндсэн харагдац өрөх
         Material(
           color: Colors.transparent,
-          child: _alertBodyBuilder(),
+          child: Container(
+            constraints: BoxConstraints(
+              maxHeight: Get.size.height - Get.mediaQuery.padding.top,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                widget.isScrollable
+                    ?
+
+                    ///Үндсэн харагдац өрөх
+                    Expanded(
+                        child: SingleChildScrollView(
+                          child: _alertBodyBuilder(),
+                        ),
+                      )
+                    : _alertBodyBuilder(),
+              ],
+            ),
+          ),
         ),
       ],
     );

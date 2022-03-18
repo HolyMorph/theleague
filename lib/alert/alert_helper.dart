@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'base_alert_body.dart';
+import 'base_snack_bar_body.dart';
 
 enum AlertType { dialog, bottomSheet, snackBar }
 
@@ -49,45 +52,37 @@ class AlertHelper {
     Widget? child,
     bool replaceWholeWidget = false,
     dynamic response,
+    bool isScrollable = false,
   }) async {
+    Widget _baseBody = BaseAlertBody(
+      type: type,
+      title: title,
+      message: message,
+      onPositiveClicked: onPositiveClicked,
+      onNegativeClicked: onNegativeClicked,
+      image: image,
+      positiveText: positiveText,
+      negativeText: negativeText,
+      child: child,
+      replaceWholeWidget: replaceWholeWidget,
+      response: response,
+      isScrollable: isScrollable,
+    );
     switch (type) {
       case AlertType.dialog:
 
         ///[Dialog] харуулах бол
         return Get.dialog(
-          BaseAlertBody(
-            type: type,
-            title: title,
-            message: message,
-            onPositiveClicked: onPositiveClicked,
-            onNegativeClicked: onNegativeClicked,
-            image: image,
-            positiveText: positiveText,
-            negativeText: negativeText,
-            child: child,
-            replaceWholeWidget: replaceWholeWidget,
-            response: response,
-          ),
+          _baseBody,
           useSafeArea: true,
         );
 
       ///[BottomSheet] харуулах бол
       case AlertType.bottomSheet:
         return Get.bottomSheet(
-          BaseAlertBody(
-            type: type,
-            title: title,
-            message: message,
-            onPositiveClicked: onPositiveClicked,
-            onNegativeClicked: onNegativeClicked,
-            image: image,
-            positiveText: positiveText,
-            negativeText: negativeText,
-            child: child,
-            replaceWholeWidget: replaceWholeWidget,
-            response: response,
-          ),
-          isScrollControlled: true,
+          _baseBody,
+          ignoreSafeArea: false,
+          isScrollControlled: isScrollable,
         );
 
       ///[SnackBar] харуулах бол
@@ -98,7 +93,24 @@ class AlertHelper {
         ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
         ScaffoldMessenger.of(Get.context!).showSnackBar(
           SnackBar(
-            content: Text(message ?? ''),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                child ??
+                    BaseSnackBarBody(
+                      title: title,
+                      message: message,
+                      icon: image,
+                    ),
+              ],
+            ),
+            action: (onPositiveClicked != null)
+                ? SnackBarAction(
+                    label: positiveText ?? 'Хаах',
+                    onPressed: onPositiveClicked,
+                  )
+                : null,
+            elevation: 2,
           ),
         );
         return null;
