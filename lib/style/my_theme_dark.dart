@@ -70,10 +70,14 @@ class MyThemeDark {
     ),
 
     ///[DiaLog]-ийн загвар
-    dialogTheme: null,
+    dialogTheme: MyTheme.dialogTheme.copyWith(
+      backgroundColor: MyColorsDark.backgroundColor,
+    ),
 
     ///Доороос гарч ирдэг bottomSheet-ийн загвар
-    bottomSheetTheme: null,
+    bottomSheetTheme: MyTheme.bottomSheetData.copyWith(
+      backgroundColor: MyColorsDark.backgroundColor,
+    ),
 
     ///Доор харагддаг AppBar-ийн загвар
     bottomAppBarTheme: null,

@@ -71,5 +71,5 @@ class MyColors {
   static const Color? shadowColor = null;
 
   ///[Dialog]-ийн арын дэвсгэр өнгө
-  static const Color? dialogBackgroundColor = null;
+  static const Color? dialogBackgroundColor = Color(0xFFF3F4F6);
 }

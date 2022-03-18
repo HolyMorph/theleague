@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyColorsDark {
   ///Апп-ын үндсэн өнгө
-  static const Color primaryColor = Colors.black54;
+  static const Color primaryColor = Colors.black;
 
   ///Апп-ын үндсэн өнгөний бараан хувилбар
   static const Color primaryColorDark = Colors.black;
@@ -14,7 +14,7 @@ class MyColorsDark {
   static const Color hintColor = Colors.white54;
 
   ///Апп-ын canvas-ийн background-д ашиглагдах өнгө
-  static const Color backgroundColor = Color(0xFFF3F4F6);
+  static const Color backgroundColor = Color(0xFF444444);
 
   ///Апп-ын background-д ашиглагдах өнгө
   static const Color scaffoldBackgroundColor = Color(0xFF444444);
@@ -71,7 +71,7 @@ class MyColorsDark {
   static const Color? shadowColor = null;
 
   ///[Dialog]-ийн арын дэвсгэр өнгө
-  static const Color? dialogBackgroundColor = null;
+  static const Color? dialogBackgroundColor = Color(0xFF444444);
 
   ///Бараан загвар дээр цайвраар харагдах гол өнгө
   static const Color darkAccentColor = Colors.white;

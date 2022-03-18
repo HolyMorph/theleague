@@ -4,10 +4,12 @@ import 'package:mezorn_dummy/demo/demo_icons/my_icon_button_collection.dart';
 import 'package:mezorn_dummy/demo/demo_selectable_widgets/selectable_widget_collection.dart';
 import 'package:mezorn_dummy/demo/demo_texts/text_collection.dart';
 
+import 'demo_alert/my_dialog_collection.dart';
 import 'demo_bottom_navigation/my_bottom_navigation_collection.dart';
+import 'demo_alert/my_bottom_sheet_collection.dart';
 import 'demo_buttons/button_collection.dart';
-import 'demo_dialogs/my_dialog_collection.dart';
 import 'demo_icons/my_icon_collection.dart';
+import 'demo_slider/my_slider_collection.dart';
 import 'demo_textfield/textfields_collection.dart';
 
 class MyStyleGuide extends StatefulWidget {
@@ -69,6 +71,12 @@ class _MyStyleGuideState extends State<MyStyleGuide> {
 
                       ///Dialog харуулах жагсаалтууд
                       MyDialogCollection(),
+
+                      ///BottomSheet харуулах жагсаалтууд
+                      MyBottomSheetCollection(),
+
+                      ///Slider загварууд
+                      MySliderCollection(),
                     ],
                   ),
                 ),

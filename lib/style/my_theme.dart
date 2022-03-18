@@ -6,6 +6,24 @@ import 'package:mezorn_dummy/style/my_text_styles.dart';
 import 'package:mezorn_dummy/style/my_text_field_style.dart';
 
 class MyTheme {
+  ///[BottomSheet]-ийн загвар
+  static BottomSheetThemeData bottomSheetData = BottomSheetThemeData(
+    backgroundColor: MyColors.dialogBackgroundColor,
+    elevation: 2,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+    ),
+  );
+
+  ///[Dialog]-ийн загвар
+  static DialogTheme dialogTheme = DialogTheme(
+    backgroundColor: MyColors.dialogBackgroundColor,
+    elevation: 2,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+    ),
+  );
+
   ///[TabBar]-ийн загвар
   static TabBarTheme tabBarTheme = TabBarTheme(
     ///Tab-ын сонгогдсон гарчигны өнгө
@@ -29,6 +47,14 @@ class MyTheme {
     ///Гарчигны зай авах хэмжээ
     labelPadding: null,
   );
+
+  // ///[Dialog]-ийн загвар
+  // static DialogTheme dialogTheme = DialogTheme(
+  //   backgroundColor: Colors.red,
+  //   shape: RoundedRectangleBorder(
+  //     borderRadius: BorderRadius.circular(10),
+  //   ),
+  // );
 
   ///[BottomNavigation]-ны загвар
   static BottomNavigationBarThemeData bottomNavigationBarTheme = BottomNavigationBarThemeData(
@@ -162,7 +188,7 @@ class MyTheme {
     ///Апп-ын нийт сүүдэрний өнгө
     shadowColor: MyColors.shadowColor,
 
-    ///Dialog-ийн арын дэвсгэр өнгө
+    ///[Dialog]-ийн арын дэвсгэр өнгө
     dialogBackgroundColor: MyColors.dialogBackgroundColor,
 
     ///CheckBox, Radio гэх мэт тийм үгүй гэсэн сонголттой виджетүүдийн идэвхтэй үеийн өнгө
@@ -183,10 +209,10 @@ class MyTheme {
     textSelectionTheme: null,
 
     ///[DiaLog]-ийн загвар
-    dialogTheme: null,
+    dialogTheme: dialogTheme,
 
     ///Доороос гарч ирдэг bottomSheet-ийн загвар
-    bottomSheetTheme: null,
+    bottomSheetTheme: bottomSheetData,
 
     ///Доор харагддаг AppBar-ийн загвар
     bottomAppBarTheme: null,

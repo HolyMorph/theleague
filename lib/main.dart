@@ -42,7 +42,7 @@ _initNotification() async {
   await MezornFcm.initNotificationService(
     ///Тухайн ашиглаж буй мэдэгдлийн сервисийн token авахад дуудагдах функц
     onTokenRefreshed: (token) {
-      //Энд сервер лүү мэдэгдлийн токен илгээх эсэхээ шийднэ
+      //TODO Энд сервер лүү мэдэгдлийн токен илгээх эсэхээ шийднэ
       log('notificationToken = $token');
     },
 
@@ -64,7 +64,7 @@ _initNotification() async {
 
 ///Апп background үед мэдэгдэл ирвэл ажиллах функц
 Future<void> handleBackgroundNotification(dynamic message) async {
-  //Апп background байгаа үед мэдэгдэл ирвэл юу хийх вэ гэдэг ээ шийднэ
+  //TODO Апп background байгаа үед мэдэгдэл ирвэл юу хийх вэ гэдэг ээ шийднэ
   log('backgroundNotificationMessage = $message');
 }
 
@@ -77,7 +77,8 @@ class MyApp extends StatelessWidget {
       ///Апп-ын үндсэн загвар
       theme: MyTheme.mainTheme,
 
-      ///Апп-ын бараан загвар
+      ///Апп-ын бараан загвар. Хэрвээ дезайн дээр бараан загвар
+      ///гараагүй бол null утга өгч болно
       darkTheme: MyThemeDark.darkTheme,
 
       ///Апп ажиллаад хамгийн эхэнд харагдах дэлгэц
