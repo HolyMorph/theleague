@@ -6,6 +6,11 @@ import 'package:mezorn_dummy/style/my_text_styles.dart';
 import 'package:mezorn_dummy/style/my_text_field_style.dart';
 
 class MyTheme {
+  ///[progressIndicator]-ийн загвар
+  static ProgressIndicatorThemeData progressIndicatorTheme = const ProgressIndicatorThemeData(
+    color: MyColors.primaryColor,
+  );
+
   ///[SnackBar]-ийн загвар
   static SnackBarThemeData snackBarTheme = const SnackBarThemeData(
     backgroundColor: Colors.black,
@@ -270,7 +275,7 @@ class MyTheme {
 
     ///Progress-уудын загвар.
     ///Linear, Circular болон Refresh-ийн загварууд энд сольж өгнө
-    progressIndicatorTheme: null,
+    progressIndicatorTheme: progressIndicatorTheme,
 
     ///ListTile-ийн загвар
     listTileTheme: null,

@@ -10,6 +10,7 @@ import 'demo_bottom_navigation/my_bottom_navigation_collection.dart';
 import 'demo_alert/my_bottom_sheet_collection.dart';
 import 'demo_buttons/button_collection.dart';
 import 'demo_icons/my_icon_collection.dart';
+import 'demo_progress/my_progress_collection.dart';
 import 'demo_slider/my_slider_collection.dart';
 import 'demo_textfield/textfields_collection.dart';
 
@@ -78,6 +79,9 @@ class _MyStyleGuideState extends State<MyStyleGuide> {
 
                       ///SnackBar харуулах жагсаалтууд
                       MySnackBarCollection(),
+
+                      ///Уншиж буй индикато харуулах жагсаалтууд
+                      MyProgressCollection(),
 
                       ///Slider загварууд
                       MySliderCollection(),

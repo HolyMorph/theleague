@@ -144,7 +144,9 @@ class MyThemeDark {
 
     ///Progress-уудын загвар.
     ///Linear, Circular болон Refresh-ийн загварууд энд сольж өгнө
-    progressIndicatorTheme: null,
+    progressIndicatorTheme: MyTheme.progressIndicatorTheme.copyWith(
+      color: MyColorsDark.darkAccentColor,
+    ),
 
     ///ListTile-ийн загвар
     listTileTheme: null,

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api/mezorn_client.dart';
 import 'package:mezorn_dummy/demo/demo_screen.dart';
@@ -12,7 +13,8 @@ import 'package:mezorn_dummy/utils/constants.dart';
 import 'package:mezorn_fcm/mezorn_fcm.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   ///Апп-ын анхны тохиргоо болон утгууд өгөх функц
   _init();
@@ -73,6 +75,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     return GetMaterialApp(
       ///Апп-ын үндсэн загвар
       theme: MyTheme.mainTheme,

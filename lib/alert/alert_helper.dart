@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mezorn_dummy/alert/my_loading_dialog_body.dart';
 
 import 'base_alert_body.dart';
 import 'base_snack_bar_body.dart';
@@ -53,6 +54,7 @@ class AlertHelper {
     bool replaceWholeWidget = false,
     dynamic response,
     bool isScrollable = false,
+    bool dismissible = true,
   }) async {
     Widget _baseBody = BaseAlertBody(
       type: type,
@@ -75,6 +77,7 @@ class AlertHelper {
         return Get.dialog(
           _baseBody,
           useSafeArea: true,
+          barrierDismissible: dismissible,
         );
 
       ///[BottomSheet] харуулах бол
@@ -83,6 +86,7 @@ class AlertHelper {
           _baseBody,
           ignoreSafeArea: false,
           isScrollControlled: isScrollable,
+          isDismissible: dismissible,
         );
 
       ///[SnackBar] харуулах бол
@@ -115,5 +119,21 @@ class AlertHelper {
         );
         return null;
     }
+  }
+
+  ///Уншиж буй dialog харуулах функц
+  static showLoadingAlert({String? message}) {
+    showAlert(
+      child: MyLoadingDialogBody(message: message),
+      dismissible: false,
+    );
+    Future.delayed(
+      const Duration(milliseconds: 1500),
+      () {
+        if (Get.isDialogOpen ?? false) {
+          Get.back();
+        }
+      },
+    );
   }
 }

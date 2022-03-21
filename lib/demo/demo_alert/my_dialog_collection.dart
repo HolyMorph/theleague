@@ -25,26 +25,17 @@ class _MyDialogCollectionState extends State<MyDialogCollection> {
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(
-                title: 'Толгой хэсгийн мсж',
-                message: 'Тайлбар хэсэг',
-                image: Icon(
-                  Icons.image,
-                  size: 78,
-                  color: Get.theme.disabledColor,
-                ),
-                negativeText: 'Цуцлах\n',
-                onNegativeClicked: () {
-                  AlertHelper.showAlert(
-                    message: 'Цуцлах товчлуур дарагдлаа',
-                    type: AlertType.snackBar,
-                  );
-                },
-                onPositiveClicked: () {
-                  AlertHelper.showAlert(
-                    message: 'Хаах товчлуур дарагдлаа',
-                    type: AlertType.snackBar,
-                  );
-                });
+              title: 'Толгой хэсгийн мсж',
+              message: 'Тайлбар хэсэг',
+              image: Icon(
+                Icons.image,
+                size: 78,
+                color: Get.theme.disabledColor,
+              ),
+              negativeText: 'Цуцлах\n',
+              onNegativeClicked: () {},
+              onPositiveClicked: () {},
+            );
           },
           child: const Text('Энгийн dialog харуулах'),
         ),

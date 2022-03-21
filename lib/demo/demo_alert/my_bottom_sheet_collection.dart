@@ -25,27 +25,18 @@ class _MyBottomSheetCollectionState extends State<MyBottomSheetCollection> {
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(
-                type: AlertType.bottomSheet,
-                title: 'Толгой хэсгийн мсж',
-                message: 'Тайлбар хэсэг',
-                image: Icon(
-                  Icons.image,
-                  size: 78,
-                  color: Get.theme.disabledColor,
-                ),
-                negativeText: 'Цуцлах\n',
-                onNegativeClicked: () {
-                  AlertHelper.showAlert(
-                    message: 'Цуцлах товчлуур дарагдлаа',
-                    type: AlertType.bottomSheet,
-                  );
-                },
-                onPositiveClicked: () {
-                  AlertHelper.showAlert(
-                    message: 'Хаах товчлуур дарагдлаа',
-                    type: AlertType.bottomSheet,
-                  );
-                });
+              type: AlertType.bottomSheet,
+              title: 'Толгой хэсгийн мсж',
+              message: 'Тайлбар хэсэг',
+              image: Icon(
+                Icons.image,
+                size: 78,
+                color: Get.theme.disabledColor,
+              ),
+              negativeText: 'Цуцлах\n',
+              onNegativeClicked: () {},
+              onPositiveClicked: () {},
+            );
           },
           child: const Text('Энгийн bottom sheet харуулах'),
         ),
