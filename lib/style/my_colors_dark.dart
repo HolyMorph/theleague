@@ -75,4 +75,9 @@ class MyColorsDark {
 
   ///Бараан загвар дээр цайвраар харагдах гол өнгө
   static const Color darkAccentColor = Colors.white;
+
+  ///Нэмэлт өнгөнүүд. Апп-д ашигладаж байгаагаас тусдаа нэмэлт
+  ///өнгө ашиглаж байгаа бол энэ хэсэгт тухайн өнгөө зарлана
+  static const Color secondaryColor = Color(0xff2FA1D9);
+  static const Color thirdColor = Color(0xff2FA1D9);
 }

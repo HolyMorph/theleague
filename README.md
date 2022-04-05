@@ -34,7 +34,7 @@ LocalStorage.getData();
 
 1. [mezorn_fcm](https://gitlab.com/mezorn/android/flutter_fcm) буюу мэдэгдэлтэй холбоотой сан. Энэ сангийн тохиргоонуудыг хийх
 2. [mezorn_common](https://gitlab.com/mezorn/android/flutter_packages/mezorn_flutter_common_library) буюу бүх төрлийн апп-д зориулагдсан нийтлэг сан
-3. [mezorn_api_caller](https://gitlab.com/mezorn/android/flutter-api-caller) буюу RestApi, GraphQL, WebSocket ашиглан сервертэй ажиллах сан
+3. [mezorn_api_caller](https://gitlab.com/mezorn/android/flutter-api-caller) буюу RestApi, GraphQL, WebSocket, MQTT ашиглан сервертэй ажиллах сан
 4. 
 
 ## Ашигласан pub.dev сангууд

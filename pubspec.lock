@@ -306,7 +306,7 @@ packages:
       name: flutter_native_splash
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.3+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -469,9 +469,11 @@ packages:
   mezorn_common:
     dependency: "direct main"
     description:
-      path: "../mezorn_common"
-      relative: true
-    source: path
+      path: "."
+      ref: "2be5aeb64270e3ec3dc6672b4fd542ee45139a90"
+      resolved-ref: "2be5aeb64270e3ec3dc6672b4fd542ee45139a90"
+      url: "https://gitlab.com/mezorn/flutter/mda/mezorn_common.git"
+    source: git
     version: "0.0.1"
   mezorn_fcm:
     dependency: "direct main"

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>104585798912-ej10amc6tjt4gtneemnafjr3t3o013q3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.104585798912-ej10amc6tjt4gtneemnafjr3t3o013q3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBr3ySeuptbGySMMJpQ_hjLRApP3P76ZdA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>104585798912</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>mn.mezorn.mezornDummy</string>
+	<key>PROJECT_ID</key>
+	<string>mezorn-flutter-dummy</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mezorn-flutter-dummy.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:104585798912:ios:fb8c3844347bd4905bbfe5</string>
+</dict>
+</plist>

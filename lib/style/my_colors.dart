@@ -72,4 +72,9 @@ class MyColors {
 
   ///[Dialog]-ийн арын дэвсгэр өнгө
   static const Color? dialogBackgroundColor = Color(0xFFF3F4F6);
+
+  ///Нэмэлт өнгөнүүд. Апп-д ашигладаж байгаагаас тусдаа нэмэлт
+  ///өнгө ашиглаж байгаа бол энэ хэсэгт тухайн өнгөө зарлана
+  static const Color secondaryColor = Color(0xff2FA1D9);
+  static const Color thirdColor = Color(0xff2FA1D9);
 }
