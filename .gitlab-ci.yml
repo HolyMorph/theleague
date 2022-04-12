@@ -15,15 +15,15 @@ stages:
 
 analyze:
   stage: analyze
-  before_script:
-    - flutter pub get
   script:
+    - flutter clean
+    - flutter pub get
     - flutter analyze
 
 format:
   stage: format
   script:
-    - dart format --line-length 150 --set-exit-if-changed .
+    - dart format -l 150 --set-exit-if-changed .
 
 test:
   stage: test
