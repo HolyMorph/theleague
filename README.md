@@ -16,7 +16,7 @@ Flutter прожект үүсгэхэд зориулсан жишээ проже
 5. [mezorn_fcm](https://gitlab.com/mezorn/android/flutter_fcm) сангын тохиргоонуудыг хийх ([firebase](https://firebase.google.com/) прожект үүсгэх, native тохиргоо хийх гэх мэт)
 6. Тухайн прожектод зориулсан git-ийн тохиргоонуудаа хийж push хийх. (init, add remote, set branch... гэх мэт)
 7. Дезайнерын гаргасан style guide-ийн дагуу прожектын `/style` хавтсан доторх загваруудыг өөрчилөх.
-8. 
+8. pubspec.yaml файл доторх mezorn сангуудад шинээр deploy token үүсгэж git url-г update хийнэ
 
 ## Боломжит үйлдлүүд
 
