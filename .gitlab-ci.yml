@@ -17,5 +17,6 @@ format_analyze_test:
     - dart format -l 150 --set-exit-if-changed .
     - flutter clean
     - flutter pub get
+    - fv2 pub run dependency_validator
     - flutter analyze
     - flutter test
