@@ -9,23 +9,13 @@ image: cirrusci/flutter:2.10.4
 #    - .pub-cache/global_packages
 
 stages:
-  - analyze
-  - format
-  - test
+  - analyze_format_test
 
-analyze:
-  stage: analyze
+analyze_format_test:
+  stage: analyze_format_test
   script:
+    - dart format -l 150 --set-exit-if-changed .
     - flutter clean
     - flutter pub get
     - flutter analyze
-
-format:
-  stage: format
-  script:
-    - dart format -l 150 --set-exit-if-changed .
-
-test:
-  stage: test
-  script:
     - flutter test
