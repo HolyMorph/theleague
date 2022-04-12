@@ -8,11 +8,15 @@ Flutter прожект үүсгэхэд зориулсан жишээ проже
 
 1. Source code-г zip байдлаар татаж аваад өөрийн ажлын хавтсанд задлана.
 2. Android package name болон IOS Bundle ID солих. [mezorn_common](https://gitlab.com/mezorn/android/flutter_packages/mezorn_flutter_common_library) санд хэрхэн солих заавар нь байгаа
-	Жишээ нь : **`flutter pub run mezorn_common:main mn.mezorn.hello`**
-3. [mezorn_fcm](https://gitlab.com/mezorn/android/flutter_fcm) сангын тохиргоонуудыг хийх ([firebase](https://firebase.google.com/) прожект үүсгэх, native тохиргоо хийх гэх мэт)
-4. Тухайн прожектод зориулсан git-ийн тохиргоонуудаа хийж push хийх. (init, add remote, set branch... гэх мэт)
-5. Дезайнерын гаргасан style guide-ийн дагуу прожектын `/style` хавтсан доторх загваруудыг өөрчилөх.
-6. 
+	Жишээ нь : **`flutter pub run mezorn_common:main mn.mezorn.hello`**. 
+
+- 	Анхааруулга: package нэр солихдоо доогуур болон дундуур зураасаар сольж болохгүй
+3. pubspec.yaml файл дотор байгаа mezorn_dummy нэрийг өөрийн прожектын нэрээр солино
+4. Өөрийн editor дээрээ "mezorn_dummy/" гэж хайгаад бүгдийг нь өөрийн прожектын нэрээр солино. search and replace хийнэ гэсэн үг
+5. [mezorn_fcm](https://gitlab.com/mezorn/android/flutter_fcm) сангын тохиргоонуудыг хийх ([firebase](https://firebase.google.com/) прожект үүсгэх, native тохиргоо хийх гэх мэт)
+6. Тухайн прожектод зориулсан git-ийн тохиргоонуудаа хийж push хийх. (init, add remote, set branch... гэх мэт)
+7. Дезайнерын гаргасан style guide-ийн дагуу прожектын `/style` хавтсан доторх загваруудыг өөрчилөх.
+8. 
 
 ## Боломжит үйлдлүүд
 

@@ -75,7 +75,7 @@ class MyThemeDark {
     ),
 
     ///Доороос гарч ирдэг bottomSheet-ийн загвар
-    bottomSheetTheme: MyTheme.bottomSheetData.copyWith(
+    bottomSheetTheme: MyTheme.bottomSheetThemeData.copyWith(
       backgroundColor: MyColorsDark.backgroundColor,
     ),
 
