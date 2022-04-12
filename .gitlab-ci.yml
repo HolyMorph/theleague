@@ -9,10 +9,10 @@ image: cirrusci/flutter:2.10.4
 #    - .pub-cache/global_packages
 
 stages:
-  - analyze_format_test
+  - format_analyze_test
 
-analyze_format_test:
-  stage: analyze_format_test
+format_analyze_test:
+  stage: format_analyze_test
   script:
     - dart format -l 150 --set-exit-if-changed .
     - flutter clean

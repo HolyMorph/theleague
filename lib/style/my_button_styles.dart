@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:mezorn_dummy/style/my_text_styles.dart';
 
 class MyButtonStyles {
-  static const double _tempH = 48;
-
   static const double buttonHeight = 48;
   static const double buttonMinWidth = 88;
   static EdgeInsets buttonPadding = const EdgeInsets.symmetric(horizontal: 12);
