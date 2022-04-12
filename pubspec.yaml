@@ -48,6 +48,10 @@ dependencies:
       ref: 2be5aeb64270e3ec3dc6672b4fd542ee45139a90
 
   get: ^4.6.1
+  cached_network_image: ^3.2.0
+#  permission_handler: ^9.2.0
+#  url_launcher: ^6.0.20
+#  cupertino_icons: ^1.0.4
   flutter_native_splash: ^2.1.5
   dependency_validator: ^3.2.0
 
