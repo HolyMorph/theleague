@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:mezorn_dummy/alert/alert_helper.dart';
 
 import '../collection_divider.dart';
