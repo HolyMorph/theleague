@@ -2,20 +2,30 @@
 # https://hub.docker.com/r/google/dart
 image: cirrusci/flutter:2.10.4
 
-# Cache downloaded dependencies and plugins between builds.
-# To keep cache across branches add 'key: "$CI_JOB_NAME"'
-cache:
-  paths:
-    - .pub-cache/global_packages
+## Cache downloaded dependencies and plugins between builds.
+## To keep cache across branches add 'key: "$CI_JOB_NAME"'
+#cache:
+#  paths:
+#    - .pub-cache/global_packages
 
 stages:
-  - analyze_and_test
+  - analyze
+  - format
+  - test
 
-before_script:
-  - flutter pub get
-
-analyze_and_test:
-  stage: analyze_and_test
+analyze:
+  stage: analyze
+  before_script:
+    - flutter pub get
   script:
     - flutter analyze
+
+format:
+  stage: format
+  script:
     - dart format --line-length 150 --set-exit-if-changed .
+
+test:
+  stage: test
+  script:
+    - flutter test

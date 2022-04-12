@@ -470,7 +470,7 @@ packages:
       path: "."
       ref: e494d770bc5b216eb1e6baae16c0a7a3f9e663b3
       resolved-ref: e494d770bc5b216eb1e6baae16c0a7a3f9e663b3
-      url: "https://gitlab.com/mezorn/android/flutter-api-caller.git"
+      url: "https://dummy_project:Zaut1oPehohtnCr7W3k8@gitlab.com/mezorn/flutter/mda/api_caller"
     source: git
     version: "0.0.6"
   mezorn_common:
@@ -479,7 +479,7 @@ packages:
       path: "."
       ref: "2be5aeb64270e3ec3dc6672b4fd542ee45139a90"
       resolved-ref: "2be5aeb64270e3ec3dc6672b4fd542ee45139a90"
-      url: "https://gitlab.com/mezorn/flutter/mda/mezorn_common.git"
+      url: "https://dummy_project:N2KM9aCd1Ss_SVxMXqxH@gitlab.com/mezorn/flutter/mda/mezorn_common.git"
     source: git
     version: "0.0.1"
   mezorn_fcm:
@@ -488,7 +488,7 @@ packages:
       path: "."
       ref: d98cd5b66578349322f3549a8d3ec86b34da84a0
       resolved-ref: d98cd5b66578349322f3549a8d3ec86b34da84a0
-      url: "https://gitlab.com/mezorn/android/flutter_fcm.git"
+      url: "https://dummy_project:CXxPtDVM7gTFJy4GhpMo@gitlab.com/mezorn/flutter/mda/notification_handler.git"
     source: git
     version: "0.0.2"
   nm:
