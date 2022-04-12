@@ -19,7 +19,7 @@ class MyTheme {
   );
 
   ///[BottomSheet]-ийн загвар
-  static BottomSheetThemeData bottomSheetData = BottomSheetThemeData(
+  static BottomSheetThemeData bottomSheetThemeData = BottomSheetThemeData(
     backgroundColor: MyColors.dialogBackgroundColor,
     elevation: 2,
     shape: RoundedRectangleBorder(
@@ -170,10 +170,10 @@ class MyTheme {
     button: MyTextStyles.button,
 
     ///Жижиг текст
-    caption: null,
+    caption: MyTextStyles.caption,
 
     ///Хамгийн жижиг текст
-    overline: null,
+    overline: MyTextStyles.overline,
   );
 
   static ThemeData mainTheme = ThemeData(
@@ -224,7 +224,7 @@ class MyTheme {
     dialogTheme: dialogTheme,
 
     ///Доороос гарч ирдэг bottomSheet-ийн загвар
-    bottomSheetTheme: bottomSheetData,
+    bottomSheetTheme: bottomSheetThemeData,
 
     ///Доор харагддаг AppBar-ийн загвар
     bottomAppBarTheme: null,

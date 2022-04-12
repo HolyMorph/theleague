@@ -23,7 +23,7 @@ class MyColors {
   /// зураасны өнгө
   static const Color dividerColor = Color(0xffbbbecd);
 
-  ///Ямар үйлдэл хийх боломжгүй буюу бүрэн идэвхгүй болсон
+  ///Ямар ч үйлдэл хийх боломжгүй буюу бүрэн идэвхгүй болсон
   ///виджетүүдэд ашиглах өнгө
   static const Color disabledColor = Color(0xffeeeff2);
 
@@ -55,7 +55,7 @@ class MyColors {
   ///харагдах өнгө
   static const Color? hoverColor = null;
 
-  ///InkWell болон түүнтэй төстэй виджетүүдийн цацраг явж
+  ///[InkWell] болон түүнтэй төстэй виджетүүдийн цацраг явж
   ///байх үеийн дэвсгэр өнгө.
   ///Мөн сонгогдсон цэсний дэвсгэр өнгө
   static const Color? highlightColor = null;

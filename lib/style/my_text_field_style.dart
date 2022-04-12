@@ -16,13 +16,13 @@ class MyTextFieldStyle {
   static TextStyle? hintStyle;
 
   ///[TextFormField]-ийн алдааны мэссэжний загвар
-  static TextStyle? textFieldErrorStyle;
+  static TextStyle? errorStyle;
 
   ///TextForm-ийн Label буюу юу гарчигны стайл
   static TextStyle? labelStyle;
 
   ///TextForm дээрх текстийн уртыг харуулах текстийн загвар
-  static TextStyle? textFieldCounterStyle;
+  static TextStyle? counterStyle;
 
   ///TextForm-ийн prefix нь текст үед тухайн текстийн стайл
   ///
@@ -56,10 +56,10 @@ class MyTextFieldStyle {
     isDense: true,
 
     ///TextForm дээрх алдааны мэдээний стайл
-    errorStyle: textFieldErrorStyle,
+    errorStyle: errorStyle,
 
     ///TextForm дээрх текстийн уртыг харуулах текстийн стайл
-    counterStyle: textFieldCounterStyle,
+    counterStyle: counterStyle,
 
     ///TextForm-ийн арын дэвсгэрийг өнгөтэй харуулах эсэх
     filled: false,
@@ -79,13 +79,6 @@ class MyTextFieldStyle {
     ///Энгийн үеийн хүрээ
     border: inputBorder,
 
-    ///Focus хийгдсэн мөн алдаатай өгөгдөл байгаа үеийн хүрээ
-    focusedErrorBorder: inputBorder.copyWith(
-      borderSide: inputBorderSide.copyWith(
-        color: Get.theme.errorColor,
-      ),
-    ),
-
     ///Идэвхтэй үеийн хүрээ
     enabledBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
@@ -102,6 +95,13 @@ class MyTextFieldStyle {
 
     ///Алдаатай үеийн хүрээ
     errorBorder: inputBorder.copyWith(
+      borderSide: inputBorderSide.copyWith(
+        color: Get.theme.errorColor,
+      ),
+    ),
+
+    ///Focus хийгдсэн мөн алдаатай өгөгдөл байгаа үеийн хүрээ
+    focusedErrorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: Get.theme.errorColor,
       ),

@@ -80,7 +80,7 @@ class _MyStyleGuideState extends State<MyStyleGuide> {
                       ///SnackBar харуулах жагсаалтууд
                       MySnackBarCollection(),
 
-                      ///Уншиж буй индикато харуулах жагсаалтууд
+                      ///Уншиж буй индикатор харуулах жагсаалтууд
                       MyProgressCollection(),
 
                       ///Slider загварууд

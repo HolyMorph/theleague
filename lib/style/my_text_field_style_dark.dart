@@ -42,10 +42,10 @@ class MyTextFieldStyleDark {
     hoverColor: MyColorsDark.darkAccentColor,
 
     ///TextForm дээрх алдааны мэдээний стайл
-    errorStyle: MyTextFieldStyle.textFieldErrorStyle,
+    errorStyle: MyTextFieldStyle.errorStyle,
 
     ///TextForm дээрх текстийн уртыг харуулах текстийн стайл
-    counterStyle: MyTextFieldStyle.textFieldCounterStyle,
+    counterStyle: MyTextFieldStyle.counterStyle,
 
     ///TextForm-ийн арын дэвсгэрийг өнгөтэй харуулах эсэх
     filled: false,
