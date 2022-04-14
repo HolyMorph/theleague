@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mezorn_dummy/demo/collection_title.dart';
-import 'package:mezorn_dummy/demo/demo_bottom_navigation/customized_bottom_navigation_widget.dart';
-import 'package:mezorn_dummy/demo/demo_bottom_navigation/normal_bottom_navigation_widget.dart';
+
+import '../collection_title.dart';
+import 'customized_bottom_navigation_widget.dart';
+import 'normal_bottom_navigation_widget.dart';
 
 class MyBottomNavigationCollection extends StatefulWidget {
   const MyBottomNavigationCollection({Key? key}) : super(key: key);

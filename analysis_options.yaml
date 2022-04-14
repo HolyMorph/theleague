@@ -22,6 +22,21 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
+    prefer_relative_imports: true
+    file_names: lowercase_with_underscores
+    package_names: lowercase_with_underscores
+    slash_for_doc_comments: true
+    comment_references: true
+    package_api_docs: true
+    use_decorated_box: true
+    use_colored_box: true
+    avoid_returning_null: true
+    avoid_private_typedef_functions: true
+    avoid_escaping_inner_quotes: true
+    no_logic_in_create_state: true
+    avoid_print: true
+
+
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

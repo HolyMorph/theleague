@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_dummy/style/my_button_styles.dart';
-import 'package:mezorn_dummy/style/my_text_field_style_dark.dart';
-import 'package:mezorn_dummy/style/my_text_styles.dart';
-import 'package:mezorn_dummy/style/my_theme.dart';
 
+import 'my_button_styles.dart';
 import 'my_colors_dark.dart';
+import 'my_text_field_style_dark.dart';
+import 'my_text_styles.dart';
+import 'my_theme.dart';
 
 class MyThemeDark {
   ///Апп-ын бараан загвар

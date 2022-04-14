@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyColors {
   ///Апп-ын үндсэн өнгө
-  static const Color primaryColor = Color(0xff2FA1D9);
+  static const Color primaryColor = Color(0xff2FAD12);
 
   ///Апп-ын үндсэн өнгөний бараан хувилбар
   static const Color primaryColorDark = Color(0xff1E258B);

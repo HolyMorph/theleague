@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mezorn_dummy/alert/alert_helper.dart';
 
+import '../../alert/alert_helper.dart';
 import '../collection_divider.dart';
 import '../collection_title.dart';
 

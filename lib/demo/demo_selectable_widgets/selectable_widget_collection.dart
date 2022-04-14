@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mezorn_dummy/demo/collection_title.dart';
 
+import '../collection_title.dart';
 import 'checkboxes_widget.dart';
 import 'radio_buttons_widget.dart';
 

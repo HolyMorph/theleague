@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mezorn_dummy/demo/collection_divider.dart';
-import 'package:mezorn_dummy/demo/collection_title.dart';
-import 'package:mezorn_dummy/demo/demo_strings.dart';
+
+import '../collection_divider.dart';
+import '../collection_title.dart';
+import '../demo_strings.dart';
 
 class TextButtonsWidget extends StatelessWidget {
   const TextButtonsWidget({Key? key}) : super(key: key);

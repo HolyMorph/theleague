@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mezorn_dummy/demo/collection_divider.dart';
-import 'package:mezorn_dummy/demo/collection_title.dart';
 
+import '../collection_divider.dart';
+import '../collection_title.dart';
 import '../demo_strings.dart';
 
 class OutlinedButtonsWidget extends StatelessWidget {

@@ -17,8 +17,8 @@ class ApiList {
 
   ///RestAPI хүсэлт илгээх функц
   ///
-  /// [url] -> сервис дуудах url. Энэ санг анх init хийхдээ үндсэн [_baseUrl] -аа заагаад
-  /// өгчихсөн бол нэмэлт path нь байхад болно. [_baseUrl]-с өөр хаягнаас сервис
+  /// [url] -> сервис дуудах url. Энэ санг анх init хийхдээ үндсэн url заагаад
+  /// өгчихсөн бол нэмэлт path нь байхад болно. Үндсэн хаягнаас өөр хаяг руу сервис
   /// дуудахаар бол бүтэн url бичиж өгч болно.
   /// Жишээ нь: auth/login, auth/register бүр эсвэл https://payment.my.com/invoice/create гэх мэт
   ///
@@ -50,6 +50,9 @@ class ApiList {
     bool checkServerConnection = false,
     Map<String, dynamic>? header,
     bool? isMultiPart,
+    bool isBasicAuth = false,
+    String? authUser,
+    String? authPassword,
   }) async {
     Response? _response;
 
@@ -59,9 +62,9 @@ class ApiList {
       body: body,
       queryParam: queryParam,
       checkServerConnection: checkServerConnection,
-      isBasicAuth: false,
-      authUser: null,
-      authPassword: null,
+      isBasicAuth: isBasicAuth,
+      authUser: authUser,
+      authPassword: authPassword,
       isMultiPart: isMultiPart,
       header: header,
     );

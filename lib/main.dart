@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api/mezorn_client.dart';
-import 'package:mezorn_dummy/demo/demo_screen.dart';
-import 'package:mezorn_dummy/service/api_list.dart';
-import 'package:mezorn_dummy/storage/local_storage.dart';
-import 'package:mezorn_dummy/style/my_theme_dark.dart';
-import 'package:mezorn_dummy/style/my_theme.dart';
-import 'package:mezorn_dummy/utils/constants.dart';
 import 'package:mezorn_fcm/mezorn_fcm.dart';
+
+import 'demo/demo_screen.dart';
+import 'service/api_list.dart';
+import 'storage/local_storage.dart';
+import 'style/my_theme.dart';
+import 'style/my_theme_dark.dart';
+import 'utils/constants.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

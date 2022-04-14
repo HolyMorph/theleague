@@ -24,7 +24,7 @@ class LocalStorage {
   ///Хадгалсан өгөгдөл авах функц
   ///
   /// [key] -> Хадгалсан өгөгдлийн түлхүүр үг.
-  /// Хэрвээ тухайн [key]-д өгөгдөл байхгүй бол [null] буцаана.
+  /// Хэрвээ тухайн [key]-д өгөгдөл байхгүй бол null буцаана.
   static dynamic getData(String key) {
     return localStorage.get(key, defaultValue: null);
   }
