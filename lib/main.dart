@@ -26,8 +26,6 @@ void main() async {
 
 ///Апп-ын анхны тохиргоо болон утгууд өгөх функц
 _init() async {
-  print('11');
-
   ///[MezornClient] буюу сервис дуудах санг тохируулах хэсэг
   await MezornClient.init(
     baseUrl: ApiList.baseUrl,
