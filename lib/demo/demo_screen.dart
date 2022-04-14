@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_dummy/onboarding/splash_screen.dart';
 
+import '../onboarding/splash_screen.dart';
 import 'my_style_guide.dart';
 
 class DemoScreen extends StatefulWidget {

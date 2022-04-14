@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_dummy/alert/alert_helper.dart';
+
+import 'alert_helper.dart';
 
 ///Alert харуулах үндсэн харагдац
 class BaseAlertBody extends StatefulWidget {

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_dummy/style/my_button_styles.dart';
-import 'package:mezorn_dummy/style/my_colors.dart';
-import 'package:mezorn_dummy/style/my_text_styles.dart';
-import 'package:mezorn_dummy/style/my_text_field_style.dart';
+
+import 'my_button_styles.dart';
+import 'my_colors.dart';
+import 'my_text_field_style.dart';
+import 'my_text_styles.dart';
 
 class MyTheme {
-  ///[progressIndicator]-ийн загвар
+  ///[ProgressIndicator]-ийн загвар
   static ProgressIndicatorThemeData progressIndicatorTheme = const ProgressIndicatorThemeData(
     color: MyColors.primaryColor,
   );
@@ -68,7 +69,7 @@ class MyTheme {
   //   ),
   // );
 
-  ///[BottomNavigation]-ны загвар
+  ///[BottomNavigationBar]-ны загвар
   static BottomNavigationBarThemeData bottomNavigationBarTheme = BottomNavigationBarThemeData(
     ///Арын дэвсгэр өнгө
     backgroundColor: Colors.white,

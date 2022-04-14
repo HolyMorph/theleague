@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_dummy/style/my_text_styles.dart';
+
+import 'my_text_styles.dart';
 
 class MyButtonStyles {
   static const double buttonHeight = 48;

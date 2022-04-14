@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_dummy/style/my_colors_dark.dart';
 
+import 'my_colors_dark.dart';
 import 'my_text_field_style.dart';
 
 //TextFormField-ийн стайл

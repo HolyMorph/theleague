@@ -23,7 +23,7 @@ class MyTextStyles {
   ///[AppBar] болон [Dialog]-ийн гарчигны стайл
   static TextStyle? headline6;
 
-  ///Үндсэн текстийн стайл. [TextForm]-ийн бичсэн текст, [ListTile]-ийн гарчиг гэх мэтэд ашиглагдана
+  ///Үндсэн текстийн стайл. [TextFormField]-ийн бичсэн текст, [ListTile]-ийн гарчиг гэх мэтэд ашиглагдана
   static TextStyle? subtitle1;
 
   ///Дунд зэргийн хэмжээтэй текст. [subtitle1]-с арай бага хэмжээтэй байх ёстой

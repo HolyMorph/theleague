@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_dummy/demo/collection_divider.dart';
-import 'package:mezorn_dummy/demo/collection_title.dart';
+
+import '../collection_divider.dart';
+import '../collection_title.dart';
 
 class TextFieldsCollection extends StatefulWidget {
   const TextFieldsCollection({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mezorn_dummy/demo/collection_divider.dart';
 
+import '../collection_divider.dart';
 import '../demo_buttons/elevated_buttons_widget.dart';
 import 'outlined_buttons_widget.dart';
 import 'text_buttons_widget.dart';

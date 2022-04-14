@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_dummy/alert/alert_helper.dart';
-import 'package:mezorn_dummy/demo/collection_title.dart';
 
+import '../../alert/alert_helper.dart';
 import '../collection_divider.dart';
+import '../collection_title.dart';
 import 'demo_custom_alert_body.dart';
 
 class MyDialogCollection extends StatefulWidget {
@@ -72,7 +72,7 @@ class _MyDialogCollectionState extends State<MyDialogCollection> {
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(
-              child: Container(
+              child: DecoratedBox(
                 decoration: const BoxDecoration(color: Colors.red),
                 child: const DemoCustomAlertBody(),
               ),

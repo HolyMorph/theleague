@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_dummy/alert/my_loading_dialog_body.dart';
 
 import 'base_alert_body.dart';
 import 'base_snack_bar_body.dart';
+import 'my_loading_dialog_body.dart';
 
 enum AlertType { dialog, bottomSheet, snackBar }
 
@@ -23,7 +23,7 @@ class AlertHelper {
   ///
   /// Гарчигны мэдээлэллийг [title], тайлбарын мэдээллийг
   /// [message] параметрээр дамжуулна. Гарчиг болон тайлбар текстийн
-  /// хооронд зураг лого гэх мэт өөр зүйл харуулахаар бол [icon] параметрийг ашиглана.
+  /// хооронд зураг лого гэх мэт өөр зүйл харуулахаар бол [image] параметрийг ашиглана.
   ///
   /// [Dialog] нь үйлдлийг хүлээн зөвшөөрөх эсвэл үл зөвшөөрөх гэсэн 2 товчлууртай бөгөөд
   /// зөвшөөрөх товчлуурын мэдээллийг [positiveText] болон [onPositiveClicked] параметрээр
@@ -32,7 +32,7 @@ class AlertHelper {
   /// бөгөөд дарсан тохиолдолд [Dialog]-г хаах үйлдэл хийнэ харин нөгөө товчлуур нь харагдахгүй
   ///
   /// Үндсэн загвараас өөр загварын [Dialog] харуулах гэж байгаа бол [child] параметрээр тухайн
-  /// харагдацаа дамжуулж өгнө. Хэрвээ [replaceWholeDialog] параметрийн утгыг <true> гэж өгвөл dialog
+  /// харагдацаа дамжуулж өгнө. Хэрвээ [replaceWholeWidget] параметрийн утгыг <true> гэж өгвөл dialog
   /// тэр чигтээ солигдоно <false> тохиолдолд [Dialog]-ийн зөвхөн дотоод хэсэг өөрчлөгдөнө.
   ///
   /// API сервис дуудаад тухайн сервис алдаатай ирсэн тохиолдолд алдааны мсж

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mezorn_dummy/demo/collection_divider.dart';
-import 'package:mezorn_dummy/demo/collection_title.dart';
+
+import '../collection_divider.dart';
+import '../collection_title.dart';
 
 class MyIconCollection extends StatelessWidget {
   const MyIconCollection({Key? key}) : super(key: key);
