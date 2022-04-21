@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../collection_divider.dart';
 import '../collection_title.dart';
