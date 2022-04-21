@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../collection_divider.dart';
 import '../collection_title.dart';
@@ -17,7 +18,10 @@ class TextButtonsWidget extends StatelessWidget {
         ///Энгийн үеийн харагдац
         TextButton(
           onPressed: () {},
-          child: const Text(DemoStrings.normalView),
+          child: Text(
+            DemoStrings.normalView,
+            // style: TextStyle(color: Get.theme.primaryColor),
+          ),
         ),
         const CollectionDivider(),
 
