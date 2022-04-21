@@ -17,7 +17,10 @@ class TextButtonsWidget extends StatelessWidget {
         ///Энгийн үеийн харагдац
         TextButton(
           onPressed: () {},
-          child: const Text(DemoStrings.normalView),
+          child: Text(
+            DemoStrings.normalView,
+            // style: TextStyle(color: Get.theme.primaryColor),
+          ),
         ),
         const CollectionDivider(),
 

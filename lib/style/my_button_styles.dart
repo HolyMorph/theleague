@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'my_colors.dart';
 import 'my_text_styles.dart';
 
 class MyButtonStyles {
@@ -64,36 +65,50 @@ class MyButtonStyles {
     animationDuration: null,
 
     ///Товчлуурын текстийн стайл
-    textStyle: MaterialStateProperty.all<TextStyle>(MyTextStyles.button ?? const TextStyle()),
+    textStyle: MaterialStateProperty.all<TextStyle>(
+      MyTextStyles.button ?? const TextStyle(color: MyColors.primaryColor),
+    ),
+
+    ///Splash буюу дарахад үүсэх цацрагын өнгө
+    overlayColor: MaterialStateProperty.all(
+      MyColors.primaryColor.withOpacity(0.2),
+    ),
   );
 
   ///[TextButton] Товчлуурын үндсэн загвар.
-  static ButtonStyle textButtonStyle = buttonStyle.copyWith(
-    backgroundColor: MaterialStateProperty.all(Colors.transparent),
-    minimumSize: MaterialStateProperty.all(
-      const Size(buttonMinWidth, buttonHeight),
+  static ButtonStyle textButtonStyle = TextButton.styleFrom(
+    primary: MyColors.primaryColor,
+    backgroundColor: Colors.transparent,
+    minimumSize: const Size(
+      buttonMinWidth,
+      buttonHeight,
     ),
   );
 
   ///[OutlinedButton] товчлуурын үндсэн загвар.
-  static ButtonStyle outlinedButtonStyle = buttonStyle.copyWith(
-    backgroundColor: MaterialStateProperty.all(Colors.transparent),
-    side: MaterialStateProperty.resolveWith<BorderSide>(
-      (Set<MaterialState> states) {
-        ///Идэвхгүй үеийн хүрээний загвар
-        if (states.contains(MaterialState.disabled)) {
-          return BorderSide(
-            color: Get.theme.disabledColor,
-            width: 1,
-          );
-        }
-
-        ///Бусад үеийн хүрээний загвар
-        return BorderSide(color: Get.theme.primaryColor, width: 1);
-      },
-    ),
-    minimumSize: MaterialStateProperty.all(
-      const Size(buttonMinWidth, buttonHeight),
-    ),
+  static ButtonStyle outlinedButtonStyle = OutlinedButton.styleFrom(
+    backgroundColor: Colors.transparent,
+    primary: MyColors.primaryColor,
+    minimumSize: const Size(buttonMinWidth, buttonHeight),
   );
+  // static ButtonStyle outlinedButtonStyle = buttonStyle.copyWith(
+  //   backgroundColor: MaterialStateProperty.all(Colors.transparent),
+  //   side: MaterialStateProperty.resolveWith<BorderSide>(
+  //     (Set<MaterialState> states) {
+  //       ///Идэвхгүй үеийн хүрээний загвар
+  //       if (states.contains(MaterialState.disabled)) {
+  //         return BorderSide(
+  //           color: Get.theme.disabledColor,
+  //           width: 1,
+  //         );
+  //       }
+  //
+  //       ///Бусад үеийн хүрээний загвар
+  //       return BorderSide(color: Get.theme.primaryColor, width: 1);
+  //     },
+  //   ),
+  //   minimumSize: MaterialStateProperty.all(
+  //     const Size(buttonMinWidth, buttonHeight),
+  //   ),
+  // );
 }
