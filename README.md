@@ -6,7 +6,7 @@ Flutter прожект үүсгэхэд зориулсан жишээ проже
 
 ## Үндсэн тохиргоо
 
-1. Source code-г zip байдлаар татаж аваад өөрийн ажлын хавтсанд задлана.
+1. Source code git-с татаж аваад origin-оо өөрийн прожектын url-р солино
 2. Android package name болон IOS Bundle ID солих. [mezorn_common](https://gitlab.com/mezorn/android/flutter_packages/mezorn_flutter_common_library) санд хэрхэн солих заавар нь байгаа
 	Жишээ нь : **`flutter pub run mezorn_common:main mn.mezorn.hello`**. 
 
