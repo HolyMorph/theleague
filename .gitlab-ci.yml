@@ -13,6 +13,9 @@ stages:
 
 format_analyze_test:
   stage: format_analyze_test
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
   script:
     - dart format -l 150 --set-exit-if-changed .
     - flutter clean
