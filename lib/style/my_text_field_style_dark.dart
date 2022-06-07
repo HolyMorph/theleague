@@ -15,24 +15,24 @@ class MyTextFieldStyleDark {
   //хийж байгаа хүнээрээ стайл гаргуулах хэрэгтэй
   //----------------------------------------------------------
 
-  ///TextFormField-ийн хүрээний зураасны загвар
+  /// TextFormField-ийн хүрээний загвар.
+  static InputBorder inputBorder = OutlineInputBorder(
+    borderSide: inputBorderSide,
+    borderRadius: BorderRadius.circular(10),
+  );
+
+  /// TextFormField-ийн хүрээний зураасны загвар.
   static BorderSide inputBorderSide = const BorderSide(
     color: MyColorsDark.darkAccentColor,
     width: 1,
     style: BorderStyle.solid,
   );
 
-  ///TextFormField-ийн хүрээний загвар
-  static InputBorder inputBorder = OutlineInputBorder(
-    borderSide: inputBorderSide,
-    borderRadius: BorderRadius.circular(10),
-  );
-
   //----------------------------------------------------------
 
   ///[TextFormField]-ийн үндсэн стайл
   static InputDecorationTheme inputTheme = InputDecorationTheme(
-    ///Label болон hint-ийг зэрэгцүүлэх эсэх
+    /// Label болон hint-ийг зэрэгцүүлэх эсэх.
     alignLabelWithHint: false,
     isCollapsed: true,
     isDense: true,
@@ -41,13 +41,13 @@ class MyTextFieldStyleDark {
 
     hoverColor: MyColorsDark.darkAccentColor,
 
-    ///TextForm дээрх алдааны мэдээний стайл
+    /// TextForm дээрх алдааны мэдээний стайл.
     errorStyle: MyTextFieldStyle.errorStyle,
 
-    ///TextForm дээрх текстийн уртыг харуулах текстийн стайл
+    /// TextForm дээрх текстийн уртыг харуулах текстийн стайл.
     counterStyle: MyTextFieldStyle.counterStyle,
 
-    ///TextForm-ийн арын дэвсгэрийг өнгөтэй харуулах эсэх
+    /// TextForm-ийн арын дэвсгэрийг өнгөтэй харуулах эсэх.
     filled: false,
 
     ///TextForm-ийн арын дэвсгэрийн  өнгөтэй харуулах
@@ -59,20 +59,20 @@ class MyTextFieldStyleDark {
     /// Focus хийгдэхэд дээшлэх, байнга дээр харагдах, эсвэл дээшлэхгүй гэх мэт тохиргоонууд байна
     floatingLabelBehavior: FloatingLabelBehavior.auto,
 
-    ///Дотоод контентийн зай авах хэмжээ
+    /// Дотоод контентийн зай авах хэмжээ.
     contentPadding: null,
 
-    ///Энгийн үеийн хүрээ
+    /// Энгийн үеийн хүрээ.
     border: inputBorder,
 
-    ///Focus хийгдсэн мөн алдаатай өгөгдөл байгаа үеийн хүрээ
+    /// Focus хийгдсэн мөн алдаатай өгөгдөл байгаа үеийн хүрээ.
     focusedErrorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: Get.theme.errorColor,
       ),
     ),
 
-    ///Идэвхтэй үеийн хүрээ
+    /// Идэвхтэй үеийн хүрээ.
     enabledBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: MyColorsDark.darkAccentColor.withOpacity(0.3),
@@ -81,52 +81,52 @@ class MyTextFieldStyleDark {
 
     focusColor: MyColorsDark.darkAccentColor,
 
-    ///Cursor идэвхтэй буюу Focus хийгдсэн үеийн хүрээ
+    /// Cursor идэвхтэй буюу Focus хийгдсэн үеийн хүрээ.
     focusedBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: MyColorsDark.darkAccentColor,
       ),
     ),
 
-    ///Алдаатай үеийн хүрээ
+    /// Алдаатай үеийн хүрээ.
     errorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: Get.theme.errorColor,
       ),
     ),
 
-    ///Идэвхгүй болгосон үеийн хүрээ
+    /// Идэвхгүй болгосон үеийн хүрээ.
     disabledBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: Get.theme.disabledColor,
       ),
     ),
 
-    ///Hint буюу зөвлөмж харуулах хэсгийн стайл
+    /// Hint буюу зөвлөмж харуулах хэсгийн стайл.
     hintStyle: MyTextFieldStyle.hintStyle,
 
-    ///Label буюу юу оруулах гарчигны стайл
+    /// Label буюу юу оруулах гарчигны стайл.
     labelStyle: (MyTextFieldStyle.labelStyle ?? const TextStyle()).copyWith(
       color: MyColorsDark.darkAccentColor,
     ),
 
-    ///TextForm-ийн prefix нь текст үед тухайн текстийн стайл
+    /// TextForm-ийн prefix нь текст үед тухайн текстийн стайл.
     prefixStyle: (MyTextFieldStyle.prefixStyle ?? const TextStyle()).copyWith(
       color: MyColorsDark.darkAccentColor,
     ),
 
-    ///Алдааны мсж-ны дээд мөрийн тоо
+    /// Алдааны мсж-ны дээд мөрийн тоо.
     errorMaxLines: 1,
 
-    ///Текстийн төгсгөлд харуулах текстийн загвар
+    /// Текстийн төгсгөлд харуулах текстийн загвар.
     suffixStyle: (MyTextFieldStyle.suffixStyle ?? const TextStyle()).copyWith(
       color: MyColorsDark.darkAccentColor,
     ),
 
-    ///Prefix нь icon буюу Widget үед тухайн icon-ы өнгө
+    /// Prefix нь icon буюу Widget үед тухайн icon-ы өнгө.
     prefixIconColor: MyColorsDark.darkAccentColor,
 
-    ///Suffix нь icon буюу Widget үед тухайн icon-ы өнгө
+    /// Suffix нь icon буюу Widget үед тухайн icon-ы өнгө.
     suffixIconColor: MyColorsDark.darkAccentColor,
   );
 }

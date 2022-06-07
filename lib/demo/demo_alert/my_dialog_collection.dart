@@ -21,7 +21,7 @@ class _MyDialogCollectionState extends State<MyDialogCollection> {
       children: [
         const CollectionTitle(name: 'Dialogs'),
 
-        ///Энгийн dialog харуулах
+        /// Энгийн dialog харуулах.
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(
@@ -41,7 +41,7 @@ class _MyDialogCollectionState extends State<MyDialogCollection> {
         ),
         const CollectionDivider(),
 
-        ///Загвар өөрчилсөн dialog харуулах
+        /// Загвар өөрчилсөн dialog харуулах.
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(
@@ -52,7 +52,7 @@ class _MyDialogCollectionState extends State<MyDialogCollection> {
         ),
         const CollectionDivider(),
 
-        ///Загвар өөрчилсөн том контенттой dialog харуулах
+        /// Загвар өөрчилсөн том контенттой dialog харуулах.
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(

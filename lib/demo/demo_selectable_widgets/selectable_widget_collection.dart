@@ -19,7 +19,7 @@ class _SelectableWidgetCollectionState extends State<SelectableWidgetCollection>
       children: const [
         CollectionTitle(name: 'Checkboxes'),
 
-        ///CheckBoxes
+        /// CheckBoxes.
         CheckboxesWidget(),
 
         CollectionTitle(name: 'Radio buttons'),

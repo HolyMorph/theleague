@@ -7,19 +7,73 @@ import 'my_text_field_style.dart';
 import 'my_text_styles.dart';
 
 class MyTheme {
-  ///[ProgressIndicator]-ийн загвар
-  static ProgressIndicatorThemeData progressIndicatorTheme = const ProgressIndicatorThemeData(
-    color: MyColors.primaryColor,
+  /// Апп-ын [AppBar]-ийн загвар.
+  static AppBarTheme appBarTheme = AppBarTheme(
+    /// Дэвсгэр өнгө.
+    backgroundColor: Get.theme.primaryColor,
+
+    /// Товгорын хэмжээ 0-с их тохиолдолд ард нь тусах сүүдрийн өнгө.
+    shadowColor: Get.theme.shadowColor,
+
+    /// Өндрийн хэмжээ.
+    toolbarHeight: null,
+
+    /// Actions буюу меню байгаа бол тухайн менюны загвар.
+    actionsIconTheme: null,
+
+    /// AppBar-ийн гарчиг төвдөө харагдах эсэх.
+    centerTitle: false,
+
+    /// [AppBar]-ийн буцах болон burger цэсний загвар.
+    iconTheme: null,
+
+    /// AppBar-ийн хэлбэр. Дугуй хүрээтэй байх эсэх нтр гээд.
+    shape: null,
+
+    /// AppBar-ийн гарчигны загвар.
+    titleTextStyle: null,
+
+    /// AppBar-ийн товгорын хэмжээ.
+    elevation: 0,
   );
 
-  ///[SnackBar]-ийн загвар
-  static SnackBarThemeData snackBarTheme = const SnackBarThemeData(
-    backgroundColor: Colors.black,
-    elevation: 2,
-    actionTextColor: Colors.white,
+  /// [BottomNavigationBar]-ны загвар.
+  static BottomNavigationBarThemeData bottomNavigationBarTheme = BottomNavigationBarThemeData(
+    /// Арын дэвсгэр өнгө.
+    backgroundColor: Colors.white,
+
+    /// Товгорын хэмжээ.
+    elevation: 0,
+
+    /// Сонгогдсон гарчигийг харуулах эсэх.
+    showSelectedLabels: true,
+
+    /// Сонгогдоогүй гарчигийг харуулах эсэх.
+    showUnselectedLabels: true,
+
+    /// Төрөл. Бүгд тэнцүү зайгаа хувааж авах эсвэл сонгогдсон нь арай илүү зай эзлэх гэх мэт.
+    type: BottomNavigationBarType.fixed,
+
+    /// Сонгогдсон Tab-ийн Icon болон текстийн өнгө.
+    selectedItemColor: Get.theme.primaryColor,
+
+    /// Сонгогдоогүй Tab-ийн Icon болон текстийн өнгө.
+    unselectedItemColor: Get.theme.unselectedWidgetColor,
+
+    /// Сонгогдсон Tab-ийн Icon-ны загвар.
+    selectedIconTheme: IconThemeData(color: Get.theme.primaryColor),
+
+    /// Сонгогдоогүй Tab-ийн Icon-ны загвар.
+    unselectedIconTheme: IconThemeData(color: Get.theme.unselectedWidgetColor),
+
+    /// Сонгогдсон Tab-ийн гарчигны загвар.
+    selectedLabelStyle: MyTextStyles.selectedLabelStyle,
+
+    /// Сонгогдоогүй Tab-ийн гарчигны загвар.
+    unselectedLabelStyle: MyTextStyles.unselectedLabelStyle,
   );
 
-  ///[BottomSheet]-ийн загвар
+  /// [BottomSheet]-ийн загвар.
   static BottomSheetThemeData bottomSheetThemeData = BottomSheetThemeData(
     backgroundColor: MyColors.dialogBackgroundColor,
     elevation: 2,
@@ -28,7 +82,7 @@ class MyTheme {
     ),
   );
 
-  ///[Dialog]-ийн загвар
+  /// [Dialog]-ийн загвар.
   static DialogTheme dialogTheme = DialogTheme(
     backgroundColor: MyColors.dialogBackgroundColor,
     elevation: 2,
@@ -37,148 +91,9 @@ class MyTheme {
     ),
   );
 
-  ///[TabBar]-ийн загвар
-  static TabBarTheme tabBarTheme = TabBarTheme(
-    ///Tab-ын сонгогдсон гарчигны өнгө
-    labelColor: Get.theme.primaryColor,
-
-    ///Tab-ын сонгогдсон гарчигны загвар
-    labelStyle: MyTextStyles.selectedTabLabelStyle,
-
-    ///Tab-ын сонгогдоогүй гарчигны өнгө
-    unselectedLabelColor: Get.theme.unselectedWidgetColor,
-
-    ///Tab-ын сонгогдоогүй гарчигны загвар
-    unselectedLabelStyle: MyTextStyles.unselectedTabLabelStyle,
-
-    ///Indicator буюу TabBar-ийн доогуур гүйх зураасны загвар
-    indicator: null,
-
-    ///Indicator буюу TabBar-ийн доогуур гүйх зураасны хэмжээ
-    indicatorSize: null,
-
-    ///Гарчигны зай авах хэмжээ
-    labelPadding: null,
-  );
-
-  // ///[Dialog]-ийн загвар
-  // static DialogTheme dialogTheme = DialogTheme(
-  //   backgroundColor: Colors.red,
-  //   shape: RoundedRectangleBorder(
-  //     borderRadius: BorderRadius.circular(10),
-  //   ),
-  // );
-
-  ///[BottomNavigationBar]-ны загвар
-  static BottomNavigationBarThemeData bottomNavigationBarTheme = BottomNavigationBarThemeData(
-    ///Арын дэвсгэр өнгө
-    backgroundColor: Colors.white,
-
-    ///Товгорын хэмжээ
-    elevation: 0,
-
-    ///Сонгогдсон гарчигийг харуулах эсэх
-    showSelectedLabels: true,
-
-    ///Сонгогдоогүй гарчигийг харуулах эсэх
-    showUnselectedLabels: true,
-
-    ///Төрөл. Бүгд тэнцүү зайгаа хувааж авах эсвэл сонгогдсон нь арай илүү зай эзлэх гэх мэт
-    type: BottomNavigationBarType.fixed,
-
-    ///Сонгогдсон Tab-ийн Icon болон текстийн өнгө
-    selectedItemColor: Get.theme.primaryColor,
-
-    ///Сонгогдоогүй Tab-ийн Icon болон текстийн өнгө
-    unselectedItemColor: Get.theme.unselectedWidgetColor,
-
-    ///Сонгогдсон Tab-ийн Icon-ны загвар
-    selectedIconTheme: IconThemeData(color: Get.theme.primaryColor),
-
-    ///Сонгогдоогүй Tab-ийн Icon-ны загвар
-    unselectedIconTheme: IconThemeData(color: Get.theme.unselectedWidgetColor),
-
-    ///Сонгогдсон Tab-ийн гарчигны загвар
-    selectedLabelStyle: MyTextStyles.selectedLabelStyle,
-
-    ///Сонгогдоогүй Tab-ийн гарчигны загвар
-    unselectedLabelStyle: MyTextStyles.unselectedLabelStyle,
-  );
-
-  ///Апп-ын [AppBar]-ийн загвар
-  static AppBarTheme appBarTheme = AppBarTheme(
-    ///Дэвсгэр өнгө.
-    backgroundColor: Get.theme.primaryColor,
-
-    ///Товгорын хэмжээ 0-с их тохиолдолд ард нь тусах сүүдрийн өнгө
-    shadowColor: Get.theme.shadowColor,
-
-    ///Өндрийн хэмжээ
-    toolbarHeight: null,
-
-    ///Actions буюу меню байгаа бол тухайн менюны загвар
-    actionsIconTheme: null,
-
-    ///AppBar-ийн гарчиг төвдөө харагдах эсэх
-    centerTitle: false,
-
-    ///[AppBar]-ийн буцах болон burger цэсний загвар
-    iconTheme: null,
-
-    ///AppBar-ийн хэлбэр. Дугуй хүрээтэй байх эсэх нтр гээд
-    shape: null,
-
-    ///AppBar-ийн гарчигны загвар
-    titleTextStyle: null,
-
-    ///AppBar-ийн товгорын хэмжээ
-    elevation: 0,
-  );
-
-  ///Апп-д ашиглах текстүүдийн стайл
-  static TextTheme textTheme = TextTheme(
-    ///Үлэмж том текст
-    headline1: MyTextStyles.headline1,
-
-    ///Аварга том текст
-    headline2: MyTextStyles.headline2,
-
-    ///Дунд зэрэг том текст
-    headline3: MyTextStyles.headline3,
-
-    ///Жоохон том текст
-    headline4: MyTextStyles.headline4,
-
-    ///Том текст
-    headline5: MyTextStyles.headline5,
-
-    ///[AppBar] болон [Dialog]-ийн гарчигны стайл
-    headline6: MyTextStyles.headline6,
-
-    ///Үндсэн текстийн стайл. [TextForm]-ийн бичсэн текст, [ListTile]-ийн гарчиг гэх мэтэд ашиглагдана
-    subtitle1: MyTextStyles.subtitle1,
-
-    ///Дунд зэргийн хэмжээтэй текст. [subtitle1]-с арай бага хэмжээтэй байх ёстой
-    subtitle2: MyTextStyles.subtitle2,
-
-    ///[bodyText2]-с арай том текстүүдэд ашиглах стайл
-    bodyText1: MyTextStyles.bodyText1,
-
-    ///[Material] элэментүүдийн текстийн үндсэн стайл
-    bodyText2: MyTextStyles.bodyText2,
-
-    ///Товчлуурын текстийн стайл
-    button: MyTextStyles.button,
-
-    ///Жижиг текст
-    caption: MyTextStyles.caption,
-
-    ///Хамгийн жижиг текст
-    overline: MyTextStyles.overline,
-  );
-
+  /// Апп-ын үндсэн загвар.
   static ThemeData mainTheme = ThemeData(
-    ///Апп-д ашиглагдах нийт өнгөнүүд тохируулах
+    /// Апп-д ашиглагдах нийт өнгөнүүд тохируулах.
     primaryColor: MyColors.primaryColor,
     primaryColorLight: MyColors.primaryColorLight,
     primaryColorDark: MyColors.primaryColorDark,
@@ -198,22 +113,22 @@ class MyTheme {
     selectedRowColor: MyColors.selectedRowColor,
     canvasColor: MyColors.canvasColor,
 
-    ///Апп-ын нийт сүүдэрний өнгө
+    /// Апп-ын нийт сүүдэрний өнгө.
     shadowColor: MyColors.shadowColor,
 
-    ///[Dialog]-ийн арын дэвсгэр өнгө
+    /// [Dialog]-ийн арын дэвсгэр өнгө.
     dialogBackgroundColor: MyColors.dialogBackgroundColor,
 
-    ///CheckBox, Radio гэх мэт тийм үгүй гэсэн сонголттой виджетүүдийн идэвхтэй үеийн өнгө
+    /// CheckBox, Radio гэх мэт тийм үгүй гэсэн сонголттой виджетүүдийн идэвхтэй үеийн өнгө.
     toggleableActiveColor: MyColors.primaryColor,
 
     ///
     visualDensity: VisualDensity.adaptivePlatformDensity,
 
-    ///Апп-ны хэмжээнд ашиглагдах үндсэн фонт. Custom фонт бол pubspec.yaml дотор зааж өгсөн байх шаардлагатай
+    /// Апп-ны хэмжээнд ашиглагдах үндсэн фонт. Custom фонт бол pubspec.yaml дотор зааж өгсөн байх шаардлагатай.
     fontFamily: MyTextStyles.baseFont,
 
-    ///BottomNavigation-ны загвар
+    /// BottomNavigation-ны загвар.
     bottomNavigationBarTheme: bottomNavigationBarTheme,
 
     ///[TextFormField] болон [SelectableText]-ийн select хийх загвар
@@ -221,19 +136,19 @@ class MyTheme {
     ///Select хийх cursor-ийн өнгө, чирэх бондгорын өнгө гэх мэт
     textSelectionTheme: null,
 
-    ///[DiaLog]-ийн загвар
+    /// [DiaLog]-ийн загвар.
     dialogTheme: dialogTheme,
 
-    ///Доороос гарч ирдэг bottomSheet-ийн загвар
+    /// Доороос гарч ирдэг bottomSheet-ийн загвар.
     bottomSheetTheme: bottomSheetThemeData,
 
-    ///Доор харагддаг AppBar-ийн загвар
+    /// Доор харагддаг AppBar-ийн загвар.
     bottomAppBarTheme: null,
 
-    ///ТabBar-ийн загвар
+    /// ТabBar-ийн загвар.
     tabBarTheme: tabBarTheme,
 
-    ///Хуудас шилжилтийн загвар
+    /// Хуудас шилжилтийн загвар.
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
@@ -241,70 +156,156 @@ class MyTheme {
       },
     ),
 
-    ///[AppBar]-ийн загвар
+    /// [AppBar]-ийн загвар.
     appBarTheme: appBarTheme,
 
-    ///ToggleButton загвар
+    /// ToggleButton загвар.
     toggleButtonsTheme: null,
 
-    ///Товчлуурын үндсэн загвар
+    /// Товчлуурын үндсэн загвар.
     buttonTheme: MyButtonStyles.buttonThemeData,
 
-    ///[Scaffold] дээр харагдах [FAB] буюу бөөрөнхий товчлуурын загвар
+    /// [Scaffold] дээр харагдах [FAB] буюу бөөрөнхий товчлуурын загвар.
     floatingActionButtonTheme: null,
 
-    ///Card виджетийн загвар
+    /// Card виджетийн загвар.
     cardTheme: null,
 
-    ///Slider буюу 2 тийш чирж утга өөрчилөх виджетийн загвар
+    /// Slider буюу 2 тийш чирж утга өөрчилөх виджетийн загвар.
     sliderTheme: null,
 
-    ///Switch товчлуурын загвар
+    /// Switch товчлуурын загвар.
     switchTheme: null,
 
-    ///RadioButton-ны загвар
+    /// RadioButton-ны загвар.
     radioTheme: null,
 
-    ///CheckBox-ийн загвар
+    /// CheckBox-ийн загвар.
     checkboxTheme: null,
 
-    ///SnackBar-ийн загвар
+    /// SnackBar-ийн загвар.
     snackBarTheme: snackBarTheme,
 
-    ///Divider виджетийн загвар
+    /// Divider виджетийн загвар.
     dividerTheme: null,
 
     ///Progress-уудын загвар.
     ///Linear, Circular болон Refresh-ийн загварууд энд сольж өгнө
     progressIndicatorTheme: progressIndicatorTheme,
 
-    ///ListTile-ийн загвар
+    /// ListTile-ийн загвар.
     listTileTheme: null,
 
-    ///Chip виджетийн загвар
+    /// Chip виджетийн загвар.
     chipTheme: null,
 
-    ///Гадуураа хүрээтэй товчлуурын загвар
+    /// Гадуураа хүрээтэй товчлуурын загвар.
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: MyButtonStyles.outlinedButtonStyle,
     ),
 
-    ///Текстэн товчлуурын загвар
+    /// Текстэн товчлуурын загвар.
     textButtonTheme: TextButtonThemeData(
       style: MyButtonStyles.textButtonStyle,
     ),
 
-    ///ElevatedButton-ны загвар
+    /// ElevatedButton-ны загвар.
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: MyButtonStyles.buttonStyle,
     ),
 
-    ///TextForm үндсэн стайл
+    /// TextForm үндсэн стайл.
     inputDecorationTheme: MyTextFieldStyle.inputTheme,
 
-    ///Апп-д ашиглах текстүүдийн стайл
+    /// Апп-д ашиглах текстүүдийн стайл.
     textTheme: textTheme,
 
     brightness: Brightness.light,
+  );
+
+  /// [ProgressIndicator]-ийн загвар.
+  static ProgressIndicatorThemeData progressIndicatorTheme = const ProgressIndicatorThemeData(
+    color: MyColors.primaryColor,
+  );
+
+  /// [SnackBar]-ийн загвар.
+  static SnackBarThemeData snackBarTheme = const SnackBarThemeData(
+    backgroundColor: Colors.black,
+    elevation: 2,
+    actionTextColor: Colors.white,
+  );
+
+  /// [TabBar]-ийн загвар.
+  static TabBarTheme tabBarTheme = TabBarTheme(
+    /// Tab-ын сонгогдсон гарчигны өнгө.
+    labelColor: Get.theme.primaryColor,
+
+    /// Tab-ын сонгогдсон гарчигны загвар.
+    labelStyle: MyTextStyles.selectedTabLabelStyle,
+
+    /// Tab-ын сонгогдоогүй гарчигны өнгө.
+    unselectedLabelColor: Get.theme.unselectedWidgetColor,
+
+    /// Tab-ын сонгогдоогүй гарчигны загвар.
+    unselectedLabelStyle: MyTextStyles.unselectedTabLabelStyle,
+
+    /// Indicator буюу TabBar-ийн доогуур гүйх зураасны загвар.
+    indicator: null,
+
+    /// Indicator буюу TabBar-ийн доогуур гүйх зураасны хэмжээ.
+    indicatorSize: null,
+
+    /// Гарчигны зай авах хэмжээ.
+    labelPadding: null,
+  );
+
+  // ///[Dialog]-ийн загвар
+  // static DialogTheme dialogTheme = DialogTheme(
+  //   backgroundColor: Colors.red,
+  //   shape: RoundedRectangleBorder(
+  //     borderRadius: BorderRadius.circular(10),
+  //   ),
+  // );
+
+  /// Апп-д ашиглах текстүүдийн стайл.
+  static TextTheme textTheme = TextTheme(
+    /// Үлэмж том текст.
+    headline1: MyTextStyles.headline1,
+
+    /// Аварга том текст.
+    headline2: MyTextStyles.headline2,
+
+    /// Дунд зэрэг том текст.
+    headline3: MyTextStyles.headline3,
+
+    /// Жоохон том текст.
+    headline4: MyTextStyles.headline4,
+
+    /// Том текст.
+    headline5: MyTextStyles.headline5,
+
+    /// [AppBar] болон [Dialog]-ийн гарчигны стайл.
+    headline6: MyTextStyles.headline6,
+
+    /// Үндсэн текстийн стайл. [TextForm]-ийн бичсэн текст, [ListTile]-ийн гарчиг гэх мэтэд ашиглагдана.
+    subtitle1: MyTextStyles.subtitle1,
+
+    /// Дунд зэргийн хэмжээтэй текст. [subtitle1]-с арай бага хэмжээтэй байх ёстой.
+    subtitle2: MyTextStyles.subtitle2,
+
+    /// [bodyText2]-с арай том текстүүдэд ашиглах стайл.
+    bodyText1: MyTextStyles.bodyText1,
+
+    /// [Material] элэментүүдийн текстийн үндсэн стайл.
+    bodyText2: MyTextStyles.bodyText2,
+
+    /// Товчлуурын текстийн стайл.
+    button: MyTextStyles.button,
+
+    /// Жижиг текст.
+    caption: MyTextStyles.caption,
+
+    /// Хамгийн жижиг текст.
+    overline: MyTextStyles.overline,
   );
 }

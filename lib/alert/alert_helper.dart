@@ -5,9 +5,7 @@ import 'base_alert_body.dart';
 import 'base_snack_bar_body.dart';
 import 'my_loading_dialog_body.dart';
 
-enum AlertType { dialog, bottomSheet, snackBar }
-
-///Апп-д зориулсан бүх төрлийн alert харуулах класс
+/// Апп-д зориулсан бүх төрлийн alert харуулах класс.
 class AlertHelper {
   /// ╔════════════════════════════════════════════════════════════════════════════╗
   /// ║ Alert харуулах үндсэн функцүүд                                             ║
@@ -39,6 +37,7 @@ class AlertHelper {
   /// харуулахаар бол энэ функц руу тухайн ирсэн [response]-оо дамжуулж алдааны мсж харуулна.
   /// [response]-ийн бүтэц нь тухайн сервисээс хамаарч өөр өөр байх тул өөрийн ашиглаж буй сервистээ
   /// тааруулж алдааны мсж-ээ авна
+  // ignore: long-parameter-list, long-method
   static Future<dynamic> showAlert({
     AlertType type = AlertType.dialog,
     String? title,
@@ -71,14 +70,14 @@ class AlertHelper {
     switch (type) {
       case AlertType.dialog:
 
-        ///[Dialog] харуулах бол
+        /// [Dialog] харуулах бол.
         return Get.dialog(
           _baseBody,
           useSafeArea: true,
           barrierDismissible: dismissible,
         );
 
-      ///[BottomSheet] харуулах бол
+      /// [BottomSheet] харуулах бол.
       case AlertType.bottomSheet:
         return Get.bottomSheet(
           _baseBody,
@@ -87,40 +86,18 @@ class AlertHelper {
           isDismissible: dismissible,
         );
 
-      ///[SnackBar] харуулах бол
+      /// [SnackBar] харуулах бол.
       case AlertType.snackBar:
         if (Get.context == null) {
           return;
         }
-        ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
-        ScaffoldMessenger.of(Get.context!).showSnackBar(
-          SnackBar(
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                child ??
-                    BaseSnackBarBody(
-                      title: title,
-                      message: message,
-                      icon: image,
-                    ),
-              ],
-            ),
-            action: (onPositiveClicked != null)
-                ? SnackBarAction(
-                    label: positiveText ?? 'Хаах',
-                    onPressed: onPositiveClicked,
-                  )
-                : null,
-            elevation: 2,
-          ),
-        );
+        _showSnackBar();
         return null;
     }
   }
 
-  ///Уншиж буй dialog харуулах функц
-  static showLoadingAlert({String? message}) {
+  /// Уншиж буй dialog харуулах функц.
+  static void showLoadingAlert({String? message}) {
     showAlert(
       child: MyLoadingDialogBody(message: message),
       dismissible: false,
@@ -134,4 +111,40 @@ class AlertHelper {
       },
     );
   }
+
+  /// [SnackBar] харуулах функц.
+  static void _showSnackBar({
+    Widget? child,
+    String? title,
+    String? message,
+    Widget? image,
+    String? positiveText,
+    Function()? onPositiveClicked,
+  }) {
+    ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
+    ScaffoldMessenger.of(Get.context!).showSnackBar(
+      SnackBar(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            child ??
+                BaseSnackBarBody(
+                  title: title,
+                  message: message,
+                  icon: image,
+                ),
+          ],
+        ),
+        action: (onPositiveClicked != null)
+            ? SnackBarAction(
+                label: positiveText ?? 'Хаах',
+                onPressed: onPositiveClicked,
+              )
+            : null,
+        elevation: 2,
+      ),
+    );
+  }
 }
+
+enum AlertType { dialog, bottomSheet, snackBar }

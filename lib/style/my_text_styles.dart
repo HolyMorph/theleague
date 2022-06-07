@@ -5,54 +5,54 @@ class MyTextStyles {
 
   //Апп-д ашиглагдаж буй текстүүдийн стайл
 
-  ///Хамгийн том текст
-  static TextStyle? headline1;
-
-  ///Аварга том текст
-  static TextStyle? headline2;
-
-  ///Дунд зэрэг том текст
-  static TextStyle? headline3;
-
-  ///Бага зэрэг том текст
-  static TextStyle? headline4;
-
-  ///Том текст
-  static TextStyle? headline5;
-
-  ///[AppBar] болон [Dialog]-ийн гарчигны стайл
-  static TextStyle? headline6;
-
-  ///Үндсэн текстийн стайл. [TextFormField]-ийн бичсэн текст, [ListTile]-ийн гарчиг гэх мэтэд ашиглагдана
-  static TextStyle? subtitle1;
-
-  ///Дунд зэргийн хэмжээтэй текст. [subtitle1]-с арай бага хэмжээтэй байх ёстой
-  static TextStyle? subtitle2;
-
-  ///[bodyText2]-с арай том текстүүдэд ашиглах стайл
+  /// [bodyText2]-с арай том текстүүдэд ашиглах стайл.
   static TextStyle? bodyText1;
 
-  ///[Material] элэментүүдийн текстийн үндсэн стайл
+  /// [Material] элэментүүдийн текстийн үндсэн стайл.
   static TextStyle? bodyText2;
 
-  ///Товчлуурын текстийн стайл
+  /// Товчлуурын текстийн стайл.
   static TextStyle? button;
 
-  ///Жижиг текст
+  /// Жижиг текст.
   static TextStyle? caption;
 
-  ///Хамгийн жижиг текст
+  /// Хамгийн том текст.
+  static TextStyle? headline1;
+
+  /// Аварга том текст.
+  static TextStyle? headline2;
+
+  /// Дунд зэрэг том текст.
+  static TextStyle? headline3;
+
+  /// Бага зэрэг том текст.
+  static TextStyle? headline4;
+
+  /// Том текст.
+  static TextStyle? headline5;
+
+  /// [AppBar] болон [Dialog]-ийн гарчигны стайл.
+  static TextStyle? headline6;
+
+  /// Хамгийн жижиг текст.
   static TextStyle? overline;
 
-  ///[BottomNavigationBar]-ийн сонгогдсон Tab-ийн гарчигны загвар
+  /// [BottomNavigationBar]-ийн сонгогдсон Tab-ийн гарчигны загвар.
   static TextStyle? selectedLabelStyle;
 
-  ///[BottomNavigationBar] сонгогдоогүй Tab-ийн гарчигны загвар
-  static TextStyle? unselectedLabelStyle;
-
-  ///[TabBar]-ийн сонгогдсон Tab-ийн гарчигны загвар
+  /// [TabBar]-ийн сонгогдсон Tab-ийн гарчигны загвар.
   static TextStyle? selectedTabLabelStyle;
 
-  ///[TabBar]-ийн сонгогдоогүй Tab-ийн гарчигны загвар
+  /// Үндсэн текстийн стайл. [TextFormField]-ийн бичсэн текст, [ListTile]-ийн гарчиг гэх мэтэд ашиглагдана.
+  static TextStyle? subtitle1;
+
+  /// Дунд зэргийн хэмжээтэй текст. [subtitle1]-с арай бага хэмжээтэй байх ёстой.
+  static TextStyle? subtitle2;
+
+  /// [BottomNavigationBar] сонгогдоогүй Tab-ийн гарчигны загвар.
+  static TextStyle? unselectedLabelStyle;
+
+  /// [TabBar]-ийн сонгогдоогүй Tab-ийн гарчигны загвар.
   static TextStyle? unselectedTabLabelStyle;
 }

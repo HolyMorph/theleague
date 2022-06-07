@@ -21,33 +21,34 @@ class _MySnackBarCollectionState extends State<MySnackBarCollection> {
       children: [
         const CollectionTitle(name: 'SnackBars'),
 
-        ///Энгийн [SnackBar] харуулах
+        /// Энгийн [SnackBar] харуулах.
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(
-                type: AlertType.snackBar,
-                title: 'Толгой хэсгийн мсж',
-                message: 'Тайлбар хэсэг',
-                image: Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  child: Icon(
-                    Icons.image,
-                    size: 24,
-                    color: Get.theme.backgroundColor,
-                  ),
+              type: AlertType.snackBar,
+              title: 'Толгой хэсгийн мсж',
+              message: 'Тайлбар хэсэг',
+              image: Container(
+                margin: const EdgeInsets.only(right: 8),
+                child: Icon(
+                  Icons.image,
+                  size: 24,
+                  color: Get.theme.backgroundColor,
                 ),
-                onPositiveClicked: () {
-                  AlertHelper.showAlert(
-                    message: 'Хаах товчлуур дарагдлаа',
-                    type: AlertType.snackBar,
-                  );
-                });
+              ),
+              onPositiveClicked: () {
+                AlertHelper.showAlert(
+                  message: 'Хаах товчлуур дарагдлаа',
+                  type: AlertType.snackBar,
+                );
+              },
+            );
           },
           child: const Text('Энгийн snackBar харуулах'),
         ),
         const CollectionDivider(),
 
-        ///Загвар өөрчилсөн [SnackBar] харуулах
+        /// Загвар өөрчилсөн [SnackBar] харуулах.
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(

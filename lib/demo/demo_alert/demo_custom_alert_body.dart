@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-///Стандарт бус Alert харуулахад ашиглах жишээ виджет
+/// Стандарт бус Alert харуулахад ашиглах жишээ виджет.
 class DemoCustomAlertBody extends StatelessWidget {
   final bool isScrollable;
   const DemoCustomAlertBody({
@@ -45,8 +45,8 @@ class DemoCustomAlertBody extends StatelessWidget {
       color: Color.fromARGB(
         255,
         Random().nextInt(255),
-        Random().nextInt(255),
-        Random().nextInt(255),
+        Random().nextInt(254),
+        Random().nextInt(253),
       ),
       child: const Text('Big screen item'),
     );

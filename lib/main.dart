@@ -17,39 +17,39 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  ///Апп-ын анхны тохиргоо болон утгууд өгөх функц
+  /// Апп-ын анхны тохиргоо болон утгууд өгөх функц.
   _init();
 
-  ///Апп ажиллуулж эхлэх
+  /// Апп ажиллуулж эхлэх.
   runApp(const MyApp());
 }
 
-///Апп-ын анхны тохиргоо болон утгууд өгөх функц
-_init() async {
-  ///[MezornClient] буюу сервис дуудах санг тохируулах хэсэг
+/// Апп-ын анхны тохиргоо болон утгууд өгөх функц.
+void _init() async {
+  /// [MezornClient] буюу сервис дуудах санг тохируулах хэсэг.
   await MezornClient.init(
     baseUrl: ApiList.baseUrl,
     debugUrl: ApiList.devUrl,
     isDebug: Constants.isDevUrl,
   );
 
-  ///Мэдэгдлий тохиргоо хийх
+  /// Мэдэгдлий тохиргоо хийх.
   await _initNotification();
 
-  ///Төхөөрөмж дээр дата хадгалах модулын тохиргоо
+  /// Төхөөрөмж дээр дата хадгалах модулын тохиргоо.
   await LocalStorage.initLocalStorage();
 }
 
-///[MezornFcm] буюу мэдэгдлийн санг тохируулах функц
-_initNotification() async {
+/// [MezornFcm] буюу мэдэгдлийн санг тохируулах функц.
+Future<void> _initNotification() async {
   await MezornFcm.initNotificationService(
-    ///Тухайн ашиглаж буй мэдэгдлийн сервисийн token авахад дуудагдах функц
+    /// Тухайн ашиглаж буй мэдэгдлийн сервисийн token авахад дуудагдах функц.
     onTokenRefreshed: (token) {
-      //TODO Энд сервер лүү мэдэгдлийн токен илгээх эсэхээ шийднэ
+      // TODO Энд сервер лүү мэдэгдлийн токен илгээх эсэхээ шийднэ.
       log('notificationToken = $token');
     },
 
-    ///Апп нээлттэй үед мэдэгдэл ирвэл дуудагдах функц
+    /// Апп нээлттэй үед мэдэгдэл ирвэл дуудагдах функц.
     onNotificationReceived: (message) {
       log('notificationMessage = $message');
     },
@@ -60,14 +60,14 @@ _initNotification() async {
       log('notificationMessageOpenedApp = $message');
     },
 
-    ///Апп background үед мэдэгдэл ирвэл ажиллах функц
+    /// Апп background үед мэдэгдэл ирвэл ажиллах функц.
     onBackgroundMessage: handleBackgroundNotification,
   );
 }
 
-///Апп background үед мэдэгдэл ирвэл ажиллах функц
+/// Апп background үед мэдэгдэл ирвэл ажиллах функц.
 Future<void> handleBackgroundNotification(dynamic message) async {
-  //TODO Апп background байгаа үед мэдэгдэл ирвэл юу хийх вэ гэдэг ээ шийднэ
+  // TODO Апп background байгаа үед мэдэгдэл ирвэл юу хийх вэ гэдэг ээ шийднэ.
   log('backgroundNotificationMessage = $message');
 }
 
@@ -77,18 +77,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
+
     return GetMaterialApp(
-      ///Апп-ын үндсэн загвар
+      /// Апп-ын үндсэн загвар.
       theme: MyTheme.mainTheme,
 
       ///Апп-ын бараан загвар. Хэрвээ дезайн дээр бараан загвар
       ///гараагүй бол null утга өгч болно
       darkTheme: MyThemeDark.darkTheme,
 
-      ///Апп ажиллаад хамгийн эхэнд харагдах дэлгэц
+      /// Апп ажиллаад хамгийн эхэнд харагдах дэлгэц.
       home: const DemoScreen(),
 
-      ///Апп аль загвараар ажиллах эсэх
+      /// Апп аль загвараар ажиллах эсэх.
       themeMode: ThemeMode.system,
     );
   }

@@ -14,24 +14,23 @@ class TextButtonsWidget extends StatelessWidget {
       children: [
         const CollectionTitle(name: '[TextButton] загварууд'),
 
-        ///Энгийн үеийн харагдац
+        /// Энгийн үеийн харагдац.
         TextButton(
           onPressed: () {},
           child: Text(
             DemoStrings.normalView,
-            // style: TextStyle(color: Get.theme.primaryColor),
           ),
         ),
         const CollectionDivider(),
 
-        ///Идэвхдгүй үеийн харагдац
+        /// Идэвхдгүй үеийн харагдац.
         const TextButton(
           onPressed: null,
           child: Text(DemoStrings.disableView),
         ),
         const CollectionDivider(),
 
-        ///Загвар өөрчлөгдсөн үеийн харагдац
+        /// Загвар өөрчлөгдсөн үеийн харагдац.
         TextButton(
           onPressed: () {},
           child: const Text(DemoStrings.customizedView),

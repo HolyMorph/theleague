@@ -13,15 +13,15 @@ class ButtonCollection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const [
-        ///[ElevatedButton] загварууд
+        /// [ElevatedButton] загварууд.
         ElevatedButtonsWidget(),
 
         CollectionDivider(),
 
-        ///[TextButton] загварууд
+        /// [TextButton] загварууд.
         TextButtonsWidget(),
 
-        ///[TextButton] загварууд
+        /// [TextButton] загварууд.
         OutlinedButtonsWidget(),
       ],
     );

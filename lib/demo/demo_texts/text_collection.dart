@@ -14,6 +14,8 @@ class TextCollection extends StatefulWidget {
 class _TextCollectionState extends State<TextCollection> {
   @override
   Widget build(BuildContext context) {
+    TextTheme _textTheme = Get.theme.textTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,67 +23,67 @@ class _TextCollectionState extends State<TextCollection> {
         const CollectionDivider(),
         Text(
           'Headline 1',
-          style: Get.theme.textTheme.headline1,
+          style: _textTheme.headline1,
         ),
         const CollectionDivider(),
         Text(
           'Headline 2',
-          style: Get.theme.textTheme.headline2,
+          style: _textTheme.headline2,
         ),
         const CollectionDivider(),
         Text(
           'Headline 3',
-          style: Get.theme.textTheme.headline3,
+          style: _textTheme.headline3,
         ),
         const CollectionDivider(),
         Text(
           'Headline 4',
-          style: Get.theme.textTheme.headline4,
+          style: _textTheme.headline4,
         ),
         const CollectionDivider(),
         Text(
           'Headline 5',
-          style: Get.theme.textTheme.headline5,
+          style: _textTheme.headline5,
         ),
         const CollectionDivider(),
         Text(
           'Headline 6',
-          style: Get.theme.textTheme.headline6,
+          style: _textTheme.headline6,
         ),
         const CollectionDivider(),
         Text(
           'Subtitle 1',
-          style: Get.theme.textTheme.subtitle1,
+          style: _textTheme.subtitle1,
         ),
         const CollectionDivider(),
         Text(
           'Subtitle 2',
-          style: Get.theme.textTheme.subtitle2,
+          style: _textTheme.subtitle2,
         ),
         const CollectionDivider(),
         Text(
           'BodyText 1',
-          style: Get.theme.textTheme.bodyText1,
+          style: _textTheme.bodyText1,
         ),
         const CollectionDivider(),
         Text(
           'BodyText 2',
-          style: Get.theme.textTheme.bodyText2,
+          style: _textTheme.bodyText2,
         ),
         const CollectionDivider(),
         Text(
           'Caption',
-          style: Get.theme.textTheme.caption,
+          style: _textTheme.caption,
         ),
         const CollectionDivider(),
         Text(
           'Button',
-          style: Get.theme.textTheme.button,
+          style: _textTheme.button,
         ),
         const CollectionDivider(),
         Text(
           'Overline',
-          style: Get.theme.textTheme.overline,
+          style: _textTheme.overline,
         ),
       ],
     );

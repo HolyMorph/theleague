@@ -19,7 +19,7 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
       children: [
         const CollectionTitle(name: '[TextFormField] загварууд'),
 
-        ///Энгийн үеийн харагдац
+        /// Энгийн үеийн харагдац.
         TextFormField(
           decoration: const InputDecoration(
             hintText: 'Энгийн [TextFormField]',
@@ -28,7 +28,7 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
         ),
         const CollectionDivider(),
 
-        ///Label-тай үеийн харагдац
+        /// Label-тай үеийн харагдац.
         TextFormField(
           decoration: const InputDecoration(
             hintText: 'Энгийн [TextFormField]',
@@ -37,7 +37,7 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
         ),
         const CollectionDivider(),
 
-        ///Доогуур зураастай үеийн харагдац
+        /// Доогуур зураастай үеийн харагдац.
         TextFormField(
           decoration: InputDecoration(
             hintText: 'Доогуур зураастай',
@@ -52,7 +52,7 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
         ),
         const CollectionDivider(),
 
-        ///Хүрээтэй үеийн харагдац
+        /// Хүрээтэй үеийн харагдац.
         TextFormField(
           decoration: const InputDecoration(
             hintText: 'Хүрээтэй',
@@ -61,38 +61,11 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
         ),
         const CollectionDivider(),
 
-        ///Хүрээний загвар өөрчлөгдсөн үеийн харагдац
-        TextFormField(
-          decoration: const InputDecoration(
-            hintText: 'Хүрээний загвар өөрчлөгдсөн',
-            labelText: 'Customized outlined border',
-            labelStyle: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
-              borderSide: BorderSide(
-                color: Colors.orange,
-                width: 2,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
-              borderSide: BorderSide(
-                color: Colors.orange,
-                width: 2,
-              ),
-            ),
-          ),
-        ),
+        /// Хүрээний загвар өөрчлөгдсөн үеийн харагдац.
+        _customizedTexField(),
         const CollectionDivider(),
 
-        ///Алдаатай үеийн харагдац
+        /// Алдаатай үеийн харагдац.
         TextFormField(
           decoration: const InputDecoration(
             hintText: 'Алдаатай утга оруулсан',
@@ -103,7 +76,53 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
 
         const CollectionDivider(),
 
-        ///Prefix-тэй үеийн харагдац
+        /// Prefix-тэй үеийн харагдац.
+        _prefixTextFields(),
+
+        const CollectionDivider(),
+
+        /// Suffix-тай үеийн харагдац.
+        _suffixTextFields(),
+      ],
+    );
+  }
+
+  /// Хүрээний загвар өөрчлөгдсөн үеийн харагдац.
+  Widget _customizedTexField() {
+    return TextFormField(
+      decoration: const InputDecoration(
+        hintText: 'Хүрээний загвар өөрчлөгдсөн',
+        labelText: 'Customized outlined border',
+        labelStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+          borderSide: BorderSide(
+            color: Colors.orange,
+            width: 2,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+          borderSide: BorderSide(
+            color: Colors.orange,
+            width: 2,
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Prefix-тэй үеийн харагдац.
+  Widget _prefixTextFields() {
+    return Column(
+      children: [
         TextFormField(
           decoration: const InputDecoration(
             hintText: 'prefix text',
@@ -114,7 +133,7 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
 
         const CollectionDivider(),
 
-        ///Prefix Widget-тэй үеийн харагдац
+        /// Prefix Widget-тэй үеийн харагдац.
         TextFormField(
           decoration: const InputDecoration(
             hintText: 'prefix icon',
@@ -122,10 +141,14 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
             prefixIcon: Icon(Icons.verified_user),
           ),
         ),
+      ],
+    );
+  }
 
-        const CollectionDivider(),
-
-        ///Suffix-тэй үеийн харагдац
+  /// Suffix-тай үеийн харагдац.
+  Widget _suffixTextFields() {
+    return Column(
+      children: [
         TextFormField(
           decoration: const InputDecoration(
             hintText: 'suffix text',
@@ -133,10 +156,7 @@ class _TextFieldsCollectionState extends State<TextFieldsCollection> {
             suffixText: 'hp',
           ),
         ),
-
         const CollectionDivider(),
-
-        ///Suffix icon-тай үеийн харагдац
         TextFormField(
           decoration: const InputDecoration(
             hintText: 'suffix icon',

@@ -50,40 +50,40 @@ class _MyStyleGuideState extends State<MyStyleGuide> {
                     children: const [
                       Text('Доорх виджетүүдийн энгийн хувилбарууд нь гаргасан дезайны загвартай таарч байх ёстой'),
 
-                      ///Товчлууруудын загвар
+                      /// Товчлууруудын загвар.
                       ButtonCollection(),
 
-                      ///TextField-ийн загварууд
+                      /// TextField-ийн загварууд.
                       TextFieldsCollection(),
 
-                      ///Текстүүдийн загвар
+                      /// Текстүүдийн загвар.
                       TextCollection(),
 
-                      ///Сонгогдох боломжтой виджетүүдийн загвар
+                      /// Сонгогдох боломжтой виджетүүдийн загвар.
                       SelectableWidgetCollection(),
 
-                      ///Icon жагсаалтууд
+                      /// Icon жагсаалтууд.
                       MyIconCollection(),
 
-                      ///IconButton жагсаалтууд
+                      /// IconButton жагсаалтууд.
                       MyIconButtonCollection(),
 
-                      ///[BottomNavigation] буюу хөл хэсгийн таб-ын загвар
+                      /// [BottomNavigation] буюу хөл хэсгийн таб-ын загвар.
                       MyBottomNavigationCollection(),
 
-                      ///Dialog харуулах жагсаалтууд
+                      /// Dialog харуулах жагсаалтууд.
                       MyDialogCollection(),
 
-                      ///BottomSheet харуулах жагсаалтууд
+                      /// BottomSheet харуулах жагсаалтууд.
                       MyBottomSheetCollection(),
 
-                      ///SnackBar харуулах жагсаалтууд
+                      /// SnackBar харуулах жагсаалтууд.
                       MySnackBarCollection(),
 
-                      ///Уншиж буй индикатор харуулах жагсаалтууд
+                      /// Уншиж буй индикатор харуулах жагсаалтууд.
                       MyProgressCollection(),
 
-                      ///Slider загварууд
+                      /// Slider загварууд.
                       MySliderCollection(),
                     ],
                   ),
@@ -96,8 +96,8 @@ class _MyStyleGuideState extends State<MyStyleGuide> {
     );
   }
 
-  ///Бүх виджетүүдийг хүчээр дахин зурах функц
-  _rebuildAllChild() {
+  /// Бүх виджетүүдийг хүчээр дахин зурах функц.
+  void _rebuildAllChild() {
     Future.delayed(const Duration(milliseconds: 200), () {
       void rebuild(Element el) {
         el.markNeedsBuild();

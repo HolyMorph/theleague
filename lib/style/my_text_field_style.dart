@@ -12,56 +12,42 @@ class MyTextFieldStyle {
   //хийж байгаа хүнээрээ стайл гаргуулах хэрэгтэй
   //----------------------------------------------------------
 
-  ///[TextFormField]-ийн тайлбар харуулах хэсгийн стайл
-  static TextStyle? hintStyle;
-
-  ///[TextFormField]-ийн алдааны мэссэжний загвар
-  static TextStyle? errorStyle;
-
-  ///TextForm-ийн Label буюу юу гарчигны стайл
-  static TextStyle? labelStyle;
-
-  ///TextForm дээрх текстийн уртыг харуулах текстийн загвар
+  /// TextForm дээрх текстийн уртыг харуулах текстийн загвар.
   static TextStyle? counterStyle;
 
-  ///TextForm-ийн prefix нь текст үед тухайн текстийн стайл
-  ///
-  /// Жишээлбэл утасны дугаар оруулах хэсэгт урд талд нь автоматаар 976 гэж харуулах бол
-  /// тухайн 976 гэсэн текстийн стайл гэсэн үг
-  static TextStyle? prefixStyle;
+  /// [TextFormField]-ийн алдааны мэссэжний загвар.
+  static TextStyle? errorStyle;
 
-  ///TextForm-ийн suffix нь текст үед тухайн текстийн стайл
-  static TextStyle? suffixStyle;
+  /// [TextFormField]-ийн тайлбар харуулах хэсгийн стайл.
+  static TextStyle? hintStyle;
 
-  ///TextFormField-ийн хүрээний зураасны загвар
+  /// TextFormField-ийн хүрээний загвар.
+  static InputBorder inputBorder = OutlineInputBorder(
+    borderSide: inputBorderSide,
+    borderRadius: BorderRadius.circular(10),
+  );
+
+  /// TextFormField-ийн хүрээний зураасны загвар.
   static BorderSide inputBorderSide = BorderSide(
     color: Get.theme.primaryColor,
     width: 1,
     style: BorderStyle.solid,
   );
 
-  ///TextFormField-ийн хүрээний загвар
-  static InputBorder inputBorder = OutlineInputBorder(
-    borderSide: inputBorderSide,
-    borderRadius: BorderRadius.circular(10),
-  );
-
-  //----------------------------------------------------------
-
-  ///[TextFormField]-ийн үндсэн стайл
+  /// [TextFormField]-ийн үндсэн стайл.
   static InputDecorationTheme inputTheme = InputDecorationTheme(
-    ///Label болон hint-ийг зэрэгцүүлэх эсэх
+    /// Label болон hint-ийг зэрэгцүүлэх эсэх.
     alignLabelWithHint: false,
     isCollapsed: true,
     isDense: true,
 
-    ///TextForm дээрх алдааны мэдээний стайл
+    /// TextForm дээрх алдааны мэдээний стайл.
     errorStyle: errorStyle,
 
-    ///TextForm дээрх текстийн уртыг харуулах текстийн стайл
+    /// TextForm дээрх текстийн уртыг харуулах текстийн стайл.
     counterStyle: counterStyle,
 
-    ///TextForm-ийн арын дэвсгэрийг өнгөтэй харуулах эсэх
+    /// TextForm-ийн арын дэвсгэрийг өнгөтэй харуулах эсэх.
     filled: false,
 
     ///TextForm-ийн арын дэвсгэрийн  өнгөтэй харуулах
@@ -73,66 +59,78 @@ class MyTextFieldStyle {
     /// Focus хийгдэхэд дээшлэх, байнга дээр харагдах, эсвэл дээшлэхгүй гэх мэт тохиргоонууд байна
     floatingLabelBehavior: FloatingLabelBehavior.auto,
 
-    ///Дотоод контентийн зай авах хэмжээ
+    /// Дотоод контентийн зай авах хэмжээ.
     contentPadding: null,
 
-    ///Энгийн үеийн хүрээ
+    /// Энгийн үеийн хүрээ.
     border: inputBorder,
 
-    ///Идэвхтэй үеийн хүрээ
+    /// Идэвхтэй үеийн хүрээ.
     enabledBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: Get.theme.dividerColor,
       ),
     ),
 
-    ///Cursor идэвхтэй буюу Focus хийгдсэн үеийн хүрээ
+    /// Cursor идэвхтэй буюу Focus хийгдсэн үеийн хүрээ.
     focusedBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: Get.theme.primaryColor,
       ),
     ),
 
-    ///Алдаатай үеийн хүрээ
+    /// Алдаатай үеийн хүрээ.
     errorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: Get.theme.errorColor,
       ),
     ),
 
-    ///Focus хийгдсэн мөн алдаатай өгөгдөл байгаа үеийн хүрээ
+    /// Focus хийгдсэн мөн алдаатай өгөгдөл байгаа үеийн хүрээ.
     focusedErrorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: Get.theme.errorColor,
       ),
     ),
 
-    ///Идэвхгүй болгосон үеийн хүрээ
+    /// Идэвхгүй болгосон үеийн хүрээ.
     disabledBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
         color: Get.theme.disabledColor,
       ),
     ),
 
-    ///Hint буюу зөвлөмж харуулах хэсгийн стайл
+    /// Hint буюу зөвлөмж харуулах хэсгийн стайл.
     hintStyle: hintStyle,
 
-    ///Label буюу юу оруулах гарчигны стайл
+    /// Label буюу юу оруулах гарчигны стайл.
     labelStyle: labelStyle,
 
-    ///TextForm-ийн prefix нь текст үед тухайн текстийн стайл
+    /// TextForm-ийн prefix нь текст үед тухайн текстийн стайл.
     prefixStyle: prefixStyle,
 
-    ///Алдааны мсж-ны дээд мөрийн тоо
+    /// Алдааны мсж-ны дээд мөрийн тоо.
     errorMaxLines: 1,
 
-    ///Текстийн төгсгөлд харуулах текстийн загвар
+    /// Текстийн төгсгөлд харуулах текстийн загвар.
     suffixStyle: suffixStyle,
 
-    ///Prefix нь icon буюу Widget үед тухайн icon-ы өнгө
+    /// Prefix нь icon буюу Widget үед тухайн icon-ы өнгө.
     prefixIconColor: null,
 
-    ///Suffix нь icon буюу Widget үед тухайн icon-ы өнгө
+    /// Suffix нь icon буюу Widget үед тухайн icon-ы өнгө.
     suffixIconColor: null,
   );
+
+  /// TextForm-ийн Label буюу юу гарчигны стайл.
+  static TextStyle? labelStyle;
+
+  ///TextForm-ийн prefix нь текст үед тухайн текстийн стайл
+  ///
+  /// Жишээлбэл утасны дугаар оруулах хэсэгт урд талд нь автоматаар 976 гэж харуулах бол
+  /// тухайн 976 гэсэн текстийн стайл гэсэн үг
+  static TextStyle? prefixStyle;
+
+  /// TextForm-ийн suffix нь текст үед тухайн текстийн стайл.
+  static TextStyle? suffixStyle;
 }

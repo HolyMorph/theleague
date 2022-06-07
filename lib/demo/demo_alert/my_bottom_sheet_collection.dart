@@ -21,7 +21,7 @@ class _MyBottomSheetCollectionState extends State<MyBottomSheetCollection> {
       children: [
         const CollectionTitle(name: 'BottomSheets'),
 
-        ///Энгийн [BottomSheet] харуулах
+        /// Энгийн [BottomSheet] харуулах.
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(
@@ -42,7 +42,7 @@ class _MyBottomSheetCollectionState extends State<MyBottomSheetCollection> {
         ),
         const CollectionDivider(),
 
-        ///Загвар өөрчилсөн [BottomSheet] харуулах
+        /// Загвар өөрчилсөн [BottomSheet] харуулах.
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(
@@ -54,7 +54,7 @@ class _MyBottomSheetCollectionState extends State<MyBottomSheetCollection> {
         ),
         const CollectionDivider(),
 
-        ///Загвар өөрчилсөн том контенттой [BottomSheet]
+        /// Загвар өөрчилсөн том контенттой [BottomSheet].
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(

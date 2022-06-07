@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class BaseSnackBarBody extends StatelessWidget {
-  final String? title;
-  final String? message;
   final Widget? icon;
+  final String? message;
+  final String? title;
+
   const BaseSnackBarBody({Key? key, this.title, this.message, this.icon}) : super(key: key);
 
   @override

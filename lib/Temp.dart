@@ -1,1 +1,3 @@
-class Temp {}
+class Temp {
+  void tempFunction({String? temp}) {}
+}

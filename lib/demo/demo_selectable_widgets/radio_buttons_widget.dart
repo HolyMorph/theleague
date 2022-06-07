@@ -16,14 +16,14 @@ class _RadioButtonsWidgetState extends State<RadioButtonsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ///Энгийн үеийн харагдац
+        /// Энгийн үеийн харагдац.
         Row(
           children: [
             Radio(
               value: 0,
               groupValue: _index,
               onChanged: (value) {
-                _index = value as int;
+                _index = (value is int) ? value : 0;
                 setState(() {});
               },
             ),
@@ -31,7 +31,7 @@ class _RadioButtonsWidgetState extends State<RadioButtonsWidget> {
           ],
         ),
 
-        ///Идвэхгүй үеийн харагдац
+        /// Идвэхгүй үеийн харагдац.
         Row(
           children: [
             Radio(
@@ -43,14 +43,14 @@ class _RadioButtonsWidgetState extends State<RadioButtonsWidget> {
           ],
         ),
 
-        ///Загвар өөрчлөгдсөн үеийн харагдац
+        /// Загвар өөрчлөгдсөн үеийн харагдац.
         Row(
           children: [
             Radio(
               value: 2,
               groupValue: _index,
               onChanged: (value) {
-                _index = value as int;
+                _index = (value is int) ? value : 0;
                 setState(() {});
               },
               hoverColor: Colors.orange,
@@ -59,7 +59,7 @@ class _RadioButtonsWidgetState extends State<RadioButtonsWidget> {
             ),
             const Text(DemoStrings.customizedView),
           ],
-        )
+        ),
       ],
     );
   }

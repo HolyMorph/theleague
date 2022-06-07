@@ -17,7 +17,7 @@ class _CheckboxesWidgetState extends State<CheckboxesWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ///Энгийн үеийн харагдац
+        /// Энгийн үеийн харагдац.
         Row(
           children: [
             Checkbox(
@@ -31,7 +31,7 @@ class _CheckboxesWidgetState extends State<CheckboxesWidget> {
           ],
         ),
 
-        ///Идэвхгүй үеийн харагдац
+        /// Идэвхгүй үеийн харагдац.
         Row(
           children: [
             Checkbox(
@@ -42,7 +42,7 @@ class _CheckboxesWidgetState extends State<CheckboxesWidget> {
           ],
         ),
 
-        ///Загвар өөрчлөгдсөн үеийн харагдац
+        /// Загвар өөрчлөгдсөн үеийн харагдац.
         Row(
           children: [
             Checkbox(
@@ -60,7 +60,7 @@ class _CheckboxesWidgetState extends State<CheckboxesWidget> {
             ),
             const Text(DemoStrings.customizedView),
           ],
-        )
+        ),
       ],
     );
   }

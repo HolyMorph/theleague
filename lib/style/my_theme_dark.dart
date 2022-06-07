@@ -8,9 +8,9 @@ import 'my_text_styles.dart';
 import 'my_theme.dart';
 
 class MyThemeDark {
-  ///Апп-ын бараан загвар
+  /// Апп-ын бараан загвар.
   static ThemeData darkTheme = ThemeData(
-    ///Апп-д ашиглагдах нийт өнгөнүүд тохируулах
+    /// Апп-д ашиглагдах нийт өнгөнүүд тохируулах.
 
     primaryColor: MyColorsDark.primaryColor,
     primaryColorLight: MyColorsDark.primaryColorLight,
@@ -31,27 +31,27 @@ class MyThemeDark {
     selectedRowColor: MyColorsDark.selectedRowColor,
     canvasColor: MyColorsDark.canvasColor,
 
-    ///Үндсэн icon-ын загвар
+    /// Үндсэн icon-ын загвар.
     primaryIconTheme: const IconThemeData(
       color: MyColorsDark.darkAccentColor,
     ),
 
-    ///Апп-ын нийт сүүдэрний өнгө
+    /// Апп-ын нийт сүүдэрний өнгө.
     shadowColor: MyColorsDark.shadowColor,
 
-    ///Dialog-ийн арын дэвсгэр өнгө
+    /// Dialog-ийн арын дэвсгэр өнгө.
     dialogBackgroundColor: MyColorsDark.dialogBackgroundColor,
 
-    ///CheckBox, Radio гэх мэт тийм үгүй гэсэн сонголттой виджетүүдийн идэвхтэй үеийн өнгө
+    /// CheckBox, Radio гэх мэт тийм үгүй гэсэн сонголттой виджетүүдийн идэвхтэй үеийн өнгө.
     toggleableActiveColor: MyColorsDark.darkAccentColor,
 
     ///
     visualDensity: VisualDensity.adaptivePlatformDensity,
 
-    ///Апп-ны хэмжээнд ашиглагдах үндсэн фонт. Custom фонт бол pubspec.yaml дотор зааж өгсөн байх шаардлагатай
+    /// Апп-ны хэмжээнд ашиглагдах үндсэн фонт. Custom фонт бол pubspec.yaml дотор зааж өгсөн байх шаардлагатай.
     fontFamily: MyTextStyles.baseFont,
 
-    ///BottomNavigation-ны загвар
+    /// BottomNavigation-ны загвар.
     bottomNavigationBarTheme: MyTheme.bottomNavigationBarTheme.copyWith(
       selectedItemColor: MyColorsDark.darkAccentColor,
       unselectedItemColor: MyColorsDark.darkAccentColor.withOpacity(0.4),
@@ -69,23 +69,23 @@ class MyThemeDark {
       selectionHandleColor: MyColorsDark.darkAccentColor,
     ),
 
-    ///[DiaLog]-ийн загвар
+    /// [DiaLog]-ийн загвар.
     dialogTheme: MyTheme.dialogTheme.copyWith(
       backgroundColor: MyColorsDark.backgroundColor,
     ),
 
-    ///Доороос гарч ирдэг bottomSheet-ийн загвар
+    /// Доороос гарч ирдэг bottomSheet-ийн загвар.
     bottomSheetTheme: MyTheme.bottomSheetThemeData.copyWith(
       backgroundColor: MyColorsDark.backgroundColor,
     ),
 
-    ///Доор харагддаг AppBar-ийн загвар
+    /// Доор харагддаг AppBar-ийн загвар.
     bottomAppBarTheme: null,
 
-    ///ТabBar-ийн загвар
+    /// ТabBar-ийн загвар.
     tabBarTheme: MyTheme.tabBarTheme,
 
-    ///Хуудас шилжилтийн загвар
+    /// Хуудас шилжилтийн загвар.
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
@@ -93,53 +93,53 @@ class MyThemeDark {
       },
     ),
 
-    ///[AppBar]-ийн загвар
+    /// [AppBar]-ийн загвар.
     appBarTheme: MyTheme.appBarTheme.copyWith(
       color: Colors.black12,
     ),
 
-    ///ToggleButton загвар
+    /// ToggleButton загвар.
     toggleButtonsTheme: null,
 
-    ///Товчлуурын үндсэн загвар
+    /// Товчлуурын үндсэн загвар.
     buttonTheme: MyButtonStyles.buttonThemeData,
 
-    ///[Scaffold] дээр харагдах [FAB] буюу бөөрөнхий товчлуурын загвар
+    /// [Scaffold] дээр харагдах [FAB] буюу бөөрөнхий товчлуурын загвар.
     floatingActionButtonTheme: null,
 
-    ///Card виджетийн загвар
+    /// Card виджетийн загвар.
     cardTheme: null,
 
-    ///Slider буюу 2 тийш чирж утга өөрчилөх виджетийн загвар
+    /// Slider буюу 2 тийш чирж утга өөрчилөх виджетийн загвар.
     sliderTheme: null,
 
-    ///Switch товчлуурын загвар
+    /// Switch товчлуурын загвар.
     switchTheme: null,
 
-    ///RadioButton-ны загвар
+    /// RadioButton-ны загвар.
     radioTheme: null,
 
-    ///CheckBox-ийн загвар
+    /// CheckBox-ийн загвар.
     checkboxTheme: CheckboxThemeData(
       checkColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
-          ///Идэвхгүй үеийн өнгө
+          /// Идэвхгүй үеийн өнгө.
           if (states.contains(MaterialState.disabled)) return MyColorsDark.darkAccentColor.withOpacity(0.2);
 
-          ///Бусад үеийн өнгө
+          /// Бусад үеийн өнгө.
           return MyColorsDark.primaryColorDark;
         },
       ),
     ),
 
-    ///SnackBar-ийн загвар
+    /// SnackBar-ийн загвар.
     snackBarTheme: MyTheme.snackBarTheme.copyWith(
       backgroundColor: MyColorsDark.darkAccentColor,
       behavior: SnackBarBehavior.fixed,
       actionTextColor: Colors.black,
     ),
 
-    ///Divider виджетийн загвар
+    /// Divider виджетийн загвар.
     dividerTheme: null,
 
     ///Progress-уудын загвар.
@@ -148,25 +148,25 @@ class MyThemeDark {
       color: MyColorsDark.darkAccentColor,
     ),
 
-    ///ListTile-ийн загвар
+    /// ListTile-ийн загвар.
     listTileTheme: null,
 
-    ///Chip виджетийн загвар
+    /// Chip виджетийн загвар.
     chipTheme: null,
 
-    ///Гадуураа хүрээтэй товчлуурын загвар
+    /// Гадуураа хүрээтэй товчлуурын загвар.
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: MyButtonStyles.outlinedButtonStyle.copyWith(
         side: MaterialStateProperty.resolveWith<BorderSide>(
           (Set<MaterialState> states) {
-            ///Идэвхгүй үеийн хүрээ
+            /// Идэвхгүй үеийн хүрээ.
             if (states.contains(MaterialState.disabled)) {
               return BorderSide(
                 color: Get.theme.disabledColor,
               );
             }
 
-            ///Бусад үеийн хүрээ
+            /// Бусад үеийн хүрээ.
             return const BorderSide(
               color: MyColorsDark.darkAccentColor,
             );
@@ -177,25 +177,25 @@ class MyThemeDark {
         ),
         foregroundColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
-            ///Идэвхгүй үеийн өнгө
+            /// Идэвхгүй үеийн өнгө.
             if (states.contains(MaterialState.disabled)) return Get.theme.disabledColor;
 
-            ///Бусад үеийн өнгө
+            /// Бусад үеийн өнгө.
             return MyColorsDark.darkAccentColor;
           },
         ),
       ),
     ),
 
-    ///Текстэн товчлуурын загвар
+    /// Текстэн товчлуурын загвар.
     textButtonTheme: TextButtonThemeData(
       style: MyButtonStyles.textButtonStyle.copyWith(
         foregroundColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
-            ///Идэвхгүй үеийн өнгө
+            /// Идэвхгүй үеийн өнгө.
             if (states.contains(MaterialState.disabled)) return Get.theme.disabledColor;
 
-            ///Бусад үеийн өнгө
+            /// Бусад үеийн өнгө.
             return MyColorsDark.darkAccentColor;
           },
         ),
@@ -205,15 +205,15 @@ class MyThemeDark {
       ),
     ),
 
-    ///ElevatedButton-ны загвар
+    /// ElevatedButton-ны загвар.
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: MyButtonStyles.buttonStyle,
     ),
 
-    ///TextForm үндсэн стайл
+    /// TextForm үндсэн стайл.
     inputDecorationTheme: MyTextFieldStyleDark.inputTheme.copyWith(),
 
-    ///Апп-д ашиглах текстүүдийн стайл
+    /// Апп-д ашиглах текстүүдийн стайл.
     textTheme: MyTheme.textTheme,
 
     brightness: Brightness.dark,
