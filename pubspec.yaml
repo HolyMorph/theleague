@@ -47,8 +47,8 @@ dependencies:
       url: https://dummy_project:N2KM9aCd1Ss_SVxMXqxH@gitlab.com/mezorn/flutter/mda/mezorn_common.git
       ref: 2be5aeb64270e3ec3dc6672b4fd542ee45139a90
 
-  get: ^4.6.1
-  flutter_native_splash: ^2.1.5
+  get: ^4.6.5
+  flutter_native_splash: ^2.2.3
   dependency_validator: ^3.2.0
 
 dev_dependencies:
@@ -60,7 +60,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.4
+  flutter_lints: ^2.0.1
+  dart_code_metrics: ^4.15.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

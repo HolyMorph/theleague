@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class NormalBottomNavigationWidget extends StatefulWidget {
   final int currentPage;
   final Function(int page) onTap;
-  const NormalBottomNavigationWidget({Key? key, required this.currentPage, required this.onTap}) : super(key: key);
+  const NormalBottomNavigationWidget({required this.currentPage, required this.onTap, Key? key}) : super(key: key);
 
   @override
   _NormalBottomNavigationWidgetState createState() => _NormalBottomNavigationWidgetState();
@@ -32,7 +32,7 @@ class _NormalBottomNavigationWidgetState extends State<NormalBottomNavigationWid
     );
   }
 
-  ///[BottomNavigationBar]-ийн зөвхөн нэг item харуулах функц
+  /// [BottomNavigationBar]-ийн зөвхөн нэг item харуулах функц.
   BottomNavigationBarItem _bottomItem({required Widget icon, required String message}) {
     return BottomNavigationBarItem(
       icon: icon,

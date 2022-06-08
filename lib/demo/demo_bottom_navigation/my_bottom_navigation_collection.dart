@@ -24,7 +24,7 @@ class _MyBottomNavigationCollectionState extends State<MyBottomNavigationCollect
         const Text('Хэвийн үеийн харагдац'),
         const SizedBox(height: 8),
 
-        ///Энгийн үеийн [BottomNavigation]
+        /// Энгийн үеийн [BottomNavigation].
         NormalBottomNavigationWidget(
           currentPage: _currentPage,
           onTap: _onPageChanged,
@@ -34,7 +34,7 @@ class _MyBottomNavigationCollectionState extends State<MyBottomNavigationCollect
         const Text('Загвар өөрчилсөн үеийн харагдац'),
         const SizedBox(height: 8),
 
-        ///Загвар өөрчилсөн үеийн [BottomNavigation]
+        /// Загвар өөрчилсөн үеийн [BottomNavigation].
         CustomizedBottomNavigationWidget(
           currentPage: _currentPage,
           onTap: _onPageChanged,
@@ -43,8 +43,8 @@ class _MyBottomNavigationCollectionState extends State<MyBottomNavigationCollect
     );
   }
 
-  ///Хуудас солих үйлдэл
-  _onPageChanged(int page) {
+  /// Хуудас солих үйлдэл.
+  void _onPageChanged(int page) {
     _currentPage = page;
     setState(() {});
   }

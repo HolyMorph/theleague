@@ -35,6 +35,65 @@ linter:
     avoid_escaping_inner_quotes: true
     no_logic_in_create_state: true
     avoid_print: true
+    require_trailing_commas: true
+    always_declare_return_types: true
+    avoid_type_to_string: false
+    avoid_types_as_parameter_names: false
+    prefer_void_to_null: true
+    always_put_required_named_parameters_first: true
+
+analyzer:
+  plugins:
+    - dart_code_metrics
+
+
+dart_code_metrics:
+  anti-patterns:
+    - long-method
+    - long-parameter-list
+  metrics:
+#    function metrics
+    cyclomatic-complexity: 7
+    number-of-parameters: 10
+    source-lines-of-code: 50
+    lines-of-code: 100
+    maximum-nesting-level: 3
+#    Class metrics
+    number-of-methods: 14
+
+
+  metrics-exclude:
+    - test/**
+  rules:
+    - newline-before-return
+    - no-boolean-literal-compare
+    - prefer-trailing-comma
+    - prefer-conditional-expressions
+    - no-equal-then-else
+    - no-boolean-literal-compare
+    - no-equal-then-else
+    - prefer-conditional-expressions
+    - prefer-first
+    - prefer-last
+    - prefer-immediate-return
+    - always-remove-listener
+    - avoid-unnecessary-setstate
+    - avoid-wrapping-in-padding
+    - prefer-single-widget-per-file
+    - prefer-match-file-name:
+        exclude:
+          - lib/main.dart
+    - prefer-correct-identifier-length:
+        max-identifier-length: 27
+        min-identifier-length: 4
+    - member-ordering-extended:
+        alphabetize: true
+        order:
+          - public-fields
+          - constructors
+          - private-fields
+          - public-methods
+          - private-methods
 
 
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule

@@ -14,21 +14,21 @@ class OutlinedButtonsWidget extends StatelessWidget {
       children: [
         const CollectionTitle(name: '[OutlinedButton] загварууд'),
 
-        ///Энгийн үеийн харагдац
+        /// Энгийн үеийн харагдац.
         OutlinedButton(
           onPressed: () {},
           child: const Text(DemoStrings.normalView),
         ),
         const CollectionDivider(),
 
-        ///Идэвхгүй үеийн харагдац
+        /// Идэвхгүй үеийн харагдац.
         const OutlinedButton(
           onPressed: null,
           child: Text(DemoStrings.disableView),
         ),
         const CollectionDivider(),
 
-        ///Загвар өөрчлөгдсөн үеийн харагдац
+        /// Загвар өөрчлөгдсөн үеийн харагдац.
         OutlinedButton(
           onPressed: () {},
           child: const Text(DemoStrings.customizedView),

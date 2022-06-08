@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../alert/alert_helper.dart';
+import '../../components/my_loading_widget.dart';
 import '../collection_divider.dart';
 import '../collection_title.dart';
 
@@ -16,6 +17,8 @@ class MyProgressCollection extends StatelessWidget {
         const CircularProgressIndicator(),
         const CollectionDivider(),
         const LinearProgressIndicator(),
+        const CollectionDivider(),
+        MyLoadingWidget(),
         const CollectionDivider(),
         ElevatedButton(
           onPressed: () {

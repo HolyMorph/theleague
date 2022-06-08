@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class CustomizedBottomNavigationWidget extends StatefulWidget {
   final int currentPage;
   final Function(int page) onTap;
-  const CustomizedBottomNavigationWidget({Key? key, required this.currentPage, required this.onTap}) : super(key: key);
+  const CustomizedBottomNavigationWidget({required this.currentPage, required this.onTap, Key? key}) : super(key: key);
 
   @override
   _CustomizedBottomNavigationWidgetState createState() => _CustomizedBottomNavigationWidgetState();
@@ -42,7 +42,7 @@ class _CustomizedBottomNavigationWidgetState extends State<CustomizedBottomNavig
     );
   }
 
-  ///[BottomNavigationBar]-ийн зөвхөн нэг item харуулах функц
+  /// [BottomNavigationBar]-ийн зөвхөн нэг item харуулах функц.
   BottomNavigationBarItem _bottomItem({required Widget icon, required String message}) {
     return BottomNavigationBarItem(
       icon: icon,

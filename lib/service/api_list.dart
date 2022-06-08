@@ -1,19 +1,43 @@
 import 'package:mezorn_api_caller/api_caller.dart';
 
 class ApiList {
-  static final ApiList _singleton = ApiList._internal();
-  factory ApiList() => _singleton;
+  /// Сервис дуудах production орчны URL.
+  static const baseUrl = 'https://base.url.here';
+
+  /// Сервис дуудах хөгжүүлэлтийн орчны URL.
+  static const devUrl = 'https://dev.url.here';
+  static final ApiList singleton = ApiList._internal();
+
+  factory ApiList() => singleton;
   ApiList._internal();
 
   final MezornClient _mezornApiClient = MezornClient();
 
-  ///Сервис дуудах production орчны URL
-  static const baseUrl = 'https://base.url.here';
+  /// ╔════════════════════════════════════════════════════════════════════════════╗
+  /// ║ Үндсэн сервисүүд                                                           ║
+  /// ║                                                                            ║
+  /// ║                                                                            ║
+  /// ║                                                                            ║
+  /// ╚════════════════════════════════════════════════════════════════════════════╝
 
-  ///Сервис дуудах хөгжүүлэлтийн орчны URL
-  static const devUrl = 'https://dev.url.here';
+  ///Жишээ хүсэлт илгээх функц
+  Future<dynamic> sendTempRequest() async => _sendRequest(
+        'tempRequest',
+        method: Method.POST,
+        body: {'data1': '1', 'data2': 2},
+      );
 
   //----------------------------------------------------
+
+  ///Сервис дуудаад ирэх хариуг жигдрүүлж буцаах функц.
+  ///
+  /// [response] серверээс ирсэн хариу
+  ///
+  ///Бүх хүсэлт нэгэн жигд ирж чадаж байгаа бол энэ функц
+  ///дотор шинээр код бичих шаардлагагүй
+  Future<dynamic> _handleResponse(dynamic response) async {
+    return response;
+  }
 
   ///RestAPI хүсэлт илгээх функц
   ///
@@ -68,30 +92,7 @@ class ApiList {
       isMultiPart: isMultiPart,
       header: header,
     );
+
     return _handleResponse(_response);
   }
-
-  ///Сервис дуудаад ирэх хариуг жигдрүүлж буцаах функц.
-  ///
-  /// [response] серверээс ирсэн хариу
-  ///
-  ///Бүх хүсэлт нэгэн жигд ирж чадаж байгаа бол энэ функц
-  ///дотор шинээр код бичих шаардлагагүй
-  Future<dynamic> _handleResponse(dynamic response) async {
-    return response;
-  }
-
-  /// ╔════════════════════════════════════════════════════════════════════════════╗
-  /// ║ Үндсэн сервисүүд                                                           ║
-  /// ║                                                                            ║
-  /// ║                                                                            ║
-  /// ║                                                                            ║
-  /// ╚════════════════════════════════════════════════════════════════════════════╝
-
-  ///Жишээ хүсэлт илгээх функц
-  Future<dynamic> sendTempRequest() async => _sendRequest(
-        'tempRequest',
-        method: Method.POST,
-        body: {'data1': '1', 'data2': 2},
-      );
 }
