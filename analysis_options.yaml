@@ -76,6 +76,10 @@ dart_code_metrics:
     - prefer-first
     - prefer-last
     - prefer-immediate-return
+    - always-remove-listener
+    - avoid-unnecessary-setstate
+    - avoid-wrapping-in-padding
+    - prefer-single-widget-per-file
     - prefer-match-file-name:
         exclude:
           - lib/main.dart
