@@ -93,7 +93,7 @@ class _BaseAlertBodyState extends State<BaseAlertBody> {
 
   /// Alert-ийн товчлууруудын харагдац.
   Widget _actionWidget() {
-    bool _showNegativeButton = widget.negativeText != null && widget.onNegativeClicked != null;
+    bool _showNegativeButton = widget.negativeText != null;
 
     return Row(
       children: [
@@ -103,7 +103,9 @@ class _BaseAlertBodyState extends State<BaseAlertBody> {
             child: ElevatedButton(
               onPressed: () {
                 Get.back();
-                widget.onNegativeClicked!();
+                if (widget.onNegativeClicked != null) {
+                  widget.onNegativeClicked!();
+                }
               },
               style: Get.theme.elevatedButtonTheme.style?.copyWith(
                 backgroundColor: MaterialStateProperty.all(Get.theme.hintColor),

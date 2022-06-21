@@ -72,7 +72,6 @@ dart_code_metrics:
     - no-equal-then-else
     - no-boolean-literal-compare
     - no-equal-then-else
-    - prefer-conditional-expressions
     - prefer-first
     - prefer-last
     - prefer-immediate-return
@@ -80,12 +79,22 @@ dart_code_metrics:
     - avoid-unnecessary-setstate
     - avoid-wrapping-in-padding
     - prefer-single-widget-per-file
+    - avoid-collection-methods-with-unrelated-types
+    - avoid-unused-parameters
+    - binary-expression-operand-order
+    - no-boolean-literal-compare
+    - prefer-correct-type-name:
+        excluded: [ 'exampleExclude' ]
+        min-length: 4
+        max-length: 40
+    - avoid-nested-conditional-expressions:
+        acceptable-level: 2
     - prefer-match-file-name:
         exclude:
           - lib/main.dart
     - prefer-correct-identifier-length:
         max-identifier-length: 27
-        min-identifier-length: 4
+        min-identifier-length: 3
     - member-ordering-extended:
         alphabetize: true
         order:

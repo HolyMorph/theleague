@@ -38,7 +38,7 @@ class AlertHelper {
   /// [response]-ийн бүтэц нь тухайн сервисээс хамаарч өөр өөр байх тул өөрийн ашиглаж буй сервистээ
   /// тааруулж алдааны мсж-ээ авна
   // ignore: long-parameter-list, long-method
-  static Future<dynamic> showAlert({
+  static Future<void> showAlert<T>({
     AlertType type = AlertType.dialog,
     String? title,
     Widget? image,
@@ -89,7 +89,7 @@ class AlertHelper {
       /// [SnackBar] харуулах бол.
       case AlertType.snackBar:
         if (Get.context == null) {
-          return;
+          return null;
         }
         _showSnackBar();
         return null;

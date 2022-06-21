@@ -34,8 +34,7 @@ class _MyBottomSheetCollectionState extends State<MyBottomSheetCollection> {
                 color: Get.theme.disabledColor,
               ),
               negativeText: 'Цуцлах\n',
-              onNegativeClicked: () {},
-              onPositiveClicked: () {},
+              positiveText: 'Confirm',
             );
           },
           child: const Text('Энгийн bottom sheet харуулах'),

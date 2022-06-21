@@ -33,8 +33,7 @@ class _MyDialogCollectionState extends State<MyDialogCollection> {
                 color: Get.theme.disabledColor,
               ),
               negativeText: 'Цуцлах\n',
-              onNegativeClicked: () {},
-              onPositiveClicked: () {},
+              positiveText: 'Confirm',
             );
           },
           child: const Text('Энгийн dialog харуулах'),
