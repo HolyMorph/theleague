@@ -33,7 +33,7 @@ void _init() async {
     isDebug: Constants.isDevUrl,
   );
 
-  /// Мэдэгдлий тохиргоо хийх.
+  /// Мэдэгдлийн тохиргоо хийх.
   await _initNotification();
 
   /// Төхөөрөмж дээр дата хадгалах модулын тохиргоо.
