@@ -9,6 +9,7 @@ image: cirrusci/flutter:3.0.1
 
 stages:
   - format_analyze_test
+  - build
 
 format_analyze_test:
   stage: format_analyze_test
@@ -24,3 +25,25 @@ format_analyze_test:
     - flutter pub run dart_code_metrics:metrics check-unused-files lib
     - flutter analyze
     - flutter test
+
+build:apk:
+  stage: build
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+  script:
+    - flutter build apk --release
+  artifacts:
+    paths:
+      - build/app/outputs/apk/release
+
+build:appbundle:
+  stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      when: always
+  script:
+    - flutter build appbundle --release
+  artifacts:
+    paths:
+      - build/app/outputs/bundle/release
