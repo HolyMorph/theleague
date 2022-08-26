@@ -7,6 +7,8 @@ image: cirrusci/flutter:3.0.5
 #  paths:
 #    - .pub-cache/global_packages
 
+entrypoint: [ '/bin/sh', '-c' ]
+
 stages:
   - format_analyze_test
   - build
