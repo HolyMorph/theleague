@@ -1,3 +1,5 @@
+// ignore_for_file: unused-code
+// ignore_for_file: unused-files
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,6 +45,19 @@ class _BaseAlertBodyState extends State<BaseAlertBody> {
   String? _titleText;
 
   @override
+  void initState() {
+    _titleText = widget.title;
+    _messageText = widget.message;
+    if (widget.response != null) {
+      //TODO
+      //Хэрвээ сервис дуудаад тухайн сервис алдаатай ирсэн бол
+      //энд [_titleText] болон [_messageText] -д [widget.response]-с утга олгоно
+      //Жишээ нь : _titleText = 'Алдаа гарлаа'; _messageText = widget.response.data['error_mn'];
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Widget _mainBody = _alertBodyBuilder();
 
@@ -76,19 +91,6 @@ class _BaseAlertBodyState extends State<BaseAlertBody> {
         ),
       ],
     );
-  }
-
-  @override
-  void initState() {
-    _titleText = widget.title;
-    _messageText = widget.message;
-    if (widget.response != null) {
-      //TODO
-      //Хэрвээ сервис дуудаад тухайн сервис алдаатай ирсэн бол
-      //энд [_titleText] болон [_messageText] -д [widget.response]-с утга олгоно
-      //Жишээ нь : _titleText = 'Алдаа гарлаа'; _messageText = widget.response.data['error_mn'];
-    }
-    super.initState();
   }
 
   /// Alert-ийн товчлууруудын харагдац.

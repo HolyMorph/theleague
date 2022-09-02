@@ -1,3 +1,5 @@
+// ignore_for_file: unused-code
+// ignore_for_file: unused-files
 import 'package:flutter/material.dart';
 
 /// Апп-н хэмжээнд ашиглах уншиж буй харагдац.

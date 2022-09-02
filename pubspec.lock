@@ -168,7 +168,7 @@ packages:
       name: dart_code_metrics
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.15.2"
+    version: "4.17.1"
   dart_style:
     dependency: transitive
     description:
@@ -184,12 +184,12 @@ packages:
     source: hosted
     version: "0.7.4"
   dependency_validator:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: dependency_validator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "3.2.2"
   device_info_plus:
     dependency: transitive
     description:
