@@ -27,26 +27,26 @@ format_analyze_test:
     - flutter analyze
     - flutter test
 
-build:apk:
-  stage: build
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      when: always
-  script:
-    - flutter build apk --release
-  artifacts:
-    name: "dev_release"
-    paths:
-      - build/app/outputs/apk/release
-
-build:appbundle:
-  stage: build
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
-      when: always
-  script:
-    - flutter build appbundle --release
-  artifacts:
-    name: "main_release"
-    paths:
-      - build/app/outputs/bundle/release
+#build:apk:
+#  stage: build
+#  rules:
+#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#      when: always
+#  script:
+#    - flutter build apk --release
+#  artifacts:
+#    name: "dev_release"
+#    paths:
+#      - build/app/outputs/apk/release
+#
+#build:appbundle:
+#  stage: build
+#  rules:
+#    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+#      when: always
+#  script:
+#    - flutter build appbundle --release
+#  artifacts:
+#    name: "main_release"
+#    paths:
+#      - build/app/outputs/bundle/release

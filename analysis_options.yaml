@@ -52,18 +52,19 @@ dart_code_metrics:
     - long-method
     - long-parameter-list
   metrics:
-#    function metrics
+    #    function metrics
     cyclomatic-complexity: 7
     number-of-parameters: 10
     source-lines-of-code: 50
     lines-of-code: 100
     maximum-nesting-level: 3
-#    Class metrics
+    #    Class metrics
     number-of-methods: 14
 
 
   metrics-exclude:
     - test/**
+
   rules:
     - newline-before-return
     - no-boolean-literal-compare
@@ -98,11 +99,20 @@ dart_code_metrics:
     - member-ordering-extended:
         alphabetize: true
         order:
-          - public-fields
+          - final-fields
           - constructors
+          - static-public-fields
+          - static-private-fields
+          - public-fields
           - private-fields
+          - init-state-method
+          - build-method
+          - did-change-dependencies-method
+          - did-update-widget-method
           - public-methods
           - private-methods
+          - dispose-method
+
 
 
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
