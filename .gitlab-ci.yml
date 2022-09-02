@@ -22,8 +22,8 @@ format_analyze_test:
     - flutter clean
     - flutter pub get
     - flutter pub run dependency_validator
-    - flutter pub run dart_code_metrics:metrics check-unused-code lib
-    - flutter pub run dart_code_metrics:metrics check-unused-files lib
+    - flutter pub run dart_code_metrics:metrics check-unused-code --exclude="lib/demo/**" lib
+    - flutter pub run dart_code_metrics:metrics check-unused-files --exclude="lib/demo/**" lib
     - flutter analyze
     - flutter test
 
