@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../onboarding/splash_screen.dart';
 import 'my_style_guide.dart';
 
+// ignore: unused-code
 class DemoScreen extends StatefulWidget {
   const DemoScreen({Key? key}) : super(key: key);
 

@@ -64,6 +64,7 @@ dart_code_metrics:
 
   metrics-exclude:
     - test/**
+
   rules:
     - newline-before-return
     - no-boolean-literal-compare
@@ -98,11 +99,19 @@ dart_code_metrics:
     - member-ordering-extended:
         alphabetize: true
         order:
+          - public-late-final-fields
           - public-fields
           - constructors
+          - private-late-final-fields
           - private-fields
+          - init-state-method
+          - build-method
+          - did-change-dependencies-method
+          - did-update-widget-method
           - public-methods
           - private-methods
+          - dispose-method
+
 
 
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
