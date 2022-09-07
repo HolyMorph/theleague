@@ -96,13 +96,14 @@ dart_code_metrics:
     - prefer-correct-identifier-length:
         max-identifier-length: 27
         min-identifier-length: 3
-    - member-ordering-extended:
+    - member-ordering-extended: #Класс доторх функц болон хувьсагчуудын дараалал
         alphabetize: true
         order:
           - public-late-final-fields
           - public-fields
           - constructors
           - private-late-final-fields
+          - static-final-fields
           - private-fields
           - init-state-method
           - build-method
