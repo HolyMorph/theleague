@@ -6,10 +6,10 @@ class ApiList {
 
   /// Сервис дуудах хөгжүүлэлтийн орчны URL.
   static const devUrl = 'https://dev.url.here';
-  static final ApiList singleton = ApiList._internal();
 
   factory ApiList() => singleton;
   ApiList._internal();
+  static final ApiList singleton = ApiList._internal();
 
   final MezornClient _mezornApiClient = MezornClient();
 
@@ -23,7 +23,7 @@ class ApiList {
   ///Жишээ хүсэлт илгээх функц
   Future<dynamic> sendTempRequest() async => _sendRequest(
         'tempRequest',
-        method: Method.POST,
+        method: Method.post,
         body: {'data1': '1', 'data2': 2},
       );
 
@@ -68,7 +68,7 @@ class ApiList {
   /// [isMultiPart] -> сервисийн contentType-ийг multipart төрлөөр илгээх эсэх
   Future<dynamic> _sendRequest(
     String url, {
-    Method method = Method.POST,
+    Method method = Method.post,
     dynamic body,
     dynamic queryParam,
     bool checkServerConnection = false,
