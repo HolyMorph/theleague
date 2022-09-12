@@ -33,7 +33,7 @@ class OutlinedButtonsWidget extends StatelessWidget {
           onPressed: () {},
           child: const Text(DemoStrings.customizedView),
           style: OutlinedButton.styleFrom(
-            primary: Colors.orange,
+            backgroundColor: Colors.orange,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),

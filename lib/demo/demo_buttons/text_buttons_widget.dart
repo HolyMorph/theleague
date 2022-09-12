@@ -35,7 +35,7 @@ class TextButtonsWidget extends StatelessWidget {
           onPressed: () {},
           child: const Text(DemoStrings.customizedView),
           style: TextButton.styleFrom(
-            primary: Colors.red,
+            backgroundColor: Colors.red,
             textStyle: const TextStyle(
               fontWeight: FontWeight.bold,
             ),

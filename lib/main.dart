@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api/mezorn_client.dart';
 import 'package:mezorn_fcm/mezorn_fcm.dart';
 
+import 'demo/demo_screen.dart';
 import 'onboarding/splash_screen.dart';
 import 'service/api_list.dart';
 import 'storage/local_storage.dart';
@@ -87,7 +88,11 @@ class MyApp extends StatelessWidget {
       darkTheme: MyThemeDark.darkTheme,
 
       /// Апп ажиллаад хамгийн эхэнд харагдах дэлгэц.
-      home: SplashScreen(),
+      home: DemoScreen(),
+
+      getPages: [
+        GetPage(name: '/', page: () => SplashScreen()),
+      ],
 
       /// Апп аль загвараар ажиллах эсэх.
       themeMode: ThemeMode.system,

@@ -40,7 +40,7 @@ dependencies:
   mezorn_fcm:
     git:
       url: https://dummy_project:CXxPtDVM7gTFJy4GhpMo@gitlab.com/mezorn/flutter/mda/notification_handler.git
-      ref: v1.0.0
+      ref: v1.0.1
 
   mezorn_common:
     git:
