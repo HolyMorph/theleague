@@ -33,8 +33,8 @@ class ElevatedButtonsWidget extends StatelessWidget {
           onPressed: () {},
           child: const Text(DemoStrings.customizedView),
           style: ElevatedButton.styleFrom(
-            primary: Colors.orange,
-            onPrimary: Colors.blueAccent,
+            backgroundColor: Colors.orange,
+            foregroundColor: Colors.blueAccent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),

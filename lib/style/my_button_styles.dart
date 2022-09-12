@@ -78,13 +78,13 @@ class MyButtonStyles {
   /// [OutlinedButton] товчлуурын үндсэн загвар.
   static ButtonStyle outlinedButtonStyle = OutlinedButton.styleFrom(
     backgroundColor: Colors.transparent,
-    primary: MyColors.primaryColor,
+    foregroundColor: MyColors.primaryColor,
     minimumSize: const Size(buttonMinWidth, buttonHeight),
   );
 
   /// [TextButton] Товчлуурын үндсэн загвар.
   static ButtonStyle textButtonStyle = TextButton.styleFrom(
-    primary: MyColors.primaryColor,
+    foregroundColor: MyColors.primaryColor,
     backgroundColor: Colors.transparent,
     minimumSize: const Size(
       buttonMinWidth,

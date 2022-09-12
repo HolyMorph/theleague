@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mn.mezorn.mezorn_dummy">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATION"/>
+
    <application
         android:label="mezorn_dummy"
         android:name="${applicationName}"
