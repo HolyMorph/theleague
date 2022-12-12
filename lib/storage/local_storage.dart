@@ -1,22 +1,21 @@
-import 'package:mezorn_api_caller/api_caller.dart';
+import 'package:get_storage/get_storage.dart';
 
 ///LocalStorage буюу төхөөрөмж дээр дата
 ///хадгалах буцааж уншихад зориулагдсан класс
 class LocalStorage {
-  static late Box localStorage;
+  static late GetStorage localStorage;
 
   ///Хадгалсан өгөгдөл авах функц
   ///
   /// [key] -> Хадгалсан өгөгдлийн түлхүүр үг.
   /// Хэрвээ тухайн [key]-д өгөгдөл байхгүй бол null буцаана.
   static dynamic getData(String key) {
-    return localStorage.get(key, defaultValue: null);
+    return localStorage.read(key);
   }
 
   /// LocalStorage тохируулах.
   static Future<void> initLocalStorage() async {
-    await Hive.initFlutter();
-    localStorage = await Hive.openBox('localStorage');
+    localStorage = GetStorage('localStorage');
   }
 
   ///Төхөөрөмжинд өгөгдөл хадгалах
@@ -26,6 +25,6 @@ class LocalStorage {
   ///
   /// [data] -> Тухайн хадгалах гэж буй өгөгдөл
   static Future<void> saveData(String key, dynamic data) async {
-    return localStorage.put(key, data);
+    return localStorage.write(key, data);
   }
 }

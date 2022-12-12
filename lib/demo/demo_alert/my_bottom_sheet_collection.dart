@@ -75,9 +75,9 @@ class _MyBottomSheetCollectionState extends State<MyBottomSheetCollection> {
           onPressed: () {
             AlertHelper.showAlert(
               type: AlertType.bottomSheet,
-              child: DecoratedBox(
-                decoration: const BoxDecoration(color: Colors.red),
-                child: const DemoCustomAlertBody(),
+              child: const DecoratedBox(
+                decoration: BoxDecoration(color: Colors.red),
+                child: DemoCustomAlertBody(),
               ),
               replaceWholeWidget: true,
             );

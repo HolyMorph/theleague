@@ -52,13 +52,13 @@ dart_code_metrics:
     - long-method
     - long-parameter-list
   metrics:
-#    function metrics
+    #    function metrics
     cyclomatic-complexity: 7
     number-of-parameters: 10
-    source-lines-of-code: 50
+    source-lines-of-code: 70
     lines-of-code: 100
     maximum-nesting-level: 3
-#    Class metrics
+    #    Class metrics
     number-of-methods: 14
 
 
@@ -96,21 +96,22 @@ dart_code_metrics:
     - prefer-correct-identifier-length:
         max-identifier-length: 27
         min-identifier-length: 3
-    - member-ordering-extended: #Класс доторх функц болон хувьсагчуудын дараалал
+    - member-ordering:
         alphabetize: true
         order:
-          - public-late-final-fields
-          - public-fields
+          - final-fields
           - constructors
-          - private-late-final-fields
-          - static-final-fields
+          - static-public-fields
+          - public-fields
           - private-fields
+          - static-private-fields
+          - public-methods
+          - private-methods
+        widgets-order:
           - init-state-method
           - build-method
           - did-change-dependencies-method
           - did-update-widget-method
-          - public-methods
-          - private-methods
           - dispose-method
 
 

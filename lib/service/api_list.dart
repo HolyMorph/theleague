@@ -1,17 +1,17 @@
 import 'package:mezorn_api_caller/api_caller.dart';
 
 class ApiList {
+  final MezornClient _mezornApiClient = MezornClient();
+
+  static final ApiList singleton = ApiList._internal();
+  factory ApiList() => singleton;
+  ApiList._internal();
+
   /// Сервис дуудах production орчны URL.
   static const baseUrl = 'https://base.url.here';
 
   /// Сервис дуудах хөгжүүлэлтийн орчны URL.
   static const devUrl = 'https://dev.url.here';
-
-  factory ApiList() => singleton;
-  ApiList._internal();
-  static final ApiList singleton = ApiList._internal();
-
-  final MezornClient _mezornApiClient = MezornClient();
 
   /// ╔════════════════════════════════════════════════════════════════════════════╗
   /// ║ Үндсэн сервисүүд                                                           ║

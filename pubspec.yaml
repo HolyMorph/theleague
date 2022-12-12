@@ -34,7 +34,7 @@ dependencies:
   mezorn_api_caller:
     git:
       url: https://dummy_project:Zaut1oPehohtnCr7W3k8@gitlab.com/mezorn/flutter/mda/api_caller
-      ref: v1.0.1
+      ref: v1.1.0
 
   # Мэдэгдэлтэй ажиллах сан
   mezorn_fcm:
@@ -48,7 +48,8 @@ dependencies:
       ref: v0.0.1
 
   get: ^4.6.5
-  flutter_native_splash: ^2.2.3
+  flutter_native_splash: ^2.2.16
+  get_storage: ^2.0.3
 
 
 dev_dependencies:
@@ -61,7 +62,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.1
-  dart_code_metrics: ^4.17.1
+  dart_code_metrics: ^5.2.1
   dependency_validator: ^3.2.2
 
 # For information on the generic Dart part of this file, see the

@@ -49,7 +49,7 @@ class _BaseAlertBodyState extends State<BaseAlertBody> {
     _titleText = widget.title;
     _messageText = widget.message;
     if (widget.response != null) {
-      //TODO
+      // TODO(usukhuu): response-с хамаарсан өөрчлөлт оруулах
       //Хэрвээ сервис дуудаад тухайн сервис алдаатай ирсэн бол
       //энд [_titleText] болон [_messageText] -д [widget.response]-с утга олгоно
       //Жишээ нь : _titleText = 'Алдаа гарлаа'; _messageText = widget.response.data['error_mn'];

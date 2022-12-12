@@ -18,7 +18,7 @@ class MyProgressCollection extends StatelessWidget {
         const CollectionDivider(),
         const LinearProgressIndicator(),
         const CollectionDivider(),
-        MyLoadingWidget(),
+        const MyLoadingWidget(),
         const CollectionDivider(),
         ElevatedButton(
           onPressed: () {
