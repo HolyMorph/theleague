@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../onboarding/splash_screen.dart';
+import '../onboarding/view/splash_screen.dart';
 import 'my_style_guide.dart';
 
 // ignore: unused-code

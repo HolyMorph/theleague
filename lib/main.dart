@@ -6,13 +6,12 @@ import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api/mezorn_client.dart';
 import 'package:mezorn_fcm/mezorn_fcm.dart';
 
-import 'demo/demo_screen.dart';
-import 'onboarding/splash_screen.dart';
-import 'service/api_list.dart';
+import 'service/api_client.dart';
 import 'storage/local_storage.dart';
 import 'style/my_theme.dart';
 import 'style/my_theme_dark.dart';
 import 'utils/constants.dart';
+import 'utils/routes.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +28,8 @@ void main() async {
 void _init() async {
   /// [MezornClient] буюу сервис дуудах санг тохируулах хэсэг.
   await MezornClient.init(
-    baseUrl: ApiList.baseUrl,
-    debugUrl: ApiList.devUrl,
+    baseUrl: ApiClient.baseUrl,
+    debugUrl: ApiClient.devUrl,
     isDebug: Constants.isDevUrl,
   );
 
@@ -88,11 +87,9 @@ class MyApp extends StatelessWidget {
       darkTheme: MyThemeDark.darkTheme,
 
       /// Апп ажиллаад хамгийн эхэнд харагдах дэлгэц.
-      home: const DemoScreen(),
-
-      getPages: [
-        GetPage(name: '/', page: () => const SplashScreen()),
-      ],
+      // home: const DemoScreen(),
+      initialRoute: '/splash',
+      getPages: Routes.routes,
 
       /// Апп аль загвараар ажиллах эсэх.
       themeMode: ThemeMode.system,

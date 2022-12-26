@@ -15,6 +15,7 @@ class LocalStorage {
 
   /// LocalStorage тохируулах.
   static Future<void> initLocalStorage() async {
+    await GetStorage.init();
     localStorage = GetStorage('localStorage');
   }
 

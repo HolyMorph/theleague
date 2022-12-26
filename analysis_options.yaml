@@ -100,18 +100,33 @@ dart_code_metrics:
         alphabetize: true
         order:
           - final-fields
-          - constructors
-          - static-public-fields
+          - constructor
+          - named-constructor
+          - const-fields
+          - static-fields
+          - static-public-methods
+          - static-private-methods
           - public-fields
           - private-fields
-          - static-private-fields
+          - getters-setters
           - public-methods
           - private-methods
         widgets-order:
+          - final-fields
+          - constructor
+          - named-constructor
+          - const-fields
+          - static-methods
+          - public-fields
+          - private-fields
+          - getters-setters
           - init-state-method
+          - overridden-public-methods
+          - did-update-widget-method
           - build-method
           - did-change-dependencies-method
-          - did-update-widget-method
+          - public-methods
+          - private-methods
           - dispose-method
 
 

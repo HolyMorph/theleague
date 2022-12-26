@@ -1,11 +1,8 @@
 import 'package:mezorn_api_caller/api_caller.dart';
 
-class ApiList {
+class ApiClient {
   final MezornClient _mezornApiClient = MezornClient();
-
-  static final ApiList singleton = ApiList._internal();
-  factory ApiList() => singleton;
-  ApiList._internal();
+  static final ApiClient singleton = ApiClient._internal();
 
   /// Сервис дуудах production орчны URL.
   static const baseUrl = 'https://base.url.here';
@@ -13,31 +10,8 @@ class ApiList {
   /// Сервис дуудах хөгжүүлэлтийн орчны URL.
   static const devUrl = 'https://dev.url.here';
 
-  /// ╔════════════════════════════════════════════════════════════════════════════╗
-  /// ║ Үндсэн сервисүүд                                                           ║
-  /// ║                                                                            ║
-  /// ║                                                                            ║
-  /// ║                                                                            ║
-  /// ╚════════════════════════════════════════════════════════════════════════════╝
-
-  ///Жишээ хүсэлт илгээх функц
-  Future<dynamic> sendTempRequest() async => _sendRequest(
-        'tempRequest',
-        method: Method.post,
-        body: {'data1': '1', 'data2': 2},
-      );
-
-  //----------------------------------------------------
-
-  ///Сервис дуудаад ирэх хариуг жигдрүүлж буцаах функц.
-  ///
-  /// [response] серверээс ирсэн хариу
-  ///
-  ///Бүх хүсэлт нэгэн жигд ирж чадаж байгаа бол энэ функц
-  ///дотор шинээр код бичих шаардлагагүй
-  Future<dynamic> _handleResponse(dynamic response) async {
-    return response;
-  }
+  factory ApiClient() => singleton;
+  ApiClient._internal();
 
   ///RestAPI хүсэлт илгээх функц
   ///
@@ -66,7 +40,7 @@ class ApiList {
   /// [header] -> сервис дээр нэмэлтээр header зааж өгөхөөр бол ашиглана
   ///
   /// [isMultiPart] -> сервисийн contentType-ийг multipart төрлөөр илгээх эсэх
-  Future<dynamic> _sendRequest(
+  Future<dynamic> sendRequest(
     String url, {
     Method method = Method.post,
     dynamic body,
@@ -94,5 +68,17 @@ class ApiList {
     );
 
     return _handleResponse(_response);
+  }
+
+  //----------------------------------------------------
+
+  ///Сервис дуудаад ирэх хариуг жигдрүүлж буцаах функц.
+  ///
+  /// [response] серверээс ирсэн хариу
+  ///
+  ///Бүх хүсэлт нэгэн жигд ирж чадаж байгаа бол энэ функц
+  ///дотор шинээр код бичих шаардлагагүй
+  Future<dynamic> _handleResponse(dynamic response) async {
+    return response;
   }
 }

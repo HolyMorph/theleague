@@ -1,5 +1,3 @@
-// ignore_for_file: unused-code
-// ignore_for_file: unused-files
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -214,5 +212,11 @@ class _BaseAlertBodyState extends State<BaseAlertBody> {
         fontSize: 24,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }

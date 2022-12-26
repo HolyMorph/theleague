@@ -93,7 +93,7 @@ class AlertHelper {
         if (Get.context == null) {
           return null;
         }
-        _showSnackBar();
+        showSnackBar();
         return null;
     }
   }
@@ -115,7 +115,7 @@ class AlertHelper {
   }
 
   /// [SnackBar] харуулах функц.
-  static void _showSnackBar({
+  static void showSnackBar({
     Widget? child,
     String? title,
     String? message,
