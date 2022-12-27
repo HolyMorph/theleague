@@ -1,3 +1,7 @@
 import 'package:get/get.dart';
 
-class SplashController extends GetxController {}
+import '../state/splash_state.dart';
+
+class SplashController extends GetxController {
+  final splashState = SplashState();
+}

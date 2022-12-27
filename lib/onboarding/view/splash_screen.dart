@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
 
+import '../../alert/alert_helper.dart';
 import '../logic/splash_controller.dart';
 
 class SplashScreen extends GetView<SplashController> {
@@ -39,6 +40,13 @@ class SplashScreen extends GetView<SplashController> {
                 Get.toNamed('/demo');
               },
               child: Text('Go to demo screen'),
+            ),
+            SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () {
+                AlertHelper.showAlert(title: 'I`m title', message: 'I`m dialog message');
+              },
+              child: Text('Show dialog'),
             ),
           ],
         ),

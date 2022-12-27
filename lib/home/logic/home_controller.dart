@@ -1,3 +1,7 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {}
+import '../state/home_state.dart';
+
+class HomeController extends GetxController {
+  final homeState = HomeState();
+}
