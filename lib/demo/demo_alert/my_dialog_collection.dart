@@ -71,9 +71,9 @@ class _MyDialogCollectionState extends State<MyDialogCollection> {
         ElevatedButton(
           onPressed: () {
             AlertHelper.showAlert(
-              child: DecoratedBox(
-                decoration: const BoxDecoration(color: Colors.red),
-                child: const DemoCustomAlertBody(),
+              child: const DecoratedBox(
+                decoration: BoxDecoration(color: Colors.red),
+                child: DemoCustomAlertBody(),
               ),
               replaceWholeWidget: true,
             );

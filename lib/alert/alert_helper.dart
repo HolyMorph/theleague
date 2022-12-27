@@ -1,5 +1,3 @@
-// ignore_for_file: unused-code
-// ignore_for_file: unused-files
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,7 +91,7 @@ class AlertHelper {
         if (Get.context == null) {
           return null;
         }
-        _showSnackBar();
+        showSnackBar();
         return null;
     }
   }
@@ -115,7 +113,7 @@ class AlertHelper {
   }
 
   /// [SnackBar] харуулах функц.
-  static void _showSnackBar({
+  static void showSnackBar({
     Widget? child,
     String? title,
     String? message,

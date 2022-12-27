@@ -34,21 +34,22 @@ dependencies:
   mezorn_api_caller:
     git:
       url: https://dummy_project:Zaut1oPehohtnCr7W3k8@gitlab.com/mezorn/flutter/mda/api_caller
-      ref: v1.0.1
+      ref: v1.1.2
 
   # Мэдэгдэлтэй ажиллах сан
   mezorn_fcm:
     git:
       url: https://dummy_project:CXxPtDVM7gTFJy4GhpMo@gitlab.com/mezorn/flutter/mda/notification_handler.git
-      ref: v1.0.1
+      ref: v1.0.3
 
   mezorn_common:
     git:
       url: https://dummy_project:N2KM9aCd1Ss_SVxMXqxH@gitlab.com/mezorn/flutter/mda/mezorn_common.git
-      ref: v0.0.1
+      ref: v0.0.2
 
   get: ^4.6.5
-  flutter_native_splash: ^2.2.3
+  flutter_native_splash: ^2.2.16
+  get_storage: ^2.0.3
 
 
 dev_dependencies:
@@ -61,7 +62,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.1
-  dart_code_metrics: ^4.17.1
+  dart_code_metrics: ^5.3.0
   dependency_validator: ^3.2.2
 
 # For information on the generic Dart part of this file, see the

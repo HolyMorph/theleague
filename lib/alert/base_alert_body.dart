@@ -1,5 +1,3 @@
-// ignore_for_file: unused-code
-// ignore_for_file: unused-files
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -49,7 +47,7 @@ class _BaseAlertBodyState extends State<BaseAlertBody> {
     _titleText = widget.title;
     _messageText = widget.message;
     if (widget.response != null) {
-      //TODO
+      // TODO(usukhuu): response-с хамаарсан өөрчлөлт оруулах
       //Хэрвээ сервис дуудаад тухайн сервис алдаатай ирсэн бол
       //энд [_titleText] болон [_messageText] -д [widget.response]-с утга олгоно
       //Жишээ нь : _titleText = 'Алдаа гарлаа'; _messageText = widget.response.data['error_mn'];
@@ -214,5 +212,11 @@ class _BaseAlertBodyState extends State<BaseAlertBody> {
         fontSize: 24,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }

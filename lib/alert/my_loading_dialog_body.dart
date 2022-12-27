@@ -12,7 +12,7 @@ class MyLoadingDialogBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        MyLoadingWidget(),
+        const MyLoadingWidget(),
         const SizedBox(width: 12),
         Expanded(
           child: Text(message ?? 'Уншиж байна'),

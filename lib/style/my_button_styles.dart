@@ -91,25 +91,4 @@ class MyButtonStyles {
       buttonHeight,
     ),
   );
-
-  // static ButtonStyle outlinedButtonStyle = buttonStyle.copyWith(
-  //   backgroundColor: MaterialStateProperty.all(Colors.transparent),
-  //   side: MaterialStateProperty.resolveWith<BorderSide>(
-  //     (Set<MaterialState> states) {
-  //       ///Идэвхгүй үеийн хүрээний загвар
-  //       if (states.contains(MaterialState.disabled)) {
-  //         return BorderSide(
-  //           color: Get.theme.disabledColor,
-  //           width: 1,
-  //         );
-  //       }
-  //
-  //       ///Бусад үеийн хүрээний загвар
-  //       return BorderSide(color: Get.theme.primaryColor, width: 1);
-  //     },
-  //   ),
-  //   minimumSize: MaterialStateProperty.all(
-  //     const Size(buttonMinWidth, buttonHeight),
-  //   ),
-  // );
 }
