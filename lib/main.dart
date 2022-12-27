@@ -18,14 +18,14 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   /// Апп-ын анхны тохиргоо болон утгууд өгөх функц.
-  _init();
+  await _init();
 
   /// Апп ажиллуулж эхлэх.
   runApp(const MyApp());
 }
 
 /// Апп-ын анхны тохиргоо болон утгууд өгөх функц.
-void _init() async {
+Future<void> _init() async {
   /// [MezornClient] буюу сервис дуудах санг тохируулах хэсэг.
   await MezornClient.init(
     baseUrl: ApiClient.baseUrl,

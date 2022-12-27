@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api_caller.dart';
 
@@ -21,6 +22,7 @@ class AuthController extends GetxController {
       method: Method.post,
       body: {'phoneNumber': phoneNumber},
     );
+    debugPrint('response = $_response');
 
     return true;
   }
@@ -32,6 +34,7 @@ class AuthController extends GetxController {
       method: Method.post,
       body: {'phoneNumber': phoneNumber, 'otp': otpCode},
     );
+    debugPrint('response = $_response');
 
     return true;
   }
