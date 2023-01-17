@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class AuthState {
+class LoginState {
   RxString otpCode = RxString('');
   RxString password = RxString('');
   RxString phoneNumber = RxString('');

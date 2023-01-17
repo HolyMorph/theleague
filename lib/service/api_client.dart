@@ -1,8 +1,7 @@
 import 'package:mezorn_api_caller/api_caller.dart';
 
 class ApiClient {
-  final MezornClient _mezornApiClient = MezornClient();
-  static final ApiClient singleton = ApiClient._internal();
+  static final MezornClient _mezornApiClient = MezornClient();
 
   /// Сервис дуудах production орчны URL.
   static const baseUrl = 'https://base.url.here';
@@ -10,8 +9,17 @@ class ApiClient {
   /// Сервис дуудах хөгжүүлэлтийн орчны URL.
   static const devUrl = 'https://dev.url.here';
 
-  factory ApiClient() => singleton;
-  ApiClient._internal();
+  //----------------------------------------------------
+
+  ///Сервис дуудаад ирэх хариуг жигдрүүлж буцаах функц.
+  ///
+  /// [response] серверээс ирсэн хариу
+  ///
+  ///Бүх хүсэлт нэгэн жигд ирж чадаж байгаа бол энэ функц
+  ///дотор шинээр код бичих шаардлагагүй
+  static Future<dynamic> _handleResponse(dynamic response) async {
+    return response;
+  }
 
   ///RestAPI хүсэлт илгээх функц
   ///
@@ -40,7 +48,7 @@ class ApiClient {
   /// [header] -> сервис дээр нэмэлтээр header зааж өгөхөөр бол ашиглана
   ///
   /// [isMultiPart] -> сервисийн contentType-ийг multipart төрлөөр илгээх эсэх
-  Future<dynamic> sendRequest(
+  static Future<dynamic> sendRequest(
     String url, {
     Method method = Method.post,
     dynamic body,
@@ -68,17 +76,5 @@ class ApiClient {
     );
 
     return _handleResponse(_response);
-  }
-
-  //----------------------------------------------------
-
-  ///Сервис дуудаад ирэх хариуг жигдрүүлж буцаах функц.
-  ///
-  /// [response] серверээс ирсэн хариу
-  ///
-  ///Бүх хүсэлт нэгэн жигд ирж чадаж байгаа бол энэ функц
-  ///дотор шинээр код бичих шаардлагагүй
-  Future<dynamic> _handleResponse(dynamic response) async {
-    return response;
   }
 }
