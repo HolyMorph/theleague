@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
 
 import '../../alert/alert_helper.dart';
-import '../../routes/my_routes.dart';
+import '../../route/my_routes.dart';
 import '../../utils/constants.dart';
 import '../../utils/my_timer.dart';
 import '../logic/splash_controller.dart';

@@ -7,7 +7,7 @@ import '../../service/base_response.dart';
 import '../logic/login_controller.dart';
 import '../state/login_state.dart';
 
-class LoginScreen extends GetView<LoginController> {
+class LoginScreen extends GetWidget<LoginController> {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override

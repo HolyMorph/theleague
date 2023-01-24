@@ -6,12 +6,10 @@ import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api/mezorn_client.dart';
 import 'package:mezorn_fcm/mezorn_fcm.dart';
 
-import 'routes/my_pages.dart';
-import 'routes/my_routes.dart';
+import 'route/route_export.dart';
 import 'service/api_client.dart';
 import 'storage/local_storage.dart';
-import 'style/my_theme.dart';
-import 'style/my_theme_dark.dart';
+import 'style/style_export.dart';
 import 'utils/constants.dart';
 
 Future<void> main() async {

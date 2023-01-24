@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../home/logic/home_controller.dart';
 import '../logic/page1_controller.dart';
 
-class Page1View extends GetView<Page1Controller> {
+class Page1View extends GetWidget<Page1Controller> {
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.find();

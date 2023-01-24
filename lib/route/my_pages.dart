@@ -14,7 +14,7 @@ import 'my_routes.dart';
 
 class MyPages {
   static final pages = [
-    ///Splash screen
+    ///Component-уудын жагсаалт дэлгэц
     GetPage(
       name: MyRoutes.styleGuide,
       page: () => MyStyleGuide(),

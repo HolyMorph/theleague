@@ -6,7 +6,7 @@ import '../../service/base_response.dart';
 import '../logic/login_controller.dart';
 import '../state/login_state.dart';
 
-class VerifyScreen extends GetView<LoginController> {
+class VerifyScreen extends GetWidget<LoginController> {
   const VerifyScreen() : super();
 
   @override
