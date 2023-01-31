@@ -29,7 +29,7 @@ class MyPages {
 
     ///Нэвтрэх дэлгэц
     GetPage(
-      name: MyRoutes.login,
+      name: '/login',
       page: () => const LoginScreen(),
       binding: LoginBinding(),
     ),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mezorn_common/mezorn_common.dart';
 
 import '../../alert/alert_helper.dart';
+import '../../alert/my_loading_dialog_body.dart';
 import '../../service/base_response.dart';
 import '../logic/login_controller.dart';
 import '../state/login_state.dart';
@@ -34,6 +35,9 @@ class LoginScreen extends GetWidget<LoginController> {
               },
             ),
             SizedBox(height: 12),
+            Obx(() {
+              return state.isLoading.value ? MyLoadingDialogBody() : SizedBox();
+            }),
             Obx(() {
               bool _isValidPhoneNumber = MezornCommon.isValidPhoneNumber(state.phoneNumber.value);
 

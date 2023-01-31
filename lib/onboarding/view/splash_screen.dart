@@ -58,11 +58,11 @@ class SplashScreen extends GetView<SplashController> {
 
   void showNextScreen() {
     bool _isLogged = MezornClientHelper().token.isNotEmpty;
-
-    if (_isLogged) {
-      Get.offAndToNamed('/home');
-    } else {
-      Get.offAndToNamed('/login');
-    }
+    Get.offAllNamed('/temp');
+    // if (_isLogged) {
+    //   Get.offAndToNamed('/home');
+    // } else {
+    //   Get.offAndToNamed('/login');
+    // }
   }
 }

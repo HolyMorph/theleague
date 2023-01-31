@@ -14,6 +14,7 @@ class LoginController extends GetxController {
 
   ///Нэвтрэх сервис
   Future<BaseResponse> getOtp() async {
+    state.isLoading.value = true;
     dynamic _response = await ApiClient.sendRequest(
       'getOtp',
       method: Method.post,
@@ -21,6 +22,7 @@ class LoginController extends GetxController {
         'phoneNumber': state.phoneNumber.value,
       },
     );
+    state.isLoading.value = false;
 
     return BaseResponse(
       response: _response,
@@ -30,6 +32,7 @@ class LoginController extends GetxController {
 
   ///Нэвтрэх сервис
   Future<BaseResponse> verify() async {
+    state.isLoading.value = true;
     dynamic _response = ApiClient.sendRequest(
       'verify',
       method: Method.post,
@@ -38,6 +41,7 @@ class LoginController extends GetxController {
         'otp': state.otpCode.value,
       },
     );
+    state.isLoading.value = false;
 
     return BaseResponse(
       response: _response,
