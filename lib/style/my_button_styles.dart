@@ -9,9 +9,11 @@ class MyButtonStyles {
   static const double buttonMinWidth = 88;
   static EdgeInsets buttonPadding = const EdgeInsets.symmetric(horizontal: 12);
 
-  static OutlinedBorder? buttonShape;
+  static OutlinedBorder? buttonShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(30),
+  );
 
-  ///Товчлуурын үндсэн загвар.
+  ///Base button style
   ///
   ///Энэ загвар нь [ElevatedButton], [OutlinedButton], [TextButton]-д ашиглагдана
   static ButtonStyle buttonStyle = ButtonStyle(
@@ -19,10 +21,10 @@ class MyButtonStyles {
     backgroundColor: MaterialStateProperty.resolveWith<Color>(
       (Set<MaterialState> states) {
         /// Идэвхгүй үеийн өнгө.
-        if (states.contains(MaterialState.disabled)) return Get.theme.disabledColor;
+        if (states.contains(MaterialState.disabled)) return MyColors.primaryColor.withOpacity(0.2);
 
         /// Бусад үеийн өнгө.
-        return Get.theme.primaryColor;
+        return MyColors.primaryColor;
       },
     ),
 
@@ -52,13 +54,13 @@ class MyButtonStyles {
 
     /// Товчлуурын текстийн стайл.
     textStyle: MaterialStateProperty.all<TextStyle>(
-      MyTextStyles.button ?? const TextStyle(color: MyColors.primaryColor),
+      MyTextStyles.labelLarge ?? const TextStyle(),
     ),
 
+    foregroundColor: MaterialStateProperty.all(Colors.white),
+
     /// Splash буюу дарахад үүсэх цацрагын өнгө.
-    overlayColor: MaterialStateProperty.all(
-      MyColors.primaryColor.withOpacity(0.2),
-    ),
+    overlayColor: MaterialStateProperty.all(Colors.white),
   );
 
   /// Товчлуурын үндсэн загвар.

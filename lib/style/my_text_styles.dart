@@ -5,38 +5,41 @@ class MyTextStyles {
 
   //Апп-д ашиглагдаж буй текстүүдийн стайл
 
-  /// [bodyText2]-с арай том текстүүдэд ашиглах стайл.
-  static TextStyle? bodyText1;
+  /// [bodyLarge]-с арай том текстүүдэд ашиглах стайл.
+  static TextStyle? bodyLarge;
 
   /// [Material] элэментүүдийн текстийн үндсэн стайл.
-  static TextStyle? bodyText2;
-
-  /// Товчлуурын текстийн стайл.
-  static TextStyle? button;
+  static TextStyle? bodyMedium;
 
   /// Жижиг текст.
-  static TextStyle? caption;
+  static TextStyle? bodySmall = TextStyle(color: Color(0xff666876), fontWeight: FontWeight.w400, fontSize: 16, fontFamily: "Outfit");
+
+  /// Жижиг текст гэхдээ арай хар.
+  static TextStyle? bodySmallBlack = TextStyle(color: Color(0xff191D31), fontWeight: FontWeight.w400, fontSize: 16, fontFamily: "Outfit");
 
   /// Хамгийн том текст.
-  static TextStyle? headline1;
+  static TextStyle? displayLarge;
 
   /// Аварга том текст.
-  static TextStyle? headline2;
+  static TextStyle? displayMedium = TextStyle(color: Color(0xff000000), fontSize: 18, fontWeight: FontWeight.w400, fontFamily: "Avenir");
 
   /// Дунд зэрэг том текст.
-  static TextStyle? headline3;
+  static TextStyle? displaySmall = TextStyle(color: Color(0xff191D31), fontSize: 16, fontWeight: FontWeight.w900, fontFamily: "Avenir");
 
   /// Бага зэрэг том текст.
-  static TextStyle? headline4;
+  static TextStyle? headlineMedium = TextStyle(color: Color(0xff191D31), fontSize: 20, fontWeight: FontWeight.w900, fontFamily: "Avenir");
 
   /// Том текст.
-  static TextStyle? headline5;
+  static TextStyle? headlineSmall = TextStyle(color: Color(0xffA7A9B7), fontWeight: FontWeight.w400, fontFamily: "Avenir", fontSize: 14);
 
-  /// [AppBar] болон [Dialog]-ийн гарчигны стайл.
-  static TextStyle? headline6;
+  /// Товчлуурын текстийн стайл.
+  static TextStyle? labelLarge;
 
   /// Хамгийн жижиг текст.
-  static TextStyle? overline;
+  static TextStyle? labelSmall = TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18);
+
+  /// name
+  static TextStyle? name = TextStyle(color: Color(0xff191D31), fontSize: 18, fontWeight: FontWeight.w700, fontFamily: "Avenir");
 
   /// [BottomNavigationBar]-ийн сонгогдсон Tab-ийн гарчигны загвар.
   static TextStyle? selectedLabelStyle;
@@ -44,11 +47,14 @@ class MyTextStyles {
   /// [TabBar]-ийн сонгогдсон Tab-ийн гарчигны загвар.
   static TextStyle? selectedTabLabelStyle;
 
-  /// Үндсэн текстийн стайл. [TextFormField]-ийн бичсэн текст, [ListTile]-ийн гарчиг гэх мэтэд ашиглагдана.
-  static TextStyle? subtitle1;
+  /// [AppBar] болон [Dialog]-ийн гарчигны стайл.
+  static TextStyle? titleLarge;
 
-  /// Дунд зэргийн хэмжээтэй текст. [subtitle1]-с арай бага хэмжээтэй байх ёстой.
-  static TextStyle? subtitle2;
+  /// Үндсэн текстийн стайл. [TextFormField]-ийн бичсэн текст, [ListTile]-ийн гарчиг гэх мэтэд ашиглагдана.
+  static TextStyle? titleMedium;
+
+  /// Дунд зэргийн хэмжээтэй текст.
+  static TextStyle? titleSmall = TextStyle(color: Color(0xff191D31), fontSize: 16, fontWeight: FontWeight.w900, fontFamily: "Avenir");
 
   /// [BottomNavigationBar] сонгогдоогүй Tab-ийн гарчигны загвар.
   static TextStyle? unselectedLabelStyle;

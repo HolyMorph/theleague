@@ -1,8 +1,7 @@
 import 'package:mezorn_api_caller/api_caller.dart';
 
 class ApiClient {
-  final MezornClient _mezornApiClient = MezornClient();
-  static final ApiClient singleton = ApiClient._internal();
+  static final MezornClient _mezornApiClient = MezornClient();
 
   /// Сервис дуудах production орчны URL.
   static const baseUrl = 'https://base.url.here';
@@ -10,8 +9,17 @@ class ApiClient {
   /// Сервис дуудах хөгжүүлэлтийн орчны URL.
   static const devUrl = 'https://dev.url.here';
 
-  factory ApiClient() => singleton;
-  ApiClient._internal();
+  //----------------------------------------------------
+
+  ///Сервис дуудаад ирэх хариуг жигдрүүлж буцаах функц.
+  ///
+  /// [response] серверээс ирсэн хариу
+  ///
+  ///Бүх хүсэлт нэгэн жигд ирж чадаж байгаа бол энэ функц
+  ///дотор шинээр код бичих шаардлагагүй
+  static Future<dynamic> _handleResponse(dynamic response) async {
+    return response;
+  }
 
   ///RestAPI хүсэлт илгээх функц
   ///
@@ -31,16 +39,10 @@ class ApiClient {
   /// холбогдсон байгаа ч гэсэн сервертэй холбогдож чадахгүй
   /// бол интернэт холболт тасарсан гэж хариу илгээнэ
   ///
-  /// [isBasicAuth] -> сервис дуудахдаа username password ашиглах эсэх
-  ///
-  /// [authUser] -> сервис дуудахдаа basicAuth ашиглаж байгаа үеийн userName
-  ///
-  /// [authPassword] -> сервис дуудахдаа basicAuth ашиглаж байгаа үеийн password
-  ///
   /// [header] -> сервис дээр нэмэлтээр header зааж өгөхөөр бол ашиглана
   ///
   /// [isMultiPart] -> сервисийн contentType-ийг multipart төрлөөр илгээх эсэх
-  Future<dynamic> sendRequest(
+  static Future<dynamic> sendRequest(
     String url, {
     Method method = Method.post,
     dynamic body,
@@ -48,9 +50,6 @@ class ApiClient {
     bool checkServerConnection = false,
     Map<String, dynamic>? header,
     bool? isMultiPart,
-    bool isBasicAuth = false,
-    String? authUser,
-    String? authPassword,
   }) async {
     Response? _response;
 
@@ -60,25 +59,10 @@ class ApiClient {
       body: body,
       queryParam: queryParam,
       checkServerConnection: checkServerConnection,
-      isBasicAuth: isBasicAuth,
-      authUser: authUser,
-      authPassword: authPassword,
       isMultiPart: isMultiPart,
       header: header,
     );
 
     return _handleResponse(_response);
-  }
-
-  //----------------------------------------------------
-
-  ///Сервис дуудаад ирэх хариуг жигдрүүлж буцаах функц.
-  ///
-  /// [response] серверээс ирсэн хариу
-  ///
-  ///Бүх хүсэлт нэгэн жигд ирж чадаж байгаа бол энэ функц
-  ///дотор шинээр код бичих шаардлагагүй
-  Future<dynamic> _handleResponse(dynamic response) async {
-    return response;
   }
 }
