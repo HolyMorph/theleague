@@ -12,24 +12,31 @@ class MyThemeDark {
   static ThemeData darkTheme = ThemeData(
     /// Апп-д ашиглагдах нийт өнгөнүүд тохируулах.
 
-    primaryColor: MyColorsDark.primaryColor,
-    primaryColorLight: MyColorsDark.primaryColorLight,
     primaryColorDark: MyColorsDark.primaryColorDark,
     scaffoldBackgroundColor: MyColorsDark.scaffoldBackgroundColor,
     unselectedWidgetColor: MyColorsDark.unselectedWidgetColor,
     disabledColor: MyColorsDark.disabledColor,
     hintColor: MyColorsDark.hintColor,
-    errorColor: MyColorsDark.errorColor,
-    backgroundColor: MyColorsDark.backgroundColor,
     dividerColor: MyColorsDark.dividerColor,
     splashColor: MyColorsDark.splashColor,
-    bottomAppBarColor: MyColorsDark.bottomAppBarColor,
     cardColor: MyColorsDark.cardColor,
     focusColor: MyColorsDark.focusColor,
     hoverColor: MyColorsDark.hoverColor,
     highlightColor: MyColorsDark.highlightColor,
-    selectedRowColor: MyColorsDark.selectedRowColor,
     canvasColor: MyColorsDark.canvasColor,
+    colorScheme: ColorScheme(
+      brightness: Brightness.light,
+      primary: MyColorsDark.primaryColor,
+      onPrimary: MyColorsDark.primaryColorLight,
+      secondary: MyColorsDark.secondaryColor,
+      onSecondary: MyColorsDark.secondaryColor,
+      error: MyColorsDark.errorColor,
+      onError: MyColorsDark.errorColor,
+      background: MyColorsDark.backgroundColor,
+      onBackground: MyColorsDark.backgroundColor,
+      surface: MyColorsDark.backgroundColor,
+      onSurface: MyColorsDark.backgroundColor,
+    ),
 
     /// Үндсэн icon-ын загвар.
     primaryIconTheme: const IconThemeData(
@@ -41,9 +48,6 @@ class MyThemeDark {
 
     /// Dialog-ийн арын дэвсгэр өнгө.
     dialogBackgroundColor: MyColorsDark.dialogBackgroundColor,
-
-    /// CheckBox, Radio гэх мэт тийм үгүй гэсэн сонголттой виджетүүдийн идэвхтэй үеийн өнгө.
-    toggleableActiveColor: MyColorsDark.darkAccentColor,
 
     ///
     visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -214,8 +218,8 @@ class MyThemeDark {
     inputDecorationTheme: MyTextFieldStyleDark.inputTheme.copyWith(),
 
     /// Апп-д ашиглах текстүүдийн стайл.
-    textTheme: MyTheme.textTheme,
-
-    brightness: Brightness.dark,
+    textTheme: MyTheme.textTheme.copyWith(
+      titleMedium: TextStyle(color: Colors.white),
+    ),
   );
 }

@@ -94,33 +94,38 @@ class MyTheme {
   /// Апп-ын үндсэн загвар.
   static ThemeData mainTheme = ThemeData(
     /// Апп-д ашиглагдах нийт өнгөнүүд тохируулах.
-    primaryColor: MyColors.primaryColor,
-    primaryColorLight: MyColors.primaryColorLight,
+
     primaryColorDark: MyColors.primaryColorDark,
     scaffoldBackgroundColor: MyColors.scaffoldBackgroundColor,
     unselectedWidgetColor: MyColors.unselectedWidgetColor,
     disabledColor: MyColors.disabledColor,
     hintColor: MyColors.hintColor,
-    errorColor: MyColors.errorColor,
-    backgroundColor: MyColors.backgroundColor,
     dividerColor: MyColors.dividerColor,
     splashColor: MyColors.splashColor,
-    bottomAppBarColor: MyColors.bottomAppBarColor,
     cardColor: MyColors.cardColor,
     focusColor: MyColors.focusColor,
     hoverColor: MyColors.hoverColor,
     highlightColor: MyColors.highlightColor,
-    selectedRowColor: MyColors.selectedRowColor,
     canvasColor: MyColors.canvasColor,
+    colorScheme: ColorScheme(
+      brightness: Brightness.light,
+      primary: MyColors.primaryColor,
+      onPrimary: MyColors.primaryColorLight,
+      secondary: MyColors.secondaryColor,
+      onSecondary: MyColors.secondaryColor,
+      error: MyColors.errorColor,
+      onError: MyColors.errorColor,
+      background: MyColors.backgroundColor,
+      onBackground: MyColors.backgroundColor,
+      surface: MyColors.backgroundColor,
+      onSurface: MyColors.backgroundColor,
+    ),
 
     /// Апп-ын нийт сүүдэрний өнгө.
     shadowColor: MyColors.shadowColor,
 
     /// [Dialog]-ийн арын дэвсгэр өнгө.
     dialogBackgroundColor: MyColors.dialogBackgroundColor,
-
-    /// CheckBox, Radio гэх мэт тийм үгүй гэсэн сонголттой виджетүүдийн идэвхтэй үеийн өнгө.
-    toggleableActiveColor: MyColors.primaryColor,
 
     ///
     visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -219,8 +224,6 @@ class MyTheme {
 
     /// Апп-д ашиглах текстүүдийн стайл.
     textTheme: textTheme,
-
-    brightness: Brightness.light,
   );
 
   /// [ProgressIndicator]-ийн загвар.
@@ -270,42 +273,42 @@ class MyTheme {
   /// Апп-д ашиглах текстүүдийн стайл.
   static TextTheme textTheme = TextTheme(
     /// Үлэмж том текст.
-    headline1: MyTextStyles.headline1,
+    displayLarge: MyTextStyles.displayLarge,
 
     /// Аварга том текст.
-    headline2: MyTextStyles.headline2,
+    displayMedium: MyTextStyles.displayMedium,
 
     /// Дунд зэрэг том текст.
-    headline3: MyTextStyles.headline3,
+    displaySmall: MyTextStyles.displaySmall,
 
     /// Жоохон том текст.
-    headline4: MyTextStyles.headline4,
+    headlineMedium: MyTextStyles.headlineMedium,
 
     /// Том текст.
-    headline5: MyTextStyles.headline5,
+    headlineSmall: MyTextStyles.headlineSmall,
 
     /// [AppBar] болон [Dialog]-ийн гарчигны стайл.
-    headline6: MyTextStyles.headline6,
+    titleLarge: MyTextStyles.titleLarge,
 
     /// Үндсэн текстийн стайл. [TextForm]-ийн бичсэн текст, [ListTile]-ийн гарчиг гэх мэтэд ашиглагдана.
-    subtitle1: MyTextStyles.subtitle1,
+    titleMedium: MyTextStyles.titleMedium,
 
-    /// Дунд зэргийн хэмжээтэй текст. [subtitle1]-с арай бага хэмжээтэй байх ёстой.
-    subtitle2: MyTextStyles.subtitle2,
+    /// Дунд зэргийн хэмжээтэй текст
+    titleSmall: MyTextStyles.titleSmall,
 
     /// [bodyText2]-с арай том текстүүдэд ашиглах стайл.
-    bodyText1: MyTextStyles.bodyText1,
+    bodyLarge: MyTextStyles.bodyLarge,
 
     /// [Material] элэментүүдийн текстийн үндсэн стайл.
-    bodyText2: MyTextStyles.bodyText2,
-
-    /// Товчлуурын текстийн стайл.
-    button: MyTextStyles.button,
+    bodyMedium: MyTextStyles.bodyMedium,
 
     /// Жижиг текст.
-    caption: MyTextStyles.caption,
+    bodySmall: MyTextStyles.bodySmall,
+
+    /// Товчлуурын текстийн стайл.
+    labelLarge: MyTextStyles.labelLarge,
 
     /// Хамгийн жижиг текст.
-    overline: MyTextStyles.overline,
+    labelSmall: MyTextStyles.labelSmall,
   );
 }

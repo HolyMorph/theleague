@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'my_colors.dart';
+
 //TextFormField-ийн стайл
 //-------------------------------------------------------------------------
 
@@ -19,7 +21,7 @@ class MyTextFieldStyle {
   static TextStyle? errorStyle;
 
   /// [TextFormField]-ийн тайлбар харуулах хэсгийн стайл.
-  static TextStyle? hintStyle;
+  static TextStyle? hintStyle = TextStyle(color: Color(0xffA7A9B7), fontSize: 14, fontWeight: FontWeight.w400, fontFamily: "Avenir");
 
   /// TextFormField-ийн хүрээний загвар.
   static InputBorder inputBorder = OutlineInputBorder(
@@ -75,21 +77,21 @@ class MyTextFieldStyle {
     /// Cursor идэвхтэй буюу Focus хийгдсэн үеийн хүрээ.
     focusedBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
-        color: Get.theme.primaryColor,
+        color: MyColors.dividerColor,
       ),
     ),
 
     /// Алдаатай үеийн хүрээ.
     errorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
-        color: Get.theme.errorColor,
+        color: Get.theme.colorScheme.error,
       ),
     ),
 
     /// Focus хийгдсэн мөн алдаатай өгөгдөл байгаа үеийн хүрээ.
     focusedErrorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
-        color: Get.theme.errorColor,
+        color: Get.theme.colorScheme.error,
       ),
     ),
 
@@ -123,7 +125,7 @@ class MyTextFieldStyle {
   );
 
   /// TextForm-ийн Label буюу юу гарчигны стайл.
-  static TextStyle? labelStyle;
+  static TextStyle? labelStyle = TextStyle(fontSize: 14, fontWeight: FontWeight.w400, fontFamily: "Avenir", color: Color(0xffA7A9B7));
 
   ///TextForm-ийн prefix нь текст үед тухайн текстийн стайл
   ///

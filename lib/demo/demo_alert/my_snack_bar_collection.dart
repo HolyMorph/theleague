@@ -33,7 +33,7 @@ class _MySnackBarCollectionState extends State<MySnackBarCollection> {
                 child: Icon(
                   Icons.image,
                   size: 24,
-                  color: Get.theme.backgroundColor,
+                  color: Get.theme.colorScheme.background,
                 ),
               ),
               onPositiveClicked: () {

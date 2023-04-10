@@ -68,7 +68,7 @@ class MyTextFieldStyleDark {
     /// Focus хийгдсэн мөн алдаатай өгөгдөл байгаа үеийн хүрээ.
     focusedErrorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
-        color: Get.theme.errorColor,
+        color: Get.theme.colorScheme.error,
       ),
     ),
 
@@ -91,7 +91,7 @@ class MyTextFieldStyleDark {
     /// Алдаатай үеийн хүрээ.
     errorBorder: inputBorder.copyWith(
       borderSide: inputBorderSide.copyWith(
-        color: Get.theme.errorColor,
+        color: Get.theme.colorScheme.error,
       ),
     ),
 

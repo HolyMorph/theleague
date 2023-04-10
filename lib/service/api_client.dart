@@ -39,12 +39,6 @@ class ApiClient {
   /// холбогдсон байгаа ч гэсэн сервертэй холбогдож чадахгүй
   /// бол интернэт холболт тасарсан гэж хариу илгээнэ
   ///
-  /// [isBasicAuth] -> сервис дуудахдаа username password ашиглах эсэх
-  ///
-  /// [authUser] -> сервис дуудахдаа basicAuth ашиглаж байгаа үеийн userName
-  ///
-  /// [authPassword] -> сервис дуудахдаа basicAuth ашиглаж байгаа үеийн password
-  ///
   /// [header] -> сервис дээр нэмэлтээр header зааж өгөхөөр бол ашиглана
   ///
   /// [isMultiPart] -> сервисийн contentType-ийг multipart төрлөөр илгээх эсэх
@@ -56,9 +50,6 @@ class ApiClient {
     bool checkServerConnection = false,
     Map<String, dynamic>? header,
     bool? isMultiPart,
-    bool isBasicAuth = false,
-    String? authUser,
-    String? authPassword,
   }) async {
     Response? _response;
 
@@ -68,9 +59,6 @@ class ApiClient {
       body: body,
       queryParam: queryParam,
       checkServerConnection: checkServerConnection,
-      isBasicAuth: isBasicAuth,
-      authUser: authUser,
-      authPassword: authPassword,
       isMultiPart: isMultiPart,
       header: header,
     );
