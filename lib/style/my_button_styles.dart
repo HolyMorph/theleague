@@ -13,7 +13,7 @@ class MyButtonStyles {
     borderRadius: BorderRadius.circular(30),
   );
 
-  ///Товчлуурын үндсэн загвар.
+  ///Base button style
   ///
   ///Энэ загвар нь [ElevatedButton], [OutlinedButton], [TextButton]-д ашиглагдана
   static ButtonStyle buttonStyle = ButtonStyle(
