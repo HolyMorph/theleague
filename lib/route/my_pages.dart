@@ -14,9 +14,9 @@ import 'my_routes.dart';
 
 class MyPages {
   static final pages = [
-    ///Component-уудын жагсаалт дэлгэц
+    ///Demo screen
     GetPage(
-      name: MyRoutes.styleGuide,
+      name: MyRoutes.demoScreen,
       page: () => MyStyleGuide(),
     ),
 
@@ -27,14 +27,14 @@ class MyPages {
       binding: SplashBinding(),
     ),
 
-    ///Нэвтрэх дэлгэц
+    ///Login screen
     GetPage(
       name: '/login',
       page: () => const LoginScreen(),
       binding: LoginBinding(),
     ),
 
-    ///Баталгаажуулах дэлгэц
+    ///Verify screen
     GetPage(
       name: MyRoutes.verify,
       page: () => const VerifyScreen(),

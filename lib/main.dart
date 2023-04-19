@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api/mezorn_client.dart';
 import 'package:mezorn_fcm/mezorn_fcm.dart';
 
-import 'route/route_export.dart';
+import 'route/route_index.dart';
 import 'service/api_client.dart';
 import 'storage/local_storage.dart';
 import 'style/style_export.dart';
