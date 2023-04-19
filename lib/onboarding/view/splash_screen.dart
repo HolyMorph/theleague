@@ -16,9 +16,7 @@ class SplashScreen extends GetView<SplashController> {
   @override
   StatelessElement createElement() {
     _splashTimer.delayed(
-      onFinished: () {
-        showNextScreen();
-      },
+      onFinished: _showNextScreen,
       duration: Duration(milliseconds: Constants.splashDelayMillis),
     );
 
@@ -38,7 +36,7 @@ class SplashScreen extends GetView<SplashController> {
             ElevatedButton(
               onPressed: () {
                 _splashTimer.cancel();
-                Get.toNamed(MyRoutes.styleGuide);
+                Get.toNamed(MyRoutes.demoScreen);
               },
               child: Text('Style guide'),
             ),
@@ -56,12 +54,8 @@ class SplashScreen extends GetView<SplashController> {
     );
   }
 
-  void showNextScreen() {
+  void _showNextScreen() {
     bool _isLogged = MezornClientHelper().token.isNotEmpty;
-    if (_isLogged) {
-      Get.offAndToNamed('/home');
-    } else {
-      Get.offAndToNamed('/login');
-    }
+    Get.offAndToNamed(_isLogged ? '/home' : '/login');
   }
 }
