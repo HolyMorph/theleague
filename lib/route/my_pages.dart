@@ -45,7 +45,7 @@ class MyPages {
     _homeRoute.copy(
       name: MyRoutes.home,
     ),
-	];
+  ];
 
   static GetPage _homeRoute = GetPage(
     name: '/',
