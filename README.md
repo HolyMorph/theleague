@@ -34,6 +34,12 @@ LocalStorage.saveData();
 LocalStorage.getData();
 ```
 
+## Mason ашиглах
+
+```dart pub global activate mason_cli``` коммандаар mason идэвхжүүлнэ.
+```mason get``` коммандаар mason.yaml файл доторх brick-үүдийг татна
+```mason make las_vegas``` коммандаар las_vegas архитектурын дагуу файлууд үүсгэнэ
+
 ## Ашигласан mezorn сангууд
 
 1. [mezorn_fcm](https://gitlab.com/mezorn/android/flutter_fcm) буюу мэдэгдэлтэй холбоотой сан. Энэ сангийн тохиргоонуудыг хийх
