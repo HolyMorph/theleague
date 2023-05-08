@@ -4,7 +4,7 @@ Flutter прожект үүсгэхэд зориулсан жишээ проже
 
 
 
-## Үндсэн тохиргоо
+## Initialize
 
 1. Source code git-с татаж аваад origin-оо өөрийн прожектын url-р солино
 2. Android package name болон IOS Bundle ID солих. [mezorn_common](https://gitlab.com/mezorn/android/flutter_packages/mezorn_flutter_common_library) санд хэрхэн солих заавар нь байгаа
@@ -34,20 +34,24 @@ LocalStorage.saveData();
 LocalStorage.getData();
 ```
 
-## Mason ашиглах
+## Activate mason
 
-```dart pub global activate mason_cli``` коммандаар mason идэвхжүүлнэ.
-```mason get``` коммандаар mason.yaml файл доторх brick-үүдийг татна
-```mason make las_vegas``` коммандаар las_vegas архитектурын дагуу файлууд үүсгэнэ
+1. Activate mason using ```dart pub global activate mason_cli```.
+2. Get mason bricks ```mason get```
 
-## Ашигласан mezorn сангууд
+## Mezorn libraries that used in this project
 
-1. [mezorn_fcm](https://gitlab.com/mezorn/android/flutter_fcm) буюу мэдэгдэлтэй холбоотой сан. Энэ сангийн тохиргоонуудыг хийх
+1. ~~[mezorn_fcm](https://gitlab.com/mezorn/android/flutter_fcm) буюу мэдэгдэлтэй холбоотой сан. Энэ сангийн тохиргоонуудыг хийх~~  Changed to brick
 2. [mezorn_common](https://gitlab.com/mezorn/android/flutter_packages/mezorn_flutter_common_library) буюу бүх төрлийн апп-д зориулагдсан нийтлэг сан
 3. [mezorn_api_caller](https://gitlab.com/mezorn/android/flutter-api-caller) буюу RestApi, GraphQL, WebSocket, MQTT ашиглан сервертэй ажиллах сан
 4. 
 
-## Ашигласан pub.dev сангууд
+## Bricks list
+1. [las_vegas](https://gitlab.com/mezorn/mda/mobile/flutter_bricks/las_vegas)
+2. [firebase_messaging](https://gitlab.com/mezorn/mda/mobile/flutter_bricks/firebase_messaging)
+3. 
+
+## Libraries used from pub.dev
 
 1. [get](https://pub.dev/packages/get)
 2. [cached_network_image](https://pub.dev/packages/cached_network_image)
