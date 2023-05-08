@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api/mezorn_client.dart';
-import 'package:mezorn_fcm/mezorn_fcm.dart';
 
 import 'route/route_index.dart';
 import 'service/api_client.dart';
@@ -32,36 +31,8 @@ Future<void> _init() async {
     isDebug: Constants.isDevUrl,
   );
 
-  /// Мэдэгдлийн тохиргоо хийх.
-  await _initNotification();
-
   /// Төхөөрөмж дээр дата хадгалах модулын тохиргоо.
   await LocalStorage.initLocalStorage();
-}
-
-/// [MezornFcm] буюу мэдэгдлийн санг тохируулах функц.
-Future<void> _initNotification() async {
-  await MezornFcm.initNotificationService(
-    /// Тухайн ашиглаж буй мэдэгдлийн сервисийн token авахад дуудагдах функц.
-    onTokenRefreshed: (token) {
-      // TODO(project): Энд сервер лүү мэдэгдлийн токен илгээх эсэхээ шийднэ.
-      log('notificationToken = $token');
-    },
-
-    /// Апп нээлттэй үед мэдэгдэл ирвэл дуудагдах функц.
-    onNotificationReceived: (message) {
-      log('notificationMessage = $message');
-    },
-
-    ///Апп background үед мэдэгдэл ирээд тухайн мэдэгдэл
-    ///дээр дарж апп нээгдэхэд дуудагдах функц
-    onMessageOpenedApp: (message) {
-      log('notificationMessageOpenedApp = $message');
-    },
-
-    /// Апп background үед мэдэгдэл ирвэл ажиллах функц.
-    onBackgroundMessage: handleBackgroundNotification,
-  );
 }
 
 /// Апп background үед мэдэгдэл ирвэл ажиллах функц.

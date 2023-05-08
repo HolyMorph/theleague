@@ -36,12 +36,6 @@ dependencies:
       url: https://dummy_project:Zaut1oPehohtnCr7W3k8@gitlab.com/mezorn/flutter/mda/api_caller
       ref: v1.1.6
 
-  # Мэдэгдэлтэй ажиллах сан
-  mezorn_fcm:
-    git:
-      url: https://dummy_project:CXxPtDVM7gTFJy4GhpMo@gitlab.com/mezorn/flutter/mda/notification_handler.git
-      ref: v1.0.3
-
   mezorn_common:
     git:
       url: https://dummy_project:N2KM9aCd1Ss_SVxMXqxH@gitlab.com/mezorn/flutter/mda/mezorn_common.git
@@ -50,7 +44,6 @@ dependencies:
   get: ^4.6.5
   flutter_native_splash: ^2.2.19
   get_storage: ^2.1.1
-
 
 dev_dependencies:
   integration_test:

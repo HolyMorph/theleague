@@ -1,1 +1,1 @@
-{"bricks":{"las_vegas":{"git":{"url":"https://git.mezorn.com/mezorn/mda/mobile/flutter_bricks/las_vegas.git","path":"","ref":"b02682a46e6e6bccb9a4915d7fc5e99b0516d5de"}}}}
+{"bricks":{"firebase_messaging":{"git":{"url":"https://gitlab.com/mezorn/mda/mobile/flutter_bricks/firebase_messaging.git","path":"","ref":"455752aeb99c118beb1290ee8917a5d62344f45e"}},"las_vegas":{"git":{"url":"https://git.mezorn.com/mezorn/mda/mobile/flutter_bricks/las_vegas.git","path":"","ref":"b02682a46e6e6bccb9a4915d7fc5e99b0516d5de"}}}}
