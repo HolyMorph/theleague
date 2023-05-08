@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
@@ -33,12 +31,6 @@ Future<void> _init() async {
 
   /// Төхөөрөмж дээр дата хадгалах модулын тохиргоо.
   await LocalStorage.initLocalStorage();
-}
-
-/// Апп background үед мэдэгдэл ирвэл ажиллах функц.
-Future<void> handleBackgroundNotification(dynamic message) async {
-  // TODO(project): Апп background байгаа үед мэдэгдэл ирвэл юу хийх вэ гэдэг ээ шийднэ.
-  log('backgroundNotificationMessage = $message');
 }
 
 class MyApp extends StatelessWidget {
