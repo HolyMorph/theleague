@@ -13,23 +13,23 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  /// Апп-ын анхны тохиргоо болон утгууд өгөх функц.
+  /// Setup app settings
   await _init();
 
-  /// Апп ажиллуулж эхлэх.
+  /// Start app
   runApp(const MyApp());
 }
 
-/// Апп-ын анхны тохиргоо болон утгууд өгөх функц.
+/// Setup app settings
 Future<void> _init() async {
-  /// [MezornClient] буюу сервис дуудах санг тохируулах хэсэг.
+  /// Init [MezornClient] library
   await MezornClient.init(
     baseUrl: ApiClient.baseUrl,
     debugUrl: ApiClient.devUrl,
     isDebug: Constants.isDevUrl,
   );
 
-  /// Төхөөрөмж дээр дата хадгалах модулын тохиргоо.
+  ///Init [LocalStorage] library
   await LocalStorage.initLocalStorage();
 }
 
@@ -41,19 +41,19 @@ class MyApp extends StatelessWidget {
     FlutterNativeSplash.remove();
 
     return GetMaterialApp(
-      /// Апп-ын үндсэн загвар.
+      /// Main theme
       theme: MyTheme.mainTheme,
 
-      ///Апп-ын бараан загвар. Хэрвээ дезайн дээр бараан загвар
-      ///гараагүй бол null утга өгч болно
+      ///Dark theme
       darkTheme: MyThemeDark.darkTheme,
 
-      /// Апп ажиллаад хамгийн эхэнд харагдах дэлгэц.
-      // home: const DemoScreen(),
       initialRoute: MyRoutes.splash,
       getPages: MyPages.pages,
 
-      /// Апп аль загвараар ажиллах эсэх.
+      /// Theme mode
+      /// [ThemeMode.system] - App use system theme for default
+      /// [ThemeMode.light] - App use light theme for default
+      /// [ThemeMode.dark] - App use dark theme for default
       themeMode: ThemeMode.system,
     );
   }
