@@ -10,3 +10,6 @@ bricks:
   las_vegas:
     git:
       url: https://git.mezorn.com/mezorn/mda/mobile/flutter_bricks/las_vegas.git
+  firebase_messaging:
+    git:
+      url: "https://gitlab.com/mezorn/mda/mobile/flutter_bricks/firebase_messaging.git"
