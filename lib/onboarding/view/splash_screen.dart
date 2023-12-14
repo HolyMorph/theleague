@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
-
 import '../../alert/alert_helper.dart';
 import '../../route/my_routes.dart';
 import '../../utils/constants.dart';
@@ -55,7 +53,7 @@ class SplashScreen extends GetView<SplashController> {
   }
 
   void _showNextScreen() {
-    bool _isLogged = MezornClientHelper().token.isNotEmpty;
-    Get.offAndToNamed(_isLogged ? '/home' : '/login');
+    // bool _isLogged = MezornClientHelper().token.isNotEmpty;
+    Get.offAndToNamed(MyRoutes.home);
   }
 }

@@ -1,8 +1,4 @@
 import 'package:get/get.dart';
-
-import '../auth/logic/login_binding.dart';
-import '../auth/view/login_screen.dart';
-import '../auth/view/verify_screen.dart';
 import '../demo/my_style_guide.dart';
 import '../home/logic/home_binding.dart';
 import '../home/view/home_screen.dart';
@@ -25,20 +21,6 @@ class MyPages {
       name: MyRoutes.splash,
       page: () => SplashScreen(),
       binding: SplashBinding(),
-    ),
-
-    ///Login screen
-    GetPage(
-      name: '/login',
-      page: () => const LoginScreen(),
-      binding: LoginBinding(),
-    ),
-
-    ///Verify screen
-    GetPage(
-      name: MyRoutes.verify,
-      page: () => const VerifyScreen(),
-      binding: LoginBinding(),
     ),
 
     _homeRoute,
