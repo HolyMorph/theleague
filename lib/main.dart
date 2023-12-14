@@ -49,12 +49,6 @@ class MyApp extends StatelessWidget {
 
       initialRoute: MyRoutes.splash,
       getPages: MyPages.pages,
-
-      /// Theme mode
-      /// [ThemeMode.system] - App use system theme for default
-      /// [ThemeMode.light] - App use light theme for default
-      /// [ThemeMode.dark] - App use dark theme for default
-      themeMode: ThemeMode.system,
     );
   }
 }

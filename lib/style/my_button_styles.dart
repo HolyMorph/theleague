@@ -5,12 +5,12 @@ import 'my_colors.dart';
 import 'my_text_styles.dart';
 
 class MyButtonStyles {
-  static const double buttonHeight = 48;
+  static const double buttonHeight = 50;
   static const double buttonMinWidth = 88;
   static EdgeInsets buttonPadding = const EdgeInsets.symmetric(horizontal: 12);
 
   static OutlinedBorder? buttonShape = RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(30),
+    borderRadius: BorderRadius.circular(5),
   );
 
   ///Base button style
@@ -21,10 +21,10 @@ class MyButtonStyles {
     backgroundColor: MaterialStateProperty.resolveWith<Color>(
       (Set<MaterialState> states) {
         /// Идэвхгүй үеийн өнгө.
-        if (states.contains(MaterialState.disabled)) return MyColors.primaryColor.withOpacity(0.2);
+        if (states.contains(MaterialState.disabled)) return MyColors.buttonDisabledColor;
 
         /// Бусад үеийн өнгө.
-        return MyColors.primaryColor;
+        return MyColors.buttonColor;
       },
     ),
 
@@ -53,14 +53,22 @@ class MyButtonStyles {
     animationDuration: null,
 
     /// Товчлуурын текстийн стайл.
-    textStyle: MaterialStateProperty.all<TextStyle>(
-      MyTextStyles.labelLarge ?? const TextStyle(),
+    // textStyle: MaterialStateProperty.all<TextStyle>(
+    //   MyTextStyles.labelLarge ?? const TextStyle(),
+    // ),
+
+    textStyle: MaterialStateProperty.resolveWith<TextStyle>(
+      (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) return MyTextStyles.disabledStyle;
+
+        return MyTextStyles.labelLarge ?? const TextStyle();
+      },
     ),
 
     foregroundColor: MaterialStateProperty.all(Colors.white),
 
     /// Splash буюу дарахад үүсэх цацрагын өнгө.
-    overlayColor: MaterialStateProperty.all(Colors.white),
+    overlayColor: MaterialStateProperty.all(Colors.grey.withOpacity(0.1)),
   );
 
   /// Товчлуурын үндсэн загвар.
@@ -68,7 +76,7 @@ class MyButtonStyles {
     height: buttonHeight,
     shape: buttonShape,
     padding: buttonPadding,
-    buttonColor: Get.theme.primaryColor,
+    buttonColor: MyColors.buttonColor,
     disabledColor: Get.theme.disabledColor,
     minWidth: double.infinity,
     splashColor: Get.theme.splashColor,
@@ -79,7 +87,7 @@ class MyButtonStyles {
 
   /// [OutlinedButton] товчлуурын үндсэн загвар.
   static ButtonStyle outlinedButtonStyle = OutlinedButton.styleFrom(
-    backgroundColor: Colors.transparent,
+    backgroundColor: MyColors.buttonColor,
     foregroundColor: MyColors.primaryColor,
     minimumSize: const Size(buttonMinWidth, buttonHeight),
   );
@@ -87,7 +95,7 @@ class MyButtonStyles {
   /// [TextButton] Товчлуурын үндсэн загвар.
   static ButtonStyle textButtonStyle = TextButton.styleFrom(
     foregroundColor: MyColors.primaryColor,
-    backgroundColor: Colors.transparent,
+    backgroundColor: MyColors.buttonColor,
     minimumSize: const Size(
       buttonMinWidth,
       buttonHeight,

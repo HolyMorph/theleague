@@ -1,59 +1,126 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../alert/alert_helper.dart';
 import '../../route/my_routes.dart';
-import '../../utils/constants.dart';
-import '../../utils/my_timer.dart';
+import '../../style/my_colors.dart';
 import '../logic/splash_controller.dart';
 
 class SplashScreen extends GetView<SplashController> {
   SplashScreen({Key? key}) : super(key: key);
 
-  final MyTimer _splashTimer = MyTimer();
-
   @override
   StatelessElement createElement() {
-    _splashTimer.delayed(
-      onFinished: _showNextScreen,
-      duration: Duration(milliseconds: Constants.splashDelayMillis),
-    );
-
     return super.createElement();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Demo UI'),
-            const SizedBox(height: 12),
-            ElevatedButton(
-              onPressed: () {
-                _splashTimer.cancel();
-                Get.toNamed(MyRoutes.demoScreen);
-              },
-              child: Text('Style guide'),
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Expanded(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(color: Color(0xFF000C8C)),
+                  child: Image.asset('assets/images/ic_cover.png', scale: 3),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(color: Colors.transparent),
+                ),
+              ),
+            ],
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  Colors.transparent,
+                  MyColors.primaryColor,
+                  MyColors.primaryColor,
+                ],
+                tileMode: TileMode.mirror,
+              ),
             ),
-            const SizedBox(height: 12),
-            ElevatedButton(
-              onPressed: () {
-                _splashTimer.cancel();
-                AlertHelper.showAlert(title: 'I`m title', message: 'I`m dialog message');
-              },
-              child: Text('Show dialog'),
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              children: [
+                Expanded(flex: 50, child: const SizedBox()),
+                Expanded(
+                  flex: 50,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 100),
+                      ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(MyRoutes.selectLeague);
+                        },
+                        child: Text('Шууд санал өгөх'),
+                      ),
+                      const SizedBox(height: 16),
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        children: [
+                          Text(
+                            'Та үргэлжлүүлснээр The League-ийн ',
+                            style: TextStyle(color: Color(0xFF8B8B8B), fontSize: 12),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              'Үйлчилгээний нөхцөл',
+                              style: TextStyle(
+                                color: Color(0xFF9E9E9E),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            ' болон ',
+                            style: TextStyle(color: Color(0xFF8B8B8B), fontSize: 12),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              'Нууцлалын бодлогыг',
+                              style: TextStyle(
+                                color: Color(0xFF9E9E9E),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            ' зөвшөөрч байна.',
+                            style: TextStyle(color: Color(0xFF8B8B8B), fontSize: 12),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Image.asset('assets/icons/ic_logo.png', width: 60, height: 60),
+                      const SizedBox(height: 4),
+                      Text(
+                        '@TheLeague 2023',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white.withOpacity(0.3),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
-  }
-
-  void _showNextScreen() {
-    // bool _isLogged = MezornClientHelper().token.isNotEmpty;
-    Get.offAndToNamed(MyRoutes.home);
   }
 }

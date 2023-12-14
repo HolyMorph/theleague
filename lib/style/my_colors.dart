@@ -11,6 +11,11 @@ class MyColors {
   /// [BottomAppBar]-ын дэвсгэр өнгө.
   static const Color? bottomAppBarColor = null;
 
+  static const Color buttonBackColor = Color(0xffEAECF0);
+  static const Color buttonColor = Color(0xff4D5163);
+
+  static const Color buttonDisabledColor = Color(0xffFF8D62);
+
   /// [Material] сангын [MaterialType.canvas]-ийн өнгө.
   static const Color? canvasColor = Color(0xff191D31);
 
@@ -47,7 +52,7 @@ class MyColors {
   static const Color? hoverColor = null;
 
   /// Апп-ын үндсэн өнгө.
-  static const Color primaryColor = Color(0xffFD683D);
+  static const Color primaryColor = Color(0xff0F0F17);
 
   /// Апп-ын үндсэн өнгөний бараан хувилбар.
   static const Color primaryColorDark = Color(0xff1E258B);
@@ -60,7 +65,7 @@ class MyColors {
 
   ///Нэмэлт өнгөнүүд. Апп-д ашигладаж байгаагаас тусдаа нэмэлт
   ///өнгө ашиглаж байгаа бол энэ хэсэгт тухайн өнгөө зарлана
-  static const Color secondaryColor = Color(0xff2FA1D9);
+  static const Color secondaryColor = Color(0xffFF4800);
 
   static const Color? selectedRowColor = null;
 

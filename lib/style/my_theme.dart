@@ -10,19 +10,19 @@ class MyTheme {
   /// Апп-ын [AppBar]-ийн загвар.
   static AppBarTheme appBarTheme = AppBarTheme(
     /// Дэвсгэр өнгө.
-    backgroundColor: Get.theme.primaryColor,
+    backgroundColor: MyColors.primaryColor,
 
     /// Товгорын хэмжээ 0-с их тохиолдолд ард нь тусах сүүдрийн өнгө.
     shadowColor: Get.theme.shadowColor,
 
     /// Өндрийн хэмжээ.
-    toolbarHeight: null,
+    toolbarHeight: 55,
 
     /// Actions буюу меню байгаа бол тухайн менюны загвар.
     actionsIconTheme: null,
 
     /// AppBar-ийн гарчиг төвдөө харагдах эсэх.
-    centerTitle: false,
+    centerTitle: true,
 
     /// [AppBar]-ийн буцах болон burger цэсний загвар.
     iconTheme: null,
@@ -31,7 +31,7 @@ class MyTheme {
     shape: null,
 
     /// AppBar-ийн гарчигны загвар.
-    titleTextStyle: null,
+    titleTextStyle: MyTextStyles.appBarTitleStyle,
 
     /// AppBar-ийн товгорын хэмжээ.
     elevation: 0,
@@ -96,7 +96,7 @@ class MyTheme {
     /// Апп-д ашиглагдах нийт өнгөнүүд тохируулах.
 
     primaryColorDark: MyColors.primaryColorDark,
-    scaffoldBackgroundColor: MyColors.scaffoldBackgroundColor,
+    scaffoldBackgroundColor: MyColors.primaryColor,
     unselectedWidgetColor: MyColors.unselectedWidgetColor,
     disabledColor: MyColors.disabledColor,
     hintColor: MyColors.hintColor,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MyTextStyles {
-  static const baseFont = '';
+  static const baseFont = 'GIP';
 
   //Апп-д ашиглагдаж буй текстүүдийн стайл
 
   /// [bodyLarge]-с арай том текстүүдэд ашиглах стайл.
+  static TextStyle? appBarTitleStyle = TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white);
   static TextStyle? bodyLarge;
 
   /// [Material] элэментүүдийн текстийн үндсэн стайл.
@@ -16,6 +17,8 @@ class MyTextStyles {
 
   /// Жижиг текст гэхдээ арай хар.
   static TextStyle? bodySmallBlack = TextStyle(color: Color(0xff191D31), fontWeight: FontWeight.w400, fontSize: 16, fontFamily: "Outfit");
+
+  static TextStyle disabledStyle = TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 16, fontWeight: FontWeight.w600);
 
   /// Хамгийн том текст.
   static TextStyle? displayLarge;
@@ -33,7 +36,11 @@ class MyTextStyles {
   static TextStyle? headlineSmall = TextStyle(color: Color(0xffA7A9B7), fontWeight: FontWeight.w400, fontFamily: "Avenir", fontSize: 14);
 
   /// Товчлуурын текстийн стайл.
-  static TextStyle? labelLarge;
+  static TextStyle? labelLarge = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
 
   /// Хамгийн жижиг текст.
   static TextStyle? labelSmall = TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18);

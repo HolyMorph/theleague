@@ -1,41 +1,35 @@
 import 'package:get/get.dart';
-import '../demo/my_style_guide.dart';
 import '../home/logic/home_binding.dart';
 import '../home/view/home_screen.dart';
 import '../onboarding/logic/splash_binding.dart';
 import '../onboarding/view/splash_screen.dart';
-import '../page1/logic/page1_binding.dart';
-import '../page2/logic/page2_binding.dart';
+import '../select_league/view/select_league_screen.dart';
 import 'my_routes.dart';
 
 class MyPages {
   static final pages = [
-    ///Demo screen
+    ///Home screen
     GetPage(
-      name: MyRoutes.demoScreen,
-      page: () => MyStyleGuide(),
+      name: MyRoutes.homeScreen,
+      page: () => HomeScreen(),
+      binding: HomeBinding(),
     ),
 
-    ///Splash screen
+    ///Select League  screen
     GetPage(
-      name: MyRoutes.splash,
-      page: () => SplashScreen(),
-      binding: SplashBinding(),
+      name: MyRoutes.selectLeague,
+      page: () => SelectLeagueScreen(),
     ),
 
     _homeRoute,
     _homeRoute.copy(
-      name: MyRoutes.home,
+      name: MyRoutes.splash,
     ),
   ];
 
   static GetPage _homeRoute = GetPage(
     name: '/',
-    page: () => HomeScreen(),
-    binding: HomeBinding(),
-    bindings: [
-      Page1Binding(),
-      Page2Binding(),
-    ],
+    page: () => SplashScreen(),
+    binding: SplashBinding(),
   );
 }

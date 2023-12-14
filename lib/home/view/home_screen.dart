@@ -1,30 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../page1/view/page1_view.dart';
-import '../../page2/view/page2_view.dart';
+import '../../alert/alert_helper.dart';
+import '../../alert/flash_status.dart';
+import '../../components/app_back_button.dart';
+import '../../components/app_button.dart';
+import '../../style/my_colors.dart';
 import '../logic/home_controller.dart';
-import '../state/home_state.dart';
 
 class HomeScreen extends GetWidget<HomeController> {
   HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    HomeState state = controller.state;
-
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() {
-          return Text('Page index: ${state.currentPage}');
-        }),
+        automaticallyImplyLeading: false,
+        title: Text('Тоглогч сонгох'),
+        leading: AppBackButton(),
+        actions: [
+          AppButton(child: Icon(Icons.pause_circle, color: Colors.white), onTap: () {}),
+        ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(color: Colors.white.withOpacity(0.1), height: 1.0),
+        ),
       ),
-      body: PageView(
-        onPageChanged: controller.changePage,
-        controller: state.pageController,
+      body: Column(
         children: [
-          Page1View(),
-          Page2View(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                const SizedBox(height: 12),
+                Text(
+                  'ҮНДЭСНИЙ ДЭЭД ЛИГ БҮХ ОДДЫН ТОГЛОЛТ',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(5, 5),
+                        blurRadius: 8.0,
+                        color: Colors.white.withOpacity(0.2),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Та 12 хүртэлх тоглогчид санал өгөх боломжтой бөгөөд нэг байрлал дээр тус бүр 3 тоглогч сонгоно.',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(5, 5),
+                        blurRadius: 8.0,
+                        color: Colors.white.withOpacity(0.2),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Image.asset('assets/images/ic_field.png'),
+              ],
+            ),
+          ),
+          const Spacer(),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  Color(0xFF4C1C1A),
+                  Color(0xFF272739),
+                ],
+                tileMode: TileMode.mirror,
+              ),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
+              onPressed: () {
+                AlertHelper.showFlashAlert(
+                  title: 'Уучлаарай',
+                  message: 'Тоглогчоо сонгоно уу !!!',
+                  status: FlashStatus.failed,
+                );
+              },
+              child: Text('Саналаа өгөх'),
+            ),
+          ),
         ],
       ),
     );
