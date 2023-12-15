@@ -8,11 +8,6 @@ class SplashScreen extends GetView<SplashController> {
   SplashScreen({Key? key}) : super(key: key);
 
   @override
-  StatelessElement createElement() {
-    return super.createElement();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(

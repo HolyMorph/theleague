@@ -5,7 +5,9 @@ import '../../alert/alert_helper.dart';
 import '../../alert/flash_status.dart';
 import '../../components/app_back_button.dart';
 import '../../components/app_button.dart';
+import '../../route/my_routes.dart';
 import '../../style/my_colors.dart';
+import '../component/select_item.dart';
 import '../logic/home_controller.dart';
 
 class HomeScreen extends GetWidget<HomeController> {
@@ -19,7 +21,7 @@ class HomeScreen extends GetWidget<HomeController> {
         title: Text('Тоглогч сонгох'),
         leading: AppBackButton(),
         actions: [
-          AppButton(child: Icon(Icons.pause_circle, color: Colors.white), onTap: () {}),
+          AppButton(child: Icon(Icons.shopping_bag_rounded, color: Colors.white), onTap: () {}),
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -34,7 +36,7 @@ class HomeScreen extends GetWidget<HomeController> {
               children: [
                 const SizedBox(height: 12),
                 Text(
-                  'ҮНДЭСНИЙ ДЭЭД ЛИГ БҮХ ОДДЫН ТОГЛОЛТ',
+                  'ҮНДЭСНИЙ ДЭЭД ЛИГ БҮХ ОДДЫН ТОГЛОЛТ'.toUpperCase(),
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
@@ -64,7 +66,31 @@ class HomeScreen extends GetWidget<HomeController> {
                   ),
                 ),
                 const SizedBox(height: 40),
-                Image.asset('assets/images/ic_field.png'),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset('assets/images/ic_field.png'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Column(
+                        children: [
+                          SelectItem(positionName: 'Төвийн тоглогч', onTap: () {}),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SelectItem(positionName: 'Довтлогч', onTap: () {}),
+                              SelectItem(positionName: 'Хамгаалагч', onTap: () {}),
+                            ],
+                          ),
+                          SelectItem(
+                            positionName: 'Холбогч',
+                            onTap: () => Get.toNamed('${MyRoutes.selectPlayer}/guard'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

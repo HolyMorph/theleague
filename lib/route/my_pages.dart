@@ -4,6 +4,8 @@ import '../home/view/home_screen.dart';
 import '../onboarding/logic/splash_binding.dart';
 import '../onboarding/view/splash_screen.dart';
 import '../select_league/view/select_league_screen.dart';
+import '../select_player/logic/select_player_binding.dart';
+import '../select_player/view/select_player_screen.dart';
 import 'my_routes.dart';
 
 class MyPages {
@@ -21,6 +23,13 @@ class MyPages {
       page: () => SelectLeagueScreen(),
     ),
 
+    ///Select Player  screen
+    GetPage(
+      name: MyRoutes.selectPlayer + '/:position',
+      page: () => SelectPlayerScreen(),
+      binding: SelectPlayerBinding(),
+    ),
+
     _homeRoute,
     _homeRoute.copy(
       name: MyRoutes.splash,
@@ -28,7 +37,7 @@ class MyPages {
   ];
 
   static GetPage _homeRoute = GetPage(
-    name: '/',
+    name: '/home',
     page: () => SplashScreen(),
     binding: SplashBinding(),
   );

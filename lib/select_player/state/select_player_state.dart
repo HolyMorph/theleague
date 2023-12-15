@@ -1,0 +1,3 @@
+class SelectPlayerState {
+  String title = '';
+}
