@@ -29,6 +29,11 @@ class SelectPlayerController extends GetxController {
   }
 
   @override
+  void onClose() {
+    super.onClose();
+  }
+
+  @override
   void onInit() {
     title = Get.parameters['position'] ?? '';
     super.onInit();

@@ -1,36 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../style/my_colors.dart';
+import '../logic/select_player_controller.dart';
 
-class PlayerItem extends StatelessWidget {
-  final Function(String) onTap;
-  final String playerFirstName;
-  final String playerId;
-  final String playerLastName;
-  final String playerNumber;
-  final String playerPosition;
-  final Color teamColor;
-
-  const PlayerItem({
-    required this.playerFirstName,
-    required this.playerId,
-    required this.playerLastName,
-    required this.playerNumber,
-    required this.teamColor,
-    required this.onTap,
-    required this.playerPosition,
-    super.key,
-  });
+class PlayerItem extends GetView<SelectPlayerController> {
+  final Function(Map<String, dynamic>) onTap;
+  final Map<String, dynamic> player;
+  final RxString selectedCode = RxString('');
+  PlayerItem({required this.player, required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final RxString selectedCode = RxString('');
-
     return GestureDetector(
       onTap: () {
-        selectedCode.value = selectedCode.value == playerId ? '' : playerId;
-        onTap(playerId);
+        selectedCode.value = controller.state.selectedPlayers.length < 3
+            ? selectedCode.value == player['playerId']
+                ? ''
+                : player['playerId']
+            : '';
+        onTap(player);
       },
       child: Stack(
         children: [
@@ -42,10 +30,13 @@ class PlayerItem extends StatelessWidget {
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    border: selectedCode.value == playerId ? Border.all(width: 1, color: teamColor) : null,
+                    border:
+                        selectedCode.value == player['playerId'] ? Border.all(width: 1, color: Color(int.parse('0xFF${player['teamColor']}'))) : null,
                     color: Color(0xFF3B3C4E),
                     boxShadow: [
-                      selectedCode.value == playerId ? BoxShadow(offset: Offset(0, 1), blurRadius: 8, color: teamColor) : BoxShadow(),
+                      selectedCode.value == player['playerId']
+                          ? BoxShadow(offset: Offset(0, 1), blurRadius: 8, color: Color(int.parse('0xFF${player['teamColor']}')))
+                          : BoxShadow(),
                     ],
                   ),
                   child: Column(
@@ -60,12 +51,12 @@ class PlayerItem extends StatelessWidget {
                           gradient: RadialGradient(
                             focal: Alignment.bottomCenter,
                             radius: 1.35,
-                            colors: [teamColor, MyColors.primaryColor],
+                            colors: [Color(int.parse('0xFF${player['teamColor']}')), MyColors.primaryColor],
                           ),
                         ),
                         padding: const EdgeInsets.all(8),
                         child: Text(
-                          playerNumber,
+                          player['playerNumber'],
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
                         ),
                       ),
@@ -74,20 +65,20 @@ class PlayerItem extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              playerFirstName,
+                              player['playerFirstName'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
                             ),
                             Text(
-                              playerLastName,
+                              player['playerLastName'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              playerPosition,
+                              player['playerPosition'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -103,11 +94,11 @@ class PlayerItem extends StatelessWidget {
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
-                          color: selectedCode.value == playerId ? Color(0xFF4D5163).withOpacity(0.4) : Color(0xFF4D5163),
+                          color: selectedCode.value == player['playerId'] ? Color(0xFF4D5163).withOpacity(0.4) : Color(0xFF4D5163),
                           borderRadius: BorderRadius.vertical(bottom: Radius.circular(5)),
                         ),
                         child: Text(
-                          selectedCode.value == playerId ? 'Болих' : 'Сонгох',
+                          selectedCode.value == player['playerId'] ? 'Болих' : 'Сонгох',
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white),
                         ),
@@ -122,7 +113,11 @@ class PlayerItem extends StatelessWidget {
           Column(
             children: [
               Image.asset('assets/images/ic_player.png'),
-              Divider(height: 1, thickness: 2, color: teamColor),
+              Divider(
+                height: 1,
+                thickness: 2,
+                color: Color(int.parse('0xFF${player['teamColor']}')),
+              ),
             ],
           ),
         ],
