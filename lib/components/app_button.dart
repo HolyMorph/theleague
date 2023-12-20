@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../style/my_colors.dart';
 
@@ -9,18 +10,22 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: MyColors.buttonBackColor.withOpacity(0.1),
+    return Stack(
+      children: [
+        InkWell(
+          onTap: onTap,
           borderRadius: BorderRadius.circular(8),
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: MyColors.buttonBackColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: child,
+          ),
         ),
-        child: child,
-      ),
+      ],
     );
   }
 }

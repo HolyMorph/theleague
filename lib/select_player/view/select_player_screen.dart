@@ -4,15 +4,50 @@ import 'package:get/get.dart';
 import '../../alert/alert_helper.dart';
 import '../../alert/flash_status.dart';
 import '../../components/app_back_button.dart';
-import '../../components/app_button.dart';
 import '../../style/my_colors.dart';
+import '../component/player_archive_button.dart';
 import '../component/player_item.dart';
 import '../component/team_item.dart';
 import '../logic/select_player_controller.dart';
 import 'right_drawer.dart';
 
-class SelectPlayerScreen extends GetView<SelectPlayerController> {
+class SelectPlayerScreen extends GetWidget<SelectPlayerController> {
   const SelectPlayerScreen({super.key});
+
+  static final List<dynamic> allPlayers = [
+    {
+      'playerId': 'dsada',
+      'playerFirstName': 'Сэтгэл',
+      'playerLastName': 'Жигмээ',
+      'playerNumber': '3',
+      'teamColor': 'B06BFF',
+      'playerPosition': 'Довтлогч / Хамгаалагч',
+    },
+    {
+      'playerId': '2dsa',
+      'playerFirstName': 'Цогтхангай',
+      'playerLastName': 'Мөнхбаяр',
+      'playerNumber': '23',
+      'teamColor': 'B06BFF',
+      'playerPosition': 'Довтлогч',
+    },
+    {
+      'playerId': '321dssa',
+      'playerFirstName': 'Алтанбагана',
+      'playerLastName': 'Ариунболд',
+      'playerNumber': '1',
+      'teamColor': 'B06BFF',
+      'playerPosition': 'Хамгаалагч',
+    },
+    {
+      'playerId': 'dsadsa',
+      'playerFirstName': 'Эрдэм',
+      'playerLastName': 'Батсайхан',
+      'playerNumber': '5',
+      'teamColor': 'B06BFF',
+      'playerPosition': 'Төв',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +65,8 @@ class SelectPlayerScreen extends GetView<SelectPlayerController> {
         title: Text(controller.getTitle()),
         leading: AppBackButton(),
         actions: [
-          AppButton(
-            child: Icon(Icons.shopping_bag_rounded, color: Colors.white),
+          PlayerArchiveButton(
+            child: Icon(Icons.people_alt, color: Colors.white),
             onTap: () {
               _scaffoldKey.currentState!.openEndDrawer();
             },
@@ -45,61 +80,55 @@ class SelectPlayerScreen extends GetView<SelectPlayerController> {
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              child: Row(
-                children: [
-                  Container(
-                    height: double.infinity,
-                    width: 90,
-                    child: ColoredBox(
-                      color: Color(0xFF272739),
-                      child: ListView.separated(
-                        padding: const EdgeInsets.all(16),
-                        shrinkWrap: true,
-                        itemCount: 10,
-                        itemBuilder: (_, index) {
-                          return TeamItem(
-                            onTap: (teamCode) {},
-                            iconPath: 'assets/icons/ic_ihc.png',
-                            teamCode: 'ihc',
-                            teamColor: Color(0xFFB06BFF),
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(height: 16);
-                        },
-                      ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: double.infinity,
+                  width: 90,
+                  child: ColoredBox(
+                    color: Color(0xFF272739),
+                    child: ListView.separated(
+                      padding: const EdgeInsets.all(16),
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      itemBuilder: (_, index) {
+                        return TeamItem(
+                          onTap: (teamCode) {},
+                          iconPath: 'assets/icons/ic_ihc.png',
+                          teamCode: 'ihc',
+                          teamColor: Color(0xFFB06BFF),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(height: 16);
+                      },
                     ),
                   ),
-                  Expanded(
-                    child: ColoredBox(
-                      color: MyColors.primaryColor,
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 8.0,
-                          crossAxisSpacing: 16.0,
-                          childAspectRatio: 3 / 5,
-                        ),
-                        padding: EdgeInsets.all(16),
-                        itemCount: 10,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return PlayerItem(
-                            playerFirstName: 'Сэтгэл',
-                            playerId: 'быйбйы',
-                            playerLastName: 'Жигмээ',
-                            playerNumber: '3',
-                            teamColor: Color(0xFFB06BFF),
-                            playerPosition: 'Довтлогч / Хамгаалагч',
-                            onTap: (playerId) {},
-                          );
-                        },
+                ),
+                Expanded(
+                  child: ColoredBox(
+                    color: MyColors.primaryColor,
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 8.0,
+                        crossAxisSpacing: 16.0,
+                        childAspectRatio: 3 / 5,
                       ),
+                      padding: EdgeInsets.all(16),
+                      itemCount: allPlayers.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return PlayerItem(
+                          player: allPlayers[index],
+                          onTap: (player) => addRemoveFunction(player: player),
+                        );
+                      },
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Container(
@@ -108,10 +137,7 @@ class SelectPlayerScreen extends GetView<SelectPlayerController> {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: <Color>[
-                  Color(0xFF4C1C1A),
-                  Color(0xFF272739),
-                ],
+                colors: <Color>[Color(0xFF4C1C1A), Color(0xFF272739)],
                 tileMode: TileMode.mirror,
               ),
             ),
@@ -131,5 +157,19 @@ class SelectPlayerScreen extends GetView<SelectPlayerController> {
         ],
       ),
     );
+  }
+
+  void addRemoveFunction({required Map<String, dynamic> player}) {
+    Map<String, dynamic>? _existPlayer = controller.state.selectedPlayers.firstWhereOrNull((element) => element['playerId'] == player['playerId']);
+
+    if (_existPlayer == null) {
+      if (controller.state.selectedPlayers.length < 3) {
+        controller.state.selectedPlayers.add(player);
+      } else {
+        AlertHelper.showFlashAlert(title: 'Уучлаарай', message: 'Нэг байрлал дээр 3 тоглогч сонгох боломжтой', status: FlashStatus.failed);
+      }
+    } else {
+      controller.state.selectedPlayers.remove(player);
+    }
   }
 }

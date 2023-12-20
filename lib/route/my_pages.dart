@@ -29,13 +29,13 @@ class MyPages {
     ///Select League  screen
     GetPage(
       name: MyRoutes.selectLeague,
-      page: () => SelectLeagueScreen(),
+      page: () => const SelectLeagueScreen(),
     ),
 
     ///Select Player  screen
     GetPage(
       name: MyRoutes.selectPlayer + '/:position',
-      page: () => SelectPlayerScreen(),
+      page: () => const SelectPlayerScreen(),
       binding: SelectPlayerBinding(),
     ),
 

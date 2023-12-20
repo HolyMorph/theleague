@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../style/my_colors.dart';
 
 class SelectLeagueItem extends StatelessWidget {

@@ -21,7 +21,7 @@ class HomeScreen extends GetWidget<HomeController> {
         title: Text('Тоглогч сонгох'),
         leading: AppBackButton(),
         actions: [
-          AppButton(child: Icon(Icons.shopping_bag_rounded, color: Colors.white), onTap: () {}),
+          AppButton(child: Image.asset('assets/icons/ic_pack.png'), onTap: () {}),
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),

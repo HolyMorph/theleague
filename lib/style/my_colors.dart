@@ -59,6 +59,7 @@ class MyColors {
 
   /// Апп-ын үндсэн өнгөний цайвар хувилбар.
   static const Color primaryColorLight = Color(0xff1E258B);
+  static const Color redColor = Color(0xffF41435);
 
   /// Апп-ын background-д ашиглагдах өнгө.
   static const Color scaffoldBackgroundColor = Color(0xffF8F9FA);
