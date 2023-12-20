@@ -1,4 +1,7 @@
 class Constants {
+  /// Token string to get token from local storage
+  static String TIMESTAMP = 'timestamp';
+
   ///Хөгжүүлэлтийн орчны URL ашиглах эсэх
   ///
   /// Хэрвээ true бол бүх хүсэлт хөгжүүлэлтийн URL

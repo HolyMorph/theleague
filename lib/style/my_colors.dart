@@ -6,7 +6,7 @@ class MyColors {
   static const Color LightModeBlack03 = Color(0xff8C8E98);
 
   /// Апп-ын canvas-ийн background-д ашиглагдах өнгө.
-  static const Color backgroundColor = Color(0xFFF3F4F6);
+  static const Color backgroundColor = Color(0xff161623);
 
   /// [BottomAppBar]-ын дэвсгэр өнгө.
   static const Color? bottomAppBarColor = null;

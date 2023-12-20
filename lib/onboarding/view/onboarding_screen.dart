@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../route/my_routes.dart';
 import '../../style/my_colors.dart';
-import '../logic/splash_controller.dart';
+import '../logic/onboarding_controller.dart';
 
-class SplashScreen extends GetView<SplashController> {
-  SplashScreen({Key? key}) : super(key: key);
+class OnboardingScreen extends GetView<OnboardingController> {
+  OnboardingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

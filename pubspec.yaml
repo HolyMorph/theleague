@@ -22,6 +22,9 @@ dependencies:
   flash: ^3.0.0
   get_storage: ^2.1.1
   pinput: ^3.0.1
+  flutter_udid: ^2.0.1
+  device_info_plus: ^9.1.1
+
 
 dev_dependencies:
   integration_test:
