@@ -6,6 +6,8 @@ import '../onboarding/view/splash_screen.dart';
 import '../select_league/view/select_league_screen.dart';
 import '../select_player/logic/select_player_binding.dart';
 import '../select_player/view/select_player_screen.dart';
+import '../verify_ticket_number/logic/verify_ticket_binding.dart';
+import '../verify_ticket_number/view/verify_ticket_screen.dart';
 import 'my_routes.dart';
 
 class MyPages {
@@ -15,6 +17,13 @@ class MyPages {
       name: MyRoutes.homeScreen,
       page: () => HomeScreen(),
       binding: HomeBinding(),
+    ),
+
+    ///Verify Ticket number
+    GetPage(
+      name: MyRoutes.verifyTicket,
+      page: () => VerifyTicketScreen(),
+      binding: VerifyTicketBinding(),
     ),
 
     ///Select League  screen

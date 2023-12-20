@@ -16,7 +16,8 @@ class SelectLeagueItem extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: onTap,
-        child: DecoratedBox(
+        child: Container(
+          width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.transparent,
@@ -24,7 +25,11 @@ class SelectLeagueItem extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Image.asset(imagePath),
+              Image.asset(
+                imagePath,
+                fit: BoxFit.contain,
+                width: double.infinity,
+              ),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(

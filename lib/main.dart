@@ -46,7 +46,8 @@ class MyApp extends StatelessWidget {
 
       ///Dark theme
       darkTheme: MyThemeDark.darkTheme,
-
+      debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.topLevel,
       initialRoute: MyRoutes.splash,
       getPages: MyPages.pages,
     );

@@ -10,6 +10,7 @@ class SplashScreen extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Column(
@@ -49,7 +50,14 @@ class SplashScreen extends GetView<SplashController> {
                   flex: 50,
                   child: Column(
                     children: [
-                      const SizedBox(height: 100),
+                      const SizedBox(height: 50),
+                      ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(MyRoutes.verifyTicket);
+                        },
+                        child: Text('Тоглолтын тасалбараар санал өгөх'),
+                      ),
+                      const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
                           Get.toNamed(MyRoutes.selectLeague);
@@ -100,7 +108,7 @@ class SplashScreen extends GetView<SplashController> {
                       Image.asset('assets/icons/ic_logo.png', width: 60, height: 60),
                       const SizedBox(height: 4),
                       Text(
-                        '@TheLeague 2023',
+                        '@Duiz 2023',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
