@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../route/my_routes.dart';
 import '../../style/my_colors.dart';
 import '../logic/vote_result_controller.dart';
 import '../suite/player_list.dart';
@@ -78,7 +79,9 @@ class VoteResultScreen extends StatelessWidget {
 
                   /// Vote button
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(MyRoutes.onboarding);
+                    },
                     child: Text(
                       'Санал өгөх',
                       style: TextStyle(

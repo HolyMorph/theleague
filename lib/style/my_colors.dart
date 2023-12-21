@@ -6,13 +6,13 @@ class MyColors {
   static const Color LightModeBlack03 = Color(0xff8C8E98);
 
   /// Апп-ын canvas-ийн background-д ашиглагдах өнгө.
-  static const Color backgroundColor = Color(0xff161623);
+  static const Color backgroundColor = Color(0xFFF3F4F6);
 
   /// [BottomAppBar]-ын дэвсгэр өнгө.
   static const Color? bottomAppBarColor = null;
 
   static const Color buttonBackColor = Color(0xffEAECF0);
-  static const Color buttonColor = Color(0xffFF4500);
+  static const Color buttonColor = Color(0xff4D5163);
 
   static const Color buttonDisabledColor = Color(0xffFF8D62);
 
@@ -52,7 +52,7 @@ class MyColors {
   static const Color? hoverColor = null;
 
   /// Апп-ын үндсэн өнгө.
-  static const Color primaryColor = Color(0xffFF4500);
+  static const Color primaryColor = Color(0xff0F0F17);
 
   /// Апп-ын үндсэн өнгөний бараан хувилбар.
   static const Color primaryColorDark = Color(0xff1E258B);
