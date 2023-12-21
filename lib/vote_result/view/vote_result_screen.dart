@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,19 +5,60 @@ import '../../route/my_routes.dart';
 import '../../style/my_colors.dart';
 import '../logic/vote_result_controller.dart';
 import '../suite/player_list.dart';
+import '../suite/vote_drawer.dart';
 
-class VoteResultScreen extends StatelessWidget {
+class VoteResultScreen extends StatefulWidget {
   const VoteResultScreen({Key? key}) : super(key: key);
 
   @override
+  State<VoteResultScreen> createState() => _VoteResultScreenState();
+}
+
+class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerProviderStateMixin {
+  late TabController tabController;
+  int _previousTabIndex = 0;
+
+  @override
+  void initState() {
+    tabController = TabController(
+      length: 3,
+      vsync: this,
+      initialIndex: 0,
+    );
+    tabController.addListener(_listenToTabChanges);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _voteScaffoldKey = new GlobalKey<ScaffoldState>();
+
     return GetBuilder(
       init: VoteResultController(),
       builder: (VoteResultController controller) {
         return Obx(() {
-          log('${controller.state.onlineVoteResults}');
+          List<dynamic> _leaderboard() {
+            switch (tabController.index) {
+              case 0:
+                return controller.state.onlineVoteResults;
+              case 1:
+                return controller.state.arenaVoteResults;
+              case 2:
+                return controller.state.coachVoteResults;
+              default:
+                return controller.state.onlineVoteResults;
+            }
+          }
 
           return Scaffold(
+            key: _voteScaffoldKey,
+            endDrawer: Drawer(
+              elevation: 2,
+              width: Get.size.width * 0.8,
+              child: VoteDrawer(
+                histories: controller.state.voteHistories,
+              ),
+            ),
             backgroundColor: MyColors.scaffoldBackgroundColor,
             body: Container(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -57,9 +96,11 @@ class VoteResultScreen extends StatelessWidget {
                   DefaultTabController(
                     length: 3,
                     child: TabBar(
+                      controller: tabController,
                       labelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
                       indicatorSize: TabBarIndicatorSize.tab,
                       indicatorColor: Colors.white,
+                      dividerColor: Colors.white.withOpacity(0.5),
                       labelColor: Colors.white,
                       unselectedLabelColor: Colors.white.withOpacity(0.5),
                       tabs: [
@@ -75,7 +116,7 @@ class VoteResultScreen extends StatelessWidget {
                   controller.state.isLoading.value
                       ? CircularProgressIndicator()
                       : PlayerList(
-                          leaderboard: controller.state.onlineVoteResults,
+                          leaderboard: _leaderboard(),
                         ),
                   const SizedBox(height: 8),
                   const Divider(color: Color(0xff323232)),
@@ -113,7 +154,9 @@ class VoteResultScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _voteScaffoldKey.currentState!.openEndDrawer();
+                    },
                     child: Text(
                       'Өгсөн саналаа харах',
                       style: TextStyle(
@@ -123,13 +166,6 @@ class VoteResultScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // TabBarView(
-                  //   children: [
-                  //     Icon(Icons.flight, size: 350),
-                  //     Icon(Icons.directions_transit, size: 350),
-                  //     Icon(Icons.directions_car, size: 350),
-                  //   ],
-                  // ),
                 ],
               ),
             ),
@@ -137,5 +173,19 @@ class VoteResultScreen extends StatelessWidget {
         });
       },
     );
+  }
+
+  void _listenToTabChanges() {
+    if (_previousTabIndex != tabController.index) {
+      _previousTabIndex = tabController.index;
+      setState(() {});
+    }
+  }
+
+  @override
+  void dispose() {
+    tabController.removeListener(_listenToTabChanges);
+    tabController.dispose();
+    super.dispose();
   }
 }

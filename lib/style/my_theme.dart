@@ -9,8 +9,8 @@ class MyTheme {
 
   MyTheme._internal();
 
-  static MyTheme get instance => _instance;
   static String fontFamily = 'GIP';
+  static MyTheme get instance => _instance;
 
   /// Апп-ын үндсэн загвар.
   ThemeData get themeData => ThemeData(

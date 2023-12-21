@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +17,8 @@ class HomeScreen extends GetWidget<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    log('setgel : ${Get.arguments}');
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -73,7 +77,7 @@ class HomeScreen extends GetWidget<HomeController> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.sta,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SelectItem(
                             positionName: 'C',

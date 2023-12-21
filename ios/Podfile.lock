@@ -10,6 +10,9 @@ PODS:
   - flutter_udid (0.0.1):
     - Flutter
     - SAMKeychain
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - integration_test (0.0.1):
     - Flutter
   - OneSignalXCFramework (3.12.3):
@@ -29,6 +32,9 @@ PODS:
   - SAMKeychain (1.5.3)
   - smart_auth (0.0.1):
     - Flutter
+  - sqflite (0.0.3):
+    - Flutter
+    - FMDB (>= 2.7.5)
 
 DEPENDENCIES:
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
@@ -40,9 +46,11 @@ DEPENDENCIES:
   - OneSignalXCFramework (< 4.0, >= 3.0)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - smart_auth (from `.symlinks/plugins/smart_auth/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
   trunk:
+    - FMDB
     - OneSignalXCFramework
     - ReachabilitySwift
     - SAMKeychain
@@ -64,6 +72,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   smart_auth:
     :path: ".symlinks/plugins/smart_auth/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
 
 SPEC CHECKSUMS:
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
@@ -71,12 +81,14 @@ SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_udid: 0848809dbed4c055175747ae6a45a8b4f6771e1c
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   integration_test: 13825b8a9334a850581300559b8839134b124670
   OneSignalXCFramework: 75844c29607ca95e6176f6f21257b4382c7fdbfb
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
+  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
 
 PODFILE CHECKSUM: 7ab580bbf47a7dfa80683cbc813f8f6efb5e8c55
 

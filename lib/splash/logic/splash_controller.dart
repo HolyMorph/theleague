@@ -107,6 +107,8 @@ class SplashController extends GetxController {
       'phoneModel': phoneModel ?? (osType == 'ios' ? 'iphone' : 'android'),
     };
 
+    log('body : $body');
+
     dynamic response = await ApiClient.sendRequest(
       '/auth/request-token',
       method: Method.post,
