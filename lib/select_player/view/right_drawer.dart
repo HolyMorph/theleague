@@ -27,17 +27,14 @@ class RightDrawer extends GetView<SelectPlayerController> {
           const SizedBox(height: 16),
           Divider(color: Colors.white.withOpacity(0.1), thickness: 1, height: 1),
           const SizedBox(height: 16),
-          ListView.builder(
+          ListView.separated(
             shrinkWrap: true,
             itemCount: controller.state.selectedPlayers.length,
             itemBuilder: (_, index) {
-              return DrawerItem(
-                playerId: controller.state.selectedPlayers[index]['playerId'],
-                teamColor: controller.state.selectedPlayers[index]['playerId'],
-                playerName: 'Сэтгэл Жигмээ',
-                playerTeam: 'IHC Apes',
-                playerNumber: '22',
-              );
+              return DrawerItem(player: controller.state.selectedPlayers[index]);
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(height: 8);
             },
           ),
           const SizedBox(height: 16),

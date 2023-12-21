@@ -1,19 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DrawerItem extends StatelessWidget {
-  final String playerId;
-  final String playerName;
-  final String playerNumber;
-  final String playerTeam;
-  final Color teamColor;
-  const DrawerItem({
-    required this.playerId,
-    required this.teamColor,
-    required this.playerName,
-    required this.playerTeam,
-    required this.playerNumber,
-    super.key,
-  });
+  final Map<String, dynamic> player;
+  const DrawerItem({required this.player, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +10,7 @@ class DrawerItem extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: Color(0xFF272739)),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             height: 40,
@@ -28,27 +18,28 @@ class DrawerItem extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(width: 1, color: teamColor),
+              border: Border.all(width: 1, color: Color(int.parse('0xFF${player['teamColor']}'))),
               image: DecorationImage(image: AssetImage('assets/images/ic_player.png'), fit: BoxFit.fitHeight),
               boxShadow: [
                 BoxShadow(
                   offset: Offset(0, 1),
                   blurRadius: 8,
-                  color: teamColor.withOpacity(0.5),
+                  color: Color(int.parse('0xFF${player['teamColor']}')).withOpacity(0.5),
                 ),
               ],
             ),
           ),
           const SizedBox(width: 10),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                playerName,
+                player['playerFirstName'],
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
               ),
               const SizedBox(height: 4),
               Text(
-                '${playerNumber} - ${playerTeam}',
+                '${player['playerNumber']} - IHC Apes',
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
               ),
             ],
