@@ -70,13 +70,11 @@ class SplashController extends GetxController {
 
       for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
         if (teams[index]['code'] == players[playerIndex]['teamCode']) {
-          log('setgel : ${metaData[index]} , ${players[playerIndex]}');
-
           metaData[index]['players'].add(players[playerIndex]);
         }
       }
     }
-    log('metaData : $metaData');
+
     LocalStorage.saveData(Constants.TEAMS, metaData);
     await Future.delayed(const Duration(seconds: 2));
     Get.toNamed(MyRoutes.voteResult);

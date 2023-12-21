@@ -93,7 +93,6 @@ class VoteResultController extends GetxController {
 
       log('getVotesHistory response : $response');
     }
-    log('setgel : ${state.voteHistories}');
   }
 
   Future<void> getVoteResult() async {
@@ -105,6 +104,7 @@ class VoteResultController extends GetxController {
     log('getVoteResult response : $response');
     if (MezornClientHelper.isValidResponse(response)) {
       List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
+      List<dynamic> teams = await LocalStorage.getData(Constants.META_DATA)['teams'];
       log('players : $players');
       List<dynamic> online = response.data['result']['votes']['online'];
       List<dynamic> arena = response.data['result']['votes']['arena'];
@@ -116,7 +116,15 @@ class VoteResultController extends GetxController {
           if (online[index]['value'] == players[playerIndex]['_id']) {
             log('online');
             players[playerIndex]..['score'] = online[index]['score'];
-            state.onlineVoteResults.add(players[playerIndex]);
+            for (var teamIndex = 0; teamIndex < teams.length; teamIndex++) {
+              if (teams[teamIndex]['code'] == players[playerIndex]['teamCode']) {
+                if (teams[teamIndex]['gender'] == 'male') {
+                  state.onlineVoteResultsMale.add(players[playerIndex]);
+                } else {
+                  state.onlineVoteResultsFemale.add(players[playerIndex]);
+                }
+              }
+            }
           }
         }
       }
@@ -127,7 +135,15 @@ class VoteResultController extends GetxController {
           if (arena[index]['value'] == players[playerIndex]['_id']) {
             log('arena');
             players[playerIndex]..['score'] = arena[index]['score'];
-            state.arenaVoteResults.add(players[playerIndex]);
+            for (var teamIndex = 0; teamIndex < teams.length; teamIndex++) {
+              if (teams[teamIndex]['code'] == players[playerIndex]['teamCode']) {
+                if (teams[teamIndex]['gender'] == 'male') {
+                  state.arenaVoteResultsMale.add(players[playerIndex]);
+                } else {
+                  state.arenaVoteResultsFemale.add(players[playerIndex]);
+                }
+              }
+            }
           }
         }
       }
@@ -138,7 +154,15 @@ class VoteResultController extends GetxController {
           if (coach[index]['value'] == players[playerIndex]['_id']) {
             log('coach');
             players[playerIndex]..['score'] = coach[index]['score'];
-            state.arenaVoteResults.add(players[playerIndex]);
+            for (var teamIndex = 0; teamIndex < teams.length; teamIndex++) {
+              if (teams[teamIndex]['code'] == players[playerIndex]['teamCode']) {
+                if (teams[teamIndex]['gender'] == 'male') {
+                  state.coachVoteResultsMale.add(players[playerIndex]);
+                } else {
+                  state.coachVoteResultsFemale.add(players[playerIndex]);
+                }
+              }
+            }
           }
         }
       }

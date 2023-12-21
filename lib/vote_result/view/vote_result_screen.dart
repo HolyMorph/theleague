@@ -40,13 +40,13 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
           List<dynamic> _leaderboard() {
             switch (tabController.index) {
               case 0:
-                return controller.state.onlineVoteResults;
+                return controller.state.isMale.value ? controller.state.onlineVoteResultsMale : controller.state.onlineVoteResultsFemale;
               case 1:
-                return controller.state.arenaVoteResults;
+                return controller.state.isMale.value ? controller.state.arenaVoteResultsMale : controller.state.arenaVoteResultsFemale;
               case 2:
-                return controller.state.coachVoteResults;
+                return controller.state.isMale.value ? controller.state.coachVoteResultsMale : controller.state.coachVoteResultsFemale;
               default:
-                return controller.state.onlineVoteResults;
+                return controller.state.onlineVoteResultsMale;
             }
           }
 
@@ -92,7 +92,64 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 16),
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(width: 1, color: Color(0xff323232)),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: InkWell(
+                            onTap: () {
+                              controller.state.isMale.value = true;
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              color: controller.state.isMale.value ? Color(0xff272739) : null,
+                              child: Center(
+                                child: Text(
+                                  'Эрэгтэй Дээд Лиг',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'GIP',
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: InkWell(
+                            onTap: () {
+                              controller.state.isMale.value = false;
+                            },
+                            child: Container(
+                              color: controller.state.isMale.value ? null : Color(0xff272739),
+                              padding: const EdgeInsets.all(10),
+                              child: Center(
+                                child: Text(
+                                  'Эрэгтэй Дээд Лиг',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'GIP',
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   DefaultTabController(
                     length: 3,
                     child: TabBar(
