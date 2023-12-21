@@ -35,6 +35,10 @@
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+    	<string>Та байршлаа идэвхжүүлснээр бид таныг UG Arena-д байгаа эсэхийг шалган, таны саналыг хүлээн авах боломжтой болно. </string>
+    	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    	<string>Та байршлаа идэвхжүүлснээр бид таныг UG Arena-д байгаа эсэхийг шалган, таны саналыг хүлээн авах боломжтой болно.</string>
 		<key>UIStatusBarHidden</key>
 		<true/>
 		<key>UISupportedInterfaceOrientations</key>

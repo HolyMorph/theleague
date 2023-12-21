@@ -129,6 +129,7 @@ class PlayerItem extends GetView<HomeController> {
             children: [
               CachedNetworkImage(
                 imageUrl: player['avatarUrl'],
+                alignment: Alignment.center,
                 imageBuilder: (context, imageProvider) => Container(
                   height: 100,
                   width: 100,

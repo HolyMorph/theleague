@@ -19,16 +19,20 @@ class SelectPlayerScreen extends GetView<HomeController> {
 
   @override
   StatelessElement createElement() {
-    controller.state.teams.clear();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      List<dynamic> allTeam = LocalStorage.getData(Constants.TEAMS);
-      allTeam.forEach((element) {
-        if (element['gender'] == controller.state.gender.value) controller.state.teams.add(element);
-      });
+      controller.state.playerLoading.value = true;
+      await Future.delayed(const Duration(milliseconds: 500)).then((value) {
+        controller.state.teams.clear();
+        List<dynamic> allTeam = LocalStorage.getData(Constants.TEAMS);
+        allTeam.forEach((element) {
+          if (element['gender'] == controller.state.gender.value) controller.state.teams.add(element);
+        });
 
-      controller.selectedTeamCode = controller.state.teams.first['code'];
-      controller.setPlayersPosition();
-      controller.calculateTotalQty();
+        controller.selectedTeamCode = controller.state.teams.first['code'];
+        controller.setPlayersPosition();
+        controller.calculateTotalQty();
+      });
+      controller.state.playerLoading.value = false;
     });
 
     return super.createElement();
@@ -62,89 +66,93 @@ class SelectPlayerScreen extends GetView<HomeController> {
           child: Container(color: Colors.white.withOpacity(0.1), height: 1.0),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: double.infinity,
-                  width: 90,
-                  color: Color(0xFF272739),
-                  child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shrinkWrap: true,
-                    itemCount: controller.state.teams.length,
-                    itemBuilder: (_, index) {
-                      return TeamItem(
-                        onTap: (teamCode) {
-                          controller.setPlayersPosition();
-                        },
-                        iconUrl: controller.state.teams[index]['logoUrl'],
-                        teamCode: controller.state.teams[index]['code'],
-                        teamColor: controller.state.teams[index]['colorCode'],
-                        selectedPlayer: controller.getTeamPlayersQty(teamCode: controller.state.teams[index]['code']),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(height: 16);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: ColoredBox(
-                    color: MyColors.primaryColor,
-                    child: ObxValue(
-                      (_) => controller.state.teamPlayers.isNotEmpty
-                          ? GridView.builder(
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 8.0,
-                                crossAxisSpacing: 16.0,
-                                childAspectRatio: 3 / 5,
-                              ),
-                              padding: EdgeInsets.all(16),
-                              itemCount: controller.state.teamPlayers.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return PlayerItem(
-                                  player: controller.state.teamPlayers[index],
-                                  isSelected: isSelected(playerId: controller.state.teamPlayers[index]['_id']),
-                                  teamColor: controller.state.teams
-                                      .firstWhere((element) => element['code'] == controller.state.selectedTeamCode.value)['colorCode'],
-                                  onTap: (player) => addRemoveFunction(player: player),
-                                );
-                              },
-                            )
-                          : EmptyWidget(),
-                      controller.state.teamPlayers,
+      body: Obx(
+        () => controller.state.playerLoading.value
+            ? Center(child: CircularProgressIndicator(color: MyColors.secondaryColor))
+            : Column(
+                children: [
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: double.infinity,
+                          width: 90,
+                          color: Color(0xFF272739),
+                          child: ListView.separated(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shrinkWrap: true,
+                            itemCount: controller.state.teams.length,
+                            itemBuilder: (_, index) {
+                              return TeamItem(
+                                onTap: (teamCode) {
+                                  controller.setPlayersPosition();
+                                },
+                                iconUrl: controller.state.teams[index]['logoUrl'],
+                                teamCode: controller.state.teams[index]['code'],
+                                teamColor: controller.state.teams[index]['colorCode'],
+                                selectedPlayer: controller.getTeamPlayersQty(teamCode: controller.state.teams[index]['code']),
+                              );
+                            },
+                            separatorBuilder: (BuildContext context, int index) {
+                              return const SizedBox(height: 16);
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: ColoredBox(
+                            color: MyColors.primaryColor,
+                            child: ObxValue(
+                              (_) => controller.state.teamPlayers.isNotEmpty
+                                  ? GridView.builder(
+                                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        mainAxisSpacing: 8.0,
+                                        crossAxisSpacing: 16.0,
+                                        childAspectRatio: 3 / 5,
+                                      ),
+                                      padding: EdgeInsets.all(16),
+                                      itemCount: controller.state.teamPlayers.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, index) {
+                                        return PlayerItem(
+                                          player: controller.state.teamPlayers[index],
+                                          isSelected: isSelected(playerId: controller.state.teamPlayers[index]['_id']),
+                                          teamColor: controller.state.teams
+                                              .firstWhere((element) => element['code'] == controller.state.selectedTeamCode.value)['colorCode'],
+                                          onTap: (player) => addRemoveFunction(player: player),
+                                        );
+                                      },
+                                    )
+                                  : EmptyWidget(),
+                              controller.state.teamPlayers,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: <Color>[Color(0xFF4C1C1A), Color(0xFF272739)],
-                tileMode: TileMode.mirror,
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: <Color>[Color(0xFF4C1C1A), Color(0xFF272739)],
+                        tileMode: TileMode.mirror,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: Text('Сонголтоо харах'),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
-              onPressed: () {
-                Get.back();
-              },
-              child: Text('Сонголтоо харах'),
-            ),
-          ),
-        ],
       ),
     );
   }

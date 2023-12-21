@@ -6,6 +6,7 @@ class Constants {
   static String TEAMS = 'teams';
   static String TIMESTAMP = 'timestamp';
   static String TOKEN = 'token';
+  static String TicketCode = 'ticketCode';
 
   ///Хөгжүүлэлтийн орчны URL ашиглах эсэх
   ///

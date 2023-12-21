@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../alert/alert_helper.dart';
+import '../../alert/flash_status.dart';
 import '../../components/app_back_button.dart';
+import '../../route/my_routes.dart';
+import '../../storage/local_storage.dart';
 import '../../style/my_colors.dart';
+import '../../utils/constants.dart';
 import '../logic/verify_ticket_controller.dart';
 
-class VerifyTicketScreen extends GetWidget<VerifyTicketController> {
+class VerifyTicketScreen extends GetView<VerifyTicketController> {
   VerifyTicketScreen({super.key});
 
   ///It is used in 2 different places at the same time.
@@ -16,6 +21,13 @@ class VerifyTicketScreen extends GetWidget<VerifyTicketController> {
     textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
     decoration: BoxDecoration(color: Color(0xFF2D2E40), borderRadius: BorderRadius.circular(10)),
   );
+
+  @override
+  StatelessElement createElement() {
+    controller.getCurrentPosition();
+
+    return super.createElement();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +75,16 @@ class VerifyTicketScreen extends GetWidget<VerifyTicketController> {
                     length: 4,
                     defaultPinTheme: defaultPinTheme,
                     onChanged: (input) => controller.ticketCode = input,
-                    onCompleted: (input) => controller.isLoading = true,
+                    onCompleted: (input) => controller.state.valid.value
+                        ? () {
+                            Get.toNamed(MyRoutes.selectLeague);
+                            LocalStorage.saveData(Constants.TicketCode, controller.state.ticketCode.value);
+                          }
+                        : () => AlertHelper.showFlashAlert(
+                              title: 'Алдаа гарлаа',
+                              message: 'Байршил тогтоогчийн зөвшөөрөл өгснөөр үргэлжлүүлэх боломжтой',
+                              status: FlashStatus.failed,
+                            ),
                     focusedPinTheme: defaultPinTheme.copyWith(
                       decoration: defaultPinTheme.decoration?.copyWith(
                         border: Border.all(width: 1, color: MyColors.secondaryColor),
@@ -81,17 +102,19 @@ class VerifyTicketScreen extends GetWidget<VerifyTicketController> {
                   Obx(
                     () => ElevatedButton(
                       style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
-                      onPressed: controller.state.ticketCode.value.length < 4 ? null : () {},
-                      child: controller.state.isLoading.value
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 3,
-                              ),
-                            )
-                          : Text('Үргэлжлүүлэх'),
+                      onPressed: controller.state.ticketCode.value.length < 4
+                          ? null
+                          : controller.state.valid.value
+                              ? () {
+                                  Get.toNamed(MyRoutes.selectLeague);
+                                  LocalStorage.saveData(Constants.TicketCode, controller.state.ticketCode.value);
+                                }
+                              : () => AlertHelper.showFlashAlert(
+                                    title: 'Алдаа гарлаа',
+                                    message: 'Байршил тогтоогчийн зөвшөөрөл өгснөөр үргэлжлүүлэх боломжтой',
+                                    status: FlashStatus.failed,
+                                  ),
+                      child: Text('Үргэлжлүүлэх'),
                     ),
                   ),
                 ],
