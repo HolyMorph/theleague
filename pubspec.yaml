@@ -24,6 +24,7 @@ dependencies:
   pinput: ^3.0.1
   flutter_udid: ^2.0.1
   device_info_plus: ^9.1.1
+  cached_network_image: ^3.3.0
 
 
 dev_dependencies:
@@ -56,16 +57,26 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/font/
 
   fonts:
-     - family: GIP
-       fonts:
-         - asset: assets/font/GIP-Regular.otf
-           weight: 400
-         - asset: assets/font/GIP-Bold.otf
-           weight: 700
-         - asset: assets/font/GIP-Light.otf
-           weight: 300
+    - family: Font_Awesome_6_Pro
+      fonts:
+        - asset: assets/font/Font Awesome 6 Pro-Light-300.otf
+          weight: 300
+
+        - asset: assets/font/Font Awesome 6 Pro-Regular-400.otf
+          weight: 400
+
+        - asset: assets/font/Font Awesome 6 Pro-Solid-900.otf
+          weight: 900
+
+    - family: GIP
+      fonts:
+        - asset: assets/font/GIP-Regular.otf
+          weight: 400
+        - asset: assets/font/GIP-Bold.otf
+          weight: 700
+        - asset: assets/font/GIP-Light.otf
+          weight: 300
 
 

@@ -85,6 +85,26 @@ class MyButtonStyles {
     highlightColor: Get.theme.highlightColor,
   );
 
+  /// Elevated button style
+  static ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
+    backgroundColor: MyColors.primaryColor,
+    foregroundColor: Colors.white,
+    disabledBackgroundColor: MyColors.buttonDisabledColor,
+    disabledForegroundColor: Colors.white,
+    elevation: 1,
+    shadowColor: const Color(0x1EFF9900),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+    minimumSize: const Size(double.infinity, 44),
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    textStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      color: Colors.white,
+    ),
+  );
+
   /// [OutlinedButton] товчлуурын үндсэн загвар.
   static ButtonStyle outlinedButtonStyle = OutlinedButton.styleFrom(
     backgroundColor: MyColors.buttonColor,

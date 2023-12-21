@@ -82,7 +82,16 @@ class VerifyTicketScreen extends GetWidget<VerifyTicketController> {
                     () => ElevatedButton(
                       style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
                       onPressed: controller.state.ticketCode.value.length < 4 ? null : () {},
-                      child: controller.state.isLoading.value ? CircularProgressIndicator(color: Colors.white) : Text('Үргэлжлүүлэх'),
+                      child: controller.state.isLoading.value
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 3,
+                              ),
+                            )
+                          : Text('Үргэлжлүүлэх'),
                     ),
                   ),
                 ],

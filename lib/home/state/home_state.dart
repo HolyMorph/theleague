@@ -1,7 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class HomeState {
-  final PageController pageController = PageController();
-  RxInt currentPage = RxInt(0);
+  final RxMap<String, RxList<Map<String, dynamic>>> selectedPlayers = RxMap({
+    'F': RxList(),
+    'G': RxList(),
+    'PG': RxList(),
+    'C': RxList(),
+  });
+  final RxString selectedTeamCode = RxString('');
+  final RxList<dynamic> teamPlayers = RxList();
+  final RxInt totalQty = RxInt(0);
+  List<dynamic> teams = [];
+  String title = '';
 }
