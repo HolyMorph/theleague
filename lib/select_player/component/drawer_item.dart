@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../home/logic/home_controller.dart';
+import '../../route/my_routes.dart';
+import '../../storage/local_storage.dart';
+import '../../utils/constants.dart';
 
 class DrawerItem extends GetView<HomeController> {
   final List<Map<String, dynamic>> players;
@@ -87,10 +90,52 @@ class DrawerItem extends GetView<HomeController> {
                         );
                         controller.state.selectedPlayers.refresh();
                         controller.calculateTotalQty();
+                        LocalStorage.saveData(
+                          controller.state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale,
+                          controller.state.selectedPlayers,
+                        );
                       },
                       icon: Icon(Icons.close, color: Colors.white),
                     ),
                   ],
+                ),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(height: 8);
+            },
+          ),
+          SizedBox(height: players.length > 0 ? 8 : 0),
+          ListView.separated(
+            itemCount: players.length < 3 ? 1 : 0,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              return Material(
+                color: Color(0xFF272739),
+                borderRadius: BorderRadius.circular(5),
+                child: InkWell(
+                  onTap: () => Get.until((route) => Get.currentRoute == MyRoutes.homeScreen),
+                  borderRadius: BorderRadius.circular(5),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.transparent,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.add_circle_outline_rounded, color: Colors.white),
+                        const SizedBox(width: 10),
+                        Text(
+                          'Тоглогч сонгох',
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               );
             },

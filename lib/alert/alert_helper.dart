@@ -2,7 +2,6 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../style/my_colors.dart';
 import 'base_alert_body.dart';
 import 'base_snack_bar_body.dart';
 import 'flash_status.dart';

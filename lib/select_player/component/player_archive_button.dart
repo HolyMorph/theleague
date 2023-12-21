@@ -27,7 +27,7 @@ class PlayerArchiveButton extends GetView<HomeController> {
           ),
         ),
         ObxValue(
-          (_) => controller.state.totalQty < 0
+          (_) => controller.state.totalQty <= 0
               ? const SizedBox()
               : Positioned(
                   top: 5,

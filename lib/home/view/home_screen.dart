@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,8 +15,6 @@ class HomeScreen extends GetWidget<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    log('setgel : ${Get.arguments}');
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -77,7 +73,6 @@ class HomeScreen extends GetWidget<HomeController> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SelectItem(
                             positionName: 'C',
@@ -135,16 +130,20 @@ class HomeScreen extends GetWidget<HomeController> {
               ),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
-              onPressed: () {
-                AlertHelper.showFlashAlert(
-                  title: 'Уучлаарай',
-                  message: 'Тоглогчоо сонгоно уу !!!',
-                  status: FlashStatus.failed,
-                );
-              },
-              child: Text('Саналаа өгөх'),
+            child: Obx(
+              () => ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
+                onPressed: controller.state.totalQty.value > 0
+                    ? () {
+                        AlertHelper.showFlashAlert(
+                          title: 'Уучлаарай',
+                          message: 'Тоглогчоо сонгоно уу !!!',
+                          status: FlashStatus.failed,
+                        );
+                      }
+                    : null,
+                child: Text('Саналаа өгөх'),
+              ),
             ),
           ),
         ],
