@@ -25,7 +25,7 @@ class _CustomLinearProgressIndicatorState extends State<MyProgressIndicator> wit
       backgroundColor: Colors.white,
       minHeight: 10,
       value: null,
-      valueColor: AlwaysStoppedAnimation<Color>(MyColors.primaryColor),
+      valueColor: AlwaysStoppedAnimation<Color>(MyColors.secondaryColor),
     );
   }
 

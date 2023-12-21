@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:mezorn_api_caller/api/mezorn_client.dart';
 import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
 
@@ -20,6 +21,79 @@ class VoteResultController extends GetxController {
     );
 
     log('checkVote response : $response');
+  }
+
+  Future<void> getVoteHistory() async {
+    List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
+
+    dynamic response = await ApiClient.sendRequest(
+      '/api/me/vote-history',
+      method: Method.get,
+    );
+
+    if (MezornClientHelper.isValidResponse(response)) {
+      List<dynamic> histories = response.data['result']['docs'];
+      for (var index = 0; index < histories.length; index++) {
+        dynamic result = {
+          "_id": "",
+          "vote": {"PG": [], "F": [], "G": [], "C": []},
+          "createdAt": "",
+        };
+        List<dynamic> pointguard = response.data['result']['docs'][index]['vote']['PG'];
+        List<dynamic> forward = response.data['result']['docs'][index]['vote']['F'];
+        List<dynamic> guard = response.data['result']['docs'][index]['vote']['G'];
+        List<dynamic> center = response.data['result']['docs'][index]['vote']['C'];
+
+        result['_id'] = histories[index]['_id'];
+        DateTime dateTime = DateTime.parse(histories[index]['createdAt']);
+        String formattedDate = DateFormat("M сарын d, HH:mm").format(dateTime);
+        result['createdAt'] = formattedDate;
+
+        /// point guard
+        if (pointguard.isNotEmpty)
+          for (var pgIndex = 0; pgIndex < pointguard.length; pgIndex++) {
+            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+              if (players[playerIndex]['_id'] == pointguard[pgIndex]) {
+                result['vote']['PG'].add(players[playerIndex]);
+              }
+            }
+          }
+
+        /// forward
+        if (forward.isNotEmpty)
+          for (var fIndex = 0; fIndex < forward.length; fIndex++) {
+            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+              if (players[playerIndex]['_id'] == forward[fIndex]) {
+                result['vote']['F'].add(players[playerIndex]);
+              }
+            }
+          }
+
+        /// guard
+        if (guard.isNotEmpty)
+          for (var gIndex = 0; gIndex < guard.length; gIndex++) {
+            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+              if (players[playerIndex]['_id'] == guard[gIndex]) {
+                result['vote']['G'].add(players[playerIndex]);
+              }
+            }
+          }
+
+        /// center
+        if (center.isNotEmpty)
+          for (var cIndex = 0; cIndex < center.length; cIndex++) {
+            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+              if (players[playerIndex]['_id'] == center[cIndex]) {
+                result['vote']['C'].add(players[playerIndex]);
+              }
+            }
+          }
+        state.voteHistories.add(result);
+      }
+
+      log('getVotesHistory response : $response');
+    }
+    log('setgel : ${state.voteHistories}');
   }
 
   Future<void> getVoteResult() async {
@@ -75,6 +149,7 @@ class VoteResultController extends GetxController {
 
   @override
   void onInit() {
+    getVoteHistory();
     getVoteResult();
     super.onInit();
   }

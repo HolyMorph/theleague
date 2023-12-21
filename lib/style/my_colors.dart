@@ -17,7 +17,7 @@ class MyColors {
   static const Color buttonDisabledColor = Color(0xffFF8D62);
 
   /// [Material] сангын [MaterialType.canvas]-ийн өнгө.
-  static const Color? canvasColor = Color(0xff191D31);
+  static const Color? canvasColor = Color(0xff272739);
 
   /// [Material] сангын [Card]-ны өнгө.
   static const Color cardColor = Color(0xffF3F3F3);
@@ -62,7 +62,7 @@ class MyColors {
   static const Color redColor = Color(0xffF41435);
 
   /// Апп-ын background-д ашиглагдах өнгө.
-  static const Color scaffoldBackgroundColor = Color(0xffF8F9FA);
+  static const Color scaffoldBackgroundColor = Color(0xff161623);
 
   ///Нэмэлт өнгөнүүд. Апп-д ашигладаж байгаагаас тусдаа нэмэлт
   ///өнгө ашиглаж байгаа бол энэ хэсэгт тухайн өнгөө зарлана

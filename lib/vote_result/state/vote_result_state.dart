@@ -6,4 +6,5 @@ class VoteResultState {
   RxString gender = 'male'.obs;
   RxBool isLoading = true.obs;
   RxList<dynamic> onlineVoteResults = RxList([]);
+  RxList<dynamic> voteHistories = RxList([]);
 }
