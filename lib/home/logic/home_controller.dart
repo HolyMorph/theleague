@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api_caller.dart';
 import '../../alert/alert_helper.dart';
 import '../../alert/flash_status.dart';
+import '../../route/my_routes.dart';
 import '../../service/api_client.dart';
 import '../../storage/local_storage.dart';
 import '../../utils/constants.dart';
@@ -11,6 +14,7 @@ class HomeController extends GetxController {
   final state = HomeState();
 
   void set gender(String gender) => state.gender.value = gender;
+  void set isLoading(bool loading) => state.isLoading.value = loading;
   void set selectedTeamCode(String code) => state.selectedTeamCode.value = code;
   void set title(String title) => state.title = title;
   void set totalQty(int qty) => state.totalQty.value = qty;
@@ -85,15 +89,24 @@ class HomeController extends GetxController {
   void onInit() {
     gender = Get.parameters['gender']!;
     state.selectedPlayers.value = LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) ??
-        RxMap({
-          'F': RxList(),
-          'G': RxList(),
-          'PG': RxList(),
-          'C': RxList(),
-        });
+        {
+          'F': RxList<Map<String, dynamic>>(),
+          'G': RxList<Map<String, dynamic>>(),
+          'PG': RxList<Map<String, dynamic>>(),
+          'C': RxList<Map<String, dynamic>>(),
+        };
 
     super.onInit();
   }
+
+  // void prepareList() {
+  //   state.selectedPlayers.forEach((key, value) {
+  //     for (Map<String,dynamic> player in value) {
+  //       state.preparedList[key];
+  //     }
+  //   });
+  //   log('prepare: ${state.preparedList}');
+  // }
 
   void setPlayersPosition() {
     state.teamPlayers.clear();
@@ -115,18 +128,26 @@ class HomeController extends GetxController {
   Future<void> voteArena() async {
     var body = {
       'gender': state.gender.value,
-      'game_code': '',
-      'lat': '',
-      'lon': '',
+      'game_code': LocalStorage.getData(Constants.TicketCode),
+      'lat': LocalStorage.getData('lat'),
+      'lon': LocalStorage.getData('lon'),
       'vote': state.selectedPlayers,
     };
+    isLoading = true;
     dynamic response = await ApiClient.sendRequest(
       '/api/me/vote-arena',
       method: Method.post,
       body: body,
     );
+    isLoading = false;
     if (MezornClientHelper.isValidResponse(response)) {
-      var _responseJson = response.data['data']['result'];
+      AlertHelper.showDialog(
+        message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.',
+        onTap: () {
+          Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
+        },
+      );
+      LocalStorage.clear();
     } else {
       var message = response.data['error']['message'] as String;
 
@@ -143,13 +164,21 @@ class HomeController extends GetxController {
       'gender': state.gender.value,
       'vote': state.selectedPlayers,
     };
+    isLoading = true;
     dynamic response = await ApiClient.sendRequest(
       '/api/me/vote-online',
       method: Method.post,
       body: body,
     );
+    isLoading = false;
     if (MezornClientHelper.isValidResponse(response)) {
-      var _responseJson = response.data['data']['result'];
+      AlertHelper.showDialog(
+        message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.',
+        onTap: () {
+          Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
+        },
+      );
+      LocalStorage.clear();
     } else {
       var message = response.data['error']['message'] as String;
 

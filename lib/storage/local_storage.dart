@@ -5,6 +5,10 @@ import 'package:get_storage/get_storage.dart';
 class LocalStorage {
   static late GetStorage localStorage;
 
+  static Future<void> clear() async {
+    return localStorage.erase();
+  }
+
   ///Хадгалсан өгөгдөл авах функц
   ///
   /// [key] -> Хадгалсан өгөгдлийн түлхүүр үг.

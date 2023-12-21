@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import '../../alert/alert_helper.dart';
 import '../../alert/flash_status.dart';
+import '../../storage/local_storage.dart';
 import '../state/verify_ticket_state.dart';
 
 class VerifyTicketController extends GetxController {
@@ -18,6 +19,8 @@ class VerifyTicketController extends GetxController {
       desiredAccuracy: LocationAccuracy.high,
     ).then((Position position) {
       state.currentLocation = position;
+      LocalStorage.saveData('lat', position.latitude);
+      LocalStorage.saveData('lon', position.longitude);
     }).catchError((e) {
       debugPrint(e);
     });
