@@ -1,26 +1,40 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../home/logic/home_controller.dart';
 import '../../style/my_colors.dart';
-import '../logic/select_player_controller.dart';
 
-class PlayerItem extends GetView<SelectPlayerController> {
+class PlayerItem extends GetView<HomeController> {
+  final bool isSelected;
   final Function(Map<String, dynamic>) onTap;
   final Map<String, dynamic> player;
-  final RxString selectedCode = RxString('');
-  PlayerItem({required this.player, required this.onTap, super.key});
+  final RxBool selected = RxBool(false);
+  final String teamColor;
+
+  PlayerItem({required this.player, required this.onTap, required this.teamColor, this.isSelected = false, super.key});
+
+  @override
+  StatelessElement createElement() {
+    selected.value = isSelected;
+
+    return super.createElement();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        selectedCode.value = controller.state.selectedPlayers.length < 3
-            ? selectedCode.value == player['playerId']
-                ? ''
-                : player['playerId']
-            : '';
+        selected.value = controller.state.selectedPlayers['${controller.state.title}']!.length < 3
+            ? selected.value
+                ? false
+                : true
+            : false;
+
         onTap(player);
       },
       child: Stack(
+        alignment: Alignment.topCenter,
         children: [
           ObxValue(
             (_) => Column(
@@ -30,12 +44,11 @@ class PlayerItem extends GetView<SelectPlayerController> {
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    border:
-                        selectedCode.value == player['playerId'] ? Border.all(width: 1, color: Color(int.parse('0xFF${player['teamColor']}'))) : null,
+                    border: selected.value ? Border.all(width: 2, color: Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}'))) : null,
                     color: Color(0xFF3B3C4E),
                     boxShadow: [
-                      selectedCode.value == player['playerId']
-                          ? BoxShadow(offset: Offset(0, 1), blurRadius: 8, color: Color(int.parse('0xFF${player['teamColor']}')))
+                      selected.value
+                          ? BoxShadow(offset: Offset(0, 1), blurRadius: 8, color: Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}')))
                           : BoxShadow(),
                     ],
                   ),
@@ -45,18 +58,19 @@ class PlayerItem extends GetView<SelectPlayerController> {
                     children: [
                       Container(
                         width: double.infinity,
-                        height: 66,
+                        height: 64,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
                           gradient: RadialGradient(
                             focal: Alignment.bottomCenter,
                             radius: 1.35,
-                            colors: [Color(int.parse('0xFF${player['teamColor']}')), MyColors.primaryColor],
+                            colors: [Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}')), MyColors.primaryColor],
                           ),
                         ),
                         padding: const EdgeInsets.all(8),
                         child: Text(
-                          player['playerNumber'],
+                          player['jerseyNumber'],
+                          textAlign: TextAlign.start,
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
                         ),
                       ),
@@ -65,20 +79,21 @@ class PlayerItem extends GetView<SelectPlayerController> {
                         child: Column(
                           children: [
                             Text(
-                              player['playerFirstName'],
+                              player['firstName'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
                             ),
                             Text(
-                              player['playerLastName'],
+                              player['lastName'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              player['playerPosition'],
+                              controller.getPositionName(position: player['positionCodes'][0]),
+                              // getPositionList(list: player['positionCodes']),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -94,11 +109,11 @@ class PlayerItem extends GetView<SelectPlayerController> {
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
-                          color: selectedCode.value == player['playerId'] ? Color(0xFF4D5163).withOpacity(0.4) : Color(0xFF4D5163),
+                          color: selected.value ? Color(0xFF4D5163).withOpacity(0.4) : Color(0xFF4D5163),
                           borderRadius: BorderRadius.vertical(bottom: Radius.circular(5)),
                         ),
                         child: Text(
-                          selectedCode.value == player['playerId'] ? 'Болих' : 'Сонгох',
+                          selected.value ? 'Болих' : 'Сонгох',
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white),
                         ),
@@ -108,20 +123,38 @@ class PlayerItem extends GetView<SelectPlayerController> {
                 ),
               ],
             ),
-            selectedCode,
+            selected,
           ),
           Column(
             children: [
-              Image.asset('assets/images/ic_player.png'),
-              Divider(
-                height: 1,
-                thickness: 2,
-                color: Color(int.parse('0xFF${player['teamColor']}')),
+              CachedNetworkImage(
+                imageUrl: player['avatarUrl'],
+                imageBuilder: (context, imageProvider) => Container(
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                  ),
+                ),
+                placeholder: (context, url) => Center(
+                  child: CupertinoActivityIndicator(animating: true, radius: 10, color: Colors.white),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.image_outlined, color: Colors.grey, size: 60),
               ),
+              Divider(height: 1, thickness: 2, color: Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}'))),
             ],
           ),
         ],
       ),
     );
+  }
+
+  String getPositionList({required List list}) {
+    String positions = '';
+    for (var position in list) {
+      positions += '${controller.getPositionName(position: position)}';
+    }
+
+    return positions;
   }
 }

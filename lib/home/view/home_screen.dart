@@ -11,7 +11,7 @@ import '../component/select_item.dart';
 import '../logic/home_controller.dart';
 
 class HomeScreen extends GetWidget<HomeController> {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,18 +73,40 @@ class HomeScreen extends GetWidget<HomeController> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.sta,
                         children: [
-                          SelectItem(positionName: 'Төвийн тоглогч', onTap: () {}),
+                          SelectItem(
+                            positionName: 'C',
+                            onTap: () {
+                              controller.title = 'C';
+                              Get.toNamed('${MyRoutes.selectPlayer}');
+                            },
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SelectItem(positionName: 'Довтлогч', onTap: () {}),
-                              SelectItem(positionName: 'Хамгаалагч', onTap: () {}),
+                              SelectItem(
+                                positionName: 'F',
+                                onTap: () {
+                                  controller.title = 'F';
+                                  Get.toNamed('${MyRoutes.selectPlayer}');
+                                },
+                              ),
+                              SelectItem(
+                                positionName: 'G',
+                                onTap: () {
+                                  controller.title = 'G';
+                                  Get.toNamed('${MyRoutes.selectPlayer}');
+                                },
+                              ),
                             ],
                           ),
                           SelectItem(
-                            positionName: 'Холбогч',
-                            onTap: () => Get.toNamed('${MyRoutes.selectPlayer}/guard'),
+                            positionName: 'PG',
+                            onTap: () {
+                              controller.title = 'PG';
+                              Get.toNamed('${MyRoutes.selectPlayer}');
+                            },
                           ),
                         ],
                       ),

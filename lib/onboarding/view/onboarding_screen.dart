@@ -56,7 +56,10 @@ class OnboardingScreen extends GetView<OnboardingController> {
                         onPressed: () {
                           Get.toNamed(MyRoutes.verifyTicket);
                         },
-                        child: Text('Тоглолтын тасалбараар санал өгөх'),
+                        child: Text(
+                          'Тоглолтын тасалбараар санал өгөх',
+                          style: TextStyle(fontFamily: 'GIP'),
+                        ),
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(

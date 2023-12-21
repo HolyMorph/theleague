@@ -5,7 +5,6 @@ import '../home/view/home_screen.dart';
 import '../onboarding/logic/onboarding_binding.dart';
 import '../onboarding/view/onboarding_screen.dart';
 import '../select_league/view/select_league_screen.dart';
-import '../select_player/logic/select_player_binding.dart';
 import '../select_player/view/select_player_screen.dart';
 import '../splash/logic/splash_binding.dart';
 import '../splash/view/splash_screen.dart';
@@ -45,9 +44,8 @@ class MyPages {
 
     ///Select Player  screen
     GetPage(
-      name: MyRoutes.selectPlayer + '/:position',
+      name: MyRoutes.selectPlayer,
       page: () => const SelectPlayerScreen(),
-      binding: SelectPlayerBinding(),
     ),
 
     /// Splash screen

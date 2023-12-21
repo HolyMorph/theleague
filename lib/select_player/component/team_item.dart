@@ -1,40 +1,95 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../home/logic/home_controller.dart';
+import '../../style/my_colors.dart';
 
-class TeamItem extends StatelessWidget {
-  final String iconPath;
+class TeamItem extends GetView<HomeController> {
+  final String iconUrl;
   final Function(String) onTap;
+  final RxInt selectedPlayer;
   final String teamCode;
-  final Color teamColor;
-  const TeamItem({required this.onTap, required this.iconPath, required this.teamColor, required this.teamCode, super.key});
+  final String teamColor;
+
+  TeamItem({
+    required this.onTap,
+    required this.iconUrl,
+    required this.teamColor,
+    required this.teamCode,
+    required this.selectedPlayer,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final RxString _teamCode = RxString('');
-
-    return Material(
-      color: Color(0xFF3B3D4F).withOpacity(0.3),
-      borderRadius: BorderRadius.circular(5),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(5),
-        onTap: () {
-          _teamCode.value = teamCode;
-          onTap(teamCode);
-        },
-        child: ObxValue(
-          (_) => Container(
-            height: 60,
-            width: 60,
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(width: 1, color: _teamCode.value == teamCode ? teamColor : Color(0xFF3B3D4F)),
-              color: Colors.transparent,
+    return Obx(
+      () => Stack(
+        alignment: Alignment.center,
+        clipBehavior: Clip.none,
+        children: [
+          InkWell(
+            borderRadius: BorderRadius.circular(5),
+            onTap: () {
+              controller.selectedTeamCode = teamCode;
+              onTap(teamCode);
+            },
+            child: Container(
+              height: 60,
+              width: 60,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Color(0xFF3b3d4f),
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                  width: 1,
+                  color: controller.state.selectedTeamCode.value == teamCode
+                      ? Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}'))
+                      : Color(0xFF3B3D4F),
+                ),
+                boxShadow: [
+                  controller.state.selectedTeamCode.value == teamCode
+                      ? BoxShadow(
+                          offset: Offset(0, 1),
+                          blurRadius: 8,
+                          color: Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}')),
+                        )
+                      : BoxShadow(),
+                ],
+              ),
+              child: CachedNetworkImage(
+                imageUrl: iconUrl,
+                alignment: Alignment.center,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: imageProvider, fit: BoxFit.contain),
+                  ),
+                ),
+                placeholder: (context, url) => Center(
+                  child: CupertinoActivityIndicator(animating: true, radius: 10, color: Colors.white),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.image_outlined, color: Colors.grey, size: 40),
+              ),
             ),
-            child: Image.asset('assets/icons/ic_ihc.png', fit: BoxFit.contain),
           ),
-          _teamCode,
-        ),
+          controller.getTeamPlayersQty(teamCode: teamCode) <= 0
+              ? const SizedBox()
+              : Positioned(
+                  top: -5,
+                  right: 10,
+                  child: Container(
+                    width: 14,
+                    height: 14,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: MyColors.redColor),
+                    child: Text(
+                      '${controller.getTeamPlayersQty(teamCode: teamCode)}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 10, color: Colors.white),
+                    ),
+                  ),
+                ),
+        ],
       ),
     );
   }

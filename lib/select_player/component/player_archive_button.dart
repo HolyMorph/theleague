@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../home/logic/home_controller.dart';
 import '../../style/my_colors.dart';
-import '../logic/select_player_controller.dart';
 
-class PlayerArchiveButton extends GetView<SelectPlayerController> {
+class PlayerArchiveButton extends GetView<HomeController> {
   final Widget child;
   final VoidCallback onTap;
   const PlayerArchiveButton({required this.child, required this.onTap, super.key});
@@ -27,7 +27,7 @@ class PlayerArchiveButton extends GetView<SelectPlayerController> {
           ),
         ),
         ObxValue(
-          (_) => controller.state.selectedPlayers.isEmpty
+          (_) => controller.state.totalQty < 0
               ? const SizedBox()
               : Positioned(
                   top: 5,
@@ -40,13 +40,13 @@ class PlayerArchiveButton extends GetView<SelectPlayerController> {
                       color: MyColors.redColor,
                     ),
                     child: Text(
-                      '${controller.state.selectedPlayers.length}',
+                      '${controller.state.totalQty.value}',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 10, color: Colors.white),
                     ),
                   ),
                 ),
-          controller.state.selectedPlayers,
+          controller.state.totalQty,
         ),
       ],
     );
