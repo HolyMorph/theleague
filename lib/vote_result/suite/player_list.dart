@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PlayerList extends StatelessWidget {
-  const PlayerList({Key? key}) : super(key: key);
+  final List<dynamic> leaderboard;
+  const PlayerList({required this.leaderboard, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
-        maxHeight: Get.mediaQuery.size.height * 0.45,
+        maxHeight: Get.mediaQuery.size.height * 0.3,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            for (var index = 0; index < 10; index++)
+            for (var index = 0; index < leaderboard.length; index++)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Row(
@@ -42,7 +43,7 @@ class PlayerList extends StatelessWidget {
                         ),
                         const SizedBox(width: 10),
                         Text(
-                          'Ulzii-orshih',
+                          leaderboard[index]['firstName'],
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
@@ -51,8 +52,8 @@ class PlayerList extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Text(
-                      '109200',
+                    Text(
+                      '${leaderboard[index]['score']}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,

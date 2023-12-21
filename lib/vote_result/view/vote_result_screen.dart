@@ -20,9 +20,9 @@ class VoteResultScreen extends StatelessWidget {
           log('${controller.state.onlineVoteResults}');
 
           return Scaffold(
+            backgroundColor: MyColors.scaffoldBackgroundColor,
             body: Container(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              color: MyColors.backgroundColor,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -72,13 +72,24 @@ class VoteResultScreen extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   /// Players Leaderboard
-                  controller.state.isLoading.value ? CircularProgressIndicator() : const PlayerList(),
+                  controller.state.isLoading.value
+                      ? CircularProgressIndicator()
+                      : PlayerList(
+                          leaderboard: controller.state.onlineVoteResults,
+                        ),
                   const SizedBox(height: 8),
                   const Divider(color: Color(0xff323232)),
                   const SizedBox(height: 8),
 
                   /// Vote button
                   ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                          return MyColors.secondaryColor;
+                        },
+                      ),
+                    ),
                     onPressed: () {
                       Get.toNamed(MyRoutes.onboarding);
                     },

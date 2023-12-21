@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
       builder: (SplashController controller) {
         return Obx(() {
           return Scaffold(
-            backgroundColor: MyColors.backgroundColor,
+            backgroundColor: MyColors.scaffoldBackgroundColor,
             body: controller.state.isLoading.value
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
