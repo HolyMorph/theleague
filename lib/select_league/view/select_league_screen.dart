@@ -37,13 +37,13 @@ class SelectLeagueScreen extends StatelessWidget {
             SelectLeagueItem(
               text: 'Эрэгтэй Дээд Лиг',
               imagePath: 'assets/images/ic_male.png',
-              onTap: () => Get.toNamed(MyRoutes.homeScreen),
+              onTap: () => Get.toNamed('${MyRoutes.homeScreen}/male'),
             ),
             const SizedBox(height: 16),
             SelectLeagueItem(
               text: 'Эмэгтэй Дээд Лиг',
               imagePath: 'assets/images/ic_female.png',
-              onTap: () => Get.toNamed(MyRoutes.homeScreen),
+              onTap: () => Get.toNamed('${MyRoutes.homeScreen}/female'),
             ),
             const Spacer(),
             Image.asset('assets/icons/ic_logo.png', width: 60, height: 60),

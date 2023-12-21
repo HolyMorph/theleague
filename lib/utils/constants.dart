@@ -1,7 +1,8 @@
 class Constants {
   /// Token string to get token from local storage
   static String META_DATA = 'metadata';
-  static String SelectedPlayers = 'selectedPlayers';
+  static String PlayersFemale = 'PlayersFemale';
+  static String PlayersMale = 'playersMale';
   static String TEAMS = 'teams';
   static String TIMESTAMP = 'timestamp';
   static String TOKEN = 'token';

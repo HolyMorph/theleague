@@ -17,7 +17,7 @@ class MyPages {
   static final pages = [
     ///Home screen
     GetPage(
-      name: MyRoutes.homeScreen,
+      name: MyRoutes.homeScreen + '/:gender',
       page: () => HomeScreen(),
       binding: HomeBinding(),
     ),
