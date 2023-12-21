@@ -1,10 +1,14 @@
 import 'package:get/get.dart';
 
 class VoteResultState {
-  RxList<dynamic> arenaVoteResults = RxList([]);
-  RxList<dynamic> coachVoteResults = RxList([]);
+  RxList<dynamic> arenaVoteResultsFemale = RxList([]);
+  RxList<dynamic> arenaVoteResultsMale = RxList([]);
+  RxList<dynamic> coachVoteResultsFemale = RxList([]);
+  RxList<dynamic> coachVoteResultsMale = RxList([]);
   RxString gender = 'male'.obs;
   RxBool isLoading = true.obs;
-  RxList<dynamic> onlineVoteResults = RxList([]);
+  RxBool isMale = true.obs;
+  RxList<dynamic> onlineVoteResultsFemale = RxList([]);
+  RxList<dynamic> onlineVoteResultsMale = RxList([]);
   RxList<dynamic> voteHistories = RxList([]);
 }
