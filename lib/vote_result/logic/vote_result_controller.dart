@@ -36,7 +36,12 @@ class VoteResultController extends GetxController {
       for (var index = 0; index < histories.length; index++) {
         dynamic result = {
           "_id": "",
-          "vote": {"PG": [], "F": [], "G": [], "C": []},
+          "vote": {
+            "PG": RxList<Map<String, dynamic>>([]),
+            "F": RxList<Map<String, dynamic>>([]),
+            "G": RxList<Map<String, dynamic>>([]),
+            "C": RxList<Map<String, dynamic>>([]),
+          },
           "createdAt": "",
         };
         List<dynamic> pointguard = response.data['result']['docs'][index]['vote']['PG'];

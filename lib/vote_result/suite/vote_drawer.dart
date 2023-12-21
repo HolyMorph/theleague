@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,8 +7,9 @@ import '../../route/my_routes.dart';
 import '../../style/my_colors.dart';
 
 class VoteDrawer extends StatelessWidget {
-  final List<dynamic> histories;
-  const VoteDrawer({required this.histories, Key? key}) : super(key: key);
+  final String gender;
+  final RxList<Map<String, dynamic>> histories;
+  const VoteDrawer({required this.gender, required this.histories, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +60,12 @@ class VoteDrawer extends StatelessWidget {
                             ),
                             child: InkWell(
                               onTap: () {
-                                Get.toNamed(MyRoutes.homeScreen, arguments: histories[index]['vote']);
+                                log('sda1 : ${MyRoutes.homeScreen}');
+                                log('sda2 : ${histories[index]['vote']}');
+                                Get.toNamed(
+                                  '${MyRoutes.homeScreen}/$gender',
+                                  arguments: histories[index]['vote'],
+                                );
                               },
                               child: Text(
                                 'Сонгох',

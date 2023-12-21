@@ -14,6 +14,8 @@ class HomeScreen extends GetWidget<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.state.selectedPlayers.value = Get.arguments;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

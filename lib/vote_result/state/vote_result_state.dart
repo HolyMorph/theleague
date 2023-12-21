@@ -10,5 +10,5 @@ class VoteResultState {
   RxBool isMale = true.obs;
   RxList<dynamic> onlineVoteResultsFemale = RxList([]);
   RxList<dynamic> onlineVoteResultsMale = RxList([]);
-  RxList<dynamic> voteHistories = RxList([]);
+  RxList<Map<String, dynamic>> voteHistories = RxList([]);
 }

@@ -57,171 +57,180 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
               width: Get.size.width * 0.8,
               child: VoteDrawer(
                 histories: controller.state.voteHistories,
+                gender: controller.state.isMale.value ? 'male' : 'female',
               ),
             ),
             backgroundColor: MyColors.scaffoldBackgroundColor,
             body: Container(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Column(
                     children: [
-                      Image.asset(
-                        'assets/icons/ic_logo.png',
-                        height: 30,
-                        width: 37,
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/icons/ic_logo.png',
+                            height: 30,
+                            width: 37,
+                          ),
+                          const SizedBox(width: 12),
+                          Image.asset(
+                            'assets/images/all_star.png',
+                            height: 30,
+                            width: 118,
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 12),
-                      Image.asset(
-                        'assets/images/all_star.png',
-                        height: 30,
-                        width: 118,
+                      const SizedBox(height: 32),
+                      Text(
+                        'Дээд Лиг 2024 Бүх оддын санал асуулга',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'GIP',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 16),
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(width: 1, color: Color(0xff323232)),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: InkWell(
+                                onTap: () {
+                                  controller.state.isMale.value = true;
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  color: controller.state.isMale.value ? Color(0xff272739) : null,
+                                  child: Center(
+                                    child: Text(
+                                      'Эрэгтэй Дээд Лиг',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'GIP',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: InkWell(
+                                onTap: () {
+                                  controller.state.isMale.value = false;
+                                },
+                                child: Container(
+                                  color: controller.state.isMale.value ? null : Color(0xff272739),
+                                  padding: const EdgeInsets.all(10),
+                                  child: Center(
+                                    child: Text(
+                                      'Эмэгтэй Дээд Лиг',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'GIP',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      DefaultTabController(
+                        length: 3,
+                        child: TabBar(
+                          controller: tabController,
+                          labelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          indicatorColor: Colors.white,
+                          dividerColor: Colors.white.withOpacity(0.5),
+                          labelColor: Colors.white,
+                          unselectedLabelColor: Colors.white.withOpacity(0.5),
+                          tabs: [
+                            Tab(text: 'Онлайн'),
+                            Tab(text: 'Тоглолтын'),
+                            Tab(text: 'Дасгалжуулагчийн'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      /// Players Leaderboard
+                      controller.state.isLoading.value
+                          ? CircularProgressIndicator()
+                          : PlayerList(
+                              leaderboard: _leaderboard(),
+                            ),
+                      const SizedBox(height: 8),
+                      const Divider(color: Color(0xff323232)),
+                      const SizedBox(height: 8),
                     ],
                   ),
-                  const SizedBox(height: 32),
-                  Text(
-                    'Дээд Лиг 2024 Бүх оддын санал асуулга',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'GIP',
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 16),
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(width: 1, color: Color(0xff323232)),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: InkWell(
-                            onTap: () {
-                              controller.state.isMale.value = true;
+                  Column(
+                    children: [
+                      /// Vote button
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              return MyColors.secondaryColor;
                             },
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              color: controller.state.isMale.value ? Color(0xff272739) : null,
-                              child: Center(
-                                child: Text(
-                                  'Эрэгтэй Дээд Лиг',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: 'GIP',
-                                  ),
-                                ),
-                              ),
-                            ),
                           ),
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: InkWell(
-                            onTap: () {
-                              controller.state.isMale.value = false;
-                            },
-                            child: Container(
-                              color: controller.state.isMale.value ? null : Color(0xff272739),
-                              padding: const EdgeInsets.all(10),
-                              child: Center(
-                                child: Text(
-                                  'Эрэгтэй Дээд Лиг',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: 'GIP',
-                                  ),
-                                ),
-                              ),
-                            ),
+                        onPressed: () {
+                          Get.toNamed(MyRoutes.onboarding);
+                        },
+                        child: Text(
+                          'Санал өгөх',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  DefaultTabController(
-                    length: 3,
-                    child: TabBar(
-                      controller: tabController,
-                      labelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      indicatorColor: Colors.white,
-                      dividerColor: Colors.white.withOpacity(0.5),
-                      labelColor: Colors.white,
-                      unselectedLabelColor: Colors.white.withOpacity(0.5),
-                      tabs: [
-                        Tab(text: 'Онлайн'),
-                        Tab(text: 'Тоглолтын'),
-                        Tab(text: 'Дасгалжуулагчийн'),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20),
+                      ),
+                      const SizedBox(height: 16),
 
-                  /// Players Leaderboard
-                  controller.state.isLoading.value
-                      ? CircularProgressIndicator()
-                      : PlayerList(
-                          leaderboard: _leaderboard(),
+                      /// Your vote button
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              return Color(0xff272739);
+                            },
+                          ),
                         ),
-                  const SizedBox(height: 8),
-                  const Divider(color: Color(0xff323232)),
-                  const SizedBox(height: 8),
-
-                  /// Vote button
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                          return MyColors.secondaryColor;
+                        onPressed: () {
+                          _voteScaffoldKey.currentState!.openEndDrawer();
                         },
+                        child: Text(
+                          'Өгсөн саналаа харах',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      Get.toNamed(MyRoutes.onboarding);
-                    },
-                    child: Text(
-                      'Санал өгөх',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  /// Your vote button
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                          return Color(0xff272739);
-                        },
-                      ),
-                    ),
-                    onPressed: () {
-                      _voteScaffoldKey.currentState!.openEndDrawer();
-                    },
-                    child: Text(
-                      'Өгсөн саналаа харах',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
+                    ],
                   ),
                 ],
               ),
