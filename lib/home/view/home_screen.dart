@@ -73,7 +73,6 @@ class HomeScreen extends GetWidget<HomeController> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.sta,
                         children: [
                           SelectItem(
                             positionName: 'C',
