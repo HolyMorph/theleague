@@ -12,7 +12,7 @@ class MyColors {
   static const Color? bottomAppBarColor = null;
 
   static const Color buttonBackColor = Color(0xffEAECF0);
-  static const Color buttonColor = Color(0xff4D5163);
+  static const Color buttonColor = Color(0xffFF4500);
 
   static const Color buttonDisabledColor = Color(0xffFF8D62);
 
@@ -52,7 +52,7 @@ class MyColors {
   static const Color? hoverColor = null;
 
   /// Апп-ын үндсэн өнгө.
-  static const Color primaryColor = Color(0xff0F0F17);
+  static const Color primaryColor = Color(0xffFF4500);
 
   /// Апп-ын үндсэн өнгөний бараан хувилбар.
   static const Color primaryColorDark = Color(0xff1E258B);

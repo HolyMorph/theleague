@@ -11,6 +11,7 @@ import '../splash/logic/splash_binding.dart';
 import '../splash/view/splash_screen.dart';
 import '../verify_ticket_number/logic/verify_ticket_binding.dart';
 import '../verify_ticket_number/view/verify_ticket_screen.dart';
+import '../vote_result/view/vote_result_screen.dart';
 import 'my_routes.dart';
 
 class MyPages {
@@ -49,10 +50,17 @@ class MyPages {
       binding: SelectPlayerBinding(),
     ),
 
+    /// Splash screen
     GetPage(
       name: MyRoutes.splash,
       page: () => SplashScreen(),
       binding: SplashBinding(),
+    ),
+
+    /// Vote result screen
+    GetPage(
+      name: MyRoutes.voteResult,
+      page: () => VoteResultScreen(),
     ),
   ];
 }

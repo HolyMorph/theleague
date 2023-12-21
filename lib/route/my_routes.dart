@@ -5,4 +5,5 @@ class MyRoutes {
   static String selectPlayer = '/selectPlayer';
   static String splash = '/splash';
   static String verifyTicket = '/verifyTicket';
+  static String voteResult = '/voteResult';
 }

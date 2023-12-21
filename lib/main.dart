@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
+    LocalStorage.initLocalStorage();
 
     return GetMaterialApp(
       /// Main theme

@@ -9,13 +9,14 @@ import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
 
 import '../../alert/alert_helper.dart';
 import '../../alert/flash_status.dart';
+import '../../route/my_routes.dart';
 import '../../service/api_client.dart';
 import '../../storage/local_storage.dart';
 import '../../utils/constants.dart';
 import '../state/splash_state.dart';
 
 class SplashController extends GetxController {
-  final splashState = SplashState();
+  final state = SplashState();
 
   @override
   void onInit() {
@@ -24,27 +25,61 @@ class SplashController extends GetxController {
     super.onInit();
   }
 
+  Future<void> _checkUpdate(String timestamp) async {
+    dynamic response = await ApiClient.sendRequest(
+      '/api/me?ts=$timestamp',
+      method: Method.get,
+    );
+  }
+
   Future<void> _checkUserToken() async {
-    String token = MezornClientHelper().token;
+    String token = await LocalStorage.getData(Constants.TOKEN) ?? "";
     log('token : $token');
     if (token.isEmpty) {
-      _requestToken();
+      await _requestToken();
+      _getMetaData();
     } else {
+      int timestamp = await LocalStorage.getData(Constants.TIMESTAMP);
+
       _getMetaData();
     }
   }
 
   Future<void> _getMetaData() async {
+    state.isLoading.value = true;
     dynamic response = await ApiClient.sendRequest(
       '/api/me',
       method: Method.get,
     );
+    LocalStorage.saveData(Constants.META_DATA, response.data['result']['meta']);
 
     if (MezornClientHelper.isValidResponse(response)) {
       LocalStorage.saveData(Constants.TIMESTAMP, response.data['result']['meta']['timestamp']);
     }
 
-    log('getMetaData :  $response');
+    // log('getMetaData :  $response');
+
+    dynamic teams = response.data['result']['meta']['teams'];
+    dynamic players = response.data['result']['meta']['players'];
+    List<dynamic> metaData = [];
+    // log('team : $teams');
+
+    for (var index = 0; index < teams.length; index++) {
+      teams[index]..['players'] = [];
+      metaData.add(teams[index]);
+
+      for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+        if (teams[index]['code'] == players[playerIndex]['teamCode']) {
+          log('setgel : ${metaData[index]} , ${players[playerIndex]}');
+
+          metaData[index]['players'].add(players[playerIndex]);
+        }
+      }
+    }
+    log('metaData : $metaData');
+    LocalStorage.saveData(Constants.TEAMS, metaData);
+    await Future.delayed(const Duration(seconds: 2));
+    Get.toNamed(MyRoutes.voteResult);
   }
 
   Future<bool> _requestToken() async {
@@ -89,6 +124,9 @@ class SplashController extends GetxController {
     bool isSuccess = await MezornClientHelper.isValidResponse(response);
 
     if (isSuccess) {
+      await LocalStorage.saveData(Constants.TOKEN, response.data['result']['token']);
+      String wtf = await LocalStorage.getData(Constants.TOKEN);
+      log('wtf : $wtf');
       MezornClientHelper().saveToken = response.data['result']['token'];
     }
 
