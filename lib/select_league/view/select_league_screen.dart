@@ -3,10 +3,24 @@ import 'package:get/get.dart';
 
 import '../../components/app_back_button.dart';
 import '../../route/my_routes.dart';
+import '../../storage/local_storage.dart';
+import '../../utils/constants.dart';
 import '../component/select_league_item.dart';
 
 class SelectLeagueScreen extends StatelessWidget {
   const SelectLeagueScreen({super.key});
+
+  @override
+  StatelessElement createElement() {
+    if (LocalStorage.getData(Constants.PlayersMale).runtimeType != RxMap<String, RxList<Map<String, dynamic>>>) {
+      LocalStorage.saveData(Constants.PlayersMale, null);
+    }
+    if (LocalStorage.getData(Constants.PlayersFemale).runtimeType != RxMap<String, RxList<Map<String, dynamic>>>) {
+      LocalStorage.saveData(Constants.PlayersFemale, null);
+    }
+
+    return super.createElement();
+  }
 
   @override
   Widget build(BuildContext context) {
