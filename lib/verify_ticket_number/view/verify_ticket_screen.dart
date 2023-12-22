@@ -5,10 +5,7 @@ import 'package:pinput/pinput.dart';
 import '../../alert/alert_helper.dart';
 import '../../alert/flash_status.dart';
 import '../../components/app_back_button.dart';
-import '../../route/my_routes.dart';
-import '../../storage/local_storage.dart';
 import '../../style/my_colors.dart';
-import '../../utils/constants.dart';
 import '../logic/verify_ticket_controller.dart';
 
 class VerifyTicketScreen extends GetView<VerifyTicketController> {
@@ -73,24 +70,17 @@ class VerifyTicketScreen extends GetView<VerifyTicketController> {
             ),
             const SizedBox(height: 64),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 64),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
                   Pinput(
                     autofocus: true,
-                    length: 4,
+                    length: 6,
                     defaultPinTheme: defaultPinTheme,
                     onChanged: (input) => controller.ticketCode = input,
-                    onCompleted: (input) => controller.state.valid.value
-                        ? () {
-                            Get.toNamed(MyRoutes.selectLeague);
-                            LocalStorage.saveData(Constants.TicketCode, controller.state.ticketCode.value);
-                          }
-                        : () => AlertHelper.showFlashAlert(
-                              title: 'Алдаа гарлаа',
-                              message: 'Байршил тогтоогчийн зөвшөөрөл өгснөөр үргэлжлүүлэх боломжтой',
-                              status: FlashStatus.failed,
-                            ),
+                    onCompleted: (input) {
+                      setOnTap();
+                    },
                     focusedPinTheme: defaultPinTheme.copyWith(
                       decoration: defaultPinTheme.decoration?.copyWith(
                         border: Border.all(width: 1, color: MyColors.secondaryColor),
@@ -108,23 +98,14 @@ class VerifyTicketScreen extends GetView<VerifyTicketController> {
                   Obx(
                     () => ElevatedButton(
                       style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
-                      onPressed: controller.state.ticketCode.value.length < 4
+                      onPressed: controller.state.ticketCode.value.length < 6
                           ? null
-                          : () async {
-                              if (await controller.handleLocationPermission()) {
-                                await controller.getCurrentPosition();
-                                Get.toNamed(MyRoutes.selectLeague);
-                                LocalStorage.saveData(Constants.TicketCode, controller.state.ticketCode.value);
-                              } else {
-                                AlertHelper.showFlashAlert(
-                                  title: 'Алдаа гарлаа',
-                                  message: 'Байршил тогтоогчийн зөвшөөрөл өгснөөр үргэлжлүүлэх боломжтой',
-                                  status: FlashStatus.failed,
-                                );
-                                controller.showLocationDialog();
-                              }
+                          : () {
+                              setOnTap();
                             },
-                      child: Text('Үргэлжлүүлэх'),
+                      child: controller.state.isLoading.value
+                          ? SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white))
+                          : Text('Үргэлжлүүлэх'),
                     ),
                   ),
                 ],
@@ -134,5 +115,21 @@ class VerifyTicketScreen extends GetView<VerifyTicketController> {
         ),
       ),
     );
+  }
+
+  void setOnTap() async {
+    if (await controller.handleLocationPermission()) {
+      controller.isLoading = true;
+      await controller.getCurrentPosition();
+      await controller.checkTicket();
+      controller.isLoading = false;
+    } else {
+      AlertHelper.showFlashAlert(
+        title: 'Алдаа гарлаа',
+        message: 'Байршил тогтоогчийн зөвшөөрөл өгснөөр үргэлжлүүлэх боломжтой',
+        status: FlashStatus.failed,
+      );
+      controller.showLocationDialog();
+    }
   }
 }

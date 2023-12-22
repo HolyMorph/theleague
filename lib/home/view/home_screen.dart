@@ -145,8 +145,9 @@ class HomeScreen extends GetView<HomeController> {
                       onPressed: controller.state.totalQty.value > 0
                           ? () {
                               AlertHelper.showDialog(
-                                message:
-                                    'Та саналаа бүрэн өгөөгүй байна, та санал өгөхдөө итгэлтэй байна уу? ( 24 цагийн дараа дахин санал өгөх боломжтой. )',
+                                message: controller.state.totalQty.value < 12
+                                    ? 'Та саналаа бүрэн өгөөгүй байна, та санал өгөхдөө итгэлтэй байна уу?'
+                                    : 'Та санал өгөхдөө итгэлтэй байна уу?',
                                 onTap: () async {
                                   Get.back();
                                   await LocalStorage.getData(Constants.TicketCode) != null ? controller.voteArena() : controller.voteOnline();

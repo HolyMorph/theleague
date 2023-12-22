@@ -12,32 +12,63 @@ class AlertHelper {
         contentPadding: EdgeInsets.zero,
         backgroundColor: Color(0xFF272739),
         content: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(width: 1, color: Colors.white.withOpacity(0.1)),
             color: Color(0xFF272739),
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
+            alignment: Alignment.bottomCenter,
             children: [
-              Text(
-                message,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'GIP',
-                  color: Colors.white,
-                ),
+              Positioned(
+                top: -75,
+                child: Image.asset('assets/images/ic_dialog_body.png', scale: 3),
               ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
-                onPressed: onTap,
-                child: Text(
-                  'Үргэлжлүүлэх',
-                  style: TextStyle(fontFamily: 'GIP', fontWeight: FontWeight.w600),
-                ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 100),
+                  Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'GIP',
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF686874)),
+                          onPressed: () => Get.back(),
+                          child: Text(
+                            'Үгүй',
+                            style: TextStyle(fontFamily: 'GIP', fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
+                          onPressed: onTap,
+                          child: Text(
+                            'Тийм',
+                            style: TextStyle(fontFamily: 'GIP', fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
