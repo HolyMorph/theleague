@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api_caller.dart';
 
@@ -86,28 +84,34 @@ class HomeController extends GetxController {
     }
   }
 
+  RxBool isSelected({required String playerId}) {
+    Map<String, dynamic>? _existPlayer = state.selectedPlayers['${state.title}']?.firstWhereOrNull((element) => element['_id'] == playerId);
+
+    return _existPlayer == null ? RxBool(false) : RxBool(true);
+  }
+
   @override
   void onInit() {
     gender = Get.parameters['gender']!;
-    state.selectedPlayers.value = LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) ??
-        {
-          'F': RxList<Map<String, dynamic>>(),
-          'G': RxList<Map<String, dynamic>>(),
-          'PG': RxList<Map<String, dynamic>>(),
-          'C': RxList<Map<String, dynamic>>(),
-        };
+    if (LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) != null) {
+      Map<String, RxList<Map<String, dynamic>>> localData =
+          LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale);
+      state.selectedPlayers.value = localData;
+    }
 
     super.onInit();
   }
 
-  // void prepareList() {
-  //   state.selectedPlayers.forEach((key, value) {
-  //     for (Map<String,dynamic> player in value) {
-  //       state.preparedList[key];
-  //     }
-  //   });
-  //   log('prepare: ${state.preparedList}');
-  // }
+  void prepareList() {
+    state.preparedList.clear();
+    state.selectedPlayers.forEach((key, value) {
+      List<String> list = [];
+      for (Map<String, dynamic> player in value) {
+        list.add(player['_id']);
+        state.preparedList[key] = list;
+      }
+    });
+  }
 
   void setPlayersPosition() {
     state.teamPlayers.clear();
@@ -127,12 +131,13 @@ class HomeController extends GetxController {
   }
 
   Future<void> voteArena() async {
+    prepareList();
     var body = {
       'gender': state.gender.value,
       'game_code': LocalStorage.getData(Constants.TicketCode),
       'lat': LocalStorage.getData('lat'),
       'lon': LocalStorage.getData('lon'),
-      'vote': state.selectedPlayers,
+      'vote': state.preparedList,
     };
     isLoading = true;
     dynamic response = await ApiClient.sendRequest(
@@ -142,13 +147,23 @@ class HomeController extends GetxController {
     );
     isLoading = false;
     if (MezornClientHelper.isValidResponse(response)) {
-      AlertHelper.showDialog(
-        message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.',
-        onTap: () {
-          Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
-        },
-      );
-      LocalStorage.clear();
+      if (response.data['statusCode'] == 400) {
+        var message = response.data['message_mn'] ?? response.data['message'] as String;
+
+        AlertHelper.showFlashAlert(
+          title: 'Алдаа гарлаа',
+          message: message,
+          status: FlashStatus.failed,
+        );
+      } else {
+        AlertHelper.showDialog(
+          message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.',
+          onTap: () {
+            Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
+          },
+        );
+        _clearData();
+      }
     } else {
       var message = response.data['error']['message'] as String;
 
@@ -161,9 +176,10 @@ class HomeController extends GetxController {
   }
 
   Future<void> voteOnline() async {
+    prepareList();
     var body = {
       'gender': state.gender.value,
-      'vote': state.selectedPlayers,
+      'vote': state.preparedList,
     };
     isLoading = true;
     dynamic response = await ApiClient.sendRequest(
@@ -173,13 +189,23 @@ class HomeController extends GetxController {
     );
     isLoading = false;
     if (MezornClientHelper.isValidResponse(response)) {
-      AlertHelper.showDialog(
-        message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.',
-        onTap: () {
-          Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
-        },
-      );
-      LocalStorage.clear();
+      if (response.data['statusCode'] == 400) {
+        var message = response.data['error']['message_mn'] ?? response.data['error']['message'] as String;
+
+        AlertHelper.showFlashAlert(
+          title: 'Алдаа гарлаа',
+          message: message,
+          status: FlashStatus.failed,
+        );
+      } else {
+        AlertHelper.showDialog(
+          message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.',
+          onTap: () {
+            Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
+          },
+        );
+        _clearData();
+      }
     } else {
       var message = response.data['error']['message'] as String;
 
@@ -189,5 +215,11 @@ class HomeController extends GetxController {
         status: FlashStatus.failed,
       );
     }
+  }
+
+  void _clearData() {
+    LocalStorage.saveData(Constants.PlayersMale, null);
+    LocalStorage.saveData(Constants.PlayersFemale, null);
+    LocalStorage.saveData(Constants.TicketCode, null);
   }
 }

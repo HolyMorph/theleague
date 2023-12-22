@@ -23,6 +23,8 @@ class PlayerBottomSheetItem extends GetView<HomeController> {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: players.length,
             itemBuilder: (context, index) {
+              String teamColor = controller.state.teams.firstWhere((element) => element['code'] == players[index]['teamCode'])['colorCode'];
+
               return Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: Color(0xFF272739)),
@@ -38,13 +40,13 @@ class PlayerBottomSheetItem extends GetView<HomeController> {
                         clipBehavior: Clip.hardEdge,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(width: 1, color: Color(int.parse('0xFF4c1c1a'))),
+                          border: Border.all(width: 1, color: Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}'))),
                           image: DecorationImage(image: imageProvider, fit: BoxFit.fitHeight),
                           boxShadow: [
                             BoxShadow(
                               offset: Offset(0, 1),
                               blurRadius: 8,
-                              color: Color(int.parse('0xFF4c1c1a')).withOpacity(0.5),
+                              color: Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}')).withOpacity(0.5),
                             ),
                           ],
                         ),
@@ -62,12 +64,22 @@ class PlayerBottomSheetItem extends GetView<HomeController> {
                           Text(
                             '${players[index]['firstName']} ${players[index]['lastName']}',
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                              fontFamily: 'GIP',
+                            ),
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            '${players[index]['jerseyNumber']} - IHC Apes',
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                            '${players[index]['jerseyNumber']} - ${controller.state.teams.firstWhere((element) => element['code'] == players[index]['teamCode'])['name']}',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                              fontFamily: 'GIP',
+                            ),
                           ),
                         ],
                       ),
@@ -113,10 +125,7 @@ class PlayerBottomSheetItem extends GetView<HomeController> {
                   borderRadius: BorderRadius.circular(5),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.transparent,
-                    ),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: Colors.transparent),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -124,7 +133,12 @@ class PlayerBottomSheetItem extends GetView<HomeController> {
                         const SizedBox(width: 10),
                         Text(
                           'Тоглогч сонгох',
-                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                            fontFamily: 'GIP',
+                          ),
                         ),
                       ],
                     ),

@@ -23,6 +23,7 @@ class RightDrawer extends GetView<HomeController> {
             style: TextStyle(
               color: Colors.white,
               fontSize: 14,
+              fontFamily: 'GIP',
               fontWeight: FontWeight.w700,
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import '../../alert/alert_helper.dart';
 import '../../alert/flash_status.dart';
+import '../../onboarding/component/location_dialog.dart';
 import '../../storage/local_storage.dart';
 import '../state/verify_ticket_state.dart';
 
@@ -33,6 +34,7 @@ class VerifyTicketController extends GetxController {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(content: Text('Байршил тогтоогчийн зөвшөөрөл өгснөөр үргэлжлүүлэх боломжтой')));
+      showLocationDialog();
 
       return false;
     }
@@ -45,7 +47,7 @@ class VerifyTicketController extends GetxController {
           message: 'Байршил тогтоогчийн зөвшөөрөл өгснөөр үргэлжлүүлэх боломжтой',
           status: FlashStatus.failed,
         );
-        valid = false;
+        showLocationDialog();
 
         return false;
       }
@@ -56,11 +58,10 @@ class VerifyTicketController extends GetxController {
         message: 'Байршил тогтоогчийн зөвшөөрөл өгснөөр үргэлжлүүлэх боломжтой',
         status: FlashStatus.failed,
       );
-      valid = false;
+      showLocationDialog();
 
       return false;
     }
-    valid = true;
 
     return true;
   }
@@ -70,5 +71,16 @@ class VerifyTicketController extends GetxController {
     handleLocationPermission();
 
     super.onInit();
+  }
+
+  void showLocationDialog() {
+    Get.dialog(
+      AlertDialog(
+        contentPadding: EdgeInsets.zero,
+        backgroundColor: Colors.transparent,
+        content: LocationDialog(),
+      ),
+      barrierDismissible: false,
+    );
   }
 }

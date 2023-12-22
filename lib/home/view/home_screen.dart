@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../alert/alert_helper.dart';
 import '../../components/app_back_button.dart';
 import '../../route/my_routes.dart';
 import '../../storage/local_storage.dart';
 import '../../style/my_colors.dart';
+import '../../utils/constants.dart';
 import '../component/select_item.dart';
 import '../logic/home_controller.dart';
 
-class HomeScreen extends GetWidget<HomeController> {
+class HomeScreen extends GetView<HomeController> {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    controller.state.selectedPlayers.value = Get.arguments;
+  StatelessElement createElement() {
+    if (Get.arguments != null) controller.state.selectedPlayers.value = Get.arguments;
 
+    return super.createElement();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text('Тоглогч сонгох'),
         leading: AppBackButton(),
-        // actions: [
-        //   AppButton(child: Image.asset('assets/icons/ic_pack.png'), onTap: () {}),
-        // ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
           child: Container(color: Colors.white.withOpacity(0.1), height: 1.0),
@@ -47,6 +49,7 @@ class HomeScreen extends GetWidget<HomeController> {
                             fontSize: 24,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
+                            fontFamily: 'GIP',
                             shadows: [
                               Shadow(
                                 offset: Offset(5, 5),
@@ -62,6 +65,7 @@ class HomeScreen extends GetWidget<HomeController> {
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.white,
+                            fontFamily: 'GIP',
                             shadows: [
                               Shadow(
                                 offset: Offset(5, 5),
@@ -145,12 +149,15 @@ class HomeScreen extends GetWidget<HomeController> {
                                     'Та саналаа бүрэн өгөөгүй байна, та санал өгөхдөө итгэлтэй байна уу? ( 24 цагийн дараа дахин санал өгөх боломжтой. )',
                                 onTap: () async {
                                   Get.back();
-                                  await LocalStorage.getData('game_code') != null ? controller.voteArena() : controller.voteOnline();
+                                  await LocalStorage.getData(Constants.TicketCode) != null ? controller.voteArena() : controller.voteOnline();
                                 },
                               );
                             }
                           : null,
-                      child: Text('Саналаа өгөх'),
+                      child: Text(
+                        'Саналаа өгөх',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
+                      ),
                     ),
                   ),
                 ],

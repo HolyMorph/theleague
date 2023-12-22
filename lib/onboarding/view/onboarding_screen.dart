@@ -53,20 +53,25 @@ class OnboardingScreen extends GetView<OnboardingController> {
                     children: [
                       const SizedBox(height: 50),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF272739)),
                         onPressed: () {
                           Get.toNamed(MyRoutes.verifyTicket);
                         },
                         child: Text(
-                          'Тоглолтын тасалбараар санал өгөх',
-                          style: TextStyle(fontFamily: 'GIP'),
+                          'Тоглолтоос санал өгөх',
+                          style: TextStyle(fontFamily: 'GIP', fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF4D5163)),
                         onPressed: () {
                           Get.toNamed(MyRoutes.selectLeague);
                         },
-                        child: Text('Шууд санал өгөх'),
+                        child: Text(
+                          'Онлайнаар санал өгөх',
+                          style: TextStyle(fontFamily: 'GIP', fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
                       ),
                       const SizedBox(height: 16),
                       Wrap(
@@ -74,7 +79,11 @@ class OnboardingScreen extends GetView<OnboardingController> {
                         children: [
                           Text(
                             'Та үргэлжлүүлснээр The League-ийн ',
-                            style: TextStyle(color: Color(0xFF8B8B8B), fontSize: 12),
+                            style: TextStyle(
+                              color: Color(0xFF8B8B8B),
+                              fontSize: 12,
+                              fontFamily: 'GIP',
+                            ),
                           ),
                           GestureDetector(
                             onTap: () {},
@@ -84,27 +93,24 @@ class OnboardingScreen extends GetView<OnboardingController> {
                                 color: Color(0xFF9E9E9E),
                                 fontWeight: FontWeight.w700,
                                 fontSize: 12,
+                                fontFamily: 'GIP',
                               ),
                             ),
                           ),
                           Text(
                             ' болон ',
-                            style: TextStyle(color: Color(0xFF8B8B8B), fontSize: 12),
+                            style: TextStyle(color: Color(0xFF8B8B8B), fontSize: 12, fontFamily: 'GIP'),
                           ),
                           GestureDetector(
                             onTap: () {},
                             child: Text(
                               'Нууцлалын бодлогыг',
-                              style: TextStyle(
-                                color: Color(0xFF9E9E9E),
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12,
-                              ),
+                              style: TextStyle(color: Color(0xFF9E9E9E), fontWeight: FontWeight.w700, fontSize: 12, fontFamily: 'GIP'),
                             ),
                           ),
                           Text(
                             ' зөвшөөрч байна.',
-                            style: TextStyle(color: Color(0xFF8B8B8B), fontSize: 12),
+                            style: TextStyle(color: Color(0xFF8B8B8B), fontSize: 12, fontFamily: 'GIP'),
                           ),
                         ],
                       ),
@@ -117,6 +123,7 @@ class OnboardingScreen extends GetView<OnboardingController> {
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: Colors.white.withOpacity(0.3),
+                          fontFamily: 'GIP',
                         ),
                       ),
                       const SizedBox(height: 16),

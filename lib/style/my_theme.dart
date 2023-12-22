@@ -40,9 +40,14 @@ class MyTheme {
           elevation: 0,
           centerTitle: true,
           foregroundColor: MyColors.backgroundColor,
-          titleTextStyle: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700, fontFamily: 'GIP'),
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            fontFamily: 'GIP',
+          ),
           actionsIconTheme: IconThemeData(color: Colors.black),
-          toolbarTextStyle: TextStyle(color: Colors.white),
+          toolbarTextStyle: TextStyle(color: Colors.white, fontFamily: 'GIP'),
         ),
         splashFactory: InkRipple.splashFactory,
       );

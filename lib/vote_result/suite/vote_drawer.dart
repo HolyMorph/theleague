@@ -60,8 +60,6 @@ class VoteDrawer extends StatelessWidget {
                             ),
                             child: InkWell(
                               onTap: () {
-                                log('sda1 : ${MyRoutes.homeScreen}');
-                                log('sda2 : ${histories[index]['vote']}');
                                 Get.toNamed(
                                   '${MyRoutes.homeScreen}/$gender',
                                   arguments: histories[index]['vote'],

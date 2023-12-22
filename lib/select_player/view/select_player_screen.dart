@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -102,8 +104,8 @@ class SelectPlayerScreen extends GetView<HomeController> {
                         Expanded(
                           child: ColoredBox(
                             color: MyColors.primaryColor,
-                            child: ObxValue(
-                              (_) => controller.state.teamPlayers.isNotEmpty
+                            child: Obx(
+                              () => controller.state.teamPlayers.isNotEmpty
                                   ? GridView.builder(
                                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
@@ -115,9 +117,13 @@ class SelectPlayerScreen extends GetView<HomeController> {
                                       itemCount: controller.state.teamPlayers.length,
                                       shrinkWrap: true,
                                       itemBuilder: (context, index) {
+                                        RxBool selected = controller.isSelected(playerId: controller.state.teamPlayers[index]['_id']);
+
+                                        log('selected: ${selected}');
+
                                         return PlayerItem(
                                           player: controller.state.teamPlayers[index],
-                                          isSelected: isSelected(playerId: controller.state.teamPlayers[index]['_id']),
+                                          isSelected: selected,
                                           teamColor: controller.state.teams
                                               .firstWhere((element) => element['code'] == controller.state.selectedTeamCode.value)['colorCode'],
                                           onTap: (player) => addRemoveFunction(player: player),
@@ -125,7 +131,6 @@ class SelectPlayerScreen extends GetView<HomeController> {
                                       },
                                     )
                                   : EmptyWidget(),
-                              controller.state.teamPlayers,
                             ),
                           ),
                         ),
@@ -148,7 +153,10 @@ class SelectPlayerScreen extends GetView<HomeController> {
                       onPressed: () {
                         Get.back();
                       },
-                      child: Text('Сонголтоо харах'),
+                      child: Text(
+                        'Сонголтоо харах',
+                        style: TextStyle(fontFamily: 'GIP', fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
                 ],
@@ -173,12 +181,5 @@ class SelectPlayerScreen extends GetView<HomeController> {
 
     controller.calculateTotalQty();
     LocalStorage.saveData(controller.state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale, controller.state.selectedPlayers);
-  }
-
-  bool isSelected({required String playerId}) {
-    Map<String, dynamic>? _existPlayer =
-        controller.state.selectedPlayers['${controller.state.title}']?.firstWhereOrNull((element) => element['_id'] == playerId);
-
-    return _existPlayer == null ? false : true;
   }
 }

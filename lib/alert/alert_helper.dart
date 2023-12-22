@@ -34,7 +34,10 @@ class AlertHelper {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
                 onPressed: onTap,
-                child: Text('Үргэлжлүүлэх'),
+                child: Text(
+                  'Үргэлжлүүлэх',
+                  style: TextStyle(fontFamily: 'GIP', fontWeight: FontWeight.w600),
+                ),
               ),
             ],
           ),
@@ -61,24 +64,18 @@ class AlertHelper {
           controller: controller,
           content: IntrinsicHeight(
             child: Row(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      color: Color(status == FlashStatus.success ? 0xff00ff47 : 0xffFF2E00),
-                      borderRadius: BorderRadius.horizontal(left: Radius.circular(4)),
-                    ),
-                    child: Image.asset(
-                      status == FlashStatus.failed ? 'assets/icons/ic_failed.png' : 'assets/icons/ic_success.png',
-                      scale: 2,
-                    ),
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: Color(status == FlashStatus.success ? 0xff00ff47 : 0xffFF2E00),
+                    borderRadius: BorderRadius.horizontal(left: Radius.circular(4)),
                   ),
+                  width: 8,
+                  height: double.infinity,
                 ),
                 Expanded(
-                  flex: 8,
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.horizontal(right: Radius.circular(4)),
@@ -89,7 +86,12 @@ class AlertHelper {
                       children: [
                         Text(
                           title,
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                            fontFamily: 'GIP',
+                          ),
                         ),
                         const SizedBox(height: 4),
                         Expanded(
@@ -99,6 +101,7 @@ class AlertHelper {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 12,
+                              fontFamily: 'GIP',
                               fontWeight: FontWeight.w400,
                               color: Colors.white.withOpacity(0.8),
                             ),

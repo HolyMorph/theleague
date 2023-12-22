@@ -85,7 +85,7 @@ class TeamItem extends GetView<HomeController> {
                     child: Text(
                       '${controller.getTeamPlayersQty(teamCode: teamCode)}',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 10, color: Colors.white),
+                      style: TextStyle(fontSize: 10, color: Colors.white, fontFamily: 'GIP'),
                     ),
                   ),
                 ),

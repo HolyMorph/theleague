@@ -6,27 +6,19 @@ import '../../home/logic/home_controller.dart';
 import '../../style/my_colors.dart';
 
 class PlayerItem extends GetView<HomeController> {
-  final bool isSelected;
+  final RxBool isSelected;
   final Function(Map<String, dynamic>) onTap;
   final Map<String, dynamic> player;
-  final RxBool selected = RxBool(false);
   final String teamColor;
 
-  PlayerItem({required this.player, required this.onTap, required this.teamColor, this.isSelected = false, super.key});
-
-  @override
-  StatelessElement createElement() {
-    selected.value = isSelected;
-
-    return super.createElement();
-  }
+  PlayerItem({required this.player, required this.onTap, required this.teamColor, required this.isSelected, super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        selected.value = controller.state.selectedPlayers['${controller.state.title}']!.length < 3
-            ? selected.value
+        isSelected.value = controller.state.selectedPlayers['${controller.state.title}']!.length < 3
+            ? isSelected.value
                 ? false
                 : true
             : false;
@@ -44,10 +36,11 @@ class PlayerItem extends GetView<HomeController> {
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    border: selected.value ? Border.all(width: 2, color: Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}'))) : null,
+                    border:
+                        isSelected.value ? Border.all(width: 2, color: Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}'))) : null,
                     color: Color(0xFF3B3C4E),
                     boxShadow: [
-                      selected.value
+                      isSelected.value
                           ? BoxShadow(offset: Offset(0, 1), blurRadius: 8, color: Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}')))
                           : BoxShadow(),
                     ],
@@ -71,7 +64,12 @@ class PlayerItem extends GetView<HomeController> {
                         child: Text(
                           player['jerseyNumber'],
                           textAlign: TextAlign.start,
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                            fontFamily: 'GIP',
+                          ),
                         ),
                       ),
                       Padding(
@@ -82,13 +80,13 @@ class PlayerItem extends GetView<HomeController> {
                               player['firstName'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
                             ),
                             Text(
                               player['lastName'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
                             ),
                             const SizedBox(height: 4),
                             Text(
@@ -99,6 +97,7 @@ class PlayerItem extends GetView<HomeController> {
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w700,
+                                fontFamily: 'GIP',
                                 color: Colors.white.withOpacity(0.5),
                               ),
                             ),
@@ -109,13 +108,13 @@ class PlayerItem extends GetView<HomeController> {
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
-                          color: selected.value ? Color(0xFF4D5163).withOpacity(0.4) : Color(0xFF4D5163),
+                          color: isSelected.value ? Color(0xFF4D5163).withOpacity(0.4) : Color(0xFF4D5163),
                           borderRadius: BorderRadius.vertical(bottom: Radius.circular(5)),
                         ),
                         child: Text(
-                          selected.value ? 'Болих' : 'Сонгох',
+                          isSelected.value ? 'Болих' : 'Сонгох',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white),
+                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
                         ),
                       ),
                     ],
@@ -123,7 +122,7 @@ class PlayerItem extends GetView<HomeController> {
                 ),
               ],
             ),
-            selected,
+            isSelected,
           ),
           Column(
             children: [

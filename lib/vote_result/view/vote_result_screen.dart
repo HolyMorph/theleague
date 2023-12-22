@@ -223,11 +223,7 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                         },
                         child: Text(
                           'Өгсөн саналаа харах',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16, fontFamily: 'GIP'),
                         ),
                       ),
                     ],

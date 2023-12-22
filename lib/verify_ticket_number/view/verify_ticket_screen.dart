@@ -50,6 +50,7 @@ class VerifyTicketScreen extends GetView<VerifyTicketController> {
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
+                fontFamily: 'GIP',
                 fontWeight: FontWeight.w700,
                 shadows: [
                   Shadow(
@@ -63,7 +64,12 @@ class VerifyTicketScreen extends GetView<VerifyTicketController> {
             const SizedBox(height: 16),
             Text(
               'Зөвхөн тухайн өдрийн тоглолтууд дээр нууц кодыг зарлах бөгөөд, энэхүү санал өгөлт нь нийт саналын 40%-ыг эзлэнэ.',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontFamily: 'GIP',
+              ),
             ),
             const SizedBox(height: 64),
             Padding(
@@ -104,16 +110,20 @@ class VerifyTicketScreen extends GetView<VerifyTicketController> {
                       style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
                       onPressed: controller.state.ticketCode.value.length < 4
                           ? null
-                          : controller.state.valid.value
-                              ? () {
-                                  Get.toNamed(MyRoutes.selectLeague);
-                                  LocalStorage.saveData(Constants.TicketCode, controller.state.ticketCode.value);
-                                }
-                              : () => AlertHelper.showFlashAlert(
-                                    title: 'Алдаа гарлаа',
-                                    message: 'Байршил тогтоогчийн зөвшөөрөл өгснөөр үргэлжлүүлэх боломжтой',
-                                    status: FlashStatus.failed,
-                                  ),
+                          : () async {
+                              if (await controller.handleLocationPermission()) {
+                                await controller.getCurrentPosition();
+                                Get.toNamed(MyRoutes.selectLeague);
+                                LocalStorage.saveData(Constants.TicketCode, controller.state.ticketCode.value);
+                              } else {
+                                AlertHelper.showFlashAlert(
+                                  title: 'Алдаа гарлаа',
+                                  message: 'Байршил тогтоогчийн зөвшөөрөл өгснөөр үргэлжлүүлэх боломжтой',
+                                  status: FlashStatus.failed,
+                                );
+                                controller.showLocationDialog();
+                              }
+                            },
                       child: Text('Үргэлжлүүлэх'),
                     ),
                   ),

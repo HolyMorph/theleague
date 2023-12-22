@@ -42,7 +42,7 @@ class PlayerArchiveButton extends GetView<HomeController> {
                     child: Text(
                       '${controller.state.totalQty.value}',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 10, color: Colors.white),
+                      style: TextStyle(fontSize: 10, color: Colors.white, fontFamily: 'GIP'),
                     ),
                   ),
                 ),

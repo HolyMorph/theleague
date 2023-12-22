@@ -37,6 +37,7 @@ class SelectLeagueItem extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
+                    fontFamily: 'GIP',
                   ),
                 ),
               ),
