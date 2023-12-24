@@ -97,6 +97,7 @@ class DrawerItem extends GetView<HomeController> {
                         );
                         controller.state.selectedPlayers.refresh();
                         controller.calculateTotalQty();
+                        controller.setPlayersPosition();
                         LocalStorage.saveData(
                           controller.state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale,
                           controller.state.selectedPlayers,

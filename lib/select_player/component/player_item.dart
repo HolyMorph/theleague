@@ -6,15 +6,16 @@ import '../../home/logic/home_controller.dart';
 import '../../style/my_colors.dart';
 
 class PlayerItem extends GetView<HomeController> {
-  final RxBool isSelected;
   final Function(Map<String, dynamic>) onTap;
   final Map<String, dynamic> player;
   final String teamColor;
 
-  PlayerItem({required this.player, required this.onTap, required this.teamColor, required this.isSelected, super.key});
+  PlayerItem({required this.player, required this.onTap, required this.teamColor, super.key});
 
   @override
   Widget build(BuildContext context) {
+    RxBool isSelected = controller.isSelected(playerId: player['_id']);
+
     return GestureDetector(
       onTap: () {
         isSelected.value = controller.state.selectedPlayers['${controller.state.title}']!.length < 3
@@ -80,13 +81,13 @@ class PlayerItem extends GetView<HomeController> {
                               player['firstName'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
                             ),
                             Text(
                               player['lastName'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
                             ),
                             const SizedBox(height: 4),
                             Text(

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../route/my_routes.dart';
 import '../../style/my_colors.dart';
+import '../../utils/basic_utils.dart';
 import '../logic/onboarding_controller.dart';
 
 class OnboardingScreen extends GetView<OnboardingController> {
@@ -86,7 +87,9 @@ class OnboardingScreen extends GetView<OnboardingController> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              BasicUtils().urlLaunch('https://theleague.mn/the-league-conditions.html');
+                            },
                             child: Text(
                               'Үйлчилгээний нөхцөл',
                               style: TextStyle(
@@ -102,7 +105,9 @@ class OnboardingScreen extends GetView<OnboardingController> {
                             style: TextStyle(color: Color(0xFF8B8B8B), fontSize: 12, fontFamily: 'GIP'),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              BasicUtils().urlLaunch('https://theleague.mn/the-league-privacy-policy.html');
+                            },
                             child: Text(
                               'Нууцлалын бодлогыг',
                               style: TextStyle(color: Color(0xFF9E9E9E), fontWeight: FontWeight.w700, fontSize: 12, fontFamily: 'GIP'),

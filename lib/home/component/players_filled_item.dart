@@ -9,12 +9,24 @@ class PlayersFilledItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100,
+      width: 110,
       child: Wrap(
         alignment: WrapAlignment.center,
         verticalDirection: VerticalDirection.up,
         spacing: 4,
-        children: players!.map((element) => ChangePlayerItem(imageUrl: element['avatarUrl'])).toList(),
+        children: [
+          if (players!.length < 2 && players!.length > 0)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.add_circle_outline_rounded, color: Colors.white, size: 40),
+                const SizedBox(width: 4),
+                Icon(Icons.add_circle_outline_rounded, color: Colors.white, size: 40),
+              ],
+            ),
+          for (var player in players!) ChangePlayerItem(imageUrl: player['avatarUrl']),
+          if (players!.length < 3 && players!.length > 1) Icon(Icons.add_circle_outline_rounded, color: Colors.white, size: 40),
+        ],
       ),
     );
   }

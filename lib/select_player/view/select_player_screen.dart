@@ -117,13 +117,8 @@ class SelectPlayerScreen extends GetView<HomeController> {
                                       itemCount: controller.state.teamPlayers.length,
                                       shrinkWrap: true,
                                       itemBuilder: (context, index) {
-                                        RxBool selected = controller.isSelected(playerId: controller.state.teamPlayers[index]['_id']);
-
-                                        log('selected: ${selected}');
-
                                         return PlayerItem(
                                           player: controller.state.teamPlayers[index],
-                                          isSelected: selected,
                                           teamColor: controller.state.teams
                                               .firstWhere((element) => element['code'] == controller.state.selectedTeamCode.value)['colorCode'],
                                           onTap: (player) => addRemoveFunction(player: player),

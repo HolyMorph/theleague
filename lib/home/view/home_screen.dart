@@ -148,10 +148,7 @@ class HomeScreen extends GetView<HomeController> {
                                 message: controller.state.totalQty.value < 12
                                     ? 'Та саналаа бүрэн өгөөгүй байна, та санал өгөхдөө итгэлтэй байна уу?'
                                     : 'Та санал өгөхдөө итгэлтэй байна уу?',
-                                onTap: () async {
-                                  Get.back();
-                                  await LocalStorage.getData(Constants.TicketCode) != null ? controller.voteArena() : controller.voteOnline();
-                                },
+                                onTap: () async => callFunction(),
                               );
                             }
                           : null,
@@ -165,5 +162,10 @@ class HomeScreen extends GetView<HomeController> {
               ),
       ),
     );
+  }
+
+  Future<void> callFunction() async {
+    Get.back();
+    await LocalStorage.getData(Constants.TicketCode) != null ? controller.voteArena() : controller.voteOnline();
   }
 }
