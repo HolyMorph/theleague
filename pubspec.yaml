@@ -28,6 +28,7 @@ dependencies:
   cached_network_image: ^3.3.0
   intl: ^0.18.1
   flutter_launcher_icons: ^0.13.1
+  percent_indicator: ^4.0.1
   geolocator: ^10.1.0
   location: ^5.0.3
 

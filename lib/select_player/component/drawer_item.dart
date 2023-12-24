@@ -41,7 +41,7 @@ class DrawerItem extends GetView<HomeController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CachedNetworkImage(
-                      imageUrl: players[index]['avatarUrl'],
+                      imageUrl: players[index]['avatarUrl'] ?? '',
                       imageBuilder: (context, imageProvider) => Container(
                         height: 40,
                         width: 40,
@@ -66,10 +66,13 @@ class DrawerItem extends GetView<HomeController> {
                           ],
                         ),
                       ),
-                      placeholder: (context, url) => Center(
+                      placeholder: (context, url) => Container(
+                        alignment: Alignment.center,
+                        height: 40,
+                        width: 40,
                         child: CupertinoActivityIndicator(animating: true, radius: 10, color: Colors.white),
                       ),
-                      errorWidget: (context, url, error) => const Icon(Icons.image_outlined, color: Colors.grey, size: 60),
+                      errorWidget: (context, url, error) => Image.asset('assets/icons/ic_player.png', height: 40, width: 40),
                     ),
                     const SizedBox(width: 10),
                     Expanded(

@@ -2,64 +2,72 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PlayerList extends StatelessWidget {
+import '../../storage/local_storage.dart';
+import '../../style/my_colors.dart';
+import '../../utils/constants.dart';
+import '../logic/vote_result_controller.dart';
+
+class PlayerList extends GetView<VoteResultController> {
   final List<dynamic> leaderboard;
-  const PlayerList({required this.leaderboard, Key? key}) : super(key: key);
+  PlayerList({required this.leaderboard, Key? key}) : super(key: key);
+
+  final RxList<dynamic> teams = RxList();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: Get.mediaQuery.size.height * 0.3,
-        minHeight: Get.mediaQuery.size.height * 0.2,
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: leaderboard.isNotEmpty
-          ? SingleChildScrollView(
+    teams.value = LocalStorage.getData(Constants.TEAMS);
+
+    return leaderboard.isNotEmpty
+        ? RefreshIndicator(
+            color: MyColors.secondaryColor,
+            onRefresh: () async {
+              await controller.refreshFunction();
+            },
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Column(
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   for (var index = 0; index < leaderboard.length; index++)
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 20,
-                                child: Text(
-                                  '${index + 1}.',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 6.5),
-                              CachedNetworkImage(
-                                imageUrl: leaderboard[index]['avatarUrl'],
-                                height: 20,
-                                width: 20,
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                leaderboard[index]['firstName'],
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            '${index + 1}.',
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'GIP',
+                            ),
                           ),
+                          const SizedBox(width: 6),
+                          CachedNetworkImage(
+                            imageUrl: teams.firstWhereOrNull((element) => element['code'] == leaderboard[index]['teamCode'])['logoUrl'],
+                            height: 20,
+                            width: 20,
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            '${leaderboard[index]['lastName'].substring(0, 1)}. ${leaderboard[index]['firstName']}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'GIP',
+                            ),
+                          ),
+                          const Spacer(),
                           Text(
                             '${leaderboard[index]['score']}',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 12,
+                              fontSize: 16,
+                              fontFamily: 'GIP',
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -68,22 +76,28 @@ class PlayerList extends StatelessWidget {
                     ),
                 ],
               ),
-            )
-          : SizedBox(
-              height: Get.mediaQuery.size.height * 0.2,
-              child: Center(
-                child: Text(
-                  'Одоогоор санал алга байна',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
-                    fontFamily: 'GIP',
-                  ),
+            ),
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/icons/ic_empty.png',
+                scale: 3,
+                color: Colors.white.withOpacity(0.5),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Одоогоор санал алга байна',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.5),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                  fontFamily: 'GIP',
                 ),
               ),
-            ),
-    );
+            ],
+          );
   }
 }

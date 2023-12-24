@@ -26,10 +26,7 @@ class VoteResultController extends GetxController {
   Future<void> getVoteHistory() async {
     List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
 
-    dynamic response = await ApiClient.sendRequest(
-      '/api/me/vote-history',
-      method: Method.get,
-    );
+    dynamic response = await ApiClient.sendRequest('/api/me/vote-history', method: Method.get);
 
     if (MezornClientHelper.isValidResponse(response)) {
       List<dynamic> histories = response.data['result']['docs'];
@@ -44,10 +41,10 @@ class VoteResultController extends GetxController {
           },
           "createdAt": "",
         };
-        List<dynamic> pointguard = response.data['result']['docs'][index]['vote']['PG'];
-        List<dynamic> forward = response.data['result']['docs'][index]['vote']['F'];
-        List<dynamic> guard = response.data['result']['docs'][index]['vote']['G'];
-        List<dynamic> center = response.data['result']['docs'][index]['vote']['C'];
+        List<dynamic> pointguard = response.data['result']['docs'][index]['vote']['PG'] ?? [];
+        List<dynamic> forward = response.data['result']['docs'][index]['vote']['F'] ?? [];
+        List<dynamic> guard = response.data['result']['docs'][index]['vote']['G'] ?? [];
+        List<dynamic> center = response.data['result']['docs'][index]['vote']['C'] ?? [];
 
         result['_id'] = histories[index]['_id'];
         DateTime dateTime = DateTime.parse(histories[index]['createdAt']);
@@ -101,6 +98,7 @@ class VoteResultController extends GetxController {
   }
 
   Future<void> getVoteResult() async {
+    state.isLoading.value = true;
     dynamic response = await ApiClient.sendRequest(
       '/api/me/vote-result',
       method: Method.get,
@@ -110,7 +108,6 @@ class VoteResultController extends GetxController {
     if (MezornClientHelper.isValidResponse(response)) {
       List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
       List<dynamic> teams = await LocalStorage.getData(Constants.META_DATA)['teams'];
-      log('players : $players');
       List<dynamic> online = response.data['result']['votes']['online'];
       List<dynamic> arena = response.data['result']['votes']['arena'];
       List<dynamic> coach = response.data['result']['votes']['coach'];
@@ -181,5 +178,17 @@ class VoteResultController extends GetxController {
     getVoteHistory();
     getVoteResult();
     super.onInit();
+  }
+
+  Future<void> refreshFunction() async {
+    state.onlineVoteResultsMale.clear();
+    state.onlineVoteResultsFemale.clear();
+    state.arenaVoteResultsFemale.clear();
+    state.arenaVoteResultsMale.clear();
+    state.coachVoteResultsFemale.clear();
+    state.coachVoteResultsMale.clear();
+    state.voteHistories.clear();
+    await getVoteResult();
+    await getVoteHistory();
   }
 }

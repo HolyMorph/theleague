@@ -19,13 +19,13 @@ class PlayersFilledItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.add_circle_outline_rounded, color: Colors.white, size: 40),
+                Image.asset('assets/icons/ic_add.png', scale: 3),
                 const SizedBox(width: 4),
-                Icon(Icons.add_circle_outline_rounded, color: Colors.white, size: 40),
+                Image.asset('assets/icons/ic_add.png', scale: 3),
               ],
             ),
-          for (var player in players!) ChangePlayerItem(imageUrl: player['avatarUrl']),
-          if (players!.length < 3 && players!.length > 1) Icon(Icons.add_circle_outline_rounded, color: Colors.white, size: 40),
+          for (var player in players!) ChangePlayerItem(imageUrl: player['avatarUrl'] ?? '', teamCode: player['teamCode'] ?? ''),
+          if (players!.length < 3 && players!.length > 1) Image.asset('assets/icons/ic_add.png', scale: 3),
         ],
       ),
     );

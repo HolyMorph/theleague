@@ -7,6 +7,7 @@ import '../onboarding/view/onboarding_screen.dart';
 import '../select_league/view/select_league_screen.dart';
 import '../select_player/view/select_player_screen.dart';
 import '../splash/logic/splash_binding.dart';
+import '../splash/view/reload_screen.dart';
 import '../splash/view/splash_screen.dart';
 import '../verify_ticket_number/logic/verify_ticket_binding.dart';
 import '../verify_ticket_number/view/verify_ticket_screen.dart';
@@ -59,6 +60,12 @@ class MyPages {
     GetPage(
       name: MyRoutes.voteResult,
       page: () => VoteResultScreen(),
+    ),
+
+    /// Vote result screen
+    GetPage(
+      name: MyRoutes.reloadScreen,
+      page: () => ReloadScreen(),
     ),
   ];
 }

@@ -132,30 +132,32 @@ class HomeScreen extends GetView<HomeController> {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: <Color>[
-                          Color(0xFF4C1C1A),
-                          Color(0xFF272739),
-                        ],
+                        colors: <Color>[Color(0xFF4C1C1A), Colors.transparent],
                         tileMode: TileMode.mirror,
                       ),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
-                      onPressed: controller.state.totalQty.value > 0
-                          ? () {
-                              AlertHelper.showDialog(
-                                message: controller.state.totalQty.value < 12
-                                    ? 'Та саналаа бүрэн өгөөгүй байна, та санал өгөхдөө итгэлтэй байна уу?'
-                                    : 'Та санал өгөхдөө итгэлтэй байна уу?',
-                                onTap: () async => callFunction(),
-                              );
-                            }
-                          : null,
-                      child: Text(
-                        'Саналаа өгөх',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
-                      ),
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
+                          onPressed: controller.state.totalQty.value > 0
+                              ? () {
+                                  AlertHelper.showDialog(
+                                    message: controller.state.totalQty.value < 12
+                                        ? 'Та саналаа бүрэн өгөөгүй байна, та санал өгөхдөө итгэлтэй байна уу?'
+                                        : 'Та санал өгөхдөө итгэлтэй байна уу?',
+                                    onTap: () async => callFunction(),
+                                  );
+                                }
+                              : null,
+                          child: Text(
+                            'Саналаа өгөх',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
+                          ),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
+                      ],
                     ),
                   ),
                 ],

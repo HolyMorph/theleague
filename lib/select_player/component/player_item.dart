@@ -128,7 +128,7 @@ class PlayerItem extends GetView<HomeController> {
           Column(
             children: [
               CachedNetworkImage(
-                imageUrl: player['avatarUrl'],
+                imageUrl: player['avatarUrl'] ?? '',
                 alignment: Alignment.center,
                 imageBuilder: (context, imageProvider) => Container(
                   height: 100,
@@ -137,10 +137,17 @@ class PlayerItem extends GetView<HomeController> {
                     image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
                   ),
                 ),
-                placeholder: (context, url) => Center(
+                placeholder: (context, url) => Container(
+                  alignment: Alignment.center,
+                  height: 100,
+                  width: 100,
                   child: CupertinoActivityIndicator(animating: true, radius: 10, color: Colors.white),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.image_outlined, color: Colors.grey, size: 60),
+                errorWidget: (context, url, error) => Image.asset(
+                  'assets/icons/ic_player.png',
+                  height: 100,
+                  width: 100,
+                ),
               ),
               Divider(height: 1, thickness: 2, color: Color(int.parse('0xFF${teamColor.substring(1, teamColor.length)}'))),
             ],

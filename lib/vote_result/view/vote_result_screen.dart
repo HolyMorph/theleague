@@ -36,54 +36,46 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
     return GetBuilder(
       init: VoteResultController(),
       builder: (VoteResultController controller) {
-        return Obx(() {
-          List<dynamic> _leaderboard() {
-            switch (tabController.index) {
-              case 0:
-                return controller.state.isMale.value ? controller.state.onlineVoteResultsMale : controller.state.onlineVoteResultsFemale;
-              case 1:
-                return controller.state.isMale.value ? controller.state.arenaVoteResultsMale : controller.state.arenaVoteResultsFemale;
-              case 2:
-                return controller.state.isMale.value ? controller.state.coachVoteResultsMale : controller.state.coachVoteResultsFemale;
-              default:
-                return controller.state.onlineVoteResultsMale;
+        return Obx(
+          () {
+            List<dynamic> _leaderboard() {
+              switch (tabController.index) {
+                case 0:
+                  return controller.state.isMale.value ? controller.state.onlineVoteResultsMale : controller.state.onlineVoteResultsFemale;
+                case 1:
+                  return controller.state.isMale.value ? controller.state.arenaVoteResultsMale : controller.state.arenaVoteResultsFemale;
+                case 2:
+                  return controller.state.isMale.value ? controller.state.coachVoteResultsMale : controller.state.coachVoteResultsFemale;
+                default:
+                  return controller.state.onlineVoteResultsMale;
+              }
             }
-          }
 
-          return Scaffold(
-            key: _voteScaffoldKey,
-            endDrawer: Drawer(
-              elevation: 2,
-              width: Get.size.width * 0.8,
-              child: VoteDrawer(
-                histories: controller.state.voteHistories,
-                gender: controller.state.isMale.value ? 'male' : 'female',
+            return Scaffold(
+              key: _voteScaffoldKey,
+              endDrawer: Drawer(
+                elevation: 2,
+                width: Get.size.width * 0.8,
+                backgroundColor: MyColors.scaffoldBackgroundColor,
+                child: VoteDrawer(
+                  histories: controller.state.voteHistories,
+                  gender: controller.state.isMale.value ? 'male' : 'female',
+                ),
               ),
-            ),
-            backgroundColor: MyColors.scaffoldBackgroundColor,
-            body: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
+              backgroundColor: MyColors.scaffoldBackgroundColor,
+              body: SafeArea(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       const SizedBox(height: 16),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            'assets/icons/ic_logo.png',
-                            height: 30,
-                            width: 37,
-                          ),
+                          Image.asset('assets/icons/ic_logo.png', scale: 10),
                           const SizedBox(width: 12),
-                          Image.asset(
-                            'assets/images/all_star.png',
-                            height: 30,
-                            width: 118,
-                          ),
+                          Image.asset('assets/images/all_star.png', scale: 2),
                         ],
                       ),
                       const SizedBox(height: 32),
@@ -158,7 +150,7 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                         length: 3,
                         child: TabBar(
                           controller: tabController,
-                          labelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+                          labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
                           indicatorSize: TabBarIndicatorSize.tab,
                           indicatorColor: Colors.white,
                           dividerColor: Colors.white.withOpacity(0.5),
@@ -167,26 +159,26 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                           tabs: [
                             Tab(text: 'Онлайн'),
                             Tab(text: 'Тоглолтын'),
-                            Tab(text: 'Дасгалжуулагчийн'),
+                            Tab(text: 'Көүчийн'),
                           ],
                         ),
                       ),
                       const SizedBox(height: 20),
 
                       /// Players Leaderboard
-                      controller.state.isLoading.value
-                          ? CircularProgressIndicator()
-                          : PlayerList(
-                              leaderboard: _leaderboard(),
-                            ),
+                      if (controller.state.isLoading.value)
+                        Expanded(
+                          child: Center(
+                            child: CircularProgressIndicator(color: MyColors.secondaryColor),
+                          ),
+                        )
+                      else
+                        Expanded(child: PlayerList(leaderboard: _leaderboard())),
+
                       const SizedBox(height: 8),
                       const Divider(color: Color(0xff323232)),
                       const SizedBox(height: 8),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      /// Vote button
+
                       ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -228,11 +220,11 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
-          );
-        });
+            );
+          },
+        );
       },
     );
   }

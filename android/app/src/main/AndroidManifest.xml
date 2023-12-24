@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mn.mezorn.mezorn_dummy">
+    package="mn.mezorn.duiz">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATION"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />

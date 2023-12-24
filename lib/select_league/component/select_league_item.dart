@@ -17,6 +17,7 @@ class SelectLeagueItem extends StatelessWidget {
         onTap: onTap,
         child: Container(
           width: double.infinity,
+          clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.transparent,
@@ -24,10 +25,14 @@ class SelectLeagueItem extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Image.asset(
-                imagePath,
-                fit: BoxFit.contain,
-                width: double.infinity,
+              ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: 180,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(16),

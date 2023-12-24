@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "104585798912",
-    "project_id": "mezorn-flutter-dummy",
-    "storage_bucket": "mezorn-flutter-dummy.appspot.com"
+    "project_number": "740247518682",
+    "project_id": "theleague-e0956",
+    "storage_bucket": "theleague-e0956.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:104585798912:android:e77a20fa420ae3d75bbfe5",
+        "mobilesdk_app_id": "1:740247518682:android:1d7d5fe211f0d766f894e3",
         "android_client_info": {
-          "package_name": "mn.mezorn.mezorn_dummy"
+          "package_name": "mn.mezorn.duiz"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "104585798912-b89v4mmcmrju57onq8qqrmddbtmlar45.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAghUYRN5WSxpn9eacVX_XpTiVf4XNOvpM"
+          "current_key": "AIzaSyA9QXTbs3K85RJbe1PAC5l4stQWm205VhY"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "104585798912-b89v4mmcmrju57onq8qqrmddbtmlar45.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

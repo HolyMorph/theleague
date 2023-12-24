@@ -4,7 +4,7 @@ class ApiClient {
   static final MezornClient _mezornApiClient = MezornClient();
 
   /// Сервис дуудах production орчны URL.
-  static const baseUrl = 'https://app-api.dev.theleague.mn/v1';
+  static const baseUrl = 'https://app-api.theleague.mn/v1';
 
   /// Сервис дуудах хөгжүүлэлтийн орчны URL.
   static const devUrl = 'https://app-api.dev.theleague.mn/v1';

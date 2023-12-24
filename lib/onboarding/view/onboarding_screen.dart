@@ -138,6 +138,23 @@ class OnboardingScreen extends GetView<OnboardingController> {
               ],
             ),
           ),
+          Positioned(
+            left: 8,
+            top: MediaQuery.of(context).viewPadding.top + 8,
+            child: Material(
+              color: Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                onTap: () => Get.back(),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.transparent),
+                  child: Icon(Icons.chevron_left, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

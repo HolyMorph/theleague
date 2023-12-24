@@ -13,9 +13,8 @@ class VoteDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      color: MyColors.scaffoldBackgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,60 +27,88 @@ class VoteDrawer extends StatelessWidget {
               fontFamily: 'GIP',
             ),
           ),
+          const SizedBox(height: 12),
+          Divider(color: Colors.white.withOpacity(0.05), height: 1, thickness: 1),
           const SizedBox(height: 24),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  for (var index = 0; index < histories.length; index++)
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 6),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: MyColors.canvasColor,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '${histories[index]['createdAt']}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'GIP',
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                            decoration: BoxDecoration(
-                              color: MyColors.secondaryColor,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                Get.toNamed(
-                                  '${MyRoutes.homeScreen}/$gender',
-                                  arguments: histories[index]['vote'],
-                                );
-                              },
-                              child: Text(
-                                'Сонгох',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'GIP',
-                                ),
+            child: histories.isNotEmpty
+                ? SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        for (var index = 0; index < histories.length; index++)
+                          InkWell(
+                            onTap: () {
+                              log('arhiv: ${histories[index]['vote']}');
+                              Get.toNamed(
+                                '${MyRoutes.homeScreen}/$gender',
+                                arguments: histories[index]['vote'],
+                              );
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(vertical: 6),
+                              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                              decoration: BoxDecoration(
+                                color: MyColors.canvasColor,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '${histories[index]['createdAt']}',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'GIP',
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                    decoration: BoxDecoration(
+                                      color: MyColors.secondaryColor,
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text(
+                                      'Сонгох',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'GIP',
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                      ],
                     ),
-                ],
-              ),
-            ),
+                  )
+                : Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/icons/ic_empty.png',
+                          scale: 3,
+                          color: Colors.white.withOpacity(0.5),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Одоогоор санал алга байна',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.5),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                            fontFamily: 'GIP',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
           ),
         ],
       ),

@@ -94,10 +94,15 @@ class HomeController extends GetxController {
   void onInit() {
     gender = Get.parameters['gender']!;
     if (LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) != null) {
-      Map<String, RxList<Map<String, dynamic>>> localData =
-          LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale);
-      state.selectedPlayers.value = localData;
+      state.selectedPlayers.value =
+          Get.arguments != null ? Get.arguments : LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale);
     }
+
+    state.teams.clear();
+    List<dynamic> allTeam = LocalStorage.getData(Constants.TEAMS);
+    allTeam.forEach((element) {
+      if (element['gender'] == state.gender.value) state.teams.add(element);
+    });
 
     super.onInit();
   }
@@ -156,12 +161,8 @@ class HomeController extends GetxController {
           status: FlashStatus.failed,
         );
       } else {
-        AlertHelper.showDialog(
-          message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.',
-          onTap: () {
-            Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
-          },
-        );
+        AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.');
+        Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
         _clearData();
       }
     } else {
@@ -190,7 +191,7 @@ class HomeController extends GetxController {
     isLoading = false;
     if (MezornClientHelper.isValidResponse(response)) {
       if (response.data['statusCode'] == 400) {
-        var message = response.data['error']['message_mn'] ?? response.data['error']['message'] as String;
+        var message = response.data['message_mn'] ?? response.data['error']['message'] as String;
 
         AlertHelper.showFlashAlert(
           title: 'Алдаа гарлаа',
@@ -198,12 +199,8 @@ class HomeController extends GetxController {
           status: FlashStatus.failed,
         );
       } else {
-        AlertHelper.showDialog(
-          message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.',
-          onTap: () {
-            Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
-          },
-        );
+        AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.');
+        Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
         _clearData();
       }
     } else {

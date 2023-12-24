@@ -1,4 +1,4 @@
-package mn.mezorn.mezorn_dummy
+package mn.mezorn.duiz
 
 import io.flutter.embedding.android.FlutterActivity
 

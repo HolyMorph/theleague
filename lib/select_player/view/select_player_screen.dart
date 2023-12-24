@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,12 +22,6 @@ class SelectPlayerScreen extends GetView<HomeController> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       controller.state.playerLoading.value = true;
       await Future.delayed(const Duration(milliseconds: 500)).then((value) {
-        controller.state.teams.clear();
-        List<dynamic> allTeam = LocalStorage.getData(Constants.TEAMS);
-        allTeam.forEach((element) {
-          if (element['gender'] == controller.state.gender.value) controller.state.teams.add(element);
-        });
-
         controller.selectedTeamCode = controller.state.teams.first['code'];
         controller.setPlayersPosition();
         controller.calculateTotalQty();
@@ -138,20 +130,25 @@ class SelectPlayerScreen extends GetView<HomeController> {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: <Color>[Color(0xFF4C1C1A), Color(0xFF272739)],
+                        colors: <Color>[Color(0xFF4C1C1A), Colors.transparent],
                         tileMode: TileMode.mirror,
                       ),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: Text(
-                        'Сонголтоо харах',
-                        style: TextStyle(fontFamily: 'GIP', fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: Text(
+                            'Сонголтоо харах',
+                            style: TextStyle(fontFamily: 'GIP', fontSize: 16, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
+                      ],
                     ),
                   ),
                 ],
