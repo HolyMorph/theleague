@@ -103,6 +103,7 @@ class HomeController extends GetxController {
     allTeam.forEach((element) {
       if (element['gender'] == state.gender.value) state.teams.add(element);
     });
+    calculateTotalQty();
 
     super.onInit();
   }
@@ -154,6 +155,8 @@ class HomeController extends GetxController {
     if (MezornClientHelper.isValidResponse(response)) {
       if (response.data['statusCode'] == 400) {
         var message = response.data['message_mn'] ?? response.data['message'] as String;
+        LocalStorage.saveData(Constants.TicketCode, null);
+        Get.offNamed(MyRoutes.onboarding);
 
         AlertHelper.showFlashAlert(
           title: 'Алдаа гарлаа',
