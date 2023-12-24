@@ -7,9 +7,11 @@ import '../../route/my_routes.dart';
 import '../../service/api_client.dart';
 import '../../storage/local_storage.dart';
 import '../../utils/constants.dart';
+import '../../vote_result/logic/vote_result_controller.dart';
 import '../state/home_state.dart';
 
 class HomeController extends GetxController {
+  final VoteResultController _voteController = Get.find();
   final state = HomeState();
 
   void set gender(String gender) => state.gender.value = gender;
@@ -164,8 +166,10 @@ class HomeController extends GetxController {
           status: FlashStatus.failed,
         );
       } else {
+        await _voteController.refreshFunction();
         AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.');
         Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
+
         _clearData();
       }
     } else {
@@ -202,6 +206,7 @@ class HomeController extends GetxController {
           status: FlashStatus.failed,
         );
       } else {
+        await _voteController.refreshFunction();
         AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.');
         Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
         _clearData();

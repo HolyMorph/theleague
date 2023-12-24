@@ -196,6 +196,7 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
+                            fontFamily: 'GIP',
                           ),
                         ),
                       ),
