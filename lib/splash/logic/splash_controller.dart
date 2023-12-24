@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
@@ -19,21 +18,20 @@ class SplashController extends GetxController {
   final state = SplashState();
 
   Future<void> checkUserToken() async {
-    String token = await LocalStorage.getData(Constants.TOKEN) ?? "";
-    log('token : $token');
-    if (token.isEmpty) {
-      await _requestToken();
-      _getMetaData();
-    } else {
-      //int timestamp = await LocalStorage.getData(Constants.TIMESTAMP);
-      _getMetaData();
-    }
+    Future.delayed(const Duration(milliseconds: 2500), () async {
+      String token = await LocalStorage.getData(Constants.TOKEN) ?? '';
+      if (token.isEmpty) {
+        await _requestToken();
+        await _getMetaData();
+      } else {
+        await _getMetaData();
+      }
+    });
   }
 
   @override
   void onInit() {
     checkUserToken();
-
     super.onInit();
   }
 
@@ -100,8 +98,6 @@ class SplashController extends GetxController {
       'phoneMake': phoneMake,
       'phoneModel': phoneModel ?? (osType == 'ios' ? 'iphone' : 'android'),
     };
-
-    log('body : $body');
 
     dynamic response = await ApiClient.sendRequest(
       '/auth/request-token',
