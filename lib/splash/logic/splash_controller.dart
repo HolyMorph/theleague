@@ -19,7 +19,7 @@ class SplashController extends GetxController {
 
   Future<void> checkUserToken() async {
     Future.delayed(const Duration(milliseconds: 2500), () async {
-      String token = await LocalStorage.getData(Constants.TOKEN) ?? '';
+      String token = await MezornClientHelper().token;
       if (token.isEmpty) {
         await _requestToken();
         await _getMetaData();
@@ -37,7 +37,7 @@ class SplashController extends GetxController {
 
   Future<void> _getMetaData() async {
     state.isLoading.value = true;
-    dynamic response = await ApiClient.sendRequest('/api/me', method: Method.get);
+    dynamic response = await ApiClient().sendRequest('/api/me', method: Method.get);
 
     if (MezornClientHelper.isValidResponse(response)) {
       if (response.data['statusCode'] == 400 || response.data['statusCode'] == 405) {
@@ -99,11 +99,7 @@ class SplashController extends GetxController {
       'phoneModel': phoneModel ?? (osType == 'ios' ? 'iphone' : 'android'),
     };
 
-    dynamic response = await ApiClient.sendRequest(
-      '/auth/request-token',
-      method: Method.post,
-      body: body,
-    );
+    dynamic response = await ApiClient().sendRequest('/auth/request-token', method: Method.post, body: body);
 
     if (response.data['statusCode'] == 400 || response.data['statusCode'] == 401) {
       AlertHelper.showFlashAlert(
@@ -116,7 +112,6 @@ class SplashController extends GetxController {
     bool isSuccess = await MezornClientHelper.isValidResponse(response);
 
     if (isSuccess) {
-      await LocalStorage.saveData(Constants.TOKEN, response.data['result']['token']);
       MezornClientHelper().saveToken = response.data['result']['token'];
     }
 

@@ -21,7 +21,7 @@ class VerifyTicketController extends GetxController {
   Future<void> checkTicket() async {
     var body = {'game_code': state.ticketCode.value};
 
-    dynamic response = await ApiClient.sendRequest('/api/me/check-game-code', method: Method.post, body: body);
+    dynamic response = await ApiClient().sendRequest('/api/me/check-game-code', method: Method.post, body: body);
 
     if (MezornClientHelper.isValidResponse(response)) {
       if (response.data['statusCode'] == 400) {

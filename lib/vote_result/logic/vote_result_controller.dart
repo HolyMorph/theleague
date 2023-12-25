@@ -14,7 +14,7 @@ class VoteResultController extends GetxController {
   VoteResultState state = VoteResultState();
 
   Future<void> checkVote() async {
-    dynamic response = await ApiClient.sendRequest(
+    dynamic response = await ApiClient().sendRequest(
       'api/me/check-vote',
       method: Method.post,
       body: {'gender': state.gender},
@@ -26,7 +26,7 @@ class VoteResultController extends GetxController {
   Future<void> getVoteHistory() async {
     List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
 
-    dynamic response = await ApiClient.sendRequest('/api/me/vote-history', method: Method.get);
+    dynamic response = await ApiClient().sendRequest('/api/me/vote-history', method: Method.get);
 
     if (MezornClientHelper.isValidResponse(response)) {
       List<dynamic> histories = response.data['result']['docs'];
@@ -99,10 +99,7 @@ class VoteResultController extends GetxController {
 
   Future<void> getVoteResult() async {
     state.isLoading.value = true;
-    dynamic response = await ApiClient.sendRequest(
-      '/api/me/vote-result',
-      method: Method.get,
-    );
+    dynamic response = await ApiClient().sendRequest('/api/me/vote-result', method: Method.get);
 
     log('getVoteResult response : $response');
     if (MezornClientHelper.isValidResponse(response)) {

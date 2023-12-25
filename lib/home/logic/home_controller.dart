@@ -148,11 +148,7 @@ class HomeController extends GetxController {
       'vote': state.preparedList,
     };
     isLoading = true;
-    dynamic response = await ApiClient.sendRequest(
-      '/api/me/vote-arena',
-      method: Method.post,
-      body: body,
-    );
+    dynamic response = await ApiClient().sendRequest('/api/me/vote-arena', method: Method.post, body: body);
     isLoading = false;
     if (MezornClientHelper.isValidResponse(response)) {
       if (response.data['statusCode'] == 400) {
@@ -190,11 +186,7 @@ class HomeController extends GetxController {
       'vote': state.preparedList,
     };
     isLoading = true;
-    dynamic response = await ApiClient.sendRequest(
-      '/api/me/vote-online',
-      method: Method.post,
-      body: body,
-    );
+    dynamic response = await ApiClient().sendRequest('/api/me/vote-online', method: Method.post, body: body);
     isLoading = false;
     if (MezornClientHelper.isValidResponse(response)) {
       if (response.data['statusCode'] == 400) {

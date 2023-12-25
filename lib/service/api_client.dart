@@ -1,7 +1,18 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter_udid/flutter_udid.dart';
+import 'package:get/get.dart' as route;
 import 'package:mezorn_api_caller/api_caller.dart';
+
+import '../alert/alert_helper.dart';
+import '../route/my_routes.dart';
+import '../storage/local_storage.dart';
+import '../utils/constants.dart';
 
 class ApiClient {
   static final MezornClient _mezornApiClient = MezornClient();
+  final route.RxBool isRefreshCalled = route.RxBool(false);
 
   /// Сервис дуудах production орчны URL.
   static const baseUrl = 'https://app-api.theleague.mn/v1';
@@ -42,7 +53,7 @@ class ApiClient {
   /// [header] -> сервис дээр нэмэлтээр header зааж өгөхөөр бол ашиглана
   ///
   /// [isMultiPart] -> сервисийн contentType-ийг multipart төрлөөр илгээх эсэх
-  static Future<dynamic> sendRequest(
+  Future<dynamic> sendRequest(
     String url, {
     Method method = Method.post,
     dynamic body,
@@ -63,6 +74,82 @@ class ApiClient {
       header: header,
     );
 
-    return _handleResponse(_response);
+    if (_response?.statusCode == 401) {
+      bool _isUpdated = await updateUserToken();
+
+      return _isUpdated
+          ? sendRequest(
+              url,
+              method: method,
+              body: body,
+              queryParam: queryParam,
+              checkServerConnection: checkServerConnection,
+              header: header,
+              isMultiPart: isMultiPart,
+            )
+          : null;
+    } else {
+      return _handleResponse(_response);
+    }
+  }
+
+  Future<bool> updateUserToken() async {
+    if (isRefreshCalled.value) {
+      return false;
+    }
+
+    isRefreshCalled.value = true;
+    final String osType = Platform.operatingSystem;
+    final String osVersion = Platform.operatingSystemVersion;
+    String? phoneModel;
+    String? phoneMake;
+    DeviceInfoPlugin deviceInfo = await DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      phoneMake = androidInfo.device;
+      phoneModel = androidInfo.model;
+    } else if (Platform.isIOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      phoneMake = iosInfo.utsname.machine;
+      phoneModel = iosInfo.name;
+    }
+    String udid = await FlutterUdid.consistentUdid;
+
+    dynamic body = {
+      'appUdId': udid,
+      'osType': osType,
+      'osVersion': osVersion,
+      'phoneMake': phoneMake,
+      'phoneModel': phoneModel ?? (osType == 'ios' ? 'iphone' : 'android'),
+    };
+
+    if (await MezornClientHelper().refreshToken.isEmpty) {
+      MezornClientHelper().saveToken = '';
+      AlertHelper.showFlashAlert(title: 'Алдаа гарлаа', message: 'Дахин эхэлнэ үү');
+      route.Get.offAllNamed(MyRoutes.splash);
+
+      return false;
+    }
+
+    dynamic response = await sendRequest(
+      '/auth/refresh-token',
+      method: Method.post,
+      body: body,
+      header: {'Authorization': '${MezornClientHelper().refreshToken}'},
+    );
+
+    isRefreshCalled.value = false;
+
+    if (MezornClientHelper.isValidResponse(response)) {
+      var token = response.data['data']['result']['token'];
+      var refresh_token = response.data['data']['result']['refreshToken'];
+
+      MezornClientHelper().token = token;
+      MezornClientHelper().refreshToken = refresh_token;
+
+      return true;
+    } else {
+      return false;
+    }
   }
 }
