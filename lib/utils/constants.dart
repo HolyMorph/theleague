@@ -1,5 +1,6 @@
 class Constants {
   /// Token string to get token from local storage
+  static String FCMToken = 'fcmToken';
   static String META_DATA = 'metadata';
   static String PlayersFemale = 'playersFemale';
   static String PlayersMale = 'playersMale';
@@ -12,7 +13,7 @@ class Constants {
   ///
   /// Хэрвээ true бол бүх хүсэлт хөгжүүлэлтийн URL
   /// ашиглаж дуудагдана
-  static bool isDevUrl = true;
+  static bool isDevUrl = false;
 
   ///SplashScreen харуулах хугацаа
   static int splashDelayMillis = 2500;

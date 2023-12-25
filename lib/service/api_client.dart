@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
@@ -5,10 +6,7 @@ import 'package:flutter_udid/flutter_udid.dart';
 import 'package:get/get.dart' as route;
 import 'package:mezorn_api_caller/api_caller.dart';
 
-import '../alert/alert_helper.dart';
 import '../route/my_routes.dart';
-import '../storage/local_storage.dart';
-import '../utils/constants.dart';
 
 class ApiClient {
   static final MezornClient _mezornApiClient = MezornClient();
@@ -62,6 +60,15 @@ class ApiClient {
     Map<String, dynamic>? header,
     bool? isMultiPart,
   }) async {
+    log('SendRequest url: $url , $method');
+
+    if (body != null) {
+      log('SendRequest body: $body');
+    }
+    if (queryParam != null) {
+      log('SendRequest queryParam: $queryParam');
+    }
+
     Response? _response;
 
     _response = await _mezornApiClient.sendRequest(
@@ -74,7 +81,7 @@ class ApiClient {
       header: header,
     );
 
-    if (_response?.statusCode == 401) {
+    if (_response?.statusCode == 401 || _response?.statusCode == 405) {
       bool _isUpdated = await updateUserToken();
 
       return _isUpdated
@@ -125,7 +132,6 @@ class ApiClient {
 
     if (await MezornClientHelper().refreshToken.isEmpty) {
       MezornClientHelper().saveToken = '';
-      AlertHelper.showFlashAlert(title: 'Алдаа гарлаа', message: 'Дахин эхэлнэ үү');
       route.Get.offAllNamed(MyRoutes.splash);
 
       return false;

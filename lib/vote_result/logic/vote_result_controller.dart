@@ -19,8 +19,6 @@ class VoteResultController extends GetxController {
       method: Method.post,
       body: {'gender': state.gender},
     );
-
-    log('checkVote response : $response');
   }
 
   Future<void> getVoteHistory() async {
@@ -92,8 +90,6 @@ class VoteResultController extends GetxController {
           }
         state.voteHistories.add(result);
       }
-
-      log('getVotesHistory response : $response');
     }
   }
 

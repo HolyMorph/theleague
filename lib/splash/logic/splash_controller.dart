@@ -8,6 +8,7 @@ import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
 
 import '../../alert/alert_helper.dart';
 import '../../alert/flash_status.dart';
+import '../../firebase_config.dart';
 import '../../route/my_routes.dart';
 import '../../service/api_client.dart';
 import '../../storage/local_storage.dart';
@@ -26,12 +27,20 @@ class SplashController extends GetxController {
       } else {
         await _getMetaData();
       }
+
+      ///Notification Token
+      ///
+      if (await LocalStorage.getData('fcmSaved') == false) {
+        await _updateFcmToken(token: await LocalStorage.getData(Constants.FCMToken));
+        FirebaseConfig.subscribeToTopic('theleaguepublic');
+      }
     });
   }
 
   @override
   void onInit() {
     checkUserToken();
+
     super.onInit();
   }
 
@@ -113,6 +122,29 @@ class SplashController extends GetxController {
 
     if (isSuccess) {
       MezornClientHelper().saveToken = response.data['result']['token'];
+      MezornClientHelper().refreshToken = response.data['result']['refreshToken'];
+    }
+
+    return isSuccess;
+  }
+
+  Future<bool> _updateFcmToken({required String token}) async {
+    final String osType = Platform.operatingSystem;
+    dynamic body = {
+      'os_type': osType,
+      "notification_token": token,
+    };
+
+    dynamic response = await ApiClient().sendRequest(
+      '/api/me/update-pn-token',
+      method: Method.post,
+      body: body,
+    );
+
+    bool isSuccess = await MezornClientHelper.isValidResponse(response);
+
+    if (isSuccess) {
+      LocalStorage.saveData(Constants.FCMToken, token);
     }
 
     return isSuccess;
