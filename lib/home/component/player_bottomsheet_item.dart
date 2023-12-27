@@ -33,7 +33,7 @@ class PlayerBottomSheetItem extends GetView<HomeController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CachedNetworkImage(
-                      imageUrl: players[index]['avatarUrl'] ?? '',
+                      imageUrl: '${players[index]['avatarUrl']}?size=w100',
                       imageBuilder: (context, imageProvider) => Container(
                         height: 40,
                         width: 40,

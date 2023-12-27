@@ -27,6 +27,42 @@ class HomeController extends GetxController {
     });
   }
 
+  String getPosition({required String positionName}) {
+    switch (positionName) {
+      case 'G':
+        {
+          return 'G';
+        }
+      case 'PG':
+        {
+          return 'PG';
+        }
+      case 'SG':
+        {
+          return 'G';
+        }
+      case 'F':
+        {
+          return 'F';
+        }
+      case 'SF':
+        {
+          return 'F';
+        }
+      case 'PF':
+        {
+          return 'F';
+        }
+      case 'C':
+        {
+          return 'C';
+        }
+
+      default:
+        return '';
+    }
+  }
+
   String getPositionName({required String position}) {
     switch (position) {
       case 'G':
@@ -124,14 +160,10 @@ class HomeController extends GetxController {
   void setPlayersPosition() {
     state.teamPlayers.clear();
     Map<String, dynamic> team = state.teams.firstWhereOrNull((element) => element['code'] == state.selectedTeamCode.value) ?? {};
-
     for (var player in team['players']) {
       for (var position in player['positionCodes']) {
-        if (position == state.title) {
+        if (getPosition(positionName: position) == state.title) {
           state.teamPlayers.add(player);
-          if (state.title == 'F' && position == 'PF') {
-            state.teamPlayers.add(player);
-          }
         }
       }
     }
@@ -148,11 +180,7 @@ class HomeController extends GetxController {
       'vote': state.preparedList,
     };
     isLoading = true;
-    dynamic response = await ApiClient.sendRequest(
-      '/api/me/vote-arena',
-      method: Method.post,
-      body: body,
-    );
+    dynamic response = await ApiClient().sendRequest('/api/me/vote-arena', method: Method.post, body: body);
     isLoading = false;
     if (MezornClientHelper.isValidResponse(response)) {
       if (response.data['statusCode'] == 400) {
@@ -190,11 +218,7 @@ class HomeController extends GetxController {
       'vote': state.preparedList,
     };
     isLoading = true;
-    dynamic response = await ApiClient.sendRequest(
-      '/api/me/vote-online',
-      method: Method.post,
-      body: body,
-    );
+    dynamic response = await ApiClient().sendRequest('/api/me/vote-online', method: Method.post, body: body);
     isLoading = false;
     if (MezornClientHelper.isValidResponse(response)) {
       if (response.data['statusCode'] == 400) {

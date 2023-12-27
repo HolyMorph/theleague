@@ -35,19 +35,22 @@ class PlayerList extends GetView<VoteResultController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            '${index + 1}.',
-                            maxLines: 1,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'GIP',
+                          SizedBox(
+                            width: 30,
+                            child: Text(
+                              '${index + 1}.',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'GIP',
+                              ),
                             ),
                           ),
-                          const SizedBox(width: 6),
                           CachedNetworkImage(
-                            imageUrl: teams.firstWhereOrNull((element) => element['code'] == leaderboard[index]['teamCode'])['logoUrl'],
+                            imageUrl: '${teams.firstWhereOrNull((element) => element['code'] == leaderboard[index]['teamCode'])['logoUrl']}?size=w60',
                             height: 20,
                             width: 20,
                           ),

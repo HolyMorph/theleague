@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,6 +37,8 @@ class SelectPlayerScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+    log('players: ${controller.state.teamPlayers}');
 
     return Scaffold(
       key: _scaffoldKey,

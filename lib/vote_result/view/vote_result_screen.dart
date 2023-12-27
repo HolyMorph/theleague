@@ -100,8 +100,9 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                             Expanded(
                               flex: 1,
                               child: InkWell(
-                                onTap: () {
+                                onTap: () async {
                                   controller.state.isMale.value = true;
+                                  await controller.getVoteHistory();
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(10),
@@ -123,8 +124,9 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                             Expanded(
                               flex: 1,
                               child: InkWell(
-                                onTap: () {
+                                onTap: () async {
                                   controller.state.isMale.value = false;
+                                  await controller.getVoteHistory();
                                 },
                                 child: Container(
                                   color: controller.state.isMale.value ? null : Color(0xff272739),
@@ -158,8 +160,8 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                           unselectedLabelColor: Colors.white.withOpacity(0.5),
                           tabs: [
                             Tab(text: 'Онлайн'),
-                            Tab(text: 'Тоглолтын'),
-                            Tab(text: 'Көүчийн'),
+                            Tab(text: 'Танхимын'),
+                            Tab(text: 'Багийн'),
                           ],
                         ),
                       ),

@@ -8,6 +8,7 @@ import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
 
 import '../../alert/alert_helper.dart';
 import '../../alert/flash_status.dart';
+import '../../firebase_config.dart';
 import '../../route/my_routes.dart';
 import '../../service/api_client.dart';
 import '../../storage/local_storage.dart';
@@ -19,12 +20,19 @@ class SplashController extends GetxController {
 
   Future<void> checkUserToken() async {
     Future.delayed(const Duration(milliseconds: 2500), () async {
-      String token = await LocalStorage.getData(Constants.TOKEN) ?? '';
+      String token = await MezornClientHelper().token;
       if (token.isEmpty) {
         await _requestToken();
         await _getMetaData();
       } else {
         await _getMetaData();
+      }
+
+      ///Notification Token
+      ///
+      if (await LocalStorage.getData('fcmSaved') == false) {
+        await _updateFcmToken(token: await LocalStorage.getData(Constants.FCMToken));
+        FirebaseConfig.subscribeToTopic('theleaguepublic');
       }
     });
   }
@@ -32,12 +40,13 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     checkUserToken();
+
     super.onInit();
   }
 
   Future<void> _getMetaData() async {
     state.isLoading.value = true;
-    dynamic response = await ApiClient.sendRequest('/api/me', method: Method.get);
+    dynamic response = await ApiClient().sendRequest('/api/me', method: Method.get);
 
     if (MezornClientHelper.isValidResponse(response)) {
       if (response.data['statusCode'] == 400 || response.data['statusCode'] == 405) {
@@ -99,11 +108,7 @@ class SplashController extends GetxController {
       'phoneModel': phoneModel ?? (osType == 'ios' ? 'iphone' : 'android'),
     };
 
-    dynamic response = await ApiClient.sendRequest(
-      '/auth/request-token',
-      method: Method.post,
-      body: body,
-    );
+    dynamic response = await ApiClient().sendRequest('/auth/request-token', method: Method.post, body: body);
 
     if (response.data['statusCode'] == 400 || response.data['statusCode'] == 401) {
       AlertHelper.showFlashAlert(
@@ -116,8 +121,30 @@ class SplashController extends GetxController {
     bool isSuccess = await MezornClientHelper.isValidResponse(response);
 
     if (isSuccess) {
-      await LocalStorage.saveData(Constants.TOKEN, response.data['result']['token']);
       MezornClientHelper().saveToken = response.data['result']['token'];
+      MezornClientHelper().refreshToken = response.data['result']['refreshToken'];
+    }
+
+    return isSuccess;
+  }
+
+  Future<bool> _updateFcmToken({required String token}) async {
+    final String osType = Platform.operatingSystem;
+    dynamic body = {
+      'os_type': osType,
+      "notification_token": token,
+    };
+
+    dynamic response = await ApiClient().sendRequest(
+      '/api/me/update-pn-token',
+      method: Method.post,
+      body: body,
+    );
+
+    bool isSuccess = await MezornClientHelper.isValidResponse(response);
+
+    if (isSuccess) {
+      LocalStorage.saveData(Constants.FCMToken, token);
     }
 
     return isSuccess;

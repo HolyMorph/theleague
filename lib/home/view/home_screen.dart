@@ -79,7 +79,12 @@ class HomeScreen extends GetView<HomeController> {
                         Stack(
                           alignment: Alignment.center,
                           children: [
-                            Image.asset('assets/images/ic_field.png'),
+                            Column(
+                              children: [
+                                const SizedBox(height: 40),
+                                Image.asset('assets/images/ic_field.png', width: double.infinity),
+                              ],
+                            ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 12),
                               child: Column(
@@ -91,29 +96,33 @@ class HomeScreen extends GetView<HomeController> {
                                       Get.toNamed('${MyRoutes.selectPlayer}');
                                     },
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SelectItem(
-                                        positionName: 'F',
-                                        onTap: () {
-                                          controller.title = 'F';
-                                          Get.toNamed('${MyRoutes.selectPlayer}');
-                                        },
-                                      ),
-                                      SelectItem(
-                                        positionName: 'G',
-                                        onTap: () {
-                                          controller.title = 'G';
-                                          Get.toNamed('${MyRoutes.selectPlayer}');
-                                        },
-                                      ),
-                                    ],
-                                  ),
+                                  const SizedBox(height: 80),
                                   SelectItem(
                                     positionName: 'PG',
                                     onTap: () {
                                       controller.title = 'PG';
+                                      Get.toNamed('${MyRoutes.selectPlayer}');
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SelectItem(
+                                    positionName: 'F',
+                                    onTap: () {
+                                      controller.title = 'F';
+                                      Get.toNamed('${MyRoutes.selectPlayer}');
+                                    },
+                                  ),
+                                  SelectItem(
+                                    positionName: 'G',
+                                    onTap: () {
+                                      controller.title = 'G';
                                       Get.toNamed('${MyRoutes.selectPlayer}');
                                     },
                                   ),

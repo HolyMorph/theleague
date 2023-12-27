@@ -58,7 +58,7 @@ class TeamItem extends GetView<HomeController> {
                 ],
               ),
               child: CachedNetworkImage(
-                imageUrl: iconUrl,
+                imageUrl: '${iconUrl}?size=w120',
                 alignment: Alignment.center,
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(

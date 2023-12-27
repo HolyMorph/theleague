@@ -1,10 +1,6 @@
 import 'dart:developer';
-
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:mezorn_api_caller/api/mezorn_client.dart';
-import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
-
+import 'package:mezorn_api_caller/api_caller.dart';
 import '../../service/api_client.dart';
 import '../../storage/local_storage.dart';
 import '../../utils/constants.dart';
@@ -13,26 +9,29 @@ import '../state/vote_result_state.dart';
 class VoteResultController extends GetxController {
   VoteResultState state = VoteResultState();
 
-  Future<void> checkVote() async {
-    dynamic response = await ApiClient.sendRequest(
-      'api/me/check-vote',
-      method: Method.post,
-      body: {'gender': state.gender},
-    );
-
-    log('checkVote response : $response');
-  }
+  // Future<void> checkVote() async {
+  //   dynamic response = await ApiClient().sendRequest(
+  //     'api/me/check-vote',
+  //     method: Method.post,
+  //     body: {'gender': state.gender.value},
+  //   );
+  // }
 
   Future<void> getVoteHistory() async {
+    state.voteHistories.clear();
     List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
-
-    dynamic response = await ApiClient.sendRequest('/api/me/vote-history', method: Method.get);
+    dynamic response = await ApiClient().sendRequest(
+      '/api/me/vote-history',
+      queryParam: {'gender': state.isMale.value ? 'male' : 'female'},
+      method: Method.get,
+    );
 
     if (MezornClientHelper.isValidResponse(response)) {
       List<dynamic> histories = response.data['result']['docs'];
       for (var index = 0; index < histories.length; index++) {
         dynamic result = {
           "_id": "",
+          "gender": state.gender.value,
           "vote": {
             "PG": RxList<Map<String, dynamic>>([]),
             "F": RxList<Map<String, dynamic>>([]),
@@ -41,6 +40,7 @@ class VoteResultController extends GetxController {
           },
           "createdAt": "",
         };
+
         List<dynamic> pointguard = response.data['result']['docs'][index]['vote']['PG'] ?? [];
         List<dynamic> forward = response.data['result']['docs'][index]['vote']['F'] ?? [];
         List<dynamic> guard = response.data['result']['docs'][index]['vote']['G'] ?? [];
@@ -92,17 +92,12 @@ class VoteResultController extends GetxController {
           }
         state.voteHistories.add(result);
       }
-
-      log('getVotesHistory response : $response');
     }
   }
 
   Future<void> getVoteResult() async {
     state.isLoading.value = true;
-    dynamic response = await ApiClient.sendRequest(
-      '/api/me/vote-result',
-      method: Method.get,
-    );
+    dynamic response = await ApiClient().sendRequest('/api/me/vote-result', method: Method.get);
 
     log('getVoteResult response : $response');
     if (MezornClientHelper.isValidResponse(response)) {
@@ -135,7 +130,6 @@ class VoteResultController extends GetxController {
       for (var index = 0; index < arena.length; index++) {
         for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
           if (arena[index]['value'] == players[playerIndex]['_id']) {
-            log('arena');
             players[playerIndex]..['score'] = arena[index]['score'];
             for (var teamIndex = 0; teamIndex < teams.length; teamIndex++) {
               if (teams[teamIndex]['code'] == players[playerIndex]['teamCode']) {
@@ -168,6 +162,9 @@ class VoteResultController extends GetxController {
           }
         }
       }
+      log('online: ${state.onlineVoteResultsMale}');
+      log('arena: ${state.arenaVoteResultsMale}');
+      log('coach: ${state.coachVoteResultsMale}');
     }
 
     state.isLoading.value = false;
