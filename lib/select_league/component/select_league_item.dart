@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../style/my_colors.dart';
 
 class SelectLeagueItem extends StatelessWidget {
@@ -32,7 +33,7 @@ class SelectLeagueItem extends StatelessWidget {
                   imagePath,
                   fit: BoxFit.cover,
                   width: double.infinity,
-                  height: Get.size.width * 0.42,
+                  height: Get.size.width * 0.4,
                 ),
               ),
               Padding(

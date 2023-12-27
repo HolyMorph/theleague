@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../logic/home_controller.dart';
 
 class ChangePlayerItem extends GetView<HomeController> {
@@ -11,6 +14,9 @@ class ChangePlayerItem extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    log('teamCode : $teamCode');
+    log('asd : ${controller.state.teams}');
+
     String teamColor = controller.state.teams.firstWhereOrNull((element) => element['code'] == teamCode)['colorCode'];
 
     return Container(

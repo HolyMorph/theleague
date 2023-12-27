@@ -13,6 +13,8 @@ class VoteDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('gender : ${histories}');
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -38,7 +40,6 @@ class VoteDrawer extends StatelessWidget {
                         for (var index = 0; index < histories.length; index++)
                           InkWell(
                             onTap: () {
-                              log('arhiv: ${histories[index]['vote']}');
                               Get.toNamed(
                                 '${MyRoutes.homeScreen}/$gender',
                                 arguments: histories[index]['vote'],

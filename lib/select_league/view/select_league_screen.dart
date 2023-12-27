@@ -48,7 +48,7 @@ class SelectLeagueScreen extends StatelessWidget {
                 fontFamily: 'GIP',
               ),
             ),
-            const SizedBox(height: 36),
+            const SizedBox(height: 24),
             SelectLeagueItem(
               text: 'Эрэгтэй Дээд Лиг',
               imagePath: 'assets/images/ic_male.png',

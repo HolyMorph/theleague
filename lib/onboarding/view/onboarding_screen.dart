@@ -20,7 +20,11 @@ class OnboardingScreen extends GetView<OnboardingController> {
               Expanded(
                 child: DecoratedBox(
                   decoration: BoxDecoration(color: Color(0xFF000C8C)),
-                  child: Image.asset('assets/images/ic_cover.png', scale: 3),
+                  child: Image.asset(
+                    'assets/images/ic_cover.png',
+                    scale: 3,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Expanded(

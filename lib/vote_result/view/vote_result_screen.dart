@@ -202,23 +202,24 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                       ),
                       const SizedBox(height: 16),
 
+                      /// TODO : Fix this
                       /// Your vote button
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
-                              return Color(0xff272739);
-                            },
-                          ),
-                        ),
-                        onPressed: () {
-                          _voteScaffoldKey.currentState!.openEndDrawer();
-                        },
-                        child: Text(
-                          'Өгсөн саналаа харах',
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16, fontFamily: 'GIP'),
-                        ),
-                      ),
+                      // ElevatedButton(
+                      //   style: ButtonStyle(
+                      //     backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      //       (Set<MaterialState> states) {
+                      //         return Color(0xff272739);
+                      //       },
+                      //     ),
+                      //   ),
+                      //   onPressed: () {
+                      //     _voteScaffoldKey.currentState!.openEndDrawer();
+                      //   },
+                      //   child: Text(
+                      //     'Өгсөн саналаа харах',
+                      //     style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16, fontFamily: 'GIP'),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
