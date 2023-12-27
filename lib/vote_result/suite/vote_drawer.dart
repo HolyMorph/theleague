@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,7 +36,6 @@ class VoteDrawer extends StatelessWidget {
                         for (var index = 0; index < histories.length; index++)
                           InkWell(
                             onTap: () {
-                              log('arhiv: ${histories[index]['vote']}');
                               Get.toNamed(
                                 '${MyRoutes.homeScreen}/$gender',
                                 arguments: histories[index]['vote'],

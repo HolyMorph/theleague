@@ -24,7 +24,7 @@ class ChangePlayerItem extends GetView<HomeController> {
       child: imageUrl.isEmpty
           ? Icon(Icons.add, color: Colors.white)
           : CachedNetworkImage(
-              imageUrl: imageUrl,
+              imageUrl: '${imageUrl}?size=w100',
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,

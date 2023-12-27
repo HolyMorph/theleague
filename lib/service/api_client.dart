@@ -81,7 +81,7 @@ class ApiClient {
       header: header,
     );
 
-    if (_response?.statusCode == 401 || _response?.statusCode == 405) {
+    if (_response?.statusCode == 401) {
       bool _isUpdated = await updateUserToken();
 
       return _isUpdated
@@ -147,8 +147,8 @@ class ApiClient {
     isRefreshCalled.value = false;
 
     if (MezornClientHelper.isValidResponse(response)) {
-      var token = response.data['data']['result']['token'];
-      var refresh_token = response.data['data']['result']['refreshToken'];
+      var token = response.data['result']['token'];
+      var refresh_token = response.data['result']['refreshToken'];
 
       MezornClientHelper().token = token;
       MezornClientHelper().refreshToken = refresh_token;
