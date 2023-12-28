@@ -19,11 +19,24 @@ class OnboardingScreen extends GetView<OnboardingController> {
             children: [
               Expanded(
                 child: DecoratedBox(
-                  decoration: BoxDecoration(color: Color(0xFF000C8C)),
-                  child: Image.asset(
-                    'assets/images/ic_cover.png',
-                    scale: 3,
-                    fit: BoxFit.cover,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment(0.4, 1),
+                      tileMode: TileMode.mirror,
+                      colors: [
+                        Color(0xff4D5163).withOpacity(0.5),
+                        Color(0xff27273900),
+                      ],
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(top: Get.mediaQuery.size.height * 0.05),
+                    child: Image.asset(
+                      'assets/images/ic_cover.png',
+                      fit: BoxFit.fill,
+                      width: Get.mediaQuery.size.width,
+                    ),
                   ),
                 ),
               ),
@@ -51,9 +64,9 @@ class OnboardingScreen extends GetView<OnboardingController> {
             alignment: Alignment.bottomCenter,
             child: Column(
               children: [
-                Expanded(flex: 50, child: const SizedBox()),
+                Expanded(flex: 1, child: const SizedBox()),
                 Expanded(
-                  flex: 50,
+                  flex: 1,
                   child: Column(
                     children: [
                       const SizedBox(height: 50),
@@ -143,8 +156,8 @@ class OnboardingScreen extends GetView<OnboardingController> {
             ),
           ),
           Positioned(
-            left: 8,
-            top: MediaQuery.of(context).viewPadding.top + 8,
+            left: 16,
+            top: MediaQuery.of(context).viewPadding.top,
             child: Material(
               color: Colors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
