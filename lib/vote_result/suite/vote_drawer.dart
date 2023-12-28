@@ -11,8 +11,6 @@ class VoteDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('gender : ${histories}');
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
