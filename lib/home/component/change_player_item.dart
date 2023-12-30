@@ -14,9 +14,6 @@ class ChangePlayerItem extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    log('teamCode : $teamCode');
-    log('asd : ${controller.state.teams}');
-
     String teamColor = controller.state.teams.firstWhereOrNull((element) => element['code'] == teamCode)['colorCode'];
 
     return Container(

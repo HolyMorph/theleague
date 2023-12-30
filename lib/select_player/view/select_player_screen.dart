@@ -38,8 +38,6 @@ class SelectPlayerScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-    log('players: ${controller.state.teamPlayers}');
-
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: Drawer(

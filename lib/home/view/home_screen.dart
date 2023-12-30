@@ -96,7 +96,7 @@ class HomeScreen extends GetView<HomeController> {
                                       Get.toNamed('${MyRoutes.selectPlayer}');
                                     },
                                   ),
-                                  const SizedBox(height: 80),
+                                  const SizedBox(height: 40),
                                   SelectItem(
                                     positionName: 'PG',
                                     onTap: () {

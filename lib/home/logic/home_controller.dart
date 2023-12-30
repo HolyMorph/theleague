@@ -69,7 +69,15 @@ class HomeController extends GetxController {
         {
           return 'Хамгаалагч';
         }
+      case 'SG':
+        {
+          return 'Хамгаалагч';
+        }
       case 'F':
+        {
+          return 'Довтлогч';
+        }
+      case 'SF':
         {
           return 'Довтлогч';
         }
@@ -79,7 +87,7 @@ class HomeController extends GetxController {
         }
       case 'PF':
         {
-          return 'Хүчний довтлогч';
+          return 'Довтлогч';
         }
       case 'PG':
         {
@@ -163,7 +171,8 @@ class HomeController extends GetxController {
     for (var player in team['players']) {
       for (var position in player['positionCodes']) {
         if (getPosition(positionName: position) == state.title) {
-          state.teamPlayers.add(player);
+          dynamic exist = state.teamPlayers.firstWhereOrNull((element) => element['_id'] == player['_id']);
+          if (exist == null) state.teamPlayers.add(player);
         }
       }
     }
