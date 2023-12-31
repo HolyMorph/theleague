@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api_caller.dart';
 
@@ -184,8 +186,11 @@ class HomeController extends GetxController {
     var body = {
       'gender': state.gender.value,
       'game_code': LocalStorage.getData(Constants.TicketCode),
-      'lat': LocalStorage.getData('lat'),
-      'lon': LocalStorage.getData('lon'),
+      //TODO: zasah
+      // 'lat': await LocalStorage.getData('lat'),
+      // 'lon': await LocalStorage.getData('lon'),
+      'lat': '47.905170559259105',
+      'lot': '106.89914916546056',
       'vote': state.preparedList,
     };
     isLoading = true;

@@ -1,8 +1,12 @@
 import 'dart:developer';
+import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api_caller.dart';
 import '../../service/api_client.dart';
 import '../../storage/local_storage.dart';
+import '../../style/my_colors.dart';
+import '../../utils/basic_utils.dart';
 import '../../utils/constants.dart';
 import '../state/vote_result_state.dart';
 
@@ -96,10 +100,17 @@ class VoteResultController extends GetxController {
   }
 
   Future<void> getVoteResult() async {
-    state.isLoading.value = true;
-    dynamic response = await ApiClient().sendRequest('/api/me/vote-result', method: Method.get);
+    state.onlineVoteResults.clear();
+    state.arenaVoteResults.clear();
+    state.coachVoteResults.clear();
 
-    log('getVoteResult response : $response');
+    state.isLoading.value = true;
+    dynamic response = await ApiClient().sendRequest(
+      '/api/me/vote-result',
+      method: Method.get,
+      queryParam: {'gender': state.isMale.value ? 'male' : 'female'},
+    );
+
     if (MezornClientHelper.isValidResponse(response)) {
       List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
       List<dynamic> teams = await LocalStorage.getData(Constants.META_DATA)['teams'];
@@ -107,19 +118,29 @@ class VoteResultController extends GetxController {
       List<dynamic> arena = response.data['result']['votes']['arena'];
       List<dynamic> coach = response.data['result']['votes']['coach'];
 
+      List<dynamic> onlineList = List.from(await LocalStorage.getData(Constants.META_DATA)['players']);
+      List<dynamic> arenaList = List.from(await LocalStorage.getData(Constants.META_DATA)['players']);
+      List<dynamic> coachList = List.from(await LocalStorage.getData(Constants.META_DATA)['players']);
+
+      // List<dynamic> onlineList = [];
+      // List<dynamic> arenaList = [];
+      // List<dynamic> coachList = [];
+      //
+      // for (var player in players) {
+      //   onlineList.add(player);
+      //   arenaList.add(player);
+      //   coachList.add(player);
+      // }
+
       /// Online vote
       for (var index = 0; index < online.length; index++) {
-        for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-          if (online[index]['value'] == players[playerIndex]['_id']) {
+        for (var playerIndex = 0; playerIndex < onlineList.length; playerIndex++) {
+          if (online[index]['value'] == onlineList[playerIndex]['_id']) {
             log('online');
-            players[playerIndex]..['score'] = online[index]['score'];
+            onlineList[playerIndex]..['score'] = online[index]['score'];
             for (var teamIndex = 0; teamIndex < teams.length; teamIndex++) {
-              if (teams[teamIndex]['code'] == players[playerIndex]['teamCode']) {
-                if (teams[teamIndex]['gender'] == 'male') {
-                  state.onlineVoteResultsMale.add(players[playerIndex]);
-                } else {
-                  state.onlineVoteResultsFemale.add(players[playerIndex]);
-                }
+              if (teams[teamIndex]['code'] == onlineList[playerIndex]['teamCode']) {
+                state.onlineVoteResults.add(onlineList[playerIndex]);
               }
             }
           }
@@ -128,16 +149,14 @@ class VoteResultController extends GetxController {
 
       /// Arena vote
       for (var index = 0; index < arena.length; index++) {
-        for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-          if (arena[index]['value'] == players[playerIndex]['_id']) {
-            players[playerIndex]..['score'] = arena[index]['score'];
+        log('arena');
+        for (var playerIndex = 0; playerIndex < arenaList.length; playerIndex++) {
+          if (arena[index]['value'] == arenaList[playerIndex]['_id']) {
+            arenaList[playerIndex]..['score'] = arena[index]['score'];
             for (var teamIndex = 0; teamIndex < teams.length; teamIndex++) {
-              if (teams[teamIndex]['code'] == players[playerIndex]['teamCode']) {
-                if (teams[teamIndex]['gender'] == 'male') {
-                  state.arenaVoteResultsMale.add(players[playerIndex]);
-                } else {
-                  state.arenaVoteResultsFemale.add(players[playerIndex]);
-                }
+              if (teams[teamIndex]['code'] == arenaList[playerIndex]['teamCode']) {
+                log('player: ${arenaList[playerIndex]}');
+                state.arenaVoteResults.add(arenaList[playerIndex]);
               }
             }
           }
@@ -146,25 +165,18 @@ class VoteResultController extends GetxController {
 
       /// Coach
       for (var index = 0; index < coach.length; index++) {
-        for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-          if (coach[index]['value'] == players[playerIndex]['_id']) {
+        for (var playerIndex = 0; playerIndex < coachList.length; playerIndex++) {
+          if (coach[index]['value'] == coachList[playerIndex]['_id']) {
             log('coach');
-            players[playerIndex]..['score'] = coach[index]['score'];
+            coachList[playerIndex]..['score'] = coach[index]['score'];
             for (var teamIndex = 0; teamIndex < teams.length; teamIndex++) {
-              if (teams[teamIndex]['code'] == players[playerIndex]['teamCode']) {
-                if (teams[teamIndex]['gender'] == 'male') {
-                  state.coachVoteResultsMale.add(players[playerIndex]);
-                } else {
-                  state.coachVoteResultsFemale.add(players[playerIndex]);
-                }
+              if (teams[teamIndex]['code'] == coachList[playerIndex]['teamCode']) {
+                state.coachVoteResults.add(coachList[playerIndex]);
               }
             }
           }
         }
       }
-      log('online: ${state.onlineVoteResultsMale}');
-      log('arena: ${state.arenaVoteResultsMale}');
-      log('coach: ${state.coachVoteResultsMale}');
     }
 
     state.isLoading.value = false;
@@ -178,14 +190,79 @@ class VoteResultController extends GetxController {
   }
 
   Future<void> refreshFunction() async {
-    state.onlineVoteResultsMale.clear();
-    state.onlineVoteResultsFemale.clear();
-    state.arenaVoteResultsFemale.clear();
-    state.arenaVoteResultsMale.clear();
-    state.coachVoteResultsFemale.clear();
-    state.coachVoteResultsMale.clear();
-    state.voteHistories.clear();
     await getVoteResult();
     await getVoteHistory();
+  }
+
+  void showForceUpdateDialog() {
+    Get.dialog(
+      PopScope(
+        canPop: false,
+        child: AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          backgroundColor: Color(0xFF272739),
+          content: Container(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(width: 1, color: Colors.white.withOpacity(0.1)),
+              color: Color(0xFF272739),
+            ),
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Positioned(
+                  top: -75,
+                  child: Image.asset('assets/images/ic_dialog_body.png', scale: 3),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 100),
+                    Text(
+                      'Апп дээр шинэчлэлт гарсан байгаа тул та татаж авна уу. Баярлалаа.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'GIP', color: Colors.white),
+                    ),
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF686874)),
+                            onPressed: () => Get.back(),
+                            child: Text(
+                              'Үгүй',
+                              style: TextStyle(fontFamily: 'GIP', fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
+                            onPressed: () => BasicUtils().urlLaunch(
+                              '${Platform.isIOS ? 'https://apps.apple.com/us/app/thele%D0%B0gue/id6474849692' : 'https://play.google.com/store/apps/details?id=mn.mezorn.duiz'}',
+                            ),
+                            child: Text(
+                              'Тийм',
+                              style: TextStyle(fontFamily: 'GIP', fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
   }
 }
