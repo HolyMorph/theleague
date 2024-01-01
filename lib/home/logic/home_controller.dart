@@ -187,11 +187,8 @@ class HomeController extends GetxController {
     var body = {
       'gender': state.gender.value,
       'game_code': LocalStorage.getData(Constants.TicketCode),
-      //TODO: zasah
-      // 'lat': await LocalStorage.getData('lat'),
-      // 'lon': await LocalStorage.getData('lon'),
-      'lat': '47.905170559259105',
-      'lot': '106.89914916546056',
+      'lat': await LocalStorage.getData('lat'),
+      'lon': await LocalStorage.getData('lon'),
       'vote': state.preparedList,
     };
     isLoading = true;

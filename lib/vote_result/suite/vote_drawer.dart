@@ -37,7 +37,7 @@ class VoteDrawer extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               Get.toNamed(
-                                '${MyRoutes.homeScreen}/$gender',
+                                '${MyRoutes.homeScreen}/$gender/true',
                                 arguments: histories[index]['vote'],
                               );
                             },
@@ -53,11 +53,7 @@ class VoteDrawer extends StatelessWidget {
                                 children: [
                                   Text(
                                     '${histories[index]['createdAt']}',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'GIP',
-                                    ),
+                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontFamily: 'GIP'),
                                   ),
                                   Container(
                                     padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
