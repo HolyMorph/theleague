@@ -13,14 +13,6 @@ import '../state/vote_result_state.dart';
 class VoteResultController extends GetxController {
   VoteResultState state = VoteResultState();
 
-  // Future<void> checkVote() async {
-  //   dynamic response = await ApiClient().sendRequest(
-  //     'api/me/check-vote',
-  //     method: Method.post,
-  //     body: {'gender': state.gender.value},
-  //   );
-  // }
-
   Future<void> getVoteHistory() async {
     state.voteHistories.clear();
     List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
@@ -51,7 +43,7 @@ class VoteResultController extends GetxController {
         List<dynamic> center = response.data['result']['docs'][index]['vote']['C'] ?? [];
 
         result['_id'] = histories[index]['_id'];
-        DateTime dateTime = DateTime.parse(histories[index]['createdAt']);
+        DateTime dateTime = DateTime.parse(histories[index]['createdAt']).toLocal();
         String formattedDate = DateFormat("M сарын d, HH:mm").format(dateTime);
         result['createdAt'] = formattedDate;
 

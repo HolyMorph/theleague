@@ -4,6 +4,7 @@ import '../home/logic/home_binding.dart';
 import '../home/view/home_screen.dart';
 import '../onboarding/logic/onboarding_binding.dart';
 import '../onboarding/view/onboarding_screen.dart';
+import '../select_league/logic/select_league_binding.dart';
 import '../select_league/view/select_league_screen.dart';
 import '../select_player/view/select_player_screen.dart';
 import '../splash/logic/splash_binding.dart';
@@ -18,7 +19,7 @@ class MyPages {
   static final pages = [
     ///Home screen
     GetPage(
-      name: MyRoutes.homeScreen + '/:gender',
+      name: MyRoutes.homeScreen + '/:gender' + '/:isCanVote',
       page: () => HomeScreen(),
       binding: HomeBinding(),
     ),
@@ -41,6 +42,7 @@ class MyPages {
     GetPage(
       name: MyRoutes.selectLeague,
       page: () => const SelectLeagueScreen(),
+      binding: SelectLeagueBinding(),
     ),
 
     ///Select Player  screen

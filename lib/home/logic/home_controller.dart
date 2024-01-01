@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api_caller.dart';
 
@@ -17,6 +15,7 @@ class HomeController extends GetxController {
   final state = HomeState();
 
   void set gender(String gender) => state.gender.value = gender;
+  void set isCanVote(bool vote) => state.isCanVote.value = vote;
   void set isLoading(bool loading) => state.isLoading.value = loading;
   void set selectedTeamCode(String code) => state.selectedTeamCode.value = code;
   void set title(String title) => state.title = title;
@@ -141,6 +140,8 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     gender = Get.parameters['gender']!;
+    isCanVote = bool.parse(Get.parameters['isCanVote']!);
+
     if (LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) != null) {
       state.selectedPlayers.value =
           Get.arguments != null ? Get.arguments : LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale);

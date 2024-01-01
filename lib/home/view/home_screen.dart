@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../alert/alert_helper.dart';
+import '../../alert/flash_status.dart';
 import '../../components/app_back_button.dart';
 import '../../route/my_routes.dart';
 import '../../storage/local_storage.dart';
@@ -150,16 +151,7 @@ class HomeScreen extends GetView<HomeController> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
-                          onPressed: controller.state.totalQty.value > 0
-                              ? () {
-                                  AlertHelper.showDialog(
-                                    message: controller.state.totalQty.value < 12
-                                        ? 'Та саналаа бүрэн өгөөгүй байна, та санал өгөхдөө итгэлтэй байна уу?'
-                                        : 'Та санал өгөхдөө итгэлтэй байна уу?',
-                                    onTap: () async => callFunction(),
-                                  );
-                                }
-                              : null,
+                          onPressed: controller.state.totalQty.value > 0 ? () async => await checkFunction() : null,
                           child: Text(
                             'Саналаа өгөх',
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
@@ -178,5 +170,24 @@ class HomeScreen extends GetView<HomeController> {
   Future<void> callFunction() async {
     Get.back();
     await LocalStorage.getData(Constants.TicketCode) != null ? controller.voteArena() : controller.voteOnline();
+  }
+
+  Future<void> checkFunction() async {
+    if (!controller.state.isCanVote.value) {
+      AlertHelper.showFlashAlert(
+        title: 'Уучлаарай',
+        message: 'Таны санал өгөх хугацаа идэвхтэй болоогүй байна.',
+        status: FlashStatus.failed,
+      );
+
+      return;
+    } else {
+      AlertHelper.showDialog(
+        message: controller.state.totalQty.value < 12
+            ? 'Та саналаа бүрэн өгөөгүй байна, та санал өгөхдөө итгэлтэй байна уу?'
+            : 'Та санал өгөхдөө итгэлтэй байна уу?',
+        onTap: () async => await callFunction(),
+      );
+    }
   }
 }
