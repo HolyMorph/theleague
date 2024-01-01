@@ -15,6 +15,7 @@ class HomeController extends GetxController {
   final state = HomeState();
 
   void set gender(String gender) => state.gender.value = gender;
+  void set isCanVote(bool vote) => state.isCanVote.value = vote;
   void set isLoading(bool loading) => state.isLoading.value = loading;
   void set selectedTeamCode(String code) => state.selectedTeamCode.value = code;
   void set title(String title) => state.title = title;
@@ -69,7 +70,15 @@ class HomeController extends GetxController {
         {
           return 'Хамгаалагч';
         }
+      case 'SG':
+        {
+          return 'Хамгаалагч';
+        }
       case 'F':
+        {
+          return 'Довтлогч';
+        }
+      case 'SF':
         {
           return 'Довтлогч';
         }
@@ -79,7 +88,7 @@ class HomeController extends GetxController {
         }
       case 'PF':
         {
-          return 'Хүчний довтлогч';
+          return 'Довтлогч';
         }
       case 'PG':
         {
@@ -131,6 +140,8 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     gender = Get.parameters['gender']!;
+    isCanVote = bool.parse(Get.parameters['isCanVote']!);
+
     if (LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) != null) {
       state.selectedPlayers.value =
           Get.arguments != null ? Get.arguments : LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale);
@@ -163,7 +174,8 @@ class HomeController extends GetxController {
     for (var player in team['players']) {
       for (var position in player['positionCodes']) {
         if (getPosition(positionName: position) == state.title) {
-          state.teamPlayers.add(player);
+          dynamic exist = state.teamPlayers.firstWhereOrNull((element) => element['_id'] == player['_id']);
+          if (exist == null) state.teamPlayers.add(player);
         }
       }
     }
@@ -175,8 +187,8 @@ class HomeController extends GetxController {
     var body = {
       'gender': state.gender.value,
       'game_code': LocalStorage.getData(Constants.TicketCode),
-      'lat': LocalStorage.getData('lat'),
-      'lon': LocalStorage.getData('lon'),
+      'lat': await LocalStorage.getData('lat'),
+      'lon': await LocalStorage.getData('lon'),
       'vote': state.preparedList,
     };
     isLoading = true;

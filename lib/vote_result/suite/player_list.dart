@@ -55,16 +55,19 @@ class PlayerList extends GetView<VoteResultController> {
                             width: 20,
                           ),
                           const SizedBox(width: 10),
-                          Text(
-                            '${leaderboard[index]['lastName'].substring(0, 1)}. ${leaderboard[index]['firstName']}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'GIP',
+                          Expanded(
+                            child: Text(
+                              '${leaderboard[index]['lastName'].substring(0, 1)}. ${leaderboard[index]['firstName']}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'GIP',
+                              ),
                             ),
                           ),
-                          const Spacer(),
                           Text(
                             '${leaderboard[index]['score']}',
                             style: TextStyle(

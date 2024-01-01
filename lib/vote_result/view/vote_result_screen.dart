@@ -41,13 +41,13 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
             List<dynamic> _leaderboard() {
               switch (tabController.index) {
                 case 0:
-                  return controller.state.isMale.value ? controller.state.onlineVoteResultsMale : controller.state.onlineVoteResultsFemale;
+                  return controller.state.onlineVoteResults;
                 case 1:
-                  return controller.state.isMale.value ? controller.state.arenaVoteResultsMale : controller.state.arenaVoteResultsFemale;
+                  return controller.state.arenaVoteResults;
                 case 2:
-                  return controller.state.isMale.value ? controller.state.coachVoteResultsMale : controller.state.coachVoteResultsFemale;
+                  return controller.state.coachVoteResults;
                 default:
-                  return controller.state.onlineVoteResultsMale;
+                  return controller.state.onlineVoteResults;
               }
             }
 
@@ -102,6 +102,7 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                               child: InkWell(
                                 onTap: () async {
                                   controller.state.isMale.value = true;
+                                  await controller.getVoteResult();
                                   await controller.getVoteHistory();
                                 },
                                 child: Container(
@@ -126,6 +127,7 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                               child: InkWell(
                                 onTap: () async {
                                   controller.state.isMale.value = false;
+                                  await controller.getVoteResult();
                                   await controller.getVoteHistory();
                                 },
                                 child: Container(
@@ -179,7 +181,27 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
 
                       const SizedBox(height: 8),
                       const Divider(color: Color(0xff323232)),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 4),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.info_outline, size: 14, color: Colors.white),
+                          const SizedBox(width: 8),
+                          Text(
+                            '${getTabTitle(index: tabController.index)} санал бүх саналын ',
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
+                          ),
+                          Text(
+                            tabController.index == 1 ? '40%-ыг' : '30%-ыг',
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: MyColors.secondaryColor, fontFamily: 'GIP'),
+                          ),
+                          Text(
+                            ' эзэлнэ.',
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
 
                       ElevatedButton(
                         style: ButtonStyle(
@@ -202,7 +224,7 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 8),
 
                       ElevatedButton(
                         style: ButtonStyle(
@@ -229,6 +251,19 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
         );
       },
     );
+  }
+
+  String getTabTitle({required int index}) {
+    switch (index) {
+      case 0:
+        return 'Онлайн';
+      case 1:
+        return 'Танхимын';
+      case 2:
+        return 'Багийн';
+      default:
+        return '';
+    }
   }
 
   void _listenToTabChanges() {

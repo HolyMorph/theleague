@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class HomeState {
   final RxString gender = RxString('');
+  final RxBool isCanVote = RxBool(false);
   final RxBool isLoading = RxBool(false);
   final RxBool playerLoading = RxBool(false);
   final RxMap<String, RxList<Map<String, dynamic>>> selectedPlayers = RxMap({
