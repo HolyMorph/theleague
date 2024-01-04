@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 
+import '../coach_verify_screen/logic/coach_verify_binding.dart';
+import '../coach_verify_screen/view/coach_loading_screen.dart';
+import '../coach_verify_screen/view/coach_verify_screen.dart';
 import '../home/logic/home_binding.dart';
 import '../home/view/home_screen.dart';
 import '../onboarding/logic/onboarding_binding.dart';
@@ -19,7 +22,7 @@ class MyPages {
   static final pages = [
     ///Home screen
     GetPage(
-      name: MyRoutes.homeScreen + '/:gender' + '/:isCanVote',
+      name: MyRoutes.homeScreen + '/:gender' + '/:isCanVote' + '/:type',
       page: () => HomeScreen(),
       binding: HomeBinding(),
     ),
@@ -40,7 +43,7 @@ class MyPages {
 
     ///Select League  screen
     GetPage(
-      name: MyRoutes.selectLeague,
+      name: MyRoutes.selectLeague + '/:type',
       page: () => const SelectLeagueScreen(),
       binding: SelectLeagueBinding(),
     ),
@@ -56,6 +59,19 @@ class MyPages {
       name: MyRoutes.splash,
       page: () => SplashScreen(),
       binding: SplashBinding(),
+    ),
+
+    /// Coach verify screen
+    GetPage(
+      name: MyRoutes.coachVerifyScreen,
+      page: () => CoachVerifyScreen(),
+      binding: CoachVerifyBinding(),
+    ),
+
+    /// Coach loading screen
+    GetPage(
+      name: MyRoutes.coachLoadingScreen,
+      page: () => CoachLoadingScreen(),
     ),
 
     /// Vote result screen

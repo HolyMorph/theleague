@@ -1,4 +1,6 @@
 class MyRoutes {
+  static String coachLoadingScreen = '/coachLoadingScreen';
+  static String coachVerifyScreen = '/coachVerifyScreen';
   static String homeScreen = '/homeScreen';
   static String onboarding = '/onboarding';
   static String reloadScreen = '/reloadScreen';

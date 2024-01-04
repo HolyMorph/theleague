@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../alert/alert_helper.dart';
@@ -7,6 +8,7 @@ import '../../route/my_routes.dart';
 import '../../storage/local_storage.dart';
 import '../../style/my_colors.dart';
 import '../../utils/constants.dart';
+import '../component/coach_button.dart';
 import '../component/select_item.dart';
 import '../logic/home_controller.dart';
 
@@ -25,7 +27,23 @@ class HomeScreen extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Тоглогч сонгох'),
+        title: LocalStorage.getData('coachData') != null && controller.state.type.value == 'coach'
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(width: 30),
+                  Row(
+                    children: [
+                      CachedNetworkImage(height: 30, width: 30, imageUrl: '${LocalStorage.getData('coachData')['teamLogo']}?size=w50'),
+                      const SizedBox(width: 8),
+                      Text('Тоглогч сонгох'),
+                    ],
+                  ),
+                  const SizedBox(width: 80),
+                ],
+              )
+            : Text('Тоглогч сонгох'),
+        centerTitle: true,
         leading: AppBackButton(),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -142,21 +160,32 @@ class HomeScreen extends GetView<HomeController> {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: <Color>[Color(0xFF4C1C1A), Colors.transparent],
+                        colors: <Color>[
+                          controller.state.type.value == 'coach'
+                              ? Color(
+                                  int.parse(
+                                    '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
+                                  ),
+                                )
+                              : Color(0xFF4C1C1A),
+                          Colors.transparent,
+                        ],
                         tileMode: TileMode.mirror,
                       ),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                     child: Column(
                       children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
-                          onPressed: controller.state.totalQty.value > 0 ? () async => await checkFunction() : null,
-                          child: Text(
-                            'Саналаа өгөх',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
-                          ),
-                        ),
+                        controller.state.type.value == 'coach'
+                            ? CoachButton()
+                            : ElevatedButton(
+                                style: ElevatedButton.styleFrom(backgroundColor: MyColors.buttonDisabledColor),
+                                onPressed: controller.state.totalQty.value > 0 ? () async => await checkFunction() : null,
+                                child: Text(
+                                  'Саналаа өгөх',
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
+                                ),
+                              ),
                         SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
                       ],
                     ),

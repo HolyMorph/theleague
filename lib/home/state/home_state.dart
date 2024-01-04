@@ -16,6 +16,7 @@ class HomeState {
   final RxList<dynamic> teamPlayers = RxList();
   final RxList<dynamic> teams = RxList();
   final RxInt totalQty = RxInt(0);
+  final RxString type = RxString('');
   Map<String, List<String>> preparedList = {};
   String title = '';
 }
