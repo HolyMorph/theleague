@@ -179,7 +179,7 @@ class HomeScreen extends GetView<HomeController> {
                         controller.state.type.value == 'coach'
                             ? CoachButton()
                             : ElevatedButton(
-                                style: ElevatedButton.styleFrom(backgroundColor: MyColors.buttonDisabledColor),
+                                style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
                                 onPressed: controller.state.totalQty.value > 0 ? () async => await checkFunction() : null,
                                 child: Text(
                                   'Саналаа өгөх',
@@ -212,9 +212,18 @@ class HomeScreen extends GetView<HomeController> {
       return;
     } else {
       AlertHelper.showDialog(
-        message: controller.state.totalQty.value < 12
-            ? 'Та саналаа бүрэн өгөөгүй байна, та санал өгөхдөө итгэлтэй байна уу?'
-            : 'Та санал өгөхдөө итгэлтэй байна уу?',
+        message: Text(
+          controller.state.totalQty.value < 12
+              ? 'Та саналаа бүрэн өгөөгүй байна, та санал өгөхдөө итгэлтэй байна уу?'
+              : 'Та санал өгөхдөө итгэлтэй байна уу?',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            fontFamily: 'GIP',
+            color: Colors.white,
+          ),
+        ),
         onTap: () async => await callFunction(),
       );
     }

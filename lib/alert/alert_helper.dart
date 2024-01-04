@@ -6,7 +6,7 @@ import '../style/my_colors.dart';
 import 'flash_status.dart';
 
 class AlertHelper {
-  static void showDialog({required String message, required VoidCallback onTap}) {
+  static void showDialog({required Widget message, required VoidCallback onTap}) {
     Get.dialog(
       AlertDialog(
         contentPadding: EdgeInsets.zero,
@@ -31,16 +31,7 @@ class AlertHelper {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 100),
-                  Text(
-                    message,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'GIP',
-                      color: Colors.white,
-                    ),
-                  ),
+                  message,
                   const SizedBox(height: 24),
                   Row(
                     mainAxisSize: MainAxisSize.min,

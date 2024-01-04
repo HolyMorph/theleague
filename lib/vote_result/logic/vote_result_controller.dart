@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mezorn_api_caller/api_caller.dart';
 
@@ -8,8 +8,17 @@ import '../../storage/local_storage.dart';
 import '../../utils/constants.dart';
 import '../state/vote_result_state.dart';
 
-class VoteResultController extends GetxController {
+class VoteResultController extends GetxController with GetSingleTickerProviderStateMixin {
   VoteResultState state = VoteResultState();
+
+  void appInit() async {
+    state.initLoading.value = true;
+    await getVoteResult();
+    await getVoteHistory();
+
+    state.tabController = TabController(vsync: this, length: state.tabLength.value);
+    state.initLoading.value = false;
+  }
 
   Future<void> getVoteHistory() async {
     state.voteHistories.clear();
@@ -93,6 +102,7 @@ class VoteResultController extends GetxController {
     state.onlineVoteResults.clear();
     state.arenaVoteResults.clear();
     state.coachVoteResults.clear();
+    state.totalVoteResults.clear();
 
     state.isLoading.value = true;
     dynamic response = await ApiClient().sendRequest(
@@ -102,11 +112,14 @@ class VoteResultController extends GetxController {
     );
 
     if (MezornClientHelper.isValidResponse(response)) {
+      state.tabLength.value = response.data['result']['showTotal'] ?? false ? 4 : 3;
+
       List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
 
       List<dynamic> onlineList = [];
       List<dynamic> arenaList = [];
       List<dynamic> coachList = [];
+      List<dynamic> totalList = [];
 
       for (var player in players) {
         onlineList.add(jsonDecode(jsonEncode(player)));
@@ -119,10 +132,12 @@ class VoteResultController extends GetxController {
       for (var player in players) {
         coachList.add(jsonDecode(jsonEncode(player)));
       }
+      for (var player in players) {
+        totalList.add(jsonDecode(jsonEncode(player)));
+      }
 
       /// Online vote
       for (var index = 0; index < response.data['result']['votes']['online'].length; index++) {
-        log('online');
         for (var playerIndex = 0; playerIndex < onlineList.length; playerIndex++) {
           if (response.data['result']['votes']['online'][index]['value'] == onlineList[playerIndex]['_id']) {
             onlineList[playerIndex]..['score'] = response.data['result']['votes']['online'][index]['score'];
@@ -133,7 +148,6 @@ class VoteResultController extends GetxController {
 
       /// Arena vote
       for (var index = 0; index < response.data['result']['votes']['arena'].length; index++) {
-        log('arena');
         for (var playerIndex = 0; playerIndex < arenaList.length; playerIndex++) {
           if (response.data['result']['votes']['arena'][index]['value'] == arenaList[playerIndex]['_id']) {
             arenaList[playerIndex]..['score'] = response.data['result']['votes']['arena'][index]['score'];
@@ -146,9 +160,18 @@ class VoteResultController extends GetxController {
       for (var index = 0; index < response.data['result']['votes']['coach'].length; index++) {
         for (var playerIndex = 0; playerIndex < coachList.length; playerIndex++) {
           if (response.data['result']['votes']['coach'][index]['value'] == coachList[playerIndex]['_id']) {
-            log('coach');
             coachList[playerIndex]..['score'] = response.data['result']['votes']['coach'][index]['score'];
             state.coachVoteResults.add(coachList[playerIndex]);
+          }
+        }
+      }
+
+      /// Coach
+      for (var index = 0; index < response.data['result']['votes']['total'].length; index++) {
+        for (var playerIndex = 0; playerIndex < totalList.length; playerIndex++) {
+          if (response.data['result']['votes']['total'][index]['value'] == totalList[playerIndex]['_id']) {
+            totalList[playerIndex]..['score'] = response.data['result']['votes']['total'][index]['score'];
+            state.totalVoteResults.add(totalList[playerIndex]);
           }
         }
       }
@@ -158,9 +181,15 @@ class VoteResultController extends GetxController {
   }
 
   @override
+  void onClose() {
+    state.tabController.dispose();
+    super.onClose();
+  }
+
+  @override
   void onInit() {
-    getVoteHistory();
-    getVoteResult();
+    appInit();
+
     super.onInit();
   }
 

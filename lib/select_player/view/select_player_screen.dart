@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +46,22 @@ class SelectPlayerScreen extends GetView<HomeController> {
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(controller.getTitle()),
+        title: LocalStorage.getData('coachData') != null && controller.state.type.value == 'coach'
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(width: 10),
+                  Row(
+                    children: [
+                      CachedNetworkImage(height: 30, width: 30, imageUrl: '${LocalStorage.getData('coachData')['teamLogo']}?size=w50'),
+                      const SizedBox(width: 8),
+                      Text(controller.getTitle()),
+                    ],
+                  ),
+                  const SizedBox(width: 10),
+                ],
+              )
+            : Text(controller.getTitle()),
         leading: AppBackButton(),
         actions: [
           PlayerArchiveButton(
@@ -130,7 +146,16 @@ class SelectPlayerScreen extends GetView<HomeController> {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: <Color>[Color(0xFF4C1C1A), Colors.transparent],
+                        colors: <Color>[
+                          controller.state.type == 'coach'
+                              ? Color(
+                                  int.parse(
+                                    '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
+                                  ),
+                                )
+                              : Color(0xFF4C1C1A),
+                          Colors.transparent,
+                        ],
                         tileMode: TileMode.mirror,
                       ),
                     ),
@@ -138,7 +163,15 @@ class SelectPlayerScreen extends GetView<HomeController> {
                     child: Column(
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: controller.state.type == 'coach'
+                                ? Color(
+                                    int.parse(
+                                      '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
+                                    ),
+                                  )
+                                : MyColors.secondaryColor,
+                          ),
                           onPressed: () {
                             Get.back();
                           },

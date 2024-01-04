@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 
+import '../../alert/alert_helper.dart';
+import '../../alert/flash_status.dart';
 import '../../storage/local_storage.dart';
+import '../../style/my_colors.dart';
 import '../logic/home_controller.dart';
 
 class CoachButton extends GetView<HomeController> {
@@ -22,11 +25,59 @@ class CoachButton extends GetView<HomeController> {
           ),
         ).withOpacity(0.4),
       ),
-      onPressed: controller.state.totalQty.value > 0 ? () async => () {} : null,
+      onPressed: checkFunction,
       child: Text(
         'Саналаа өгөх',
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
       ),
     );
+  }
+
+  Future<void> checkFunction() async {
+    if (controller.state.totalQty.value < 12) {
+      AlertHelper.showFlashAlert(
+        title: 'Уучлаарай',
+        message: 'Та 12 тоглогч бүрэн сонгоогүй байна.',
+        status: FlashStatus.failed,
+      );
+    } else {
+      AlertHelper.showDialog(
+        message: RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: 'Та саналаа өгөхдөө итгэлтэй байна уу? Та багийн санал өгч байгаа тул ',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'GIP',
+                  color: Colors.white,
+                ),
+              ),
+              TextSpan(
+                text: 'нэг л удаа ',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'GIP',
+                  color: MyColors.secondaryColor,
+                ),
+              ),
+              TextSpan(
+                text: 'өгөх боломжтойг анхаарна уу.',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'GIP',
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
+        onTap: () async {},
+      );
+    }
   }
 }

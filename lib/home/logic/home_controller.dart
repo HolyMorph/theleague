@@ -225,6 +225,41 @@ class HomeController extends GetxController {
     }
   }
 
+  Future<void> voteCoach() async {
+    prepareList();
+    var body = {
+      'gender': state.gender.value,
+      'vote': state.preparedList,
+    };
+    isLoading = true;
+    dynamic response = await ApiClient().sendRequest('/api/me/vote-coach', method: Method.post, body: body);
+    isLoading = false;
+    if (MezornClientHelper.isValidResponse(response)) {
+      if (response.data['statusCode'] == 400 || response.data['statusCode'] == 404) {
+        var message = response.data['message_mn'] ?? response.data['error']['message'] as String;
+
+        AlertHelper.showFlashAlert(
+          title: 'Алдаа гарлаа',
+          message: message,
+          status: FlashStatus.failed,
+        );
+      } else {
+        await _voteController.refreshFunction();
+        AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Таны саналыг хүлээж авлаа.');
+        Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
+        _clearData();
+      }
+    } else {
+      var message = response.data['error']['message'] as String;
+
+      AlertHelper.showFlashAlert(
+        title: 'Алдаа гарлаа',
+        message: message,
+        status: FlashStatus.failed,
+      );
+    }
+  }
+
   Future<void> voteOnline() async {
     prepareList();
     var body = {
