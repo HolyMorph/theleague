@@ -33,7 +33,7 @@ class VerifyTicketController extends GetxController {
           status: FlashStatus.failed,
         );
       } else {
-        Get.offNamed(MyRoutes.selectLeague);
+        Get.offNamed('${MyRoutes.selectLeague}/arena');
         LocalStorage.saveData(Constants.TicketCode, state.ticketCode.value);
       }
     } else {

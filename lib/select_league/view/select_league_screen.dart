@@ -61,7 +61,7 @@ class SelectLeagueScreen extends GetView<SelectLeagueController> {
                         controller.gender = 'male';
                         await controller.checkVote();
                         Get.toNamed(
-                          '${MyRoutes.homeScreen}/male/${controller.state.isCanVote.value}',
+                          '${MyRoutes.homeScreen}/male/${controller.state.isCanVote.value}/${controller.state.type.value}',
                           arguments: controller.state.isCanVote.value ? null : controller.state.result,
                         );
                       },
@@ -74,7 +74,7 @@ class SelectLeagueScreen extends GetView<SelectLeagueController> {
                         controller.gender = 'female';
                         await controller.checkVote();
                         Get.toNamed(
-                          '${MyRoutes.homeScreen}/female/${controller.state.isCanVote.value}',
+                          '${MyRoutes.homeScreen}/female/${controller.state.isCanVote.value}/${controller.state.type.value}',
                           arguments: controller.state.isCanVote.value ? null : controller.state.result,
                         );
                       },

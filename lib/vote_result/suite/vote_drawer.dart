@@ -37,7 +37,7 @@ class VoteDrawer extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               Get.toNamed(
-                                '${MyRoutes.homeScreen}/$gender/true',
+                                '${MyRoutes.homeScreen}/$gender/true/online',
                                 arguments: histories[index]['vote'],
                               );
                             },

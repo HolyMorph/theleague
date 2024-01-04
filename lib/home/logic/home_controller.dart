@@ -20,6 +20,7 @@ class HomeController extends GetxController {
   void set selectedTeamCode(String code) => state.selectedTeamCode.value = code;
   void set title(String title) => state.title = title;
   void set totalQty(int qty) => state.totalQty.value = qty;
+  void set type(String type) => state.type.value = type;
 
   void calculateTotalQty() {
     state.totalQty.value = 0;
@@ -141,6 +142,7 @@ class HomeController extends GetxController {
   void onInit() {
     gender = Get.parameters['gender']!;
     isCanVote = bool.parse(Get.parameters['isCanVote']!);
+    type = Get.parameters['type']!;
 
     if (LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) != null) {
       state.selectedPlayers.value =

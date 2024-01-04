@@ -93,6 +93,12 @@ class SelectLeagueController extends GetxController {
     }
   }
 
+  @override
+  void onInit() {
+    state.type.value = Get.parameters['type'] ?? '';
+    super.onInit();
+  }
+
   String secondsToTime(int seconds) {
     final int hour = (seconds / 3600).floor();
     final int minute = ((seconds / 3600 - hour) * 60).floor();

@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../route/my_routes.dart';
+import '../../storage/local_storage.dart';
 import '../../style/my_colors.dart';
 import '../../utils/basic_utils.dart';
 import '../logic/onboarding_controller.dart';
@@ -84,13 +86,39 @@ class OnboardingScreen extends GetView<OnboardingController> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF4D5163)),
                         onPressed: () {
-                          Get.toNamed(MyRoutes.selectLeague);
+                          Get.toNamed('${MyRoutes.selectLeague}/online');
                         },
                         child: Text(
                           'Онлайнаар санал өгөх',
                           style: TextStyle(fontFamily: 'GIP', fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                       ),
+                      const SizedBox(height: 16),
+                      LocalStorage.getData('coachData') != null
+                          ? ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(
+                                  int.parse(
+                                    '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                Get.toNamed('${MyRoutes.selectLeague}/coach');
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CachedNetworkImage(height: 30, width: 30, imageUrl: '${LocalStorage.getData('coachData')['teamLogo']}?size=w50'),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Багийн санал өгөх',
+                                    style: TextStyle(fontFamily: 'GIP', fontSize: 16, fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : const SizedBox(),
                       const SizedBox(height: 16),
                       Wrap(
                         alignment: WrapAlignment.center,

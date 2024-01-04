@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -70,13 +72,19 @@ class _VoteResultScreenState extends State<VoteResultScreen> with SingleTickerPr
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset('assets/icons/ic_logo.png', scale: 10),
-                          const SizedBox(width: 12),
-                          Image.asset('assets/images/all_star.png', scale: 2),
-                        ],
+                      GestureDetector(
+                        onTap: () => Get.toNamed(MyRoutes.coachVerifyScreen),
+                        onSecondaryLongPressCancel: () {
+                          log('tapped');
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/icons/ic_logo.png', scale: 10),
+                            const SizedBox(width: 12),
+                            Image.asset('assets/images/all_star.png', scale: 2),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 32),
                       Text(
