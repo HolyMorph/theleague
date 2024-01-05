@@ -36,7 +36,7 @@ class OnboardingScreen extends GetView<OnboardingController> {
                     padding: EdgeInsets.only(top: Get.mediaQuery.size.height * 0.05),
                     child: Image.asset(
                       'assets/images/ic_cover.png',
-                      fit: BoxFit.fill,
+                      fit: BoxFit.contain,
                       width: Get.mediaQuery.size.width,
                     ),
                   ),
@@ -57,6 +57,8 @@ class OnboardingScreen extends GetView<OnboardingController> {
                 end: Alignment.bottomCenter,
                 colors: <Color>[
                   Colors.transparent,
+                  Colors.transparent,
+                  MyColors.primaryColor,
                   MyColors.primaryColor,
                   MyColors.primaryColor,
                 ],
@@ -168,7 +170,7 @@ class OnboardingScreen extends GetView<OnboardingController> {
                       Image.asset('assets/icons/ic_logo.png', width: 60, height: 60),
                       const SizedBox(height: 4),
                       Text(
-                        '@TheLeague 2023',
+                        '@TheLeague 2024',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,

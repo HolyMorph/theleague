@@ -152,7 +152,7 @@ class SelectPlayerScreen extends GetView<HomeController> {
                                   int.parse(
                                     '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
                                   ),
-                                )
+                                ).withOpacity(0.5)
                               : Color(0xFF4C1C1A),
                           Colors.transparent,
                         ],

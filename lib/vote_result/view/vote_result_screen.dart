@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gesture_x_detector/gesture_x_detector.dart';
 import 'package:get/get.dart';
 
 import '../../route/my_routes.dart';
@@ -55,9 +56,12 @@ class VoteResultScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             const SizedBox(height: 16),
-                            GestureDetector(
-                              onTap: () => Get.toNamed(MyRoutes.coachVerifyScreen),
-                              onSecondaryLongPressCancel: () {},
+
+                            XGestureDetector(
+                              onLongPress: (event) {
+                                Get.toNamed(MyRoutes.coachVerifyScreen);
+                              },
+                              longPressTimeConsider: 5000,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -144,8 +148,8 @@ class VoteResultScreen extends StatelessWidget {
                               labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
                               indicatorSize: TabBarIndicatorSize.tab,
                               indicatorColor: Colors.white,
-                              isScrollable: true,
-                              tabAlignment: TabAlignment.start,
+                              isScrollable: controller.state.tabLength.value == 4 ? true : false,
+                              tabAlignment: controller.state.tabLength.value == 4 ? TabAlignment.start : TabAlignment.fill,
                               dividerColor: Colors.white.withOpacity(0.5),
                               labelColor: Colors.white,
                               unselectedLabelColor: Colors.white.withOpacity(0.5),

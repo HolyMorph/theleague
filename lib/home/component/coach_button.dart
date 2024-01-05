@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:get/get.dart';
 
 import '../../alert/alert_helper.dart';
 import '../../alert/flash_status.dart';
@@ -76,7 +76,10 @@ class CoachButton extends GetView<HomeController> {
             ],
           ),
         ),
-        onTap: () async {},
+        onTap: () async {
+          Get.back();
+          await controller.voteCoach();
+        },
       );
     }
   }

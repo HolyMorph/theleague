@@ -83,7 +83,7 @@ class SelectLeagueScreen extends GetView<SelectLeagueController> {
                     Image.asset('assets/icons/ic_logo.png', width: 60, height: 60),
                     const SizedBox(height: 4),
                     Text(
-                      '@TheLeague 2023',
+                      '@TheLeague 2024',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
