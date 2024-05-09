@@ -1,23 +1,22 @@
 import 'package:get/get.dart';
-
-import '../coach_verify_screen/logic/coach_verify_binding.dart';
-import '../coach_verify_screen/view/coach_loading_screen.dart';
-import '../coach_verify_screen/view/coach_verify_screen.dart';
-import '../home/logic/home_binding.dart';
-import '../home/view/home_screen.dart';
-import '../onboarding/logic/onboarding_binding.dart';
-import '../onboarding/view/onboarding_screen.dart';
-import '../player_detail_screen/logic/player_detail_binding.dart';
-import '../player_detail_screen/view/player_detail_screen.dart';
-import '../select_league/logic/select_league_binding.dart';
-import '../select_league/view/select_league_screen.dart';
-import '../select_player/view/select_player_screen.dart';
-import '../splash/logic/splash_binding.dart';
-import '../splash/view/reload_screen.dart';
-import '../splash/view/splash_screen.dart';
-import '../verify_ticket_number/logic/verify_ticket_binding.dart';
-import '../verify_ticket_number/view/verify_ticket_screen.dart';
-import '../vote_result/view/vote_result_screen.dart';
+import '../pages/onboarding/logic/onboarding_binding.dart';
+import '../pages/onboarding/view/onboarding_screen.dart';
+import '../pages/splash/logic/splash_binding.dart';
+import '../pages/splash/view/reload_screen.dart';
+import '../pages/splash/view/splash_screen.dart';
+import '../pages/theleague/all_star_home/logic/all_star_binding.dart';
+import '../pages/theleague/all_star_home/view/all_star_screen.dart';
+import '../pages/theleague/coach_verify_screen/logic/coach_verify_binding.dart';
+import '../pages/theleague/coach_verify_screen/view/coach_loading_screen.dart';
+import '../pages/theleague/coach_verify_screen/view/coach_verify_screen.dart';
+import '../pages/theleague/player_detail_screen/logic/player_detail_binding.dart';
+import '../pages/theleague/player_detail_screen/view/player_detail_screen.dart';
+import '../pages/theleague/select_league/logic/select_league_binding.dart';
+import '../pages/theleague/select_league/view/select_league_screen.dart';
+import '../pages/theleague/select_player/view/select_player_screen.dart';
+import '../pages/theleague/verify_ticket_number/logic/verify_ticket_binding.dart';
+import '../pages/theleague/verify_ticket_number/view/verify_ticket_screen.dart';
+import '../pages/theleague/vote_result/view/vote_result_screen.dart';
 import 'my_routes.dart';
 
 class MyPages {
@@ -25,8 +24,8 @@ class MyPages {
     ///Home screen
     GetPage(
       name: MyRoutes.homeScreen + '/:gender' + '/:isCanVote' + '/:type',
-      page: () => HomeScreen(),
-      binding: HomeBinding(),
+      page: () => AllStarScreen(),
+      binding: AllStarBinding(),
     ),
 
     ///Verify Ticket number
