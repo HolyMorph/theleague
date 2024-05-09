@@ -3,6 +3,7 @@ class MyRoutes {
   static String coachVerifyScreen = '/coachVerifyScreen';
   static String homeScreen = '/homeScreen';
   static String onboarding = '/onboarding';
+  static String playerDetailScreen = '/playerDetailScreen';
   static String reloadScreen = '/reloadScreen';
   static String selectLeague = '/selectLeague';
   static String selectPlayer = '/selectPlayer';

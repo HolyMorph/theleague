@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.instance.themeData,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.topLevel,
-      initialRoute: MyRoutes.splash,
+      // initialRoute: MyRoutes.splash,
+      initialRoute: MyRoutes.playerDetailScreen,
       getPages: MyPages.pages,
     );
   }

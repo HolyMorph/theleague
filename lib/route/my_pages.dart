@@ -7,6 +7,8 @@ import '../home/logic/home_binding.dart';
 import '../home/view/home_screen.dart';
 import '../onboarding/logic/onboarding_binding.dart';
 import '../onboarding/view/onboarding_screen.dart';
+import '../player_detail_screen/logic/player_detail_binding.dart';
+import '../player_detail_screen/view/player_detail_screen.dart';
 import '../select_league/logic/select_league_binding.dart';
 import '../select_league/view/select_league_screen.dart';
 import '../select_player/view/select_player_screen.dart';
@@ -39,6 +41,13 @@ class MyPages {
       name: MyRoutes.onboarding,
       page: () => OnboardingScreen(),
       binding: OnboardingBinding(),
+    ),
+
+    /// Player detail screen
+    GetPage(
+      name: MyRoutes.playerDetailScreen,
+      page: () => PlayerDetailScreen(),
+      binding: PlayerDetailBinding(),
     ),
 
     ///Select League  screen
