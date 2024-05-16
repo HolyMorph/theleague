@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_api_caller/api_caller.dart';
-import '../../../../service/api_client.dart';
-import '../../../../storage/local_storage.dart';
+import 'package:intl/intl.dart';
+import '../../../../service/method.dart';
+import '../../../../service/my_client.dart';
 import '../../../../utils/constants.dart';
+import '../../../../utils/my_storage.dart';
 import '../state/vote_result_state.dart';
 
 class VoteResultController extends GetxController with GetSingleTickerProviderStateMixin {
@@ -12,6 +13,7 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
 
   void appInit() async {
     state.initLoading.value = true;
+    state.teams.value = await MyStorage().getData(Constants.TEAMS);
     await getVoteResult();
     await getVoteHistory();
 
@@ -21,14 +23,13 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
 
   Future<void> getVoteHistory() async {
     state.voteHistories.clear();
-    List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
-    dynamic response = await ApiClient().sendRequest(
-      '/api/me/vote-history',
-      queryParam: {'gender': state.isMale.value ? 'male' : 'female'},
+    var (isSucces, response) = await MyClient().sendHttpRequest(
+      urlPath: '/api/me/vote-history',
+      queryParameters: {'gender': state.isMale.value ? 'male' : 'female'},
       method: Method.get,
     );
 
-    if (MezornClientHelper.isValidResponse(response)) {
+    if (isSucces) {
       List<dynamic> histories = response.data['result']['docs'];
       for (var index = 0; index < histories.length; index++) {
         dynamic result = {
@@ -56,9 +57,9 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
         /// point guard
         if (pointguard.isNotEmpty)
           for (var pgIndex = 0; pgIndex < pointguard.length; pgIndex++) {
-            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-              if (players[playerIndex]['_id'] == pointguard[pgIndex]) {
-                result['vote']['PG'].add(players[playerIndex]);
+            for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
+              if (state.players[playerIndex]['_id'] == pointguard[pgIndex]) {
+                result['vote']['PG'].add(state.players[playerIndex]);
               }
             }
           }
@@ -66,9 +67,9 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
         /// forward
         if (forward.isNotEmpty)
           for (var fIndex = 0; fIndex < forward.length; fIndex++) {
-            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-              if (players[playerIndex]['_id'] == forward[fIndex]) {
-                result['vote']['F'].add(players[playerIndex]);
+            for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
+              if (state.players[playerIndex]['_id'] == forward[fIndex]) {
+                result['vote']['F'].add(state.players[playerIndex]);
               }
             }
           }
@@ -76,9 +77,9 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
         /// guard
         if (guard.isNotEmpty)
           for (var gIndex = 0; gIndex < guard.length; gIndex++) {
-            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-              if (players[playerIndex]['_id'] == guard[gIndex]) {
-                result['vote']['G'].add(players[playerIndex]);
+            for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
+              if (state.players[playerIndex]['_id'] == guard[gIndex]) {
+                result['vote']['G'].add(state.players[playerIndex]);
               }
             }
           }
@@ -86,9 +87,9 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
         /// center
         if (center.isNotEmpty)
           for (var cIndex = 0; cIndex < center.length; cIndex++) {
-            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-              if (players[playerIndex]['_id'] == center[cIndex]) {
-                result['vote']['C'].add(players[playerIndex]);
+            for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
+              if (state.players[playerIndex]['_id'] == center[cIndex]) {
+                result['vote']['C'].add(state.players[playerIndex]);
               }
             }
           }
@@ -104,34 +105,34 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
     state.totalVoteResults.clear();
 
     state.isLoading.value = true;
-    dynamic response = await ApiClient().sendRequest(
-      '/api/me/vote-result',
+    var (isSuccess, response) = await MyClient().sendHttpRequest(
+      urlPath: '/api/me/vote-result',
       method: Method.get,
-      queryParam: {'gender': state.isMale.value ? 'male' : 'female', 'version': 1.2},
+      queryParameters: {'gender': state.isMale.value ? 'male' : 'female', 'version': 1.2},
     );
 
-    if (MezornClientHelper.isValidResponse(response)) {
+    if (isSuccess) {
       state.tabLength.value = response.data['result']['showTotal'] ?? false ? 4 : 3;
-
-      List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
+      Map<String, dynamic> meta = await MyStorage().getData(Constants.META_DATA);
+      state.players.value = await meta['players'];
 
       List<dynamic> onlineList = [];
       List<dynamic> arenaList = [];
       List<dynamic> coachList = [];
       List<dynamic> totalList = [];
 
-      for (var player in players) {
+      for (var player in state.players) {
         onlineList.add(jsonDecode(jsonEncode(player)));
       }
 
-      for (var player in players) {
+      for (var player in state.players) {
         arenaList.add(jsonDecode(jsonEncode(player)));
       }
 
-      for (var player in players) {
+      for (var player in state.players) {
         coachList.add(jsonDecode(jsonEncode(player)));
       }
-      for (var player in players) {
+      for (var player in state.players) {
         totalList.add(jsonDecode(jsonEncode(player)));
       }
 

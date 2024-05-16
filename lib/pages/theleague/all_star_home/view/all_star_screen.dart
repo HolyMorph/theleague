@@ -5,9 +5,9 @@ import '../../../../alert/alert_helper.dart';
 import '../../../../alert/flash_status.dart';
 import '../../../../components/app_back_button.dart';
 import '../../../../route/my_routes.dart';
-import '../../../../storage/local_storage.dart';
 import '../../../../style/my_colors.dart';
 import '../../../../utils/constants.dart';
+import '../../../../utils/my_storage.dart';
 import '../component/coach_button.dart';
 import '../component/select_item.dart';
 import '../logic/all_star_controller.dart';
@@ -27,14 +27,14 @@ class AllStarScreen extends GetView<AllStarController> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: LocalStorage.getData('coachData') != null && controller.state.type.value == 'coach'
+        title: controller.state.coachData.isNotEmpty && controller.state.type.value == 'coach'
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(width: 30),
                   Row(
                     children: [
-                      CachedNetworkImage(height: 30, width: 30, imageUrl: '${LocalStorage.getData('coachData')['teamLogo']}?size=w50'),
+                      CachedNetworkImage(height: 30, width: 30, imageUrl: '${controller.state.coachData['teamLogo']}?size=w50'),
                       const SizedBox(width: 8),
                       Text('Тоглогч сонгох'),
                     ],
@@ -164,7 +164,7 @@ class AllStarScreen extends GetView<AllStarController> {
                           controller.state.type.value == 'coach'
                               ? Color(
                                   int.parse(
-                                    '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
+                                    '0xFF${controller.state.coachData['teamColor'].substring(1, controller.state.coachData['teamColor'].length)}',
                                   ),
                                 ).withOpacity(0.5)
                               : Color(0xFF4C1C1A),
@@ -198,7 +198,7 @@ class AllStarScreen extends GetView<AllStarController> {
 
   Future<void> callFunction() async {
     Get.back();
-    await LocalStorage.getData(Constants.TicketCode) != null ? controller.voteArena() : controller.voteOnline();
+    await MyStorage().getData(Constants.TicketCode) != null ? controller.voteArena() : controller.voteOnline();
   }
 
   Future<void> checkFunction() async {

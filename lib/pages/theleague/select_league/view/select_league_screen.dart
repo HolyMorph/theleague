@@ -2,26 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../components/app_back_button.dart';
 import '../../../../route/my_routes.dart';
-import '../../../../storage/local_storage.dart';
 import '../../../../style/my_colors.dart';
-import '../../../../utils/constants.dart';
 import '../component/select_league_item.dart';
 import '../logic/select_league_controller.dart';
 
 class SelectLeagueScreen extends GetView<SelectLeagueController> {
   const SelectLeagueScreen({super.key});
-
-  @override
-  StatelessElement createElement() {
-    if (LocalStorage.getData(Constants.PlayersMale).runtimeType != RxMap<String, RxList<Map<String, dynamic>>>) {
-      LocalStorage.saveData(Constants.PlayersMale, null);
-    }
-    if (LocalStorage.getData(Constants.PlayersFemale).runtimeType != RxMap<String, RxList<Map<String, dynamic>>>) {
-      LocalStorage.saveData(Constants.PlayersFemale, null);
-    }
-
-    return super.createElement();
-  }
 
   @override
   Widget build(BuildContext context) {

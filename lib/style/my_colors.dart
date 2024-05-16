@@ -62,7 +62,7 @@ class MyColors {
   static const Color redColor = Color(0xffF41435);
 
   /// Апп-ын background-д ашиглагдах өнгө.
-  static const Color scaffoldBackgroundColor = Color(0xff161623);
+  static const Color scaffoldBackgroundColor = Color(0xff3E4784);
 
   ///Нэмэлт өнгөнүүд. Апп-д ашигладаж байгаагаас тусдаа нэмэлт
   ///өнгө ашиглаж байгаа бол энэ хэсэгт тухайн өнгөө зарлана

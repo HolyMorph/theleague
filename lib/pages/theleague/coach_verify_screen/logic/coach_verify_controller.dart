@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
-import 'package:mezorn_api_caller/api/mezorn_client.dart';
-import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
 import '../../../../alert/alert_helper.dart';
 import '../../../../alert/flash_status.dart';
 import '../../../../route/my_routes.dart';
-import '../../../../service/api_client.dart';
+import '../../../../service/method.dart';
+import '../../../../service/my_client.dart';
+import '../../../../utils/constants.dart';
+import '../../../../utils/my_storage.dart';
 import '../state/coach_verify_state.dart';
 
 class CoachVerifyController extends GetxController {
@@ -17,10 +18,10 @@ class CoachVerifyController extends GetxController {
   Future<void> checkCoach() async {
     isLoading = true;
     var body = {'login_code': state.coachCode.value};
-    dynamic response = await ApiClient().sendRequest('/api/me/connect-coach', method: Method.post, body: body);
+    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/me/connect-coach', method: Method.post, body: body);
 
     isLoading = false;
-    if (MezornClientHelper.isValidResponse(response)) {
+    if (isSuccess) {
       if (response.data['statusCode'] == 400 || response.data['statusCode'] == 404) {
         var message = response.data['message_mn'] ?? response.data['message'] as String;
 
@@ -31,8 +32,9 @@ class CoachVerifyController extends GetxController {
         );
       } else {
         teamCode = response.data['result']['teamCode'];
-        MezornClientHelper().saveToken = response.data['result']['token'];
-        MezornClientHelper().refreshToken = response.data['result']['refreshToken'];
+        MyStorage.instance.saveData(Constants.TOKEN, response.data['result']['token']);
+        MyStorage.instance.saveData(Constants.REFRESH_TOKEN, response.data['result']['refreshToken']);
+
         Get.toNamed(MyRoutes.coachLoadingScreen);
       }
     } else {
@@ -44,5 +46,11 @@ class CoachVerifyController extends GetxController {
         status: FlashStatus.failed,
       );
     }
+  }
+
+  @override
+  void onInit() async {
+    state.teams.value = await MyStorage().getData(Constants.TEAMS);
+    super.onInit();
   }
 }

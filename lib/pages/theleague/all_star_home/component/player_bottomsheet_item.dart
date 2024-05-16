@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../route/my_routes.dart';
-import '../../../../storage/local_storage.dart';
 import '../../../../utils/constants.dart';
+import '../../../../utils/my_storage.dart';
 import '../logic/all_star_controller.dart';
 
 class PlayerBottomSheetItem extends GetView<AllStarController> {
@@ -95,7 +95,7 @@ class PlayerBottomSheetItem extends GetView<AllStarController> {
                         );
                         controller.state.selectedPlayers.refresh();
                         controller.calculateTotalQty();
-                        LocalStorage.saveData(
+                        MyStorage().saveData(
                           controller.state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale,
                           controller.state.selectedPlayers,
                         );

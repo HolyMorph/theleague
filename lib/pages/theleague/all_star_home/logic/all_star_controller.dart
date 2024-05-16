@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:mezorn_api_caller/api_caller.dart';
 
 import '../../../../alert/alert_helper.dart';
 import '../../../../alert/flash_status.dart';
 import '../../../../route/my_routes.dart';
-import '../../../../service/api_client.dart';
-import '../../../../storage/local_storage.dart';
+import '../../../../service/method.dart';
+import '../../../../service/my_client.dart';
 import '../../../../utils/constants.dart';
+import '../../../../utils/my_storage.dart';
 import '../../vote_result/logic/vote_result_controller.dart';
 import '../state/all_star_state.dart';
 
@@ -139,18 +139,19 @@ class AllStarController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
+    state.coachData.value = await MyStorage.instance.getData('coachData');
     gender = Get.parameters['gender']!;
     isCanVote = bool.parse(Get.parameters['isCanVote']!);
     type = Get.parameters['type']!;
 
-    if (LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) != null) {
+    if (await MyStorage().getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) != null) {
       state.selectedPlayers.value =
-          Get.arguments != null ? Get.arguments : LocalStorage.getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale);
+          Get.arguments != null ? Get.arguments : MyStorage().getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale);
     }
 
     state.teams.clear();
-    List<dynamic> allTeam = LocalStorage.getData(Constants.TEAMS);
+    List<dynamic> allTeam = await MyStorage().getData(Constants.TEAMS);
     allTeam.forEach((element) {
       if (element['gender'] == state.gender.value) state.teams.add(element);
     });
@@ -188,18 +189,18 @@ class AllStarController extends GetxController {
     prepareList();
     var body = {
       'gender': state.gender.value,
-      'game_code': LocalStorage.getData(Constants.TicketCode),
-      'lat': await LocalStorage.getData('lat'),
-      'lon': await LocalStorage.getData('lon'),
+      'game_code': await MyStorage().getData(Constants.TicketCode),
+      'lat': await MyStorage().getData('lat'),
+      'lon': await MyStorage().getData('lon'),
       'vote': state.preparedList,
     };
     isLoading = true;
-    dynamic response = await ApiClient().sendRequest('/api/me/vote-arena', method: Method.post, body: body);
+    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/me/vote-arena', method: Method.post, body: body);
     isLoading = false;
-    if (MezornClientHelper.isValidResponse(response)) {
+    if (isSuccess) {
       if (response.data['statusCode'] == 400) {
         var message = response.data['message_mn'] ?? response.data['message'] as String;
-        LocalStorage.saveData(Constants.TicketCode, null);
+        MyStorage().saveData(Constants.TicketCode, null);
         Get.offNamed(MyRoutes.onboarding);
 
         AlertHelper.showFlashAlert(
@@ -232,9 +233,9 @@ class AllStarController extends GetxController {
       'vote': state.preparedList,
     };
     isLoading = true;
-    dynamic response = await ApiClient().sendRequest('/api/me/vote-coach', method: Method.post, body: body);
+    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/me/vote-coach', method: Method.post, body: body);
     isLoading = false;
-    if (MezornClientHelper.isValidResponse(response)) {
+    if (isSuccess) {
       if (response.data['statusCode'] == 400 || response.data['statusCode'] == 404) {
         var message = response.data['message_mn'] ?? response.data['error']['message'] as String;
 
@@ -267,9 +268,9 @@ class AllStarController extends GetxController {
       'vote': state.preparedList,
     };
     isLoading = true;
-    dynamic response = await ApiClient().sendRequest('/api/me/vote-online', method: Method.post, body: body);
+    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/me/vote-online', method: Method.post, body: body);
     isLoading = false;
-    if (MezornClientHelper.isValidResponse(response)) {
+    if (isSuccess) {
       if (response.data['statusCode'] == 400) {
         var message = response.data['message_mn'] ?? response.data['error']['message'] as String;
 
@@ -296,8 +297,8 @@ class AllStarController extends GetxController {
   }
 
   void _clearData() {
-    LocalStorage.saveData(Constants.PlayersMale, null);
-    LocalStorage.saveData(Constants.PlayersFemale, null);
-    LocalStorage.saveData(Constants.TicketCode, null);
+    MyStorage().saveData(Constants.PlayersMale, null);
+    MyStorage().saveData(Constants.PlayersFemale, null);
+    MyStorage().saveData(Constants.TicketCode, null);
   }
 }

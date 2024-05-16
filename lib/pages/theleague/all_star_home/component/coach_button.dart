@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../../alert/alert_helper.dart';
 import '../../../../alert/flash_status.dart';
-import '../../../../storage/local_storage.dart';
 import '../../../../style/my_colors.dart';
 import '../logic/all_star_controller.dart';
 
@@ -16,12 +15,12 @@ class CoachButton extends GetView<AllStarController> {
       style: ElevatedButton.styleFrom(
         backgroundColor: Color(
           int.parse(
-            '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
+            '0xFF${controller.state.coachData['teamColor'].substring(1, controller.state.coachData['teamColor'].length)}',
           ),
         ),
         disabledBackgroundColor: Color(
           int.parse(
-            '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
+            '0xFF${controller.state.coachData['teamColor'].substring(1, controller.state.coachData['teamColor'].length)}',
           ),
         ).withOpacity(0.4),
       ),

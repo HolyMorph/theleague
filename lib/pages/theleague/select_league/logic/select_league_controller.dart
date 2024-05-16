@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
-import 'package:mezorn_api_caller/api/mezorn_client.dart';
-import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
 import '../../../../alert/alert_helper.dart';
 import '../../../../alert/flash_status.dart';
-import '../../../../service/api_client.dart';
-import '../../../../storage/local_storage.dart';
+import '../../../../service/method.dart';
+import '../../../../service/my_client.dart';
 import '../../../../utils/constants.dart';
+import '../../../../utils/my_storage.dart';
 import '../state/select_league_state.dart';
 
 class SelectLeagueController extends GetxController {
@@ -17,15 +16,14 @@ class SelectLeagueController extends GetxController {
 
   Future<void> checkVote() async {
     isLoading = true;
-    List<dynamic> players = await LocalStorage.getData(Constants.META_DATA)['players'];
-    dynamic response = await ApiClient().sendRequest(
-      '/api/me/check-vote',
+    var (isSuccess, response) = await MyClient().sendHttpRequest(
+      urlPath: '/api/me/check-vote',
       method: Method.post,
       body: {'gender': state.gender.value},
     );
     isLoading = false;
 
-    if (MezornClientHelper.isValidResponse(response)) {
+    if (isSuccess) {
       if (response.data['remaining_seconds'] == null) {
         isCanVote = true;
       } else {
@@ -46,9 +44,9 @@ class SelectLeagueController extends GetxController {
         /// point guard
         if (pointguard.isNotEmpty)
           for (var pgIndex = 0; pgIndex < pointguard.length; pgIndex++) {
-            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-              if (players[playerIndex]['_id'] == pointguard[pgIndex]) {
-                state.result['PG'].add(players[playerIndex]);
+            for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
+              if (state.players[playerIndex]['_id'] == pointguard[pgIndex]) {
+                state.result['PG'].add(state.players[playerIndex]);
               }
             }
           }
@@ -56,9 +54,9 @@ class SelectLeagueController extends GetxController {
         /// forward
         if (forward.isNotEmpty)
           for (var fIndex = 0; fIndex < forward.length; fIndex++) {
-            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-              if (players[playerIndex]['_id'] == forward[fIndex]) {
-                state.result['F'].add(players[playerIndex]);
+            for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
+              if (state.players[playerIndex]['_id'] == forward[fIndex]) {
+                state.result['F'].add(state.players[playerIndex]);
               }
             }
           }
@@ -66,9 +64,9 @@ class SelectLeagueController extends GetxController {
         /// guard
         if (guard.isNotEmpty)
           for (var gIndex = 0; gIndex < guard.length; gIndex++) {
-            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-              if (players[playerIndex]['_id'] == guard[gIndex]) {
-                state.result['G'].add(players[playerIndex]);
+            for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
+              if (state.players[playerIndex]['_id'] == guard[gIndex]) {
+                state.result['G'].add(state.players[playerIndex]);
               }
             }
           }
@@ -76,9 +74,9 @@ class SelectLeagueController extends GetxController {
         /// center
         if (center.isNotEmpty)
           for (var cIndex = 0; cIndex < center.length; cIndex++) {
-            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-              if (players[playerIndex]['_id'] == center[cIndex]) {
-                state.result['C'].add(players[playerIndex]);
+            for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
+              if (state.players[playerIndex]['_id'] == center[cIndex]) {
+                state.result['C'].add(state.players[playerIndex]);
               }
             }
           }
@@ -93,8 +91,10 @@ class SelectLeagueController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     state.type.value = Get.parameters['type'] ?? '';
+    Map<String, dynamic> meta = await MyStorage().getData(Constants.META_DATA);
+    state.players.value = meta['players'];
     super.onInit();
   }
 

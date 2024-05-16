@@ -3,27 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../../../route/my_routes.dart';
-import '../../../../storage/local_storage.dart';
 import '../../../../style/my_colors.dart';
-import '../../../../utils/constants.dart';
+import '../../../../utils/my_storage.dart';
 import '../logic/coach_verify_controller.dart';
 
 class CoachLoadingScreen extends GetView<CoachVerifyController> {
   CoachLoadingScreen({super.key});
 
   final RxString teamColor = RxString('');
-  final RxList<dynamic> teams = RxList();
 
   @override
   StatelessElement createElement() {
-    teams.value = LocalStorage.getData(Constants.TEAMS);
-    teamColor.value = teams.firstWhereOrNull((element) => element['code'] == controller.state.teamCode.value)['colorCode'];
+    teamColor.value = controller.state.teams.firstWhereOrNull((element) => element['code'] == controller.state.teamCode.value)['colorCode'];
 
     Future.delayed(const Duration(milliseconds: 3500), () {
-      LocalStorage.saveData('coachData', {
+      MyStorage().saveData('coachData', {
         'coachCode': '${controller.state.coachCode}',
         'teamCode': '${controller.state.teamCode}',
-        'teamLogo': '${teams.firstWhereOrNull((element) => element['code'] == controller.state.teamCode.value)['logoUrl']}',
+        'teamLogo': '${controller.state.teams.firstWhereOrNull((element) => element['code'] == controller.state.teamCode.value)['logoUrl']}',
         'teamColor': '${teamColor.value}',
       });
 
@@ -43,7 +40,8 @@ class CoachLoadingScreen extends GetView<CoachVerifyController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CachedNetworkImage(
-              imageUrl: '${teams.firstWhereOrNull((element) => element['code'] == controller.state.teamCode.value)['logoUrl']}?size=w150',
+              imageUrl:
+                  '${controller.state.teams.firstWhereOrNull((element) => element['code'] == controller.state.teamCode.value)['logoUrl']}?size=w150',
               height: 120,
               width: 120,
             ),

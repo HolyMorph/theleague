@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import '../../../../alert/alert_helper.dart';
 import '../../../../alert/flash_status.dart';
 import '../../../../components/app_back_button.dart';
-import '../../../../storage/local_storage.dart';
 import '../../../../style/my_colors.dart';
 import '../../../../utils/constants.dart';
+import '../../../../utils/my_storage.dart';
 import '../../all_star_home/logic/all_star_controller.dart';
 import '../component/empty_widget.dart';
 import '../component/player_archive_button.dart';
@@ -45,14 +45,14 @@ class SelectPlayerScreen extends GetView<AllStarController> {
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: LocalStorage.getData('coachData') != null && controller.state.type.value == 'coach'
+        title: controller.state.coachData.isNotEmpty && controller.state.type.value == 'coach'
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(width: 10),
                   Row(
                     children: [
-                      CachedNetworkImage(height: 30, width: 30, imageUrl: '${LocalStorage.getData('coachData')['teamLogo']}?size=w50'),
+                      CachedNetworkImage(height: 30, width: 30, imageUrl: '${controller.state.coachData['teamLogo']}?size=w50'),
                       const SizedBox(width: 8),
                       Text(controller.getTitle()),
                     ],
@@ -149,7 +149,7 @@ class SelectPlayerScreen extends GetView<AllStarController> {
                           controller.state.type == 'coach'
                               ? Color(
                                   int.parse(
-                                    '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
+                                    '0xFF${controller.state.coachData['teamColor'].substring(1, controller.state.coachData['teamColor'].length)}',
                                   ),
                                 ).withOpacity(0.5)
                               : Color(0xFF4C1C1A),
@@ -166,7 +166,7 @@ class SelectPlayerScreen extends GetView<AllStarController> {
                             backgroundColor: controller.state.type == 'coach'
                                 ? Color(
                                     int.parse(
-                                      '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
+                                      '0xFF${controller.state.coachData['teamColor'].substring(1, controller.state.coachData['teamColor'].length)}',
                                     ),
                                   )
                                 : MyColors.secondaryColor,
@@ -204,6 +204,6 @@ class SelectPlayerScreen extends GetView<AllStarController> {
     }
 
     controller.calculateTotalQty();
-    LocalStorage.saveData(controller.state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale, controller.state.selectedPlayers);
+    MyStorage().saveData(controller.state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale, controller.state.selectedPlayers);
   }
 }

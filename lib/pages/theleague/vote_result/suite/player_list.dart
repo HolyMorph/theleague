@@ -1,21 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../storage/local_storage.dart';
 import '../../../../style/my_colors.dart';
-import '../../../../utils/constants.dart';
 import '../logic/vote_result_controller.dart';
 
 class PlayerList extends GetView<VoteResultController> {
   final List<dynamic> leaderboard;
   PlayerList({required this.leaderboard, Key? key}) : super(key: key);
 
-  final RxList<dynamic> teams = RxList();
-
   @override
   Widget build(BuildContext context) {
-    teams.value = LocalStorage.getData(Constants.TEAMS);
-
     return leaderboard.isNotEmpty
         ? RefreshIndicator(
             color: MyColors.secondaryColor,
@@ -49,7 +43,8 @@ class PlayerList extends GetView<VoteResultController> {
                             ),
                           ),
                           CachedNetworkImage(
-                            imageUrl: '${teams.firstWhereOrNull((element) => element['code'] == leaderboard[index]['teamCode'])['logoUrl']}?size=w60',
+                            imageUrl:
+                                '${controller.state.teams.firstWhereOrNull((element) => element['code'] == leaderboard[index]['teamCode'])['logoUrl']}?size=w60',
                             height: 20,
                             width: 20,
                           ),

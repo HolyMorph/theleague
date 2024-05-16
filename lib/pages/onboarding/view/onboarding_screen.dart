@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../route/my_routes.dart';
-import '../../../storage/local_storage.dart';
 import '../../../style/my_colors.dart';
 import '../../../utils/basic_utils.dart';
 import '../logic/onboarding_controller.dart';
@@ -95,12 +94,12 @@ class OnboardingScreen extends GetView<OnboardingController> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      LocalStorage.getData('coachData') != null
+                      controller.state.coachData.isNotEmpty
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Color(
                                   int.parse(
-                                    '0xFF${LocalStorage.getData('coachData')['teamColor'].substring(1, LocalStorage.getData('coachData')['teamColor'].length)}',
+                                    '0xFF${controller.state.coachData['teamColor'].substring(1, controller.state.coachData['teamColor'].length)}',
                                   ),
                                 ),
                               ),
@@ -110,7 +109,7 @@ class OnboardingScreen extends GetView<OnboardingController> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  CachedNetworkImage(height: 30, width: 30, imageUrl: '${LocalStorage.getData('coachData')['teamLogo']}?size=w50'),
+                                  CachedNetworkImage(height: 30, width: 30, imageUrl: '${controller.state.coachData['teamLogo']}?size=w50'),
                                   const SizedBox(width: 8),
                                   Text(
                                     'Багийн санал өгөх',

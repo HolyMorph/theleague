@@ -2,14 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:mezorn_api_caller/api/mezorn_client.dart';
 
 import 'alert/alert_helper.dart';
 import 'firebase_config.dart';
 import 'my_app.dart';
-import 'service/api_client.dart';
-import 'storage/local_storage.dart';
+import 'service/my_client.dart';
 import 'utils/constants.dart';
+import 'utils/my_storage.dart';
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -24,15 +23,10 @@ Future<void> main() async {
 
 /// Setup app settings
 Future<void> _init() async {
-  /// Init [MezornClient] library
-  await MezornClient.init(
-    baseUrl: ApiClient.baseUrl,
-    debugUrl: ApiClient.devUrl,
-    isDebug: Constants.isDevUrl,
-  );
+  await MyClient.instance.init(baseUrl: Constants.BASE_DEV_URL);
 
   ///Init [LocalStorage] library
-  await LocalStorage.initLocalStorage();
+  await MyStorage.instance.init();
 
   ///Init Firebase
   await FirebaseConfig.initFirebase(
@@ -45,11 +39,11 @@ Future<void> _init() async {
     onTokenRefreshed: (newToken) async {
       log('fcm Token : ${newToken}');
 
-      if (await LocalStorage.getData(Constants.FCMToken) != newToken) {
-        await LocalStorage.saveData('fcmSaved', false);
-        await LocalStorage.saveData(Constants.FCMToken, newToken);
+      if (await MyStorage().getData(Constants.FCMToken) != newToken) {
+        await MyStorage().saveData('fcmSaved', false);
+        await MyStorage().saveData(Constants.FCMToken, newToken);
       } else {
-        await LocalStorage.saveData('fcmSaved', true);
+        await MyStorage().saveData('fcmSaved', true);
       }
     },
   );

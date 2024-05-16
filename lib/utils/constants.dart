@@ -8,12 +8,15 @@ class Constants {
   static String TIMESTAMP = 'timestamp';
   static String TOKEN = 'token';
   static String TicketCode = 'ticketCode';
+  static String REFRESH_TOKEN = 'refreshToken';
+  static String BASE_URL = 'https://app-api.theleague.mn/v1';
+  static String BASE_DEV_URL = 'https://app-api.dev.theleague.mn/v1';
 
   ///Хөгжүүлэлтийн орчны URL ашиглах эсэх
   ///
   /// Хэрвээ true бол бүх хүсэлт хөгжүүлэлтийн URL
   /// ашиглаж дуудагдана
-  static bool isDevUrl = false;
+  static bool isDevUrl = true;
 
   ///SplashScreen харуулах хугацаа
   static int splashDelayMillis = 2500;

@@ -12,6 +12,7 @@ class AllStarState {
     'C': RxList<Map<String, dynamic>>(),
   });
 
+  final RxMap<String, dynamic> coachData = RxMap();
   final RxString selectedTeamCode = RxString('');
   final RxList<dynamic> teamPlayers = RxList();
   final RxList<dynamic> teams = RxList();

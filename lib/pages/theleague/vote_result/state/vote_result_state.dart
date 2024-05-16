@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 class VoteResultState {
   final RxInt tabIndex = RxInt(0);
   final RxInt tabLength = RxInt(0);
+  final RxList<dynamic> players = RxList();
+  final RxList<dynamic> teams = RxList();
   RxList<dynamic> arenaVoteResults = RxList();
   RxList<dynamic> coachVoteResults = RxList();
   RxString gender = 'male'.obs;

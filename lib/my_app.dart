@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import 'route/my_pages.dart';
 import 'route/my_routes.dart';
-import 'storage/local_storage.dart';
 import 'style/my_theme.dart';
 
 class MyApp extends StatelessWidget {
@@ -13,7 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
-    LocalStorage.initLocalStorage();
 
     return GetMaterialApp(
       /// Main theme

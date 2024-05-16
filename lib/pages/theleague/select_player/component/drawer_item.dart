@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../storage/local_storage.dart';
 import '../../../../utils/constants.dart';
+import '../../../../utils/my_storage.dart';
 import '../../all_star_home/logic/all_star_controller.dart';
 
 class DrawerItem extends GetView<AllStarController> {
@@ -101,7 +101,7 @@ class DrawerItem extends GetView<AllStarController> {
                         controller.state.selectedPlayers.refresh();
                         controller.calculateTotalQty();
                         controller.setPlayersPosition();
-                        LocalStorage.saveData(
+                        MyStorage().saveData(
                           controller.state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale,
                           controller.state.selectedPlayers,
                         );

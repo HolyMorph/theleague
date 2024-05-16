@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:mezorn_api_caller/api/mezorn_client.dart';
-import 'package:mezorn_api_caller/api/mezorn_client_helper.dart';
 import '../../../../alert/alert_helper.dart';
 import '../../../../alert/flash_status.dart';
 import '../../../../route/my_routes.dart';
-import '../../../../service/api_client.dart';
-import '../../../../storage/local_storage.dart';
+import '../../../../service/method.dart';
+import '../../../../service/my_client.dart';
 import '../../../../utils/constants.dart';
+import '../../../../utils/my_storage.dart';
 import '../../../onboarding/component/location_dialog.dart';
 import '../state/verify_ticket_state.dart';
 
@@ -21,9 +20,9 @@ class VerifyTicketController extends GetxController {
   Future<void> checkTicket() async {
     var body = {'game_code': state.ticketCode.value};
 
-    dynamic response = await ApiClient().sendRequest('/api/me/check-game-code', method: Method.post, body: body);
+    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/me/check-game-code', method: Method.post, body: body);
 
-    if (MezornClientHelper.isValidResponse(response)) {
+    if (isSuccess) {
       if (response.data['statusCode'] == 400) {
         var message = response.data['message_mn'] ?? response.data['message'] as String;
 
@@ -34,7 +33,7 @@ class VerifyTicketController extends GetxController {
         );
       } else {
         Get.offNamed('${MyRoutes.selectLeague}/arena');
-        LocalStorage.saveData(Constants.TicketCode, state.ticketCode.value);
+        MyStorage().saveData(Constants.TicketCode, state.ticketCode.value);
       }
     } else {
       var message = response.data['message'] ?? response.data['error']['message_mn'] as String;
@@ -54,8 +53,8 @@ class VerifyTicketController extends GetxController {
       desiredAccuracy: LocationAccuracy.high,
     ).then((Position position) {
       state.currentLocation = position;
-      LocalStorage.saveData('lat', position.latitude);
-      LocalStorage.saveData('lon', position.longitude);
+      MyStorage().saveData('lat', position.latitude);
+      MyStorage().saveData('lon', position.longitude);
     }).catchError((e) {
       debugPrint(e);
     });
