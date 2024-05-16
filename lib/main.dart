@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/get.dart';
 
 import 'alert/alert_helper.dart';
 import 'firebase_config.dart';
 import 'my_app.dart';
+import 'pages/core/logic/core_controller.dart';
 import 'service/my_client.dart';
 import 'utils/constants.dart';
 import 'utils/my_storage.dart';
@@ -47,4 +49,5 @@ Future<void> _init() async {
       }
     },
   );
+  await Get.putAsync<CoreController>(() async => CoreController());
 }

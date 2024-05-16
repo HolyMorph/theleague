@@ -48,11 +48,7 @@ class SplashScreen extends StatelessWidget {
                     ],
                   )
                 : Center(
-                    child: Image.asset(
-                      'assets/icons/ic_logo.png',
-                      height: 209,
-                      width: 167,
-                    ),
+                    child: Image.asset('assets/images/ic_logo_bg.png', scale: 3),
                   ),
           );
         });

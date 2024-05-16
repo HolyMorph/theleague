@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'my_button_styles.dart';
 import 'my_colors.dart';
+import 'my_text_field_style.dart';
 
 class MyTheme {
   static final MyTheme _instance = MyTheme._internal();
@@ -18,7 +19,7 @@ class MyTheme {
         fontFamily: fontFamily,
         primarySwatch: Colors.blue,
         dividerColor: MyColors.dividerColor,
-        scaffoldBackgroundColor: MyColors.primaryColor,
+        scaffoldBackgroundColor: Colors.white,
         hintColor: MyColors.hintColor,
         colorScheme: ColorScheme.light(
           primary: MyColors.primaryColor,
@@ -34,7 +35,7 @@ class MyTheme {
           style: MyButtonStyles.textButtonStyle,
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: MyColors.primaryColor,
+          backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.white),
           toolbarHeight: 55,
           elevation: 0,
@@ -49,6 +50,7 @@ class MyTheme {
           actionsIconTheme: IconThemeData(color: Colors.black),
           toolbarTextStyle: TextStyle(color: Colors.white, fontFamily: 'GIP'),
         ),
+        inputDecorationTheme: MyTextFieldStyle.inputDecoration,
         splashFactory: InkRipple.splashFactory,
       );
 }

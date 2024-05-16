@@ -12,6 +12,8 @@ import '../../../service/method.dart';
 import '../../../service/my_client.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/my_storage.dart';
+import '../../core/logic/core_controller.dart';
+import '../../core/suit/core_type.dart';
 import '../state/splash_state.dart';
 
 class SplashController extends GetxController {
@@ -19,13 +21,14 @@ class SplashController extends GetxController {
 
   Future<void> checkUserToken() async {
     Future.delayed(const Duration(milliseconds: 2500), () async {
-      String token = await MyStorage.instance.getData(Constants.TOKEN);
-      if (token.isEmpty) {
-        await _requestToken();
-        await _getMetaData();
-      } else {
-        await _getMetaData();
-      }
+      Get.find<CoreController>().state.coreType.value = CoreType.home;
+      // String token = await MyStorage.instance.getData(Constants.TOKEN);
+      // if (token.isEmpty) {
+      //   await _requestToken();
+      //   await _getMetaData();
+      // } else {
+      //   await _getMetaData();
+      // }
 
       ///Notification Token
       ///

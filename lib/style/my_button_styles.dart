@@ -92,7 +92,7 @@ class MyButtonStyles {
     disabledBackgroundColor: MyColors.buttonDisabledColor,
     disabledForegroundColor: Colors.white,
     elevation: 1,
-    shadowColor: const Color(0x1EFF9900),
+    shadowColor: Colors.white,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
     ),
@@ -101,6 +101,7 @@ class MyButtonStyles {
     textStyle: const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w500,
+      fontFamily: 'GIP',
       color: Colors.white,
     ),
   );

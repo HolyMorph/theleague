@@ -2,8 +2,27 @@ import 'package:flutter/material.dart';
 
 class MyColors {
   static const Color LightModeBlack02 = Color(0xff666876);
+  static const Color permissionGreyColor = Color(0xFF989EAC);
 
   static const Color LightModeBlack03 = Color(0xff8C8E98);
+  static const Color borderGreyColor = Color(0xFFECF0F4);
+  static const Color neutral400 = Color(0xFF9CA3AF);
+  static const Color neutral500 = Color(0xFF6B7280);
+  static const Color neutral600 = Color(0xFF4B5563);
+  static const Color neutral900 = Color(0xFF111827);
+  static const Color neutral50 = Color(0xFFF9FAFB);
+  static const Color neutral100 = Color(0xFFF3F4F6);
+  static const Color neutral200 = Color(0xFFE5E7EB);
+  static const Color grey25 = Color(0xFFFCFCFD);
+  static const Color grey50 = Color(0xffEEEFF2);
+  static const Color grey100 = Color(0xFFF3F4F6);
+  static const Color grey200 = Color(0xFFEAECF0);
+  static const Color grey300 = Color(0xFFD0D5DD);
+  static const Color grey400 = Color(0xFFCBD5E0);
+  static const Color grey500 = Color(0xFF667085);
+  static const Color grey600 = Color(0xFF475467);
+  static const Color grey700 = Color(0xFF344054);
+  static const Color grey900 = Color(0xFF101828);
 
   /// Апп-ын canvas-ийн background-д ашиглагдах өнгө.
   static const Color backgroundColor = Color(0xFFF3F4F6);
@@ -52,7 +71,7 @@ class MyColors {
   static const Color? hoverColor = null;
 
   /// Апп-ын үндсэн өнгө.
-  static const Color primaryColor = Color(0xff0F0F17);
+  static const Color primaryColor = Color(0xFF3E4784);
 
   /// Апп-ын үндсэн өнгөний бараан хувилбар.
   static const Color primaryColorDark = Color(0xff1E258B);

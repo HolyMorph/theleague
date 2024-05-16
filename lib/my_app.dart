@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
+import 'pages/competition_detail/suit/competition_detail_pages.dart';
+import 'pages/core/suit/core_pages.dart';
+import 'pages/core/suit/core_routes.dart';
 import 'route/my_pages.dart';
-import 'route/my_routes.dart';
 import 'style/my_theme.dart';
 
 class MyApp extends StatelessWidget {
@@ -18,9 +20,10 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.instance.themeData,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.topLevel,
-      // initialRoute: MyRoutes.splash,
-      initialRoute: MyRoutes.playerDetailScreen,
-      getPages: MyPages.pages,
+      initialRoute: CoreRoutes.coreScreen,
+      getPages: MyPages.pages
+        ..addAll(CorePages.pages)
+        ..addAll(CompetitionDetailPages.pages),
     );
   }
 }
