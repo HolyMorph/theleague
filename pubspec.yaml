@@ -28,6 +28,7 @@ dependencies:
   location: ^6.0.2
   gesture_x_detector: ^1.1.1
   dio: ^5.4.3+1
+  image_picker: ^1.1.1
 
 
 dev_dependencies:

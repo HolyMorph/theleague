@@ -8,7 +8,7 @@ import 'my_colors.dart';
 class MyTextFieldBorder extends OutlineInputBorder {
   const MyTextFieldBorder({
     BorderSide borderSide = const BorderSide(
-      color: MyColors.borderGreyColor,
+      color: MyColors.grey300,
       width: 1,
       strokeAlign: BorderSide.strokeAlignCenter,
     ),

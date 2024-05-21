@@ -10,6 +10,7 @@ class SportDescriptionItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(4),
         border: Border.all(width: 1, color: MyColors.neutral200),
       ),

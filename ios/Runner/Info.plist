@@ -36,6 +36,8 @@
 		<string>Та байршлаа идэвхжүүлснээр бид таныг UG Arena-д байгаа эсэхийг шалган, таны саналыг хүлээн авах боломжтой болно.</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
+        <key>com.apple.security.files.user-selected.read-only</key>
+        <true/>
 		<key>UIBackgroundModes</key>
 		<array>
 			<string>fetch</string>
