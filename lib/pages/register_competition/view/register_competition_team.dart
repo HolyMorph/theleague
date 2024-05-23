@@ -7,6 +7,7 @@ import '../../../style/my_colors.dart';
 import '../../competition_detail/suit/component/register_button.dart';
 import '../suit/components/find_player_bottomsheet_body.dart';
 import '../suit/components/register_competition_appbar.dart';
+import '../suit/register_competition_routes.dart';
 
 class RegisterCompetitionTeam extends StatelessWidget {
   RegisterCompetitionTeam({super.key});
@@ -133,7 +134,9 @@ class RegisterCompetitionTeam extends StatelessWidget {
               ).paddingAll(16),
             ),
           ),
-          RegisterButton(),
+          RegisterButton(
+            onTap: () => Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation),
+          ),
         ],
       ),
     );

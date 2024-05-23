@@ -18,6 +18,7 @@ class MainScreen extends StatelessWidget {
           controller: controller.state.pageController,
           children: [
             HomeScreen(),
+            Container(),
             ProfileScreen(),
           ],
         ),
@@ -56,7 +57,14 @@ class MainScreen extends StatelessWidget {
                   ),
                 ],
                 currentIndex: currIndex.value,
-                onTap: (index) => currIndex.value = index,
+                onTap: (index) {
+                  currIndex.value = index;
+                  controller.state.pageController.animateToPage(
+                    index,
+                    duration: 100.milliseconds,
+                    curve: Curves.decelerate,
+                  );
+                },
               ),
             ),
           ),

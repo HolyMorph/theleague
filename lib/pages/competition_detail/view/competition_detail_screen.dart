@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../components/schedule_information.dart';
 import '../../../style/my_colors.dart';
+import '../../register_competition/suit/register_competition_routes.dart';
 import '../logic/competition_detail_controller.dart';
 import '../suit/component/competition_header.dart';
 import '../suit/component/register_button.dart';
@@ -60,7 +61,9 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
               ).paddingSymmetric(horizontal: 16),
             ),
           ),
-          RegisterButton(),
+          RegisterButton(
+            onTap: () => Get.toNamed(RegisterCompetitionRoutes.registerCompetitionScreen),
+          ),
         ],
       ),
     );

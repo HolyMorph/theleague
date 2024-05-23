@@ -6,6 +6,7 @@ import 'pages/competition_detail/suit/competition_detail_pages.dart';
 import 'pages/core/suit/core_pages.dart';
 import 'pages/core/suit/core_routes.dart';
 import 'pages/register_competition/suit/register_competition_pages.dart';
+import 'pages/settings/suit/settings_pages.dart';
 import 'route/my_pages.dart';
 import 'style/my_theme.dart';
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       getPages: MyPages.pages
         ..addAll(CorePages.pages)
         ..addAll(RegisterCompetitionPages.pages)
+        ..addAll(SettingsPages.pages)
         ..addAll(CompetitionDetailPages.pages),
     );
   }

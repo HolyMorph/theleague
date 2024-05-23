@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import '../../../../style/my_colors.dart';
-import '../../../register_competition/suit/register_competition_routes.dart';
 
 class RegisterButton extends StatelessWidget {
-  const RegisterButton({super.key});
+  final VoidCallback onTap;
+  const RegisterButton({required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +54,7 @@ class RegisterButton extends StatelessWidget {
           const SizedBox(width: 32),
           Expanded(
             child: ElevatedButton(
-              onPressed: () {
-                Get.toNamed(RegisterCompetitionRoutes.registerCompetitionScreen);
-              },
+              onPressed: () => onTap(),
               child: Text('Бүртгүүлэх'),
             ),
           ),
