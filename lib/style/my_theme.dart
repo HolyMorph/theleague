@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'my_button_styles.dart';
-import 'my_colors.dart';
-import 'my_text_field_style.dart';
 import 'style_export.dart';
 
 class MyTheme {

@@ -42,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
                   Get.toNamed(SettingsRoutes.settingsScreen);
                 },
                 icon: FaIcon.user_edit,
-                title: 'Хувийн мэдээлэл'),
+                title: 'Хувийн мэдээлэл',),
             const SizedBox(height: 4),
             ProfileMenuItem(onTap: () {}, icon: FaIcon.trophy, title: 'Миний тэмцээнүүд'),
             const SizedBox(height: 4),

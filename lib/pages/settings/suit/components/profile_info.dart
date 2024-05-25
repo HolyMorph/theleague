@@ -18,44 +18,71 @@ class ProfileInfo extends StatelessWidget {
         children: [
           Row(
             children: [
-              CachedNetworkImage(
-                imageUrl: '?size=w100',
-                imageBuilder: (context, imageProvider) => Container(
-                  height: 80,
-                  width: 80,
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(image: imageProvider, fit: BoxFit.fitHeight),
-                    boxShadow: [],
-                  ),
-                ),
-                placeholder: (context, url) => Container(
-                  alignment: Alignment.center,
-                  height: 80,
-                  width: 80,
-                  child: CupertinoActivityIndicator(animating: true, radius: 10, color: Colors.white),
-                ),
-                errorWidget: (context, url, error) => Container(
-                  height: 80,
-                  width: 80,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(0, 1),
-                        blurRadius: 8,
-                        color: MyColors.grey200,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Stack(
+                    children: [
+                      CachedNetworkImage(
+                        imageUrl: '?size=w100',
+                        imageBuilder: (context, imageProvider) => Container(
+                          height: 80,
+                          width: 80,
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(image: imageProvider, fit: BoxFit.fitHeight),
+                            boxShadow: [],
+                          ),
+                        ),
+                        placeholder: (context, url) => Container(
+                          alignment: Alignment.center,
+                          height: 80,
+                          width: 80,
+                          child: CupertinoActivityIndicator(animating: true, radius: 10, color: Colors.white),
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 1),
+                                blurRadius: 8,
+                                color: MyColors.grey200,
+                              ),
+                            ],
+                          ),
+                          child: Icon(
+                            Icons.person,
+                            size: 40,
+                            color: MyColors.primaryColor,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 80,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black.withOpacity(0.4),
+                        ),
+                        child: Icon(Icons.camera_alt, color: Colors.white),
                       ),
                     ],
                   ),
-                  child: Icon(
-                    Icons.person,
-                    size: 40,
-                    color: MyColors.primaryColor,
+                  const SizedBox(height: 8),
+                  Text(
+                    'Зураг солих',
+                    style: TextStyle(
+                      color: MyColors.darkGrey,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
+                ],
               ),
               const SizedBox(width: 16),
               Column(
