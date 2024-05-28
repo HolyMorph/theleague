@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../style/my_colors.dart';
 import '../../home/view/home_screen.dart';
 import '../../profile/view/profile_screen.dart';
+import '../../register/view/register_screen.dart';
 import '../logic/main_screen_controller.dart';
 
 class MainScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class MainScreen extends StatelessWidget {
           controller: controller.state.pageController,
           children: [
             HomeScreen(),
-            Container(),
+            RegisterScreen(),
             ProfileScreen(),
           ],
         ),
