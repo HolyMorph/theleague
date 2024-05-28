@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../login/view/login_screen.dart';
 import '../../main_screen/view/main_screen.dart';
 import '../../register/view/register_screen.dart';
 import '../../splash/view/splash_screen.dart';
@@ -18,6 +19,8 @@ class CoreScreen extends GetView<CoreController> {
           switch (status.value) {
             case CoreType.splash:
               return const SplashScreen();
+            case CoreType.login:
+              return const LoginScreen();
             case CoreType.home:
               return const MainScreen();
             case CoreType.register:

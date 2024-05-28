@@ -7,8 +7,9 @@ import '../../settings/suit/settings_routes.dart';
 import '../logic/profile_controller.dart';
 import '../suit/components/personal_info.dart';
 import '../suit/components/profile_menu_item.dart';
+import 'profile_not_login_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends GetView<ProfileController> {
   const ProfileScreen({super.key});
 
   @override
@@ -33,28 +34,31 @@ class ProfileScreen extends StatelessWidget {
             child: const SizedBox(),
           ),
         ),
-        body: Column(
-          children: [
-            PersonalInfo(),
-            const SizedBox(height: 24),
-            ProfileMenuItem(
-                onTap: () {
-                  Get.toNamed(SettingsRoutes.settingsScreen);
-                },
-                icon: FaIcon.user_edit,
-                title: 'Хувийн мэдээлэл',),
-            const SizedBox(height: 4),
-            ProfileMenuItem(onTap: () {}, icon: FaIcon.trophy, title: 'Миний тэмцээнүүд'),
-            const SizedBox(height: 4),
-            ProfileMenuItem(onTap: () {}, icon: FaIcon.medal, title: 'Миний шагналууд'),
-            const SizedBox(height: 16),
-            ProfileMenuItem(onTap: () {}, icon: FaIcon.circleInfo, title: 'Үйлчилгээний нөхцөл'),
-            const SizedBox(height: 4),
-            ProfileMenuItem(onTap: () {}, icon: FaIcon.circleQuestion, title: 'Заавар'),
-            const SizedBox(height: 4),
-            ProfileMenuItem(onTap: () {}, icon: FaIcon.quit, title: 'Системээс гарах'),
-          ],
-        ),
+        body: !controller.state.isActive.value
+            ? ProfileNotLoginScreen()
+            : Column(
+                children: [
+                  PersonalInfo(),
+                  const SizedBox(height: 24),
+                  ProfileMenuItem(
+                    onTap: () {
+                      Get.toNamed(SettingsRoutes.settingsScreen);
+                    },
+                    icon: FaIcon.user_edit,
+                    title: 'Хувийн мэдээлэл',
+                  ),
+                  const SizedBox(height: 4),
+                  ProfileMenuItem(onTap: () {}, icon: FaIcon.trophy, title: 'Миний тэмцээнүүд'),
+                  const SizedBox(height: 4),
+                  ProfileMenuItem(onTap: () {}, icon: FaIcon.medal, title: 'Миний шагналууд'),
+                  const SizedBox(height: 16),
+                  ProfileMenuItem(onTap: () {}, icon: FaIcon.circleInfo, title: 'Үйлчилгээний нөхцөл'),
+                  const SizedBox(height: 4),
+                  ProfileMenuItem(onTap: () {}, icon: FaIcon.circleQuestion, title: 'Заавар'),
+                  const SizedBox(height: 4),
+                  ProfileMenuItem(onTap: () {}, icon: FaIcon.quit, title: 'Системээс гарах'),
+                ],
+              ),
       ),
     );
   }

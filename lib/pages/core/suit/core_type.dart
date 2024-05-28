@@ -1,1 +1,1 @@
-enum CoreType { splash, home, register }
+enum CoreType { splash, home, register, login }

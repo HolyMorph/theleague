@@ -36,7 +36,7 @@ class MyColors {
   static const Color buttonBackColor = Color(0xffEAECF0);
   static const Color buttonColor = Color(0xff4D5163);
 
-  static const Color buttonDisabledColor = Color(0xffFF8D62);
+  static const Color buttonDisabledColor = Color(0xffB3B8DB);
 
   /// [Material] сангын [MaterialType.canvas]-ийн өнгө.
   static const Color? canvasColor = Color(0xff272739);

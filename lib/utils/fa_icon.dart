@@ -46,6 +46,8 @@ class FaIcon {
   static const String heart = '\uf004';
   static const String trophy = '\uf091';
   static const String medal = '\uf5a2';
+  static const String upload_cloud = '\uf0ee';
+  static const String image = '\uf03e';
 
   ///For proper use
   ///Light style tai, w300 icon bol faLight

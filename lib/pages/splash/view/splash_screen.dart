@@ -39,16 +39,12 @@ class SplashScreen extends StatelessWidget {
                       const SizedBox(height: 24),
                       const Text(
                         'Уншиж байна, түр хүлээнэ үү.',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'GIP',
-                        ),
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
                       ),
                     ],
                   )
                 : Center(
-                    child: Image.asset('assets/images/ic_logo_bg.png', scale: 3),
+                    child: Image.asset('assets/images/ic_logo_bg.png', scale: 4),
                   ),
           );
         });

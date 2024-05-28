@@ -17,7 +17,7 @@ class MyTheme {
         fontFamily: fontFamily,
         primarySwatch: Colors.blue,
         dividerColor: MyColors.dividerColor,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: MyColors.bgColor,
         hintColor: MyColors.hintColor,
         colorScheme: ColorScheme.light(
           primary: MyColors.primaryColor,
