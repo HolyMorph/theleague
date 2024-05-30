@@ -1,15 +1,16 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class LoginState {
   final RxBool isLoading = RxBool(false);
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   RxBool actionButtonValid = RxBool(false);
   RxString from = RxString('');
   RxBool isValidPhoneNumber = RxBool(true);
 
-  RxString otpCode = RxString('');
-  RxDouble otpWidth = RxDouble(51);
   RxString phoneNumber = RxString('');
   RxString phoneNumberErrorText = RxString('');
   RxBool resendActivated = RxBool(false);

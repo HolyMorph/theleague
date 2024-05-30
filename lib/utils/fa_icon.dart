@@ -49,6 +49,7 @@ class FaIcon {
   static const String upload_cloud = '\uf0ee';
   static const String image = '\uf03e';
   static const String camera = '\uf030';
+  static const String lock = '\uf30d';
 
   ///For proper use
   ///Light style tai, w300 icon bol faLight

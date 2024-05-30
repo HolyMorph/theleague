@@ -26,6 +26,7 @@ class ProfileSettingScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SettingsTextField(
+                    hintText: 'Нэр оруулах',
                     title: 'Нэр',
                     initialValue: 'Муунохой-Уудамсалтай',
                     isActive: true,
@@ -33,12 +34,14 @@ class ProfileSettingScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   SettingsTextField(
                     title: 'Овог',
+                    hintText: 'Овог оруулах',
                     initialValue: 'Сугарбар-Онгонтамирдалт',
                     isActive: true,
                   ),
                   const SizedBox(height: 16),
                   SettingsTextField(
                     title: 'Регистрийн дугаар',
+                    hintText: 'Регистрийн дугаар',
                     initialValue: 'ДИ00121314',
                     isActive: false,
                   ),
@@ -46,6 +49,7 @@ class ProfileSettingScreen extends StatelessWidget {
                   SettingsTextField(
                     title: 'Жин',
                     initialValue: '79',
+                    hintText: 'Жин',
                     isActive: true,
                     suffix: Text(
                       'кг',
@@ -60,6 +64,7 @@ class ProfileSettingScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   SettingsTextField(
                     title: 'Өндөр',
+                    hintText: 'Өндөр',
                     initialValue: '168',
                     isActive: true,
                     suffix: Text(
@@ -75,6 +80,7 @@ class ProfileSettingScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   SettingsTextField(
                     title: 'Цахим хаяг',
+                    hintText: 'Цахим хаяг',
                     prefix: Text(
                       FaIcon.email,
                       style: FaIcon.regular().copyWith(color: MyColors.darkGrey, fontSize: 16),
@@ -85,6 +91,7 @@ class ProfileSettingScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   SettingsTextField(
                     title: 'Утасны дугаар',
+                    hintText: 'Утасны дугаар',
                     initialValue: '99000052',
                     prefix: Text(
                       FaIcon.phone,

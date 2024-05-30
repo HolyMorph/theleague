@@ -37,7 +37,7 @@ class MyClient {
     required String urlPath,
     Method method = Method.get,
     Map<String, dynamic>? queryParameters,
-    Map<String, dynamic>? body,
+    dynamic body,
     Map<String, dynamic>? headers,
   }) async {
     Map<String, dynamic> header = headers ?? {};

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../components/schedule_information.dart';
 import '../../../style/my_colors.dart';
 import '../../register_competition/suit/register_competition_routes.dart';
@@ -16,55 +17,70 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.grey100,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CompetitionHeader(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
+      body: Obx(
+        () => controller.state.isLoading.value
+            ? const Center(
+                child: CircularProgressIndicator(color: MyColors.primaryColor),
+              )
+            : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Children Day 3x3'),
-                  const SizedBox(height: 8),
-                  Text('Зохион байгуулагч: SportsLab LLC'),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      SportDescriptionItem(),
-                    ],
+                  CompetitionHeader(
+                    coverUrl: controller.state.gameData['logo_rectangle'],
                   ),
-                  const SizedBox(height: 24),
-                  ScheduleInformation(
-                    location: 'Хүүхдийн парк',
-                    date: 'Бя, 6 сарын 1 - Ня, 6 сарын 2',
-                    time: '10:00 - 21:00',
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const SizedBox(height: 24),
+                          Text(
+                            controller.state.gameData['name'],
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Зохион байгуулагч: ${controller.state.gameData['organizerName']}',
+                            style: TextStyle(color: MyColors.grey500),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              SportDescriptionItem(),
+                            ],
+                          ),
+                          const SizedBox(height: 24),
+                          ScheduleInformation(
+                            location: '${controller.state.gameData['address']['name']}',
+                            date:
+                                '${DateFormat('MM сарын dd').format(DateTime.parse('${controller.state.gameData['startDate']}'))} - ${DateFormat('MM сарын dd').format(DateTime.parse('${controller.state.gameData['endDate']}'))}',
+                            time: '${controller.state.gameData['timeString']}',
+                          ),
+                          // const SizedBox(height: 24),
+                          // ScoreboardScheduleItem(),
+                          const SizedBox(height: 24),
+                          Text(
+                            'Дэлгэрэнгүй мэдээлэл',
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            '${controller.state.gameData['description']}',
+                            style: TextStyle(color: MyColors.grey500, fontSize: 12),
+                          ),
+                          const SizedBox(height: 24),
+                          RegisteredButton(),
+                          const SizedBox(height: 24),
+                        ],
+                      ).paddingSymmetric(horizontal: 16),
+                    ),
                   ),
-                  const SizedBox(height: 24),
-                  ScoreboardScheduleItem(),
-                  const SizedBox(height: 24),
-                  Text(
-                    'Дэлгэрэнгүй мэдээлэл',
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                  RegisterButton(
+                    onTap: () => Get.toNamed(RegisterCompetitionRoutes.registerCompetitionScreen),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
-                    style: TextStyle(color: MyColors.grey500, fontSize: 12),
-                  ),
-                  const SizedBox(height: 24),
-                  RegisteredButton(),
-                  const SizedBox(height: 24),
                 ],
-              ).paddingSymmetric(horizontal: 16),
-            ),
-          ),
-          RegisterButton(
-            onTap: () => Get.toNamed(RegisterCompetitionRoutes.registerCompetitionScreen),
-          ),
-        ],
+              ),
       ),
     );
   }

@@ -7,10 +7,12 @@ class Constants {
   static String TEAMS = 'teams';
   static String TIMESTAMP = 'timestamp';
   static String TOKEN = 'token';
+  static String USERTYPE = 'userType';
   static String TicketCode = 'ticketCode';
   static String REFRESH_TOKEN = 'refreshToken';
-  static String BASE_URL = 'https://app-api.theleague.mn/v1';
-  static String BASE_DEV_URL = 'https://app-api.dev.theleague.mn/v1';
+  static String BASE_URL = 'https://app-api.sportlab.mn/';
+  static String BASE_DEV_URL = 'https://app-api.dev.sportlab.mn/';
+  static String BASE_UPLOAD_URL = 'https://upload.dev.sportlab.mn/';
 
   ///Хөгжүүлэлтийн орчны URL ашиглах эсэх
   ///

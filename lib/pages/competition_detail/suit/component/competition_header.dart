@@ -1,16 +1,43 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../style/my_colors.dart';
+
 class CompetitionHeader extends StatelessWidget {
-  const CompetitionHeader({super.key});
+  final String coverUrl;
+  const CompetitionHeader({required this.coverUrl, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          height: 200,
-          child: Image.asset('assets/images/all_star.png'),
+        CachedNetworkImage(
+          imageUrl: '${coverUrl}?size=w300',
+          imageBuilder: (context, imageProvider) => Container(
+            height: 200,
+            width: double.infinity,
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+            ),
+          ),
+          placeholder: (context, url) => Container(
+            alignment: Alignment.center,
+            height: 200,
+            width: double.infinity,
+            child: CupertinoActivityIndicator(animating: true, radius: 10, color: MyColors.primaryColor),
+          ),
+          errorWidget: (context, url, error) => Container(
+            height: 200,
+            width: double.infinity,
+            child: Image.asset(
+              'assets/images/ic_logo_bg.png',
+              color: MyColors.primaryColor,
+            ),
+          ),
         ),
         Container(
           height: 200,

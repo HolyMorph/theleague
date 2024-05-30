@@ -112,14 +112,12 @@ class VerifyScreen extends GetView<LoginController> {
             const SizedBox(height: 16),
             Obx(
               () => ElevatedButton(
-                onPressed: controller.state.otpCode.value.length < 6
-                    ? null
-                    : () async {
-                        // var (isSuccess, response) = await controller.checkOTP();
-                        // if (!isSuccess) {
-                        //   AlertUtils.showErrorFlashAlert(response: response);
-                        // }
-                      },
+                onPressed: () async {
+                  // var (isSuccess, response) = await controller.checkOTP();
+                  // if (!isSuccess) {
+                  //   AlertUtils.showErrorFlashAlert(response: response);
+                  // }
+                },
                 child: controller.state.isLoading.value
                     ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white))
                     : Text('Үргэлжлүүлэх'),

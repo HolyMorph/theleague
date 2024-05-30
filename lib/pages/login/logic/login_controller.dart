@@ -2,6 +2,12 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
+import '../../../alert/alert_helper.dart';
+import '../../../alert/flash_status.dart';
+import '../../../service/method.dart';
+import '../../../service/my_client.dart';
+import '../../../utils/constants.dart';
+import '../../../utils/my_storage.dart';
 import '../state/login_state.dart';
 
 class LoginController extends GetxController {
@@ -23,6 +29,30 @@ class LoginController extends GetxController {
         state.resendDuration--;
       }
     });
+  }
+
+  Future<(bool, dynamic)> userLogin() async {
+    state.isLoading.value = true;
+    var (isSuccess, response) = await MyClient.instance.sendHttpRequest(
+      urlPath: 'api/auth/login',
+      method: Method.post,
+      body: {
+        'email': state.emailController.text,
+        'password': state.passwordController.text,
+      },
+    );
+    state.isLoading.value = false;
+    if (isSuccess) {
+      MyStorage.instance.saveData(Constants.TOKEN, response['result']['token']);
+      MyStorage.instance.saveData(Constants.USERTYPE, response['result']['type']);
+    } else {
+      AlertHelper.showFlashAlert(
+        title: 'Алдаа',
+        message: '${response['message']}',
+        status: FlashStatus.failed,
+      );
+    }
+    return (isSuccess, response);
   }
 
   @override

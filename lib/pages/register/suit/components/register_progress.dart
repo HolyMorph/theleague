@@ -58,7 +58,7 @@ class RegisterProgress extends GetView<RegisterController> {
             ),
           ),
         ],
-      ),
+      ).paddingAll(16),
       controller.state.selectedIndex,
     );
   }

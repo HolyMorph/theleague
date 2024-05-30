@@ -3,17 +3,27 @@ import '../../../../style/my_colors.dart';
 
 class SettingsTextField extends StatelessWidget {
   final String title;
-  final String initialValue;
+  final String? initialValue;
+  final String hintText;
+  final TextEditingController? textEditingController;
+  final String? errorText;
   final Widget? prefix;
   final Widget? suffix;
+  final TextInputType? inputType;
   final bool isActive;
+  final bool? isRequired;
   final VoidCallback? onTap;
 
   const SettingsTextField({
     required this.title,
-    required this.initialValue,
     required this.isActive,
+    required this.hintText,
+    this.initialValue,
     this.onTap,
+    this.inputType,
+    this.textEditingController,
+    this.errorText,
+    this.isRequired,
     this.prefix,
     this.suffix,
     super.key,
@@ -21,30 +31,45 @@ class SettingsTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: MyColors.grey700,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: MyColors.grey700,
+              ),
             ),
+            if (isRequired ?? false)
+              Text(
+                '*',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: MyColors.errorColor,
+                ),
+              ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        TextFormField(
+          controller: textEditingController,
+          onTap: onTap,
+          enabled: isActive,
+          keyboardType: inputType,
+          initialValue: initialValue,
+          decoration: InputDecoration(
+            prefixIcon: prefix,
+            hintText: hintText,
+            suffix: suffix,
           ),
-          const SizedBox(height: 6),
-          TextFormField(
-            onTap: onTap,
-            enabled: isActive,
-            initialValue: initialValue,
-            decoration: InputDecoration(
-              prefix: prefix,
-              suffix: suffix,
-            ),
-          ),
-        ],
-      ),
+          validator: (value) => ((value ?? '').isEmpty && (isRequired ?? false)) ? errorText : null,
+        ),
+      ],
     );
   }
 }

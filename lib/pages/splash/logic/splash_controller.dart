@@ -21,14 +21,14 @@ class SplashController extends GetxController {
 
   Future<void> checkUserToken() async {
     Future.delayed(const Duration(milliseconds: 2500), () async {
+      String token = await MyStorage.instance.getData(Constants.TOKEN) ?? '';
+      if (token.isEmpty) {
+        await _requestToken();
+        // await _getMetaData();
+      } else {
+        //await _getMetaData();
+      }
       Get.find<CoreController>().state.coreType.value = CoreType.home;
-      // String token = await MyStorage.instance.getData(Constants.TOKEN);
-      // if (token.isEmpty) {
-      //   await _requestToken();
-      //   await _getMetaData();
-      // } else {
-      //   await _getMetaData();
-      // }
 
       ///Notification Token
       ///
@@ -87,19 +87,22 @@ class SplashController extends GetxController {
 
   Future<void> _requestToken() async {
     final String osType = Platform.operatingSystem;
-    final String osVersion = Platform.operatingSystemVersion;
     String? phoneModel;
     String? phoneMake;
+    String? osVersion;
     DeviceInfoPlugin deviceInfo = await DeviceInfoPlugin();
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       phoneMake = androidInfo.device;
       phoneModel = androidInfo.model;
+      osVersion = androidInfo.version.release;
     } else if (Platform.isIOS) {
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
       phoneMake = iosInfo.utsname.machine;
       phoneModel = iosInfo.name;
+      osVersion = iosInfo.systemVersion;
     }
+
     String udid = await FlutterUdid.consistentUdid;
 
     dynamic body = {
@@ -110,19 +113,17 @@ class SplashController extends GetxController {
       'phoneModel': phoneModel ?? (osType == 'ios' ? 'iphone' : 'android'),
     };
 
-    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/auth/request-token', method: Method.post, body: body);
+    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/auth', method: Method.post, body: body);
 
-    if (response.data['statusCode'] == 400 || response.data['statusCode'] == 401) {
+    if (isSuccess) {
+      MyStorage.instance.saveData(Constants.TOKEN, response['result']['token']);
+      MyStorage.instance.saveData(Constants.USERTYPE, response['result']['type']);
+    } else {
       AlertHelper.showFlashAlert(
         title: 'Алдаа гарлаа!',
         message: response.data['message_mn'],
         status: FlashStatus.failed,
       );
-    }
-
-    if (isSuccess) {
-      MyStorage.instance.saveData(Constants.TOKEN, response.data['result']['token']);
-      MyStorage.instance.saveData(Constants.REFRESH_TOKEN, response.data['result']['refreshToken']);
     }
   }
 

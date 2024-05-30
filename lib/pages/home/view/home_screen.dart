@@ -23,11 +23,22 @@ class HomeScreen extends StatelessWidget {
               child: HomeAppBar(),
             ),
           ),
-          body: Column(
-            children: [
-              HomeCompetitionItem(),
-            ],
-          ).paddingAll(16),
+          body: Obx(
+            () => controller.state.isLoading.value
+                ? Center(child: CircularProgressIndicator(color: MyColors.primaryColor))
+                : ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: controller.state.homeData['docs'].length,
+                    itemBuilder: (context, index) {
+                      return HomeCompetitionItem(
+                        data: controller.state.homeData['docs'][index],
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(height: 8);
+                    },
+                  ).paddingAll(16),
+          ),
         );
       },
     );

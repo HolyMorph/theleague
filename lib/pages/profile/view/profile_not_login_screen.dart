@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../style/my_colors.dart';
 import '../../login/suit/login_routes.dart';
+import '../../register/suit/register_routes.dart';
 
 class ProfileNotLoginScreen extends StatelessWidget {
   const ProfileNotLoginScreen({super.key});
@@ -41,6 +42,27 @@ class ProfileNotLoginScreen extends StatelessWidget {
             child: Text(
               'Нэвтрэх',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+                side: BorderSide(width: 1, color: MyColors.primaryColor),
+              ),
+            ),
+            onPressed: () {
+              Get.toNamed(RegisterRoutes.registerEmailScreen);
+            },
+            child: Text(
+              'Бүртгүүлэх',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: MyColors.primaryColor,
+              ),
             ),
           ),
         ],

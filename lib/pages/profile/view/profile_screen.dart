@@ -9,7 +9,7 @@ import '../suit/components/personal_info.dart';
 import '../suit/components/profile_menu_item.dart';
 import 'profile_not_login_screen.dart';
 
-class ProfileScreen extends GetView<ProfileController> {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override

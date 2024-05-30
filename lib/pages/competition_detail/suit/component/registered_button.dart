@@ -14,75 +14,15 @@ class RegisteredButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 6),
         child: Row(
           children: [
-            Container(
-              child: Stack(
-                children: [
-                  Container(
-                    height: 26,
-                    width: 26,
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: Icon(Icons.time_to_leave),
-                  ),
-                  Container(
-                    height: 26,
-                    width: 26,
-                    margin: const EdgeInsets.only(left: 20),
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: Icon(Icons.time_to_leave),
-                  ),
-                  Container(
-                    height: 26,
-                    width: 26,
-                    margin: const EdgeInsets.only(left: 40),
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: Icon(Icons.time_to_leave),
-                  ),
-                  Container(
-                    height: 26,
-                    width: 26,
-                    margin: const EdgeInsets.only(left: 60),
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: MyColors.grey500),
-                        shape: BoxShape.circle,
-                        color: MyColors.grey100,
-                      ),
-                      child: Text(
-                        '+5',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: MyColors.grey600,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            Icon(
+              Icons.people,
+              color: MyColors.primaryColor,
             ),
             const SizedBox(width: 8),
             Text(
-              'Бүртгүүлсэн',
+              'Бүртгүүлсэн тамирчид',
               style: TextStyle(
-                color: MyColors.grey500,
+                color: MyColors.primaryColor,
                 fontWeight: FontWeight.w500,
               ),
             ),

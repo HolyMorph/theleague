@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,14 +22,41 @@ class RegisterPageAdditional extends GetView<RegisterController> {
       children: [
         SettingsTextField(
           title: 'Утасны дугаар',
-          initialValue: '99000052',
-          prefix: Text(
-            FaIcon.phone,
-            style: FaIcon.regular().copyWith(color: MyColors.darkGrey, fontSize: 16),
-          ).paddingOnly(right: 8),
+          hintText: 'Утасны дугаар',
+          textEditingController: controller.state.phoneNumberController,
+          inputType: TextInputType.number,
+          prefix: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              FaIcon.phone,
+              textAlign: TextAlign.center,
+              style: FaIcon.regular().copyWith(color: MyColors.darkGrey, fontSize: 16),
+            ),
+          ),
           isActive: true,
         ),
         const SizedBox(height: 16),
+        Row(
+          children: [
+            Text(
+              'Цээж зураг',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: MyColors.grey700,
+              ),
+            ),
+            Text(
+              '*',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: MyColors.errorColor,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
         ObxValue(
           (image) => image.value != null
               ? Row(
@@ -53,6 +81,7 @@ class RegisterPageAdditional extends GetView<RegisterController> {
                       child: InkWell(
                         onTap: () {
                           controller.state.selectedImage.value = null;
+                          controller.state.avatarUrl.value = '';
                         },
                         borderRadius: BorderRadius.circular(8),
                         child: Container(
@@ -123,6 +152,7 @@ class RegisterPageAdditional extends GetView<RegisterController> {
                               children: [
                                 ElevatedButton(
                                   onPressed: () async {
+                                    Get.back();
                                     await _onImageButtonPressed(ImageSource.camera);
                                   },
                                   child: Row(
@@ -140,6 +170,7 @@ class RegisterPageAdditional extends GetView<RegisterController> {
                                 const SizedBox(height: 16),
                                 ElevatedButton(
                                   onPressed: () async {
+                                    Get.back();
                                     await _onImageButtonPressed(ImageSource.gallery);
                                   },
                                   child: Row(
@@ -189,6 +220,7 @@ class RegisterPageAdditional extends GetView<RegisterController> {
                 ),
           controller.state.selectedImage,
         ),
+        const SizedBox(height: 8),
         Text(
           'Цээж зураг сонговол илүү тохиромжтой.',
           style: TextStyle(
@@ -197,21 +229,34 @@ class RegisterPageAdditional extends GetView<RegisterController> {
           ),
         ),
         const SizedBox(height: 24),
-        ElevatedButton(
-          onPressed: () {},
-          child: Text('Үргэлжлүүлэх'),
-        ),
+        Obx(() {
+          bool isEmailPassVerified = (controller.state.passwordController.text.isNotEmpty && controller.state.emailController.text.isNotEmpty);
+          bool isPersonalVerified = (controller.state.firstNameController.text.isNotEmpty &&
+              controller.state.lastNameController.text.isNotEmpty &&
+              controller.state.registerController.text.isNotEmpty);
+          bool bodyVerified = (controller.state.heightController.text.isNotEmpty &&
+              controller.state.weightController.text.isNotEmpty &&
+              controller.state.selectedGender.value.isNotEmpty);
+          return ElevatedButton(
+            onPressed: (isEmailPassVerified && isPersonalVerified && bodyVerified && controller.state.selectedImage.value != null)
+                ? () async {
+                    await controller.userRegister();
+                  }
+                : null,
+            child: controller.state.isLoading.value ? const CupertinoActivityIndicator(color: Colors.white) : Text('Дуусгах'),
+          );
+        }),
       ],
-    );
+    ).paddingSymmetric(horizontal: 16);
   }
 
   Future<void> _onImageButtonPressed(ImageSource source) async {
     try {
       final XFile? pickedFile = await _picker.pickImage(
         source: source,
-        maxWidth: 200,
-        maxHeight: 100,
-        imageQuality: 80,
+        maxWidth: 512,
+        maxHeight: 512,
+        imageQuality: 100,
       );
       controller.state.selectedImage.value = pickedFile;
     } catch (e) {

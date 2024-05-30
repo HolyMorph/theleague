@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../../../style/my_colors.dart';
 import '../../../utils/fa_icon.dart';
-import '../../register/suit/register_routes.dart';
+import '../../login/suit/login_routes.dart';
 import '../../settings/suit/components/settings_textfield.dart';
-import '../logic/login_controller.dart';
+import '../logic/register_controller.dart';
+import '../suit/register_routes.dart';
 
-class LoginScreen extends GetView<LoginController> {
-  const LoginScreen({super.key});
+class RegisterEmailScreen extends GetView<RegisterController> {
+  const RegisterEmailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class LoginScreen extends GetView<LoginController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Нэвтрэх',
+            'Бүртгэл үүсгэх',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -76,29 +75,50 @@ class LoginScreen extends GetView<LoginController> {
             ),
           ),
           const SizedBox(height: 16),
-          Obx(
-            () => ElevatedButton(
-              onPressed: () {
-                controller.userLogin();
-              },
-              child: controller.state.isLoading.value ? CupertinoActivityIndicator(color: Colors.white) : Text('Нэвтрэх'),
-            ),
+          Row(
+            children: [
+              Container(
+                height: 20,
+                width: 20,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: MyColors.grey300,
+                ),
+                child: Icon(
+                  Icons.check,
+                  size: 14,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Нууц үг хамгийн багадаа 8 тэмдэгт байна',
+                style: TextStyle(fontSize: 14, color: MyColors.grey600),
+              ),
+            ],
+          ),
+          const SizedBox(height: 32),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed(RegisterRoutes.registerScreen);
+            },
+            child: Text('Бүртгүүлэх'),
           ),
           const SizedBox(height: 16),
           InkWell(
             onTap: () {
-              Get.toNamed(RegisterRoutes.registerEmailScreen);
+              Get.toNamed(LoginRoutes.loginScreen);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Бүртгэл байхгүй юу?',
+                  'Бүртгэлтэй юу?',
                   style: TextStyle(fontSize: 14, color: MyColors.grey600),
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  'Бүртгүүлэх',
+                  'Нэвтрэх',
                   style: TextStyle(
                     fontSize: 14,
                     color: MyColors.primaryColor,
