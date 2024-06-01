@@ -25,7 +25,7 @@ Future<void> main() async {
 
 /// Setup app settings
 Future<void> _init() async {
-  await MyClient.instance.init(baseUrl: Constants.BASE_DEV_URL);
+  await MyClient.instance.init(baseUrl: Constants.isDevUrl ? Constants.BASE_DEV_URL : Constants.BASE_URL);
 
   ///Init [LocalStorage] library
   await MyStorage.instance.init();

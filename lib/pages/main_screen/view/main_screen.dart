@@ -18,7 +18,6 @@ class MainScreen extends StatelessWidget {
           controller: controller.state.pageController,
           children: [
             HomeScreen(),
-            Container(),
             ProfileScreen(),
           ],
         ),
@@ -47,10 +46,10 @@ class MainScreen extends StatelessWidget {
                     icon: Icon(Icons.home),
                     label: 'Home',
                   ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.notifications),
-                    label: 'Search',
-                  ),
+                  // BottomNavigationBarItem(
+                  //   icon: Icon(Icons.notifications),
+                  //   label: 'Search',
+                  // ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.person),
                     label: 'Profile',

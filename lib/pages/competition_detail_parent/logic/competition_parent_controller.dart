@@ -9,6 +9,8 @@ class CompetitionParentController extends GetxController {
   @override
   void onInit() {
     state.gameCode.value = Get.parameters['id']!;
+    state.gameName.value = Get.parameters['name'] ?? '';
+    state.coverImage.value = Get.parameters['image'] ?? '';
     getGameList();
     super.onInit();
   }

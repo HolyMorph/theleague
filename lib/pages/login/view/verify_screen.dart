@@ -11,7 +11,7 @@ class VerifyScreen extends GetView<LoginController> {
 
   @override
   StatelessElement createElement() {
-    controller.startResendTimer();
+    // controller.startResendTimer();
     return super.createElement();
   }
 

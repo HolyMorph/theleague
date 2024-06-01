@@ -7,7 +7,7 @@ class HomeController extends GetxController {
   final state = HomeState();
 
   Future<(bool, dynamic)> getHomeData() async {
-    state.isLoading.value = true;
+    if (state.homeData.isEmpty) state.isLoading.value = true;
     var (isSuccess, response) = await MyClient.instance.sendHttpRequest(
       urlPath: 'api/game/list',
       method: Method.post,
@@ -15,6 +15,7 @@ class HomeController extends GetxController {
     state.isLoading.value = false;
     if (isSuccess) {
       state.homeData.value = response['result'];
+      state.filteredList.value = response['result']['docs'];
     }
 
     return (isSuccess, response);

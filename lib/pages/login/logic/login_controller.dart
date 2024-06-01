@@ -1,9 +1,5 @@
 import 'dart:async';
-
 import 'package:get/get.dart';
-
-import '../../../alert/alert_helper.dart';
-import '../../../alert/flash_status.dart';
 import '../../../service/method.dart';
 import '../../../service/my_client.dart';
 import '../../../utils/constants.dart';
@@ -13,23 +9,23 @@ import '../state/login_state.dart';
 class LoginController extends GetxController {
   final state = LoginState();
 
-  ///OTP Resend хийх цаг гүйлгэж эхлэх
-  void startResendTimer() {
-    state.resendActivated.value = false;
-
-    const duration = Duration(seconds: 1);
-    if (state.resendTimer != null) {
-      state.resendTimer?.cancel();
-    }
-    state.resendTimer = Timer.periodic(duration, (timer) {
-      if (state.resendDuration.value == 0) {
-        state.resendActivated.value = true;
-        timer.cancel();
-      } else {
-        state.resendDuration--;
-      }
-    });
-  }
+  // ///OTP Resend хийх цаг гүйлгэж эхлэх
+  // void startResendTimer() {
+  //   state.resendActivated.value = false;
+  //
+  //   const duration = Duration(seconds: 1);
+  //   if (state.resendTimer != null) {
+  //     state.resendTimer?.cancel();
+  //   }
+  //   state.resendTimer = Timer.periodic(duration, (timer) {
+  //     if (state.resendDuration.value == 0) {
+  //       state.resendActivated.value = true;
+  //       timer.cancel();
+  //     } else {
+  //       state.resendDuration--;
+  //     }
+  //   });
+  // }
 
   Future<(bool, dynamic)> userLogin() async {
     state.isLoading.value = true;
@@ -45,12 +41,6 @@ class LoginController extends GetxController {
     if (isSuccess) {
       MyStorage.instance.saveData(Constants.TOKEN, response['result']['token']);
       MyStorage.instance.saveData(Constants.USERTYPE, response['result']['type']);
-    } else {
-      AlertHelper.showFlashAlert(
-        title: 'Алдаа',
-        message: '${response['message']}',
-        status: FlashStatus.failed,
-      );
     }
     return (isSuccess, response);
   }

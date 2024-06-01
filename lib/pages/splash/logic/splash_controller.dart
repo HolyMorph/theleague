@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import '../../../alert/alert_helper.dart';
 import '../../../alert/flash_status.dart';
 import '../../../firebase_config.dart';
-import '../../../route/my_routes.dart';
 import '../../../service/method.dart';
 import '../../../service/my_client.dart';
 import '../../../utils/constants.dart';
@@ -24,10 +23,11 @@ class SplashController extends GetxController {
       String token = await MyStorage.instance.getData(Constants.TOKEN) ?? '';
       if (token.isEmpty) {
         await _requestToken();
-        // await _getMetaData();
+        Get.find<CoreController>().getMeData();
       } else {
-        //await _getMetaData();
+        Get.find<CoreController>().getMeData();
       }
+
       Get.find<CoreController>().state.coreType.value = CoreType.home;
 
       ///Notification Token
@@ -42,48 +42,48 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     checkUserToken();
-
     super.onInit();
   }
 
-  Future<void> _getMetaData() async {
-    state.isLoading.value = true;
-    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/me', method: Method.get);
+  // Future<void> _getMetaData() async {
 
-    if (isSuccess) {
-      if (response.data['statusCode'] == 400 || response.data['statusCode'] == 405) {
-        state.isLoading.value = false;
-        Get.offNamed(MyRoutes.reloadScreen);
-
-        return;
-      }
-
-      MyStorage().saveData(Constants.META_DATA, response.data['result']['meta']);
-      MyStorage().saveData(Constants.TIMESTAMP, response.data['result']['meta']['timestamp']);
-      dynamic teams = response.data['result']['meta']['teams'];
-      dynamic players = response.data['result']['meta']['players'];
-      List<dynamic> metaData = [];
-
-      for (var index = 0; index < teams.length; index++) {
-        teams[index]..['players'] = [];
-        metaData.add(teams[index]);
-
-        for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
-          if (teams[index]['code'] == players[playerIndex]['teamCode']) {
-            metaData[index]['players'].add(players[playerIndex]);
-          }
-        }
-      }
-
-      MyStorage().saveData(Constants.TEAMS, metaData);
-      await Future.delayed(const Duration(seconds: 2));
-      state.isLoading.value = false;
-      Get.offNamed(MyRoutes.voteResult);
-    } else {
-      state.isLoading.value = false;
-      Get.toNamed(MyRoutes.reloadScreen);
-    }
-  }
+  // state.isLoading.value = true;
+  // var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/me', method: Method.get);
+  //
+  // if (isSuccess) {
+  //   if (response.data['statusCode'] == 400 || response.data['statusCode'] == 405) {
+  //     state.isLoading.value = false;
+  //     Get.offNamed(MyRoutes.reloadScreen);
+  //
+  //     return;
+  //   }
+  //
+  //   MyStorage().saveData(Constants.META_DATA, response.data['result']['meta']);
+  //   MyStorage().saveData(Constants.TIMESTAMP, response.data['result']['meta']['timestamp']);
+  //   dynamic teams = response.data['result']['meta']['teams'];
+  //   dynamic players = response.data['result']['meta']['players'];
+  //   List<dynamic> metaData = [];
+  //
+  //   for (var index = 0; index < teams.length; index++) {
+  //     teams[index]..['players'] = [];
+  //     metaData.add(teams[index]);
+  //
+  //     for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+  //       if (teams[index]['code'] == players[playerIndex]['teamCode']) {
+  //         metaData[index]['players'].add(players[playerIndex]);
+  //       }
+  //     }
+  //   }
+  //
+  //   MyStorage().saveData(Constants.TEAMS, metaData);
+  //   await Future.delayed(const Duration(seconds: 2));
+  //   state.isLoading.value = false;
+  //   Get.offNamed(MyRoutes.voteResult);
+  // } else {
+  //   state.isLoading.value = false;
+  //   Get.toNamed(MyRoutes.reloadScreen);
+  // }
+  //}
 
   Future<void> _requestToken() async {
     final String osType = Platform.operatingSystem;

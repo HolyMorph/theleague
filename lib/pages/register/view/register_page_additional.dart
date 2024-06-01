@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../alert/alert_helper.dart';
+import '../../../alert/flash_status.dart';
 import '../../../style/my_colors.dart';
 import '../../../utils/fa_icon.dart';
+import '../../core/logic/core_controller.dart';
+import '../../core/suit/core_routes.dart';
 import '../../settings/suit/components/settings_textfield.dart';
 import '../logic/register_controller.dart';
 
@@ -25,6 +29,7 @@ class RegisterPageAdditional extends GetView<RegisterController> {
           hintText: 'Утасны дугаар',
           textEditingController: controller.state.phoneNumberController,
           inputType: TextInputType.number,
+          customValidation: (value) {},
           prefix: FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
@@ -230,7 +235,7 @@ class RegisterPageAdditional extends GetView<RegisterController> {
         ),
         const SizedBox(height: 24),
         Obx(() {
-          bool isEmailPassVerified = (controller.state.passwordController.text.isNotEmpty && controller.state.emailController.text.isNotEmpty);
+          bool isEmailPassVerified = (controller.state.passwordValid.value && controller.state.emailController.text.isNotEmpty);
           bool isPersonalVerified = (controller.state.firstNameController.text.isNotEmpty &&
               controller.state.lastNameController.text.isNotEmpty &&
               controller.state.registerController.text.isNotEmpty);
@@ -238,9 +243,32 @@ class RegisterPageAdditional extends GetView<RegisterController> {
               controller.state.weightController.text.isNotEmpty &&
               controller.state.selectedGender.value.isNotEmpty);
           return ElevatedButton(
-            onPressed: (isEmailPassVerified && isPersonalVerified && bodyVerified && controller.state.selectedImage.value != null)
+            onPressed: (isEmailPassVerified && isPersonalVerified && bodyVerified)
                 ? () async {
-                    await controller.userRegister();
+                    if (controller.state.selectedImage.value != null) {
+                      var (isSuccess, response) = await controller.userRegister();
+                      if (isSuccess) {
+                        FocusScope.of(context).unfocus();
+                        Get.until((route) => Get.currentRoute == CoreRoutes.coreScreen);
+                        await Get.find<CoreController>().getMeData();
+                        AlertHelper.showFlashAlert(
+                          title: 'Амжилттай',
+                          message: 'Бүртгэл амжилттай үүслээ.',
+                        );
+                      } else {
+                        AlertHelper.showFlashAlert(
+                          title: 'Алдаа',
+                          message: '${response['message']}',
+                          status: FlashStatus.failed,
+                        );
+                      }
+                    } else {
+                      AlertHelper.showFlashAlert(
+                        title: 'Уучлаарай',
+                        message: 'Цээж зураг оруулаагүй байна.',
+                        status: FlashStatus.warning,
+                      );
+                    }
                   }
                 : null,
             child: controller.state.isLoading.value ? const CupertinoActivityIndicator(color: Colors.white) : Text('Дуусгах'),

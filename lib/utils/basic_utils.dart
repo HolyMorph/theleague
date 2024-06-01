@@ -23,4 +23,22 @@ class BasicUtils {
 
     return '${getParsedTime(min.toString())}:${getParsedTime(sec.toString())}';
   }
+
+  String? emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Цахим хаяг оруулна уу.';
+    }
+
+    const pattern = r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$';
+    final regExp = RegExp(pattern);
+
+    if (!regExp.hasMatch(value)) {
+      return 'Буруу цахим хаяг оруулсан байна.';
+    }
+    return null;
+  }
+
+  static bool isValidPhoneNumber(String phoneNumber) {
+    return phoneNumber.length == 8 && (phoneNumber.startsWith('9') || phoneNumber.startsWith('8'));
+  }
 }

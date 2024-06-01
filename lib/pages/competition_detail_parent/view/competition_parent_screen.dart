@@ -18,17 +18,13 @@ class CompetitionParentScreen extends GetWidget<CompetitionParentController> {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CompetitionHeader(coverUrl: ''),
+                  CompetitionHeader(coverUrl: controller.state.coverImage.value),
                   const SizedBox(height: 24),
                   Text(
-                    'UBCab Family Day',
+                    '${controller.state.gameName.value}',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                   ).paddingSymmetric(horizontal: 16),
                   const SizedBox(height: 24),
-                  Text(
-                    'Тэмцээнүүд',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ).paddingSymmetric(horizontal: 16),
                   Expanded(
                     child: ListView.separated(
                       padding: const EdgeInsets.symmetric(vertical: 8),

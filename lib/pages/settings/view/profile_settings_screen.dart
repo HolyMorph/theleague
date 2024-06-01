@@ -51,13 +51,16 @@ class ProfileSettingScreen extends StatelessWidget {
                     initialValue: '79',
                     hintText: 'Жин',
                     isActive: true,
-                    suffix: Text(
-                      'кг',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: MyColors.greyBlue800,
+                    suffix: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'кг',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: MyColors.greyBlue800,
+                        ),
                       ),
                     ),
                   ),
@@ -67,13 +70,16 @@ class ProfileSettingScreen extends StatelessWidget {
                     hintText: 'Өндөр',
                     initialValue: '168',
                     isActive: true,
-                    suffix: Text(
-                      'см',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: MyColors.greyBlue800,
+                    suffix: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'см',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: MyColors.greyBlue800,
+                        ),
                       ),
                     ),
                   ),
@@ -81,10 +87,13 @@ class ProfileSettingScreen extends StatelessWidget {
                   SettingsTextField(
                     title: 'Цахим хаяг',
                     hintText: 'Цахим хаяг',
-                    prefix: Text(
-                      FaIcon.email,
-                      style: FaIcon.regular().copyWith(color: MyColors.darkGrey, fontSize: 16),
-                    ).paddingOnly(right: 8),
+                    prefix: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        FaIcon.email,
+                        style: FaIcon.regular().copyWith(color: MyColors.darkGrey, fontSize: 16),
+                      ).paddingOnly(right: 8),
+                    ),
                     initialValue: 'baddoggy_saagii@gmail.com',
                     isActive: true,
                   ),
@@ -93,10 +102,13 @@ class ProfileSettingScreen extends StatelessWidget {
                     title: 'Утасны дугаар',
                     hintText: 'Утасны дугаар',
                     initialValue: '99000052',
-                    prefix: Text(
-                      FaIcon.phone,
-                      style: FaIcon.regular().copyWith(color: MyColors.darkGrey, fontSize: 16),
-                    ).paddingOnly(right: 8),
+                    prefix: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        FaIcon.phone,
+                        style: FaIcon.regular().copyWith(color: MyColors.darkGrey, fontSize: 16),
+                      ).paddingOnly(right: 8),
+                    ),
                     isActive: true,
                   ),
                 ],

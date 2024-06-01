@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class LoginState {
+  final formKey = GlobalKey<FormState>();
+  final RxBool isObscure = RxBool(true);
   final RxBool isLoading = RxBool(false);
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();

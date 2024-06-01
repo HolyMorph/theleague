@@ -13,6 +13,10 @@ class SettingsTextField extends StatelessWidget {
   final bool isActive;
   final bool? isRequired;
   final VoidCallback? onTap;
+  final bool? checkEmail;
+  final bool? obscureText;
+  final Function(String)? customValidation;
+  final Function(String)? onChanged;
 
   const SettingsTextField({
     required this.title,
@@ -20,9 +24,13 @@ class SettingsTextField extends StatelessWidget {
     required this.hintText,
     this.initialValue,
     this.onTap,
+    this.checkEmail,
+    this.onChanged,
+    this.customValidation,
     this.inputType,
     this.textEditingController,
     this.errorText,
+    this.obscureText,
     this.isRequired,
     this.prefix,
     this.suffix,
@@ -62,12 +70,21 @@ class SettingsTextField extends StatelessWidget {
           enabled: isActive,
           keyboardType: inputType,
           initialValue: initialValue,
+          onChanged: onChanged,
+          obscureText: obscureText ?? false,
           decoration: InputDecoration(
             prefixIcon: prefix,
             hintText: hintText,
-            suffix: suffix,
+            suffixIcon: suffix,
           ),
-          validator: (value) => ((value ?? '').isEmpty && (isRequired ?? false)) ? errorText : null,
+          validator: (value) {
+            if (customValidation != null) {
+              return customValidation!(value ?? '') ?? null;
+            } else {
+              return ((value ?? '').isEmpty && (isRequired ?? false)) ? errorText : null;
+            }
+          },
+          //validator: (value) => ((value ?? '').isEmpty && (isRequired ?? false)) ? (checkEmail ?? false ? emailValidator(value) : errorText) : null,
         ),
       ],
     );

@@ -50,6 +50,7 @@ class FaIcon {
   static const String image = '\uf03e';
   static const String camera = '\uf030';
   static const String lock = '\uf30d';
+  static const String inbox = '\uf01c';
 
   ///For proper use
   ///Light style tai, w300 icon bol faLight

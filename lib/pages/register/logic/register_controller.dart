@@ -3,7 +3,6 @@ import 'package:dio/dio.dart' as Dio;
 import 'package:get/get.dart';
 
 import '../../../alert/alert_helper.dart';
-import '../../../alert/flash_status.dart';
 import '../../../service/method.dart';
 import '../../../service/my_client.dart';
 import '../../../utils/constants.dart';
@@ -27,7 +26,7 @@ class RegisterController extends GetxController {
       'height': int.tryParse(state.heightController.text),
       'weight': int.tryParse(state.weightController.text),
       'avatar': state.avatarUrl.value,
-      'phoneNumber': state.phoneNumberController.text,
+      if (state.phoneNumberController.text.isNotEmpty) 'phoneNumber': state.phoneNumberController.text,
     };
     var (isSuccess, response) = await MyClient.instance.sendHttpRequest(
       urlPath: 'api/auth/register-all',
@@ -38,12 +37,6 @@ class RegisterController extends GetxController {
     if (isSuccess) {
       MyStorage.instance.saveData(Constants.TOKEN, response['result']['token']);
       MyStorage.instance.saveData(Constants.USERTYPE, response['result']['type']);
-    } else {
-      AlertHelper.showFlashAlert(
-        title: 'Алдаа',
-        message: '${response['message']}',
-        status: FlashStatus.failed,
-      );
     }
     return (isSuccess, response);
   }

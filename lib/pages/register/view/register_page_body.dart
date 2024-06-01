@@ -10,6 +10,14 @@ class RegisterPageBody extends GetView<RegisterController> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  StatelessElement createElement() {
+    String number = controller.state.registerController.text[controller.state.registerController.text.length - 2];
+    controller.state.selectedGender.value = int.parse(number).isOdd ? 'Эрэгтэй' : 'Эмэгтэй';
+
+    return super.createElement();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
@@ -76,13 +84,16 @@ class RegisterPageBody extends GetView<RegisterController> {
               errorText: 'Өндөр оруулна уу',
               textEditingController: controller.state.heightController,
               isActive: true,
-              suffix: Text(
-                'см',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: MyColors.greyBlue800,
+              suffix: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  'см',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: MyColors.greyBlue800,
+                  ),
                 ),
               ),
             ),
@@ -95,13 +106,16 @@ class RegisterPageBody extends GetView<RegisterController> {
               inputType: TextInputType.number,
               textEditingController: controller.state.weightController,
               isActive: true,
-              suffix: Text(
-                'кг',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: MyColors.greyBlue800,
+              suffix: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  'кг',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: MyColors.greyBlue800,
+                  ),
                 ),
               ),
             ),

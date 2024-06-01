@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../style/my_colors.dart';
 import '../../../../style/style_export.dart';
+import '../../logic/profile_controller.dart';
 
-class PersonalInfo extends StatelessWidget {
+class PersonalInfo extends GetView<ProfileController> {
   const PersonalInfo({super.key});
 
   @override
@@ -19,22 +21,21 @@ class PersonalInfo extends StatelessWidget {
           Row(
             children: [
               CachedNetworkImage(
-                imageUrl: '?size=w100',
+                imageUrl: '${controller.coreController.state.meData['avatar']}',
                 imageBuilder: (context, imageProvider) => Container(
                   height: 80,
                   width: 80,
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    image: DecorationImage(image: imageProvider, fit: BoxFit.fitHeight),
-                    boxShadow: [],
+                    image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
                   ),
                 ),
                 placeholder: (context, url) => Container(
                   alignment: Alignment.center,
                   height: 80,
                   width: 80,
-                  child: CupertinoActivityIndicator(animating: true, radius: 10, color: Colors.white),
+                  child: CupertinoActivityIndicator(animating: true, radius: 10, color: MyColors.primaryColor),
                 ),
                 errorWidget: (context, url, error) => Container(
                   height: 80,
@@ -62,7 +63,7 @@ class PersonalInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'С. Муунохой-Уудамсалтай',
+                    '${'${controller.coreController.state.meData['lastName']}'[0]}.${controller.coreController.state.meData['firstName']}',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -70,6 +71,9 @@ class PersonalInfo extends StatelessWidget {
                     ),
                   ),
                   InkWell(
+                    onTap: () {
+                      copyData(controller.coreController.state.meData['code']);
+                    },
                     child: Row(
                       children: [
                         Text(
@@ -77,7 +81,7 @@ class PersonalInfo extends StatelessWidget {
                           style: TextStyle(fontSize: 14, color: MyColors.darkGrey),
                         ),
                         Text(
-                          'djgsajdgas',
+                          '${controller.coreController.state.meData['code']}',
                           style: TextStyle(fontSize: 14, color: MyColors.greyBlue800),
                         ),
                         const SizedBox(width: 8),
@@ -93,78 +97,104 @@ class PersonalInfo extends StatelessWidget {
               ),
             ],
           ).paddingSymmetric(horizontal: 16),
-          const SizedBox(height: 24),
-          const Divider(height: 1, thickness: 1, color: MyColors.grey100),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    'Эр',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: MyColors.greyBlue800,
+          ObxValue(
+            (meData) {
+              if (meData['type'] == 'athelete')
+                return Column(
+                  children: [
+                    const SizedBox(height: 24),
+                    const Divider(height: 1, thickness: 1, color: MyColors.grey100),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              meData['gender'] == 'male' ? 'Эр' : 'Эм',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: MyColors.greyBlue800,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Хүйс',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.darkGrey,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              '${meData['height']}см',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: MyColors.greyBlue800,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Өндөр',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.darkGrey,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              '${meData['weight']}кг',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: MyColors.greyBlue800,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Жин',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.darkGrey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Хүйс',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: MyColors.darkGrey,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    '158cm',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: MyColors.greyBlue800,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Өндөр',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: MyColors.darkGrey,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    '79кг',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: MyColors.greyBlue800,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Жин',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: MyColors.darkGrey,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                );
+              else
+                return const SizedBox();
+            },
+            controller.coreController.state.meData,
           ),
         ],
+      ),
+    );
+  }
+
+  void copyData(String data) {
+    Clipboard.setData(new ClipboardData(text: data));
+    ScaffoldMessenger.of(Get.context!).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Хуулж авлаа'.tr,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+        ),
+        backgroundColor: MyColors.primaryColor,
+        duration: const Duration(milliseconds: 1200),
       ),
     );
   }

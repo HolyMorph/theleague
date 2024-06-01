@@ -16,7 +16,7 @@ class CompetitionHeader extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: '${coverUrl}?size=w300',
           imageBuilder: (context, imageProvider) => Container(
-            height: 200,
+            height: 250,
             width: double.infinity,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
@@ -26,12 +26,12 @@ class CompetitionHeader extends StatelessWidget {
           ),
           placeholder: (context, url) => Container(
             alignment: Alignment.center,
-            height: 200,
+            height: 250,
             width: double.infinity,
             child: CupertinoActivityIndicator(animating: true, radius: 10, color: MyColors.primaryColor),
           ),
           errorWidget: (context, url, error) => Container(
-            height: 200,
+            height: 250,
             width: double.infinity,
             child: Image.asset(
               'assets/images/ic_logo_bg.png',
@@ -40,7 +40,7 @@ class CompetitionHeader extends StatelessWidget {
           ),
         ),
         Container(
-          height: 200,
+          height: 250,
           width: Get.size.width,
           decoration: BoxDecoration(
             gradient: LinearGradient(

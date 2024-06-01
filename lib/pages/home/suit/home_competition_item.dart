@@ -20,11 +20,17 @@ class HomeCompetitionItem extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
         onTap: () {
-          Get.toNamed(
-            data['hasChildren']
-                ? CompetitionParentRoutes.competitionParentScreen + '/${data['code']}'
-                : CompetitionDetailRoutes.competitionDetailScreen + '/${data['id']}',
-          );
+          if (data['hasChildren']) {
+            Get.toNamed(
+              CompetitionParentRoutes.competitionParentScreen + '/${data['code']}',
+              parameters: {
+                'name': '${data['name']}',
+                'image': '${data['logo_rectangle']}',
+              },
+            );
+          } else {
+            Get.toNamed(CompetitionDetailRoutes.competitionDetailScreen + '/${data['id']}');
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(8),

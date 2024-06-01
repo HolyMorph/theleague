@@ -65,9 +65,9 @@ class RegisterPagePersonal extends GetView<RegisterController> {
                   textCapitalization: TextCapitalization.characters,
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(10),
-                    FilteringTextInputFormatter.allow(RegExp(r'^[А-Я]{0,2}[0-9]*$')),
+                    FilteringTextInputFormatter.allow(RegExp(r'^[А-Яа-яЁёӨөҮү]{0,2}[0-9]*$')),
                     TextInputFormatter.withFunction((oldValue, newValue) {
-                      if (newValue.text.length > 2 && newValue.text.substring(0, 2).contains(RegExp(r'[^А-Я]'))) {
+                      if (newValue.text.length > 2 && newValue.text.substring(0, 2).contains(RegExp(r'[^А-Яа-яЁёӨөҮү]'))) {
                         return oldValue;
                       }
                       if (newValue.text.length > 2 && newValue.text.substring(2).contains(RegExp(r'[^0-9]'))) {
@@ -83,7 +83,7 @@ class RegisterPagePersonal extends GetView<RegisterController> {
                     if (value == null || value.isEmpty) {
                       return 'Регистрийн дугаар оруулна уу';
                     }
-                    if (value.length < 3 || !RegExp(r'^[А-Я]{2}[0-9]+$').hasMatch(value)) {
+                    if (value.length < 3 || !RegExp(r'^[А-Яа-яЁёӨөҮү]{2}[0-9]+$').hasMatch(value)) {
                       return 'Оруулсан мэдээлэл буруу байна.';
                     }
                     return null;

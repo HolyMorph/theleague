@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../style/my_colors.dart';
+import '../../../../utils/fa_icon.dart';
 
 class SportDescriptionItem extends StatelessWidget {
-  const SportDescriptionItem({super.key});
+  final String category;
+  const SportDescriptionItem({required this.category, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +18,21 @@ class SportDescriptionItem extends StatelessWidget {
         border: Border.all(width: 1, color: MyColors.neutral200),
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.sports),
+          Container(
+            child: Text(
+              FaIcon.medal,
+              style: FaIcon.regular(),
+            ),
+          ),
           const SizedBox(width: 8),
           Text(
-            'Сагсан бөмбөг',
+            category.capitalizeFirst ?? '',
             style: TextStyle(
               fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: MyColors.neutral900,
+              fontWeight: FontWeight.w600,
+              color: MyColors.grey700,
             ),
           ),
         ],
