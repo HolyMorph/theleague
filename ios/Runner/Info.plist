@@ -11,7 +11,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>The League</string>
+	<string>Sport Lab</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -30,13 +30,17 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Та зөвшөөрөл өгснөөр та зураг даран оруулах боломжтой болох юм.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Та байршлаа идэвхжүүлснээр бид таныг UG Arena-д байгаа эсэхийг шалган, таны саналыг хүлээн авах боломжтой болно.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Та байршлаа идэвхжүүлснээр бид таныг UG Arena-д байгаа эсэхийг шалган, таны саналыг хүлээн авах боломжтой болно.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Та зөвшөөрөл өгснөөр зургийн сангаас зураг сонгож оруулах боломжтой болох юм.</string>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>Та сонордуулгаа идэвхжүүлснээр цаг алдалгүй манай апп-ын мэдээллийг авах боломжтой болно.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>com.apple.security.files.user-selected.read-only</key>
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
@@ -49,17 +53,17 @@
 	<string>Main</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDarkContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSUserNotificationsUsageDescription</key>
-	<string>Та сонордуулгаа идэвхжүүлснээр цаг алдалгүй манай апп-ын мэдээллийг авах боломжтой болно.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Та зөвшөөрөл өгснөөр зургийн сангаас зураг сонгож оруулах боломжтой болох юм.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Та зөвшөөрөл өгснөөр та зураг даран оруулах боломжтой болох юм.</string>
+	<key>com.apple.security.files.user-selected.read-only</key>
+	<true/>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
 </dict>
 </plist>

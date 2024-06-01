@@ -6,7 +6,7 @@ class Constants {
   static String PlayersMale = 'playersMale';
   static String TEAMS = 'teams';
   static String TIMESTAMP = 'timestamp';
-  static String TOKEN = 'token';
+  static String TOKEN = 'sl_token';
   static String USERTYPE = 'userType';
   static String TicketCode = 'ticketCode';
   static String REFRESH_TOKEN = 'refreshToken';

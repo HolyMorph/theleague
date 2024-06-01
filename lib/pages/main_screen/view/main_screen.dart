@@ -33,38 +33,37 @@ class MainScreen extends StatelessWidget {
                 ),
               ],
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-              child: BottomNavigationBar(
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                backgroundColor: Colors.white,
-                selectedItemColor: MyColors.primaryColor,
-                iconSize: 28,
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: 'Home',
-                  ),
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(Icons.notifications),
-                  //   label: 'Search',
-                  // ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.person),
-                    label: 'Profile',
-                  ),
-                ],
-                currentIndex: currIndex.value,
-                onTap: (index) {
-                  currIndex.value = index;
-                  controller.state.pageController.animateToPage(
-                    index,
-                    duration: 100.milliseconds,
-                    curve: Curves.decelerate,
-                  );
-                },
-              ),
+            child: BottomNavigationBar(
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              unselectedFontSize: 0,
+              selectedFontSize: 0,
+              backgroundColor: Colors.white,
+              selectedItemColor: MyColors.primaryColor,
+              iconSize: 28,
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: '',
+                ),
+                // BottomNavigationBarItem(
+                //   icon: Icon(Icons.notifications),
+                //   label: 'Search',
+                // ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: '',
+                ),
+              ],
+              currentIndex: currIndex.value,
+              onTap: (index) {
+                currIndex.value = index;
+                controller.state.pageController.animateToPage(
+                  index,
+                  duration: 200.milliseconds,
+                  curve: Curves.decelerate,
+                );
+              },
             ),
           ),
           controller.state.bottomIndex,

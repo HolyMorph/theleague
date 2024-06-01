@@ -19,24 +19,22 @@ class SplashController extends GetxController {
   final state = SplashState();
 
   Future<void> checkUserToken() async {
-    Future.delayed(const Duration(milliseconds: 2500), () async {
-      String token = await MyStorage.instance.getData(Constants.TOKEN) ?? '';
-      if (token.isEmpty) {
-        await _requestToken();
-        Get.find<CoreController>().getMeData();
-      } else {
-        Get.find<CoreController>().getMeData();
-      }
+    String token = await MyStorage.instance.getData(Constants.TOKEN) ?? '';
+    if (token.isEmpty) {
+      await _requestToken();
+      Get.find<CoreController>().getMeData();
+    } else {
+      Get.find<CoreController>().getMeData();
+    }
 
-      Get.find<CoreController>().state.coreType.value = CoreType.home;
+    Get.find<CoreController>().state.coreType.value = CoreType.home;
 
-      ///Notification Token
-      ///
-      if (await MyStorage().getData('fcmSaved') == false) {
-        await _updateFcmToken(token: await MyStorage().getData(Constants.FCMToken));
-        FirebaseConfig.subscribeToTopic('theleaguepublic');
-      }
-    });
+    ///Notification Token
+    ///
+    if (await MyStorage().getData('fcmSaved') == false) {
+      await _updateFcmToken(token: await MyStorage().getData(Constants.FCMToken));
+      FirebaseConfig.subscribeToTopic('theleaguepublic');
+    }
   }
 
   @override
