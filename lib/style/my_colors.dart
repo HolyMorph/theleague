@@ -29,6 +29,7 @@ class MyColors {
   static const Color greyBlue800 = Color(0xFF293056);
   static const Color progressGrey = Color(0xFFD5D9EB);
   static const Color emptyGrey = Color(0xFFB2B7C2);
+  static const Color softPrimary = Color(0xFF797FA6);
 
   /// Апп-ын canvas-ийн background-д ашиглагдах өнгө.
   static const Color backgroundColor = Color(0xFFF3F4F6);

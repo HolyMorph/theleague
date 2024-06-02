@@ -106,7 +106,9 @@ class LoginScreen extends GetView<LoginController> {
                       var (isSuccess, response) = await controller.userLogin();
                       if (isSuccess) {
                         FocusScope.of(context).unfocus();
-                        Get.until((route) => Get.currentRoute == CoreRoutes.coreScreen);
+                        Get.until(
+                          (route) => Get.currentRoute == (controller.state.from.isNotEmpty ? controller.state.from.value : CoreRoutes.coreScreen),
+                        );
                         Get.find<CoreController>().getMeData();
                       } else {
                         AlertHelper.showFlashAlert(
@@ -124,7 +126,7 @@ class LoginScreen extends GetView<LoginController> {
             const SizedBox(height: 16),
             InkWell(
               onTap: () {
-                Get.toNamed(RegisterRoutes.registerEmailScreen);
+                Get.toNamed(RegisterRoutes.registerTypeScreen);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

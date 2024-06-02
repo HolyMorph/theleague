@@ -6,6 +6,7 @@ import 'pages/competition_detail/suit/competition_detail_pages.dart';
 import 'pages/competition_detail_parent/suit/competition_parent_pages.dart';
 import 'pages/core/suit/core_pages.dart';
 import 'pages/core/suit/core_routes.dart';
+import 'pages/create_team/suit/create_team_pages.dart';
 import 'pages/login/suit/login_pages.dart';
 import 'pages/register/suit/register_pages.dart';
 import 'pages/register_competition/suit/register_competition_pages.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         ..addAll(LoginPages.pages)
         ..addAll(RegisterPages.pages)
         ..addAll(CompetitionParentPages.pages)
+        ..addAll(CreateTeamPages.pages)
         ..addAll(CompetitionDetailPages.pages),
     );
   }

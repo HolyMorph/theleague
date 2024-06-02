@@ -8,7 +8,7 @@ import 'register_competition_routes.dart';
 class RegisterCompetitionPages {
   static List<GetPage> pages = [
     GetPage(
-      name: RegisterCompetitionRoutes.registerCompetitionScreen,
+      name: RegisterCompetitionRoutes.registerCompetitionScreen + '/:id',
       page: () => RegisterCompetitionScreen(),
       binding: RegisterCompetitionBinding(),
     ),

@@ -50,4 +50,10 @@ class LoginController extends GetxController {
     state.resendTimer?.cancel();
     super.onClose();
   }
+
+  @override
+  void onInit() {
+    state.from.value = Get.parameters['from'] ?? '';
+    super.onInit();
+  }
 }

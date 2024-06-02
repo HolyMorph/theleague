@@ -3,8 +3,12 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../components/schedule_information.dart';
 import '../../../style/my_colors.dart';
+import '../../../utils/basic_utils.dart';
+import '../../core/logic/core_controller.dart';
+import '../../register_competition/suit/register_competition_routes.dart';
 import '../logic/competition_detail_controller.dart';
 import '../suit/component/competition_header.dart';
+import '../suit/component/register_button.dart';
 import '../suit/component/sport_description_item.dart';
 
 class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
@@ -75,9 +79,19 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
                       ).paddingSymmetric(horizontal: 16),
                     ),
                   ),
-                  // RegisterButton(
-                  //   onTap: () => Get.toNamed(RegisterCompetitionRoutes.registerCompetitionScreen),
-                  // ),
+                  if (controller.state.gameData['hasAppRegistration'] == true && controller.state.gameData['registrationPrice'] > 0)
+                    RegisterButton(
+                      title: 'Оролцох',
+                      onTap: () {
+                        if (!Get.find<CoreController>().state.isLoggedIn.value) {
+                          BasicUtils().notLoggedIn(route: Get.currentRoute);
+                        } else {
+                          Get.toNamed(
+                            '${RegisterCompetitionRoutes.registerCompetitionScreen}/${controller.state.gameCode.value}',
+                          );
+                        }
+                      },
+                    ),
                 ],
               ),
       ),

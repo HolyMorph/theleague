@@ -54,7 +54,7 @@ class ProfileNotLoginScreen extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              Get.toNamed(RegisterRoutes.registerEmailScreen);
+              Get.toNamed(RegisterRoutes.registerTypeScreen);
             },
             child: Text(
               'Бүртгүүлэх',

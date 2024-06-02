@@ -31,8 +31,7 @@ dependencies:
   dio: ^5.4.3+1
   image_picker: ^1.1.1
   flutter_html: ^3.0.0-beta.2
-
-
+  qr_code_scanner: ^1.0.1
 
 
 dev_dependencies:
@@ -69,6 +68,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/images/register/
 
   fonts:
     - family: Font_Awesome_6_Pro

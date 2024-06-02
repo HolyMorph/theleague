@@ -11,6 +11,7 @@ import '../../webview/my_web_view.dart';
 import '../logic/profile_controller.dart';
 import '../suit/components/personal_info.dart';
 import '../suit/components/profile_menu_item.dart';
+import '../suit/components/profile_not_athlete.dart';
 import 'policy_screen.dart';
 import 'profile_not_login_screen.dart';
 
@@ -47,11 +48,11 @@ class _ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveCl
           ),
         ),
         body: Obx(() {
-          return !Get.find<CoreController>().state.isActive.value
+          return !Get.find<CoreController>().state.isLoggedIn.value
               ? ProfileNotLoginScreen()
               : Column(
                   children: [
-                    PersonalInfo(),
+                    Get.find<CoreController>().state.meData['type'] == 'clientuser' ? ProfileNotAthlete() : PersonalInfo(),
                     const SizedBox(height: 16),
                     // ProfileMenuItem(
                     //   onTap: () {

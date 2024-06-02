@@ -40,7 +40,7 @@ class RegisterScreen extends GetView<RegisterController> {
               children: [
                 RegisterPagePersonal(),
                 RegisterPageBody(),
-                RegisterPageAdditional(),
+                const RegisterPageAdditional(),
               ],
             ),
           ),

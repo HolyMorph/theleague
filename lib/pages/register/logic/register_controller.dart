@@ -1,20 +1,23 @@
 import 'dart:io';
-import 'package:dio/dio.dart' as Dio;
 import 'package:get/get.dart';
-
-import '../../../alert/alert_helper.dart';
 import '../../../service/method.dart';
 import '../../../service/my_client.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/my_storage.dart';
+import '../../core/logic/core_controller.dart';
 import '../state/register_state.dart';
 
 class RegisterController extends GetxController {
   final state = RegisterState();
 
-  Future<(bool, dynamic)> userRegister() async {
+  Future<(bool, dynamic)> athleteRegister() async {
     state.isLoading.value = true;
-    if (state.avatarUrl.isEmpty) await uploadAvatar(file: File(state.selectedImage.value?.path ?? ''));
+    if (state.avatarUrl.isEmpty) {
+      var (isSuccess, response) = await Get.find<CoreController>().uploadAvatar(file: File(state.selectedImage.value?.path ?? ''));
+      if (isSuccess) {
+        state.avatarUrl.value = response['result'][0]['fileUrl'];
+      }
+    }
 
     dynamic body = {
       'email': state.emailController.text,
@@ -28,6 +31,7 @@ class RegisterController extends GetxController {
       'avatar': state.avatarUrl.value,
       if (state.phoneNumberController.text.isNotEmpty) 'phoneNumber': state.phoneNumberController.text,
     };
+
     var (isSuccess, response) = await MyClient.instance.sendHttpRequest(
       urlPath: 'api/auth/register-all',
       method: Method.post,
@@ -41,27 +45,31 @@ class RegisterController extends GetxController {
     return (isSuccess, response);
   }
 
-  Future<(bool, dynamic)> uploadAvatar({required File file}) async {
-    String? token = await MyStorage.instance.getData(Constants.TOKEN);
+  Future<(bool, dynamic)> clientRegister() async {
+    state.isLoading.value = true;
 
-    String fileName = file.path.split('/').last;
-
-    Dio.FormData formData = Dio.FormData.fromMap({
-      'files': await Dio.MultipartFile.fromFile(file.path, filename: fileName),
-    });
+    dynamic body = {
+      'name': state.clientNameController.text,
+      'email': state.emailController.text,
+      'password': state.passwordController.text,
+    };
 
     var (isSuccess, response) = await MyClient.instance.sendHttpRequest(
-      urlPath: '${Constants.BASE_UPLOAD_URL}v2/upload?prefix=client&useFileName=false&folderPath=user-avatar&debug=true',
+      urlPath: 'api/auth/register-client',
       method: Method.post,
-      body: formData,
-      headers: {'Authorization': 'Bearer ${token}'},
+      body: body,
     );
-
+    state.isLoading.value = false;
     if (isSuccess) {
-      state.avatarUrl.value = response['result'][0]['fileUrl'];
-    } else {
-      AlertHelper.showFlashAlert(title: 'Алдаа', message: '${response['message']}');
+      MyStorage.instance.saveData(Constants.TOKEN, response['result']['token']);
+      MyStorage.instance.saveData(Constants.USERTYPE, response['result']['type']);
     }
     return (isSuccess, response);
+  }
+
+  @override
+  void onInit() {
+    state.from.value = Get.parameters['from'] ?? '';
+    super.onInit();
   }
 }

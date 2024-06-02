@@ -38,6 +38,7 @@ class FaIcon {
   static const String creditCard = '\uf09d';
   static const String edit = '\uf044';
   static const String user_group = '\uf500';
+  static const String user_medical = '\uf830';
   static const String user_edit = '\uf4ff';
   static const String location_dot = '\uf3c5';
   static const String key = '\uf084';
@@ -51,6 +52,7 @@ class FaIcon {
   static const String camera = '\uf030';
   static const String lock = '\uf30d';
   static const String inbox = '\uf01c';
+  static const String search = '\uf002';
 
   ///For proper use
   ///Light style tai, w300 icon bol faLight

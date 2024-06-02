@@ -14,7 +14,7 @@ class CompetitionHeader extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: '${coverUrl}?size=w300',
+          imageUrl: '${coverUrl}?size=w500',
           imageBuilder: (context, imageProvider) => Container(
             height: 250,
             width: double.infinity,

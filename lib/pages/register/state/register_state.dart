@@ -7,9 +7,12 @@ class RegisterState {
   final RxBool passwordValid = RxBool(false);
   final RxInt selectedIndex = RxInt(0);
   final RxString selectedGender = RxString('Эрэгтэй');
+  final RxString from = RxString('');
   final Rx<XFile?> selectedImage = Rx(null);
   final RxString avatarUrl = RxString('');
   final PageController pageController = PageController();
+  final RxString registerType = RxString('');
+  final TextEditingController clientNameController = TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
