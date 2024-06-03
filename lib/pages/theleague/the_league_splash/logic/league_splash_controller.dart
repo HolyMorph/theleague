@@ -1,19 +1,26 @@
+import 'dart:developer';
 import 'package:get/get.dart';
+import '../../../../alert/alert_helper.dart';
 import '../../../../route/my_routes.dart';
 import '../../../../service/my_client.dart';
 import '../../../../utils/constants.dart';
 import '../../../../utils/my_storage.dart';
+import '../../../core/suit/core_routes.dart';
 import '../state/league_splash_state.dart';
 
 class LeagueSplashController extends GetxController {
   final state = LeagueSplashState();
 
   @override
-  void onInit() {
+  void onInit() async {
     state.gameCode.value = Get.parameters['gameCode'] ?? '';
     state.category.value = Get.parameters['category'] ?? '';
     state.gender.value = Get.parameters['gender'] ?? '';
     _getMetaData();
+    // if (await MyStorage.instance.getData(Constants.TIMESTAMP) == null)
+    //   _getMetaData();
+    // else
+    //   _getMetaTimeStamp();
     super.onInit();
   }
 
@@ -50,7 +57,44 @@ class LeagueSplashController extends GetxController {
       Get.offNamed(MyRoutes.voteResult + '/${state.category.value}/${state.gameCode.value}/${state.gender.value}');
     } else {
       state.isLoading.value = false;
-      Get.toNamed(MyRoutes.reloadScreen);
+      AlertHelper.showFlashAlert(title: 'Алдаа', message: response['message'] ?? 'Дахин оролдоно уу.');
+      Get.until((route) => Get.currentRoute == CoreRoutes.coreScreen);
     }
   }
+
+  Future<void> _getMetaTimeStamp() async {
+    await Future.delayed(2.seconds);
+    dynamic timeStamp = await MyStorage.instance.getData(Constants.TIMESTAMP);
+    state.isLoading.value = true;
+    var (isSuccess, response) = await MyClient().sendHttpRequest(
+      urlPath: '/api/vote/me',
+      queryParameters: {
+        'category': state.category.value,
+        'gameCode': state.gameCode.value,
+        'ts': timeStamp,
+      },
+    );
+
+    if (isSuccess) {
+      log('response:${response}');
+    } else {
+      state.isLoading.value = false;
+      AlertHelper.showFlashAlert(title: 'Алдаа', message: response['message'] ?? 'Дахин оролдоно уу.');
+      Get.until((route) => Get.currentRoute == CoreRoutes.coreScreen);
+    }
+  }
+
+  // Future<void> addNewData(String key, Map<String, dynamic> newData) async {
+  //   final localStorage = await MyStorage();
+  //
+  //   dynamic existingDataString = localStorage.getData(key);
+  //   Map<String, dynamic> existingData = {};
+  //
+  //   if (existingDataString != null) {
+  //     existingData = Map<String, dynamic>.from(jsonDecode(existingDataString));
+  //   }
+  //   existingData.addAll(newData);
+  //
+  //   await prefs.setString(key, jsonEncode(existingData));
+  // }
 }

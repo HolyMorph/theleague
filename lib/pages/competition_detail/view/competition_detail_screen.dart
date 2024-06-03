@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../components/schedule_information.dart';
 import '../../../style/my_colors.dart';
-import '../../../utils/basic_utils.dart';
-import '../../core/logic/core_controller.dart';
-import '../../register_competition/suit/register_competition_routes.dart';
+import '../../competition_detail_parent/suit/component/parent_poll_item.dart';
+import '../../theleague/the_league_splash/suit/league_splash_routes.dart';
 import '../logic/competition_detail_controller.dart';
 import '../suit/component/competition_header.dart';
-import '../suit/component/register_button.dart';
 import '../suit/component/sport_description_item.dart';
 
 class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
@@ -26,7 +24,9 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CompetitionHeader(
-                    coverUrl: controller.state.gameData['logo_rectangle'],
+                    coverUrl: controller.state.gameData['eventType'] == 'poll'
+                        ? controller.state.gameData['logo_square']
+                        : controller.state.gameData['logo_rectangle'],
                   ),
                   Expanded(
                     child: SingleChildScrollView(
@@ -62,6 +62,21 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
                           // const SizedBox(height: 24),
                           // ScoreboardScheduleItem(),
                           const SizedBox(height: 24),
+                          if (controller.state.gameData['eventType'] == 'poll')
+                            Column(
+                              children: [
+                                for (var event in controller.state.gameData['children'])
+                                  ParentPollItem(
+                                    onTap: () {
+                                      Get.toNamed(
+                                        LeagueSplashRoutes.leagueSplashScreen + '/${event['gameCategories']}/${event['code']}/${event['gender']}',
+                                      );
+                                    },
+                                    text: '${controller.state.gameData['meta']['genderDictionary']['${event['gender']}']} санал өгөх',
+                                  ).marginOnly(bottom: 8),
+                                const SizedBox(height: 8),
+                              ],
+                            ),
                           Text(
                             'Дэлгэрэнгүй мэдээлэл',
                             style: TextStyle(fontWeight: FontWeight.w500),
@@ -79,19 +94,22 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
                       ).paddingSymmetric(horizontal: 16),
                     ),
                   ),
-                  if (controller.state.gameData['hasAppRegistration'] == true && controller.state.gameData['registrationPrice'] > 0)
-                    RegisterButton(
-                      title: 'Оролцох',
-                      onTap: () {
-                        if (!Get.find<CoreController>().state.isLoggedIn.value) {
-                          BasicUtils().notLoggedIn(route: Get.currentRoute);
-                        } else {
-                          Get.toNamed(
-                            '${RegisterCompetitionRoutes.registerCompetitionScreen}/${controller.state.gameCode.value}',
-                          );
-                        }
-                      },
-                    ),
+                  // if (controller.state.gameData['hasAppRegistration'] == true && controller.state.gameData['registrationPrice'] > 0)
+                  //   RegisterButton(
+                  //     title: 'Оролцох',
+                  //     onTap: () {
+                  //       Get.toNamed(
+                  //         '${RegisterCompetitionRoutes.registerCompetitionScreen}/${controller.state.gameCode.value}',
+                  //       );
+                  //       // if (!Get.find<CoreController>().state.isLoggedIn.value) {
+                  //       //   BasicUtils().notLoggedIn(route: Get.currentRoute, dismissible: true);
+                  //       // } else {
+                  //       //   Get.toNamed(
+                  //       //     '${RegisterCompetitionRoutes.registerCompetitionScreen}/${controller.state.gameCode.value}',
+                  //       //   );
+                  //       // }
+                  //     },
+                  //   ),
                 ],
               ),
       ),

@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../style/my_colors.dart';
 import '../../../../utils/fa_icon.dart';
+import '../../logic/register_controller.dart';
 
-class RegisterNextButton extends StatelessWidget {
+class RegisterNextButton extends GetView<RegisterController> {
   final Function()? onNext;
   final Function()? onBack;
   final String buttonText;
@@ -38,22 +41,26 @@ class RegisterNextButton extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16),
-          Expanded(
-            child: ElevatedButton(
-              onPressed: onNext,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    buttonText,
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    FaIcon.iconChevronRight,
-                    style: FaIcon.regular().copyWith(color: Colors.white, fontSize: 14),
-                  ),
-                ],
+          Obx(
+            () => Expanded(
+              child: ElevatedButton(
+                onPressed: onNext,
+                child: controller.state.isLoading.value
+                    ? const CupertinoActivityIndicator(color: Colors.white)
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            buttonText,
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            FaIcon.iconChevronRight,
+                            style: FaIcon.regular().copyWith(color: Colors.white, fontSize: 14),
+                          ),
+                        ],
+                      ),
               ),
             ),
           ),

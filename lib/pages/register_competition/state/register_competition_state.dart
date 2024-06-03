@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import '../view/register_competition_screen.dart';
+import '../../../utils/event_type.dart';
+import '../../../utils/game_type.dart';
 
 class RegisterCompetitionState {
-  Rx<RegisterCompetitionType> competitionType = RegisterCompetitionType.Team.obs;
+  Rx<GameType> gameType = Rx(GameType.Team);
+  Rx<EventType> eventType = Rx(EventType.Tournament);
   final RxList<dynamic> selectedTeamMembers = RxList();
   final Rx<XFile?> selectedLogo = Rx(null);
   final RxList myTeams = RxList();
@@ -11,4 +13,5 @@ class RegisterCompetitionState {
   final RxString gameId = RxString('');
   final RxMap gameData = RxMap();
   final RxMap teamData = RxMap();
+  final RxInt ticketCount = RxInt(1);
 }

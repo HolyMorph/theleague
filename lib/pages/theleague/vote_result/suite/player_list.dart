@@ -53,7 +53,7 @@ class PlayerList extends GetView<VoteResultController> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              '${leaderboard[index]['lastName'].substring(0, 1)}. ${leaderboard[index]['firstName']}',
+                              '${leaderboard[index]['name']}',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(

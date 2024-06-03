@@ -43,7 +43,7 @@ class RightDrawer extends GetView<AllStarController> {
               ),
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
         ],
       ),
     );

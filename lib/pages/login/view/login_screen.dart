@@ -42,12 +42,23 @@ class LoginScreen extends GetView<LoginController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Нэвтрэх',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: MyColors.grey900,
+            InkWell(
+              onTap: () => Get.back(),
+              borderRadius: BorderRadius.circular(8),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.chevron_left, size: 28),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Нэвтрэх',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: MyColors.grey900,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 16),

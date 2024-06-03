@@ -95,13 +95,17 @@ class HomePollItem extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               if (data['hasChildren']) {
-                Get.toNamed(
-                  CompetitionParentRoutes.competitionParentScreen + '/${data['code']}',
-                  parameters: {
-                    'name': '${data['name']}',
-                    'image': '${data['logo_square']}',
-                  },
-                );
+                if (data['eventType'] == 'poll') {
+                  Get.toNamed(CompetitionDetailRoutes.competitionDetailScreen + '/${data['id']}');
+                } else {
+                  Get.toNamed(
+                    CompetitionParentRoutes.competitionParentScreen + '/${data['code']}',
+                    parameters: {
+                      'name': '${data['name']}',
+                      'image': '${data['logo_square']}',
+                    },
+                  );
+                }
               } else {
                 Get.toNamed(CompetitionDetailRoutes.competitionDetailScreen + '/${data['id']}');
               }

@@ -23,6 +23,7 @@ class RegisterTeamCart extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {},
+              borderRadius: BorderRadius.circular(8),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

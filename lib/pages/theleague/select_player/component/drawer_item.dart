@@ -81,14 +81,14 @@ class DrawerItem extends GetView<AllStarController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${players[index]['firstName']} ${players[index]['lastName']}',
+                            '${players[index]['name']}',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             '${players[index]['jerseyNumber']} - ${controller.state.teams.firstWhere((element) => element['code'].toLowerCase() == players[index]['teamCode'].toLowerCase())['name']}',
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
                           ),
                         ],
                       ),

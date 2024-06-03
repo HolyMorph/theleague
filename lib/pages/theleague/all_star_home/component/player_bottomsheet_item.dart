@@ -34,7 +34,7 @@ class PlayerBottomSheetItem extends GetView<AllStarController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CachedNetworkImage(
-                      imageUrl: '${players[index]['avatarUrl']}?size=w100',
+                      imageUrl: '${players[index]['avatarUrl']}?size=w150',
                       imageBuilder: (context, imageProvider) => Container(
                         height: 40,
                         width: 40,
@@ -66,7 +66,7 @@ class PlayerBottomSheetItem extends GetView<AllStarController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${players[index]['firstName']} ${players[index]['lastName']}',
+                            '${players[index]['name']}',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 12,
@@ -110,7 +110,7 @@ class PlayerBottomSheetItem extends GetView<AllStarController> {
             },
           ),
           ListView.separated(
-            itemCount: players.length < 3 ? 1 : 0,
+            itemCount: players.length < 2 ? 1 : 0,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsets.zero,

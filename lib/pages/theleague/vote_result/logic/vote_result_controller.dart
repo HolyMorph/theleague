@@ -17,7 +17,6 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
     state.teams.value = await MyStorage().getData(Constants.TEAMS);
     await getVoteResult();
     await getVoteHistory();
-
     state.initLoading.value = false;
   }
 
@@ -41,6 +40,7 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
             'S': RxList<Map<String, dynamic>>([]),
             'OH': RxList<Map<String, dynamic>>([]),
             'OPH': RxList<Map<String, dynamic>>([]),
+            'CO': RxList<Map<String, dynamic>>([]),
           },
           "createdAt": "",
         };
@@ -50,6 +50,7 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
         List<dynamic> setter = response['result']['docs'][index]['vote']['S'] ?? [];
         List<dynamic> outSideHitter = response['result']['docs'][index]['vote']['OH'] ?? [];
         List<dynamic> outSidePowerHitter = response['result']['docs'][index]['vote']['OPH'] ?? [];
+        List<dynamic> coach = response['result']['docs'][index]['vote']['CO'] ?? [];
 
         result['_id'] = histories[index]['_id'];
         DateTime dateTime = DateTime.parse(histories[index]['createdAt']).toLocal();
@@ -97,6 +98,15 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
             for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
               if (state.players[playerIndex]['_id'] == outSidePowerHitter[cIndex]) {
                 result['vote']['OPH'].add(state.players[playerIndex]);
+              }
+            }
+          }
+
+        if (coach.isNotEmpty)
+          for (var cIndex = 0; cIndex < coach.length; cIndex++) {
+            for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
+              if (state.players[playerIndex]['_id'] == coach[cIndex]) {
+                result['vote']['CO'].add(state.players[playerIndex]);
               }
             }
           }

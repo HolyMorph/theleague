@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../../service/my_client.dart';
+import '../../../utils/basic_utils.dart';
 import '../state/competition_detail_state.dart';
 
 class CompetitionDetailController extends GetxController {
@@ -14,6 +15,9 @@ class CompetitionDetailController extends GetxController {
     state.isLoading.value = false;
     if (isSuccess) {
       state.gameData.value = response['result'];
+      if (state.gameData['registrationRequired'] == true) {
+        BasicUtils().notLoggedIn(route: Get.currentRoute, dismissible: false);
+      }
     }
 
     return (isSuccess, response);
@@ -23,6 +27,7 @@ class CompetitionDetailController extends GetxController {
   void onInit() {
     state.gameCode.value = Get.parameters['id']!;
     getGameDetail();
+
     super.onInit();
   }
 }

@@ -83,7 +83,7 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 60),
+                        const SizedBox(height: 50),
                         Stack(
                           alignment: Alignment.center,
                           children: [
@@ -94,29 +94,8 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                               ],
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Column(
-                                  children: [
-                                    SelectedPlayers(
-                                      maxPlayer: 2,
-                                      positionName: 'OPH',
-                                      onTap: () {
-                                        controller.title = 'OPH';
-                                        Get.toNamed('${MyRoutes.selectPlayer}');
-                                      },
-                                    ),
-                                    const SizedBox(height: 16),
-                                    SelectedPlayers(
-                                      maxPlayer: 2,
-                                      positionName: 'S',
-                                      onTap: () {
-                                        controller.title = 'S';
-                                        Get.toNamed('${MyRoutes.selectPlayer}');
-                                      },
-                                    ),
-                                  ],
-                                ),
                                 Column(
                                   children: [
                                     SelectedPlayers(
@@ -127,7 +106,28 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                                         Get.toNamed('${MyRoutes.selectPlayer}');
                                       },
                                     ),
-                                    const SizedBox(height: 70),
+                                    const SizedBox(height: 16),
+                                    SelectedPlayers(
+                                      maxPlayer: 2,
+                                      positionName: 'L',
+                                      onTap: () {
+                                        controller.title = 'L';
+                                        Get.toNamed('${MyRoutes.selectPlayer}');
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    const SizedBox(height: 50),
+                                    SelectedPlayers(
+                                      maxPlayer: 2,
+                                      positionName: 'OPH',
+                                      onTap: () {
+                                        controller.title = 'OPH';
+                                        Get.toNamed('${MyRoutes.selectPlayer}');
+                                      },
+                                    ),
                                   ],
                                 ),
                                 Column(
@@ -144,9 +144,9 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                                     const SizedBox(height: 16),
                                     SelectedPlayers(
                                       maxPlayer: 2,
-                                      positionName: 'L',
+                                      positionName: 'S',
                                       onTap: () {
-                                        controller.title = 'L';
+                                        controller.title = 'S';
                                         Get.toNamed('${MyRoutes.selectPlayer}');
                                       },
                                     ),
@@ -155,6 +155,15 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                               ],
                             ),
                           ],
+                        ),
+                        const SizedBox(height: 16),
+                        SelectedPlayers(
+                          maxPlayer: 2,
+                          positionName: 'CO',
+                          onTap: () {
+                            controller.title = 'CO';
+                            Get.toNamed('${MyRoutes.selectPlayer}');
+                          },
                         ),
                       ],
                     ),
@@ -167,7 +176,7 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: <Color>[
-                          Color(0xFF4C1C1A),
+                          MyColors.secondaryColor.withOpacity(0.5),
                           Colors.transparent,
                         ],
                         tileMode: TileMode.mirror,
@@ -178,6 +187,7 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                            surfaceTintColor: Colors.transparent,
                             backgroundColor: MyColors.secondaryColor,
                             disabledBackgroundColor: MyColors.unselectedWidgetColor.withOpacity(0.5),
                           ),

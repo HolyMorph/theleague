@@ -20,8 +20,8 @@ class RegisterController extends GetxController {
     }
 
     dynamic body = {
-      'email': state.emailController.text,
-      'password': state.passwordController.text,
+      if (Get.find<CoreController>().state.meData['type'] == 'appuser') 'email': state.emailController.text,
+      if (Get.find<CoreController>().state.meData['type'] == 'appuser') 'password': state.passwordController.text,
       'firstName': state.firstNameController.text,
       'lastName': state.lastNameController.text,
       'registrationNumber': state.registerController.text,

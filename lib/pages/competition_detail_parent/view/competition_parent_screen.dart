@@ -26,11 +26,6 @@ class CompetitionParentScreen extends GetWidget<CompetitionParentController> {
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                   ).paddingSymmetric(horizontal: 16),
                   const SizedBox(height: 16),
-                  Text(
-                    '${controller.state.gameData['docs'][0]['description']}',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                  ).paddingSymmetric(horizontal: 16),
-                  const SizedBox(height: 16),
                   Expanded(
                     child: ListView.separated(
                       padding: const EdgeInsets.symmetric(vertical: 8),

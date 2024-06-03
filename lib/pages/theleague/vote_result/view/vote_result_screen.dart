@@ -132,19 +132,4 @@ class VoteResultScreen extends StatelessWidget {
       },
     );
   }
-
-  String getTabTitle({required int index}) {
-    switch (index) {
-      case 0:
-        return 'Онлайн';
-      case 1:
-        return 'Танхимын';
-      case 2:
-        return 'Багийн';
-      case 3:
-        return 'Нийт дүн';
-      default:
-        return '';
-    }
-  }
 }

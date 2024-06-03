@@ -135,7 +135,7 @@ class SelectPlayerScreen extends GetView<AllStarController> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: <Color>[
-                          Color(0xFF4C1C1A),
+                          MyColors.secondaryColor.withOpacity(0.5),
                           Colors.transparent,
                         ],
                         tileMode: TileMode.mirror,

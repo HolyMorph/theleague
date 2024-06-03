@@ -7,7 +7,8 @@ import '../../../../style/my_colors.dart';
 import '../../logic/register_competition_controller.dart';
 
 class RegisterCompetitionAppbar extends GetView<RegisterCompetitionController> {
-  const RegisterCompetitionAppbar({super.key});
+  final String coverUrl;
+  const RegisterCompetitionAppbar({required this.coverUrl, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class RegisterCompetitionAppbar extends GetView<RegisterCompetitionController> {
         child: Stack(
           children: [
             CachedNetworkImage(
-              imageUrl: '${data['logo_square']}?size=w500',
+              imageUrl: '${coverUrl}?size=w500',
               imageBuilder: (context, imageProvider) => Container(
                 height: 250,
                 clipBehavior: Clip.hardEdge,

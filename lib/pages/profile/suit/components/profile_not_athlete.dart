@@ -39,7 +39,7 @@ class ProfileNotAthlete extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(8),
                   onTap: () {
-                    Get.toNamed(RegisterRoutes.registerTypeScreen);
+                    Get.toNamed(RegisterRoutes.registerScreen);
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

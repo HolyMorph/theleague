@@ -58,13 +58,25 @@ class CreateTeamScreen extends GetWidget<CreateTeamController> {
                           dictionary: controller.state.sportTypes['dictionary'],
                         ),
                         const SizedBox(height: 16),
-                        Text(
-                          'Багийн Лого',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: MyColors.grey700,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              'Багийн Лого',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.grey700,
+                              ),
+                            ),
+                            Text(
+                              '*',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.redColor,
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 6),
                         MyImagePicker(
@@ -96,8 +108,9 @@ class CreateTeamScreen extends GetWidget<CreateTeamController> {
                         if (controller.state.teamName.isNotEmpty &&
                             controller.state.selectedGender.isNotEmpty &&
                             controller.state.selectedType.isNotEmpty &&
-                            controller.state.teamMembers.isNotEmpty) {
-                          var (isSuccess, _) = await controller.createTeam();
+                            controller.state.teamMembers.isNotEmpty &&
+                            controller.state.selectedImage.value != null) {
+                          var (isSuccess, response) = await controller.createTeam();
                           if (isSuccess) {
                             if (controller.state.from.isNotEmpty) {
                               Get.until((route) => Get.currentRoute == controller.state.from.value);
@@ -107,6 +120,12 @@ class CreateTeamScreen extends GetWidget<CreateTeamController> {
                             AlertHelper.showFlashAlert(
                               title: 'Амжилттай',
                               message: 'Баг амжилттай үүслээ',
+                            );
+                          } else {
+                            AlertHelper.showFlashAlert(
+                              title: 'Уучлаарай',
+                              message: response['message'] ?? 'Дахин оролдоно уу',
+                              status: FlashStatus.warning,
                             );
                           }
                         } else {

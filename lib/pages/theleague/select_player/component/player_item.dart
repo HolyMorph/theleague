@@ -76,7 +76,6 @@ class PlayerItem extends GetView<AllStarController> {
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
-                            fontFamily: 'GIP',
                           ),
                         ),
                       ),
@@ -85,17 +84,18 @@ class PlayerItem extends GetView<AllStarController> {
                         child: Column(
                           children: [
                             Text(
-                              player['firstName'],
+                              player['name'],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
                             ),
-                            Text(
-                              player['lastName'],
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'GIP'),
-                            ),
+                            // if (player['lastName'] != null && player['lastName'] != '')
+                            //   Text(
+                            //     player['lastName'],
+                            //     maxLines: 1,
+                            //     overflow: TextOverflow.ellipsis,
+                            //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                            //   ),
                             const SizedBox(height: 4),
                             Text(
                               controller.getPositionName(position: player['positionCodes'][0]),

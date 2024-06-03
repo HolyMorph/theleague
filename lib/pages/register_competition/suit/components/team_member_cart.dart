@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../style/my_colors.dart';
+import '../../../core/logic/core_controller.dart';
+import '../../../profile/logic/profile_controller.dart';
 
 class TeamMemberCart extends StatelessWidget {
   final dynamic player;
@@ -64,13 +67,25 @@ class TeamMemberCart extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '${player['name']}',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: MyColors.grey900,
-                    fontWeight: FontWeight.w600,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      '${player['name']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: MyColors.grey900,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    if (player['code'] == Get.find<CoreController>().state.meData['code'])
+                      Text(
+                        ' (Би)',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: MyColors.darkGrey,
+                        ),
+                      ),
+                  ],
                 ),
                 Row(
                   children: [

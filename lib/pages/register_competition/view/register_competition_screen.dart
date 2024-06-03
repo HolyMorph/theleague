@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../utils/game_type.dart';
 import '../logic/register_competition_controller.dart';
 import 'register_competition_individual.dart';
 import 'register_competition_team.dart';
@@ -15,16 +15,14 @@ class RegisterCompetitionScreen extends GetView<RegisterCompetitionController> {
       child: ObxValue(
         (type) {
           switch (type.value) {
-            case RegisterCompetitionType.Team:
+            case GameType.Team:
               return RegisterCompetitionTeam();
-            case RegisterCompetitionType.Individual:
+            case GameType.Individual:
               return const RegisterCompetitionIndividual();
           }
         },
-        controller.state.competitionType,
+        controller.state.gameType,
       ),
     );
   }
 }
-
-enum RegisterCompetitionType { Team, Individual }

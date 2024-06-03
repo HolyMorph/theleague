@@ -11,6 +11,7 @@ class RegisterPages {
     GetPage(
       name: RegisterRoutes.registerScreen,
       page: () => RegisterScreen(),
+      binding: RegisterBinding(),
     ),
     GetPage(
       name: RegisterRoutes.registerTypeScreen,

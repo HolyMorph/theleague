@@ -138,8 +138,9 @@ class BasicUtils {
     );
   }
 
-  void notLoggedIn({required String route}) {
+  void notLoggedIn({required String route, required bool dismissible}) {
     Get.dialog(
+      barrierDismissible: dismissible,
       AlertDialog(
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,

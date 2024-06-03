@@ -93,7 +93,7 @@ class MyColors {
 
   ///Нэмэлт өнгөнүүд. Апп-д ашигладаж байгаагаас тусдаа нэмэлт
   ///өнгө ашиглаж байгаа бол энэ хэсэгт тухайн өнгөө зарлана
-  static const Color secondaryColor = Color(0xffFF4800);
+  static const Color secondaryColor = Color(0xff155EEF);
 
   static const Color? selectedRowColor = null;
 

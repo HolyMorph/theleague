@@ -21,7 +21,7 @@ class TeamMemberSelection extends GetView<CreateTeamController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Багийн гишүүд (3-4)',
+            'Багийн гишүүд',
             style: TextStyle(
               color: MyColors.grey700,
               fontWeight: FontWeight.w500,
@@ -76,7 +76,6 @@ class TeamMemberSelection extends GetView<CreateTeamController> {
 
                     if (code != null) {
                       var (isSuccess, response) = await controller.searchMember(code: code);
-
                       if (isSuccess) {
                         if (response['result'] == null) {
                           AlertHelper.showFlashAlert(

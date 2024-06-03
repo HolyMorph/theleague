@@ -15,8 +15,8 @@ class ChangePlayerItem extends GetView<AllStarController> {
     String teamColor = controller.state.teams.firstWhereOrNull((element) => element['code'].toLowerCase() == teamCode.toLowerCase())['colorCode'];
 
     return Container(
-      width: 40,
-      height: 40,
+      width: 44,
+      height: 44,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         shape: BoxShape.circle,

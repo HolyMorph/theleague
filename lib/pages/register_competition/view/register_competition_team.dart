@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../alert/alert_helper.dart';
+import '../../../alert/flash_status.dart';
 import '../../../style/my_colors.dart';
 import '../../competition_detail/suit/component/register_button.dart';
 import '../logic/register_competition_controller.dart';
@@ -22,7 +24,7 @@ class RegisterCompetitionTeam extends GetView<RegisterCompetitionController> {
               )
             : Column(
                 children: [
-                  RegisterCompetitionAppbar(),
+                  RegisterCompetitionAppbar(coverUrl: controller.state.gameData['logo_rectangle']),
                   Expanded(
                     child: Column(
                       children: [
@@ -45,7 +47,18 @@ class RegisterCompetitionTeam extends GetView<RegisterCompetitionController> {
                   ),
                   RegisterButton(
                     title: 'Бүртгүүлэх',
-                    onTap: () => Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation),
+                    onTap: () async {
+                      var (isSuccess, response) = await controller.joinGame();
+                      if (isSuccess) {
+                        Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
+                      } else {
+                        AlertHelper.showFlashAlert(
+                          title: 'Уучлаарай',
+                          message: response['message'] ?? 'Хүсэлт амжилтгүй',
+                          status: FlashStatus.failed,
+                        );
+                      }
+                    },
                   ),
                 ],
               ),

@@ -49,6 +49,10 @@ class AllStarController extends GetxController {
         {
           return 'Хүчний довтлогч';
         }
+      case 'CO':
+        {
+          return 'Дасгалжуулагч';
+        }
 
       default:
         return '';
@@ -74,6 +78,10 @@ class AllStarController extends GetxController {
           return 4;
         }
       case 'OPH':
+        {
+          return 2;
+        }
+      case 'CO':
         {
           return 2;
         }
@@ -114,6 +122,10 @@ class AllStarController extends GetxController {
         {
           return 'Хүчний довтлогч';
         }
+      case 'CO':
+        {
+          return 'Дасгалжуулагч';
+        }
       default:
         return '';
     }
@@ -148,13 +160,15 @@ class AllStarController extends GetxController {
         'S': RxList<Map<String, dynamic>>([]),
         'OH': RxList<Map<String, dynamic>>([]),
         'OPH': RxList<Map<String, dynamic>>([]),
+        'CO': RxList<Map<String, dynamic>>([]),
       };
 
-      state.selectedPlayers['MB'] = selected['MB'];
-      state.selectedPlayers['L'] = selected['L'];
-      state.selectedPlayers['S'] = selected['S'];
-      state.selectedPlayers['OH'] = selected['OH'];
-      state.selectedPlayers['OPH'] = selected['OPH'];
+      state.selectedPlayers['MB'] = RxList.from(selected['MB']);
+      state.selectedPlayers['L'] = RxList.from(selected['L']);
+      state.selectedPlayers['S'] = RxList.from(selected['S']);
+      state.selectedPlayers['OH'] = RxList.from(selected['OH']);
+      state.selectedPlayers['OPH'] = RxList.from(selected['OPH']);
+      state.selectedPlayers['CO'] = RxList.from(selected['CO'] ?? []);
     }
 
     calculateTotalQty();
@@ -244,6 +258,7 @@ class AllStarController extends GetxController {
           'S': RxList<Map<String, dynamic>>([]),
           'OH': RxList<Map<String, dynamic>>([]),
           'OPH': RxList<Map<String, dynamic>>([]),
+          'CO': RxList<Map<String, dynamic>>([]),
         };
 
         List<dynamic> midBlocker = response['voteData']['MB'] ?? [];
@@ -251,6 +266,7 @@ class AllStarController extends GetxController {
         List<dynamic> setter = response['voteData']['S'] ?? [];
         List<dynamic> outSideHitter = response['voteData']['OH'] ?? [];
         List<dynamic> outSidePowerHitter = response['voteData']['OPH'] ?? [];
+        List<dynamic> coach = response['voteData']['CO'] ?? [];
 
         /// MB
         if (midBlocker.isNotEmpty)
@@ -298,6 +314,16 @@ class AllStarController extends GetxController {
             for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
               if (players[playerIndex]['_id'] == outSideHitter[cIndex]) {
                 state.selectedPlayers['OH']?.add(players[playerIndex]);
+              }
+            }
+          }
+
+        /// Coach
+        if (coach.isNotEmpty)
+          for (var cIndex = 0; cIndex < coach.length; cIndex++) {
+            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+              if (players[playerIndex]['_id'] == coach[cIndex]) {
+                state.selectedPlayers['CO']?.add(players[playerIndex]);
               }
             }
           }

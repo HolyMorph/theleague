@@ -81,6 +81,7 @@ class RegisterPageAdditional extends GetView<RegisterController> {
         Obx(
           () {
             bool isEmailPassVerified = (controller.state.passwordValid.value && controller.state.emailController.text.isNotEmpty);
+            if (Get.find<CoreController>().state.meData['type'] == 'clientuser') isEmailPassVerified = true;
             bool isPersonalVerified = (controller.state.firstNameController.text.isNotEmpty &&
                 controller.state.lastNameController.text.isNotEmpty &&
                 controller.state.registerController.text.isNotEmpty);
