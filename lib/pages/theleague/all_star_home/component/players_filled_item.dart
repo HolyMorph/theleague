@@ -15,6 +15,7 @@ class PlayersFilledItem extends StatelessWidget {
         alignment: WrapAlignment.center,
         verticalDirection: VerticalDirection.down,
         spacing: 4,
+        runSpacing: 4,
         children: [
           for (var player in players!) ChangePlayerItem(imageUrl: player['avatarUrl'] ?? '', teamCode: player['teamCode'] ?? ''),
           for (int empty = 0; empty < (maxPlayer - players!.length); empty++) Image.asset('assets/icons/ic_add.png', height: 44, width: 44),

@@ -35,6 +35,7 @@ class VoteDrawer extends GetView<VoteResultController> {
                         for (var index = 0; index < histories.length; index++)
                           InkWell(
                             onTap: () {
+                              Get.back();
                               Get.toNamed(
                                 VolleyBallAllStarRoutes.volleyBallAllStarScreen +
                                     '/${controller.state.gender.value}' +

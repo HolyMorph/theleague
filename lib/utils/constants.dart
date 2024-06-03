@@ -5,7 +5,7 @@ class Constants {
   static String PlayersFemale = 'playersFemale';
   static String PlayersMale = 'playersMale';
   static String TEAMS = 'teams';
-  static String TIMESTAMP = 'timestamp';
+  static String TIMESTAMP = 'sl_timestamp';
   static String TOKEN = 'sl_token';
   static String USERTYPE = 'userType';
   static String TicketCode = 'ticketCode';

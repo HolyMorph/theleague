@@ -34,7 +34,7 @@ class PlayerBottomSheetItem extends GetView<AllStarController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CachedNetworkImage(
-                      imageUrl: '${players[index]['avatarUrl']}?size=w150',
+                      imageUrl: '${players[index]['avatarUrl']}?size=w200',
                       imageBuilder: (context, imageProvider) => Container(
                         height: 40,
                         width: 40,

@@ -17,7 +17,6 @@ class CompetitionDetailController extends GetxController {
     state.isLoading.value = false;
     if (isSuccess) {
       state.gameData.value = response['result'];
-      state.isValidUserType = state.gameData['allowedUserTypes'].any((type) => type == coreController.state.meData['type']);
       if (state.gameData['registrationRequired'] == true && !coreController.state.isLoggedIn.value) {
         BasicUtils().notLoggedIn(route: Get.currentRoute, dismissible: false);
       }

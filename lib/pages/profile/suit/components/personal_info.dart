@@ -77,7 +77,7 @@ class PersonalInfo extends GetView<ProfileController> {
                     child: Row(
                       children: [
                         Text(
-                          'Sportlab ID: ',
+                          'SportLab ID: ',
                           style: TextStyle(fontSize: 14, color: MyColors.darkGrey),
                         ),
                         Text(

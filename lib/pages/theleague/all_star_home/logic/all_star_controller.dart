@@ -221,10 +221,10 @@ class AllStarController extends GetxController {
     var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/vote/vote-online', method: Method.post, body: body);
     isLoading = false;
     if (isSuccess) {
-      await _voteController.refreshFunction();
-      AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.');
       Get.until((route) => Get.currentRoute == '${MyRoutes.voteResult}/${state.category.value}/${state.gameCode.value}/${state.gender.value}');
+      AlertHelper.showFlashAlert(title: 'Амжилттай', message: '${response['result']['message']}');
       _clearData();
+      await _voteController.refreshFunction();
     } else {
       var message = response['error']['message'] as String;
       AlertHelper.showFlashAlert(

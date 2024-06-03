@@ -101,8 +101,9 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
                   if (controller.state.gameData['hasAppRegistration'] == true && controller.state.gameData['registrationPrice'] > 0)
                     RegisterButton(
                       title: 'Оролцох',
-                      onTap: () {
-                        if (controller.state.isValidUserType) {
+                      onTap: () async {
+                        if (await controller.state.gameData['allowedUserTypes']
+                            .any((type) => type == controller.coreController.state.meData['type'])) {
                           Get.toNamed(
                             '${RegisterCompetitionRoutes.registerCompetitionScreen}/${controller.state.gameCode.value}',
                           );

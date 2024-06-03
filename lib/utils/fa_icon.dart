@@ -54,6 +54,7 @@ class FaIcon {
   static const String inbox = '\uf01c';
   static const String search = '\uf002';
   static const String calendar = '\uf133';
+  static const String user_square = '\ue283';
 
   ///For proper use
   ///Light style tai, w300 icon bol faLight

@@ -62,6 +62,20 @@ class _ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveCl
                     //   title: 'Хувийн мэдээлэл',
                     // ),
                     // const SizedBox(height: 4),
+                    // ProfileMenuItem(
+                    //   onTap: () {},
+                    //   icon: FaIcon.user_square,
+                    //   title: 'Миний мандат',
+                    // ),
+                    // const SizedBox(height: 4),
+                    // ProfileMenuItem(
+                    //   onTap: () {
+                    //     Get.toNamed(MyTeamsRoutes.myTeamsScreen);
+                    //   },
+                    //   icon: FaIcon.user_group,
+                    //   title: 'Миний багууд',
+                    // ),
+                    //const SizedBox(height: 4),
                     ProfileMenuItem(
                       onTap: () {
                         Get.to(() => PolicyScreen());

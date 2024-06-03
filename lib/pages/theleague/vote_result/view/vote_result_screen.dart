@@ -38,6 +38,24 @@ class VoteResultScreen extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: GestureDetector(
+                                onTap: () => Get.back(),
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Icon(
+                                    Icons.chevron_left,
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                            ),
                             const SizedBox(height: 16),
                             Image.asset('assets/images/ic_volleyball_cover.png', scale: 2),
                             const SizedBox(height: 32),
