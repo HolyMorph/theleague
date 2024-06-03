@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../route/my_routes.dart';
 import '../../../../style/my_colors.dart';
+import '../../volleyball_allstar/suit/volleyball_allstar_routes.dart';
+import '../logic/vote_result_controller.dart';
 
-class VoteDrawer extends StatelessWidget {
+class VoteDrawer extends GetView<VoteResultController> {
   final String gender;
   final RxList<Map<String, dynamic>> histories;
   const VoteDrawer({required this.gender, required this.histories, Key? key}) : super(key: key);
@@ -22,7 +22,6 @@ class VoteDrawer extends StatelessWidget {
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w700,
-              fontFamily: 'GIP',
             ),
           ),
           const SizedBox(height: 12),
@@ -37,7 +36,10 @@ class VoteDrawer extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               Get.toNamed(
-                                '${MyRoutes.homeScreen}/$gender/true/online',
+                                VolleyBallAllStarRoutes.volleyBallAllStarScreen +
+                                    '/${controller.state.gender.value}' +
+                                    '/${controller.state.category}' +
+                                    '/${controller.state.gameCode.value}',
                                 arguments: histories[index]['vote'],
                               );
                             },
@@ -96,7 +98,6 @@ class VoteDrawer extends StatelessWidget {
                             color: Colors.white.withOpacity(0.5),
                             fontWeight: FontWeight.w600,
                             fontSize: 12,
-                            fontFamily: 'GIP',
                           ),
                         ),
                       ],

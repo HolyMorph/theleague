@@ -1,95 +1,102 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../../../service/method.dart';
 import '../../../../service/my_client.dart';
 import '../../../../utils/constants.dart';
 import '../../../../utils/my_storage.dart';
 import '../state/vote_result_state.dart';
 
 class VoteResultController extends GetxController with GetSingleTickerProviderStateMixin {
-  VoteResultState state = VoteResultState();
+  final state = VoteResultState();
 
   void appInit() async {
+    state.gender.value = Get.parameters['gender'] ?? '';
+    state.category.value = Get.parameters['category'] ?? '';
+    state.gameCode.value = Get.parameters['gameCode'] ?? '';
     state.initLoading.value = true;
     state.teams.value = await MyStorage().getData(Constants.TEAMS);
     await getVoteResult();
     await getVoteHistory();
 
-    state.tabController = TabController(vsync: this, length: state.tabLength.value);
     state.initLoading.value = false;
   }
 
   Future<void> getVoteHistory() async {
     state.voteHistories.clear();
     var (isSucces, response) = await MyClient().sendHttpRequest(
-      urlPath: '/api/me/vote-history',
-      queryParameters: {'gender': state.isMale.value ? 'male' : 'female'},
-      method: Method.get,
+      urlPath: 'api/vote/vote-history',
+      queryParameters: {'gender': state.gender.value, 'gameCode': state.gameCode.value},
     );
 
     if (isSucces) {
-      List<dynamic> histories = response.data['result']['docs'];
+      List<dynamic> histories = response['result']['docs'];
+
       for (var index = 0; index < histories.length; index++) {
         dynamic result = {
           "_id": "",
           "gender": state.gender.value,
           "vote": {
-            "PG": RxList<Map<String, dynamic>>([]),
-            "F": RxList<Map<String, dynamic>>([]),
-            "G": RxList<Map<String, dynamic>>([]),
-            "C": RxList<Map<String, dynamic>>([]),
+            'MB': RxList<Map<String, dynamic>>([]),
+            'L': RxList<Map<String, dynamic>>([]),
+            'S': RxList<Map<String, dynamic>>([]),
+            'OH': RxList<Map<String, dynamic>>([]),
+            'OPH': RxList<Map<String, dynamic>>([]),
           },
           "createdAt": "",
         };
 
-        List<dynamic> pointguard = response.data['result']['docs'][index]['vote']['PG'] ?? [];
-        List<dynamic> forward = response.data['result']['docs'][index]['vote']['F'] ?? [];
-        List<dynamic> guard = response.data['result']['docs'][index]['vote']['G'] ?? [];
-        List<dynamic> center = response.data['result']['docs'][index]['vote']['C'] ?? [];
+        List<dynamic> midBlocker = response['result']['docs'][index]['vote']['MB'] ?? [];
+        List<dynamic> libero = response['result']['docs'][index]['vote']['L'] ?? [];
+        List<dynamic> setter = response['result']['docs'][index]['vote']['S'] ?? [];
+        List<dynamic> outSideHitter = response['result']['docs'][index]['vote']['OH'] ?? [];
+        List<dynamic> outSidePowerHitter = response['result']['docs'][index]['vote']['OPH'] ?? [];
 
         result['_id'] = histories[index]['_id'];
         DateTime dateTime = DateTime.parse(histories[index]['createdAt']).toLocal();
         String formattedDate = DateFormat("M сарын d, HH:mm").format(dateTime);
         result['createdAt'] = formattedDate;
 
-        /// point guard
-        if (pointguard.isNotEmpty)
-          for (var pgIndex = 0; pgIndex < pointguard.length; pgIndex++) {
+        if (midBlocker.isNotEmpty)
+          for (var pgIndex = 0; pgIndex < midBlocker.length; pgIndex++) {
             for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
-              if (state.players[playerIndex]['_id'] == pointguard[pgIndex]) {
-                result['vote']['PG'].add(state.players[playerIndex]);
+              if (state.players[playerIndex]['_id'] == midBlocker[pgIndex]) {
+                result['vote']['MB'].add(state.players[playerIndex]);
               }
             }
           }
 
-        /// forward
-        if (forward.isNotEmpty)
-          for (var fIndex = 0; fIndex < forward.length; fIndex++) {
+        if (libero.isNotEmpty)
+          for (var fIndex = 0; fIndex < libero.length; fIndex++) {
             for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
-              if (state.players[playerIndex]['_id'] == forward[fIndex]) {
-                result['vote']['F'].add(state.players[playerIndex]);
+              if (state.players[playerIndex]['_id'] == libero[fIndex]) {
+                result['vote']['L'].add(state.players[playerIndex]);
               }
             }
           }
 
-        /// guard
-        if (guard.isNotEmpty)
-          for (var gIndex = 0; gIndex < guard.length; gIndex++) {
+        if (setter.isNotEmpty)
+          for (var gIndex = 0; gIndex < setter.length; gIndex++) {
             for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
-              if (state.players[playerIndex]['_id'] == guard[gIndex]) {
-                result['vote']['G'].add(state.players[playerIndex]);
+              if (state.players[playerIndex]['_id'] == setter[gIndex]) {
+                result['vote']['S'].add(state.players[playerIndex]);
               }
             }
           }
 
-        /// center
-        if (center.isNotEmpty)
-          for (var cIndex = 0; cIndex < center.length; cIndex++) {
+        if (outSideHitter.isNotEmpty)
+          for (var cIndex = 0; cIndex < outSideHitter.length; cIndex++) {
             for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
-              if (state.players[playerIndex]['_id'] == center[cIndex]) {
-                result['vote']['C'].add(state.players[playerIndex]);
+              if (state.players[playerIndex]['_id'] == outSideHitter[cIndex]) {
+                result['vote']['OH'].add(state.players[playerIndex]);
+              }
+            }
+          }
+
+        if (outSidePowerHitter.isNotEmpty)
+          for (var cIndex = 0; cIndex < outSidePowerHitter.length; cIndex++) {
+            for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
+              if (state.players[playerIndex]['_id'] == outSidePowerHitter[cIndex]) {
+                result['vote']['OPH'].add(state.players[playerIndex]);
               }
             }
           }
@@ -100,78 +107,33 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
 
   Future<void> getVoteResult() async {
     state.onlineVoteResults.clear();
-    state.arenaVoteResults.clear();
-    state.coachVoteResults.clear();
-    state.totalVoteResults.clear();
 
     state.isLoading.value = true;
     var (isSuccess, response) = await MyClient().sendHttpRequest(
-      urlPath: '/api/me/vote-result',
-      method: Method.get,
-      queryParameters: {'gender': state.isMale.value ? 'male' : 'female', 'version': 1.2},
+      urlPath: 'api/vote/vote-result',
+      queryParameters: {
+        'gender': state.gender.value,
+        'category': state.category.value,
+        'gameCode': state.gameCode.value,
+      },
     );
 
     if (isSuccess) {
-      state.tabLength.value = response.data['result']['showTotal'] ?? false ? 4 : 3;
       Map<String, dynamic> meta = await MyStorage().getData(Constants.META_DATA);
       state.players.value = await meta['players'];
 
       List<dynamic> onlineList = [];
-      List<dynamic> arenaList = [];
-      List<dynamic> coachList = [];
-      List<dynamic> totalList = [];
 
       for (var player in state.players) {
         onlineList.add(jsonDecode(jsonEncode(player)));
       }
 
-      for (var player in state.players) {
-        arenaList.add(jsonDecode(jsonEncode(player)));
-      }
-
-      for (var player in state.players) {
-        coachList.add(jsonDecode(jsonEncode(player)));
-      }
-      for (var player in state.players) {
-        totalList.add(jsonDecode(jsonEncode(player)));
-      }
-
       /// Online vote
-      for (var index = 0; index < response.data['result']['votes']['online'].length; index++) {
+      for (var index = 0; index < response['result']['votes']['online'].length; index++) {
         for (var playerIndex = 0; playerIndex < onlineList.length; playerIndex++) {
-          if (response.data['result']['votes']['online'][index]['value'] == onlineList[playerIndex]['_id']) {
-            onlineList[playerIndex]..['score'] = response.data['result']['votes']['online'][index]['score'];
+          if (response['result']['votes']['online'][index]['value'] == onlineList[playerIndex]['_id']) {
+            onlineList[playerIndex]..['score'] = response['result']['votes']['online'][index]['score'];
             state.onlineVoteResults.add(onlineList[playerIndex]);
-          }
-        }
-      }
-
-      /// Arena vote
-      for (var index = 0; index < response.data['result']['votes']['arena'].length; index++) {
-        for (var playerIndex = 0; playerIndex < arenaList.length; playerIndex++) {
-          if (response.data['result']['votes']['arena'][index]['value'] == arenaList[playerIndex]['_id']) {
-            arenaList[playerIndex]..['score'] = response.data['result']['votes']['arena'][index]['score'];
-            state.arenaVoteResults.add(arenaList[playerIndex]);
-          }
-        }
-      }
-
-      /// Coach
-      for (var index = 0; index < response.data['result']['votes']['coach'].length; index++) {
-        for (var playerIndex = 0; playerIndex < coachList.length; playerIndex++) {
-          if (response.data['result']['votes']['coach'][index]['value'] == coachList[playerIndex]['_id']) {
-            coachList[playerIndex]..['score'] = response.data['result']['votes']['coach'][index]['score'];
-            state.coachVoteResults.add(coachList[playerIndex]);
-          }
-        }
-      }
-
-      /// Coach
-      for (var index = 0; index < response.data['result']['votes']['total'].length; index++) {
-        for (var playerIndex = 0; playerIndex < totalList.length; playerIndex++) {
-          if (response.data['result']['votes']['total'][index]['value'] == totalList[playerIndex]['_id']) {
-            totalList[playerIndex]..['score'] = response.data['result']['votes']['total'][index]['score'];
-            state.totalVoteResults.add(totalList[playerIndex]);
           }
         }
       }
@@ -182,7 +144,6 @@ class VoteResultController extends GetxController with GetSingleTickerProviderSt
 
   @override
   void onClose() {
-    state.tabController.dispose();
     super.onClose();
   }
 

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../alert/alert_helper.dart';
@@ -38,29 +37,17 @@ class SelectPlayerScreen extends GetView<AllStarController> {
 
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: MyColors.theLeagueColor,
       endDrawer: Drawer(
+        backgroundColor: MyColors.theLeagueColor,
         elevation: 2,
         width: Get.size.width * 0.8,
         child: RightDrawer(),
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: controller.state.coachData.isNotEmpty && controller.state.type.value == 'coach'
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 10),
-                  Row(
-                    children: [
-                      CachedNetworkImage(height: 30, width: 30, imageUrl: '${controller.state.coachData['teamLogo']}?size=w50'),
-                      const SizedBox(width: 8),
-                      Text(controller.getTitle()),
-                    ],
-                  ),
-                  const SizedBox(width: 10),
-                ],
-              )
-            : Text(controller.getTitle()),
+        title: Text(controller.getTitle()),
+        backgroundColor: MyColors.theLeagueColor,
         leading: AppBackButton(),
         actions: [
           PlayerArchiveButton(
@@ -110,7 +97,7 @@ class SelectPlayerScreen extends GetView<AllStarController> {
                         ),
                         Expanded(
                           child: ColoredBox(
-                            color: MyColors.primaryColor,
+                            color: MyColors.theLeagueColor,
                             child: Obx(
                               () => controller.state.teamPlayers.isNotEmpty
                                   ? GridView.builder(
@@ -126,8 +113,10 @@ class SelectPlayerScreen extends GetView<AllStarController> {
                                       itemBuilder: (context, index) {
                                         return PlayerItem(
                                           player: controller.state.teamPlayers[index],
-                                          teamColor: controller.state.teams
-                                              .firstWhere((element) => element['code'] == controller.state.selectedTeamCode.value)['colorCode'],
+                                          maxPlayer: controller.getPositionMaxPlayer(controller.state.title),
+                                          teamColor: controller.state.teams.firstWhere(
+                                            (element) => element['code'].toLowerCase() == controller.state.selectedTeamCode.value.toLowerCase(),
+                                          )['colorCode'],
                                           onTap: (player) => addRemoveFunction(player: player),
                                         );
                                       },
@@ -146,13 +135,7 @@ class SelectPlayerScreen extends GetView<AllStarController> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: <Color>[
-                          controller.state.type == 'coach'
-                              ? Color(
-                                  int.parse(
-                                    '0xFF${controller.state.coachData['teamColor'].substring(1, controller.state.coachData['teamColor'].length)}',
-                                  ),
-                                ).withOpacity(0.5)
-                              : Color(0xFF4C1C1A),
+                          Color(0xFF4C1C1A),
                           Colors.transparent,
                         ],
                         tileMode: TileMode.mirror,
@@ -162,21 +145,13 @@ class SelectPlayerScreen extends GetView<AllStarController> {
                     child: Column(
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: controller.state.type == 'coach'
-                                ? Color(
-                                    int.parse(
-                                      '0xFF${controller.state.coachData['teamColor'].substring(1, controller.state.coachData['teamColor'].length)}',
-                                    ),
-                                  )
-                                : MyColors.secondaryColor,
-                          ),
+                          style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
                           onPressed: () {
                             Get.back();
                           },
                           child: Text(
                             'Сонголтоо харах',
-                            style: TextStyle(fontFamily: 'GIP', fontSize: 16, fontWeight: FontWeight.w600),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                           ),
                         ),
                         SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
@@ -194,10 +169,14 @@ class SelectPlayerScreen extends GetView<AllStarController> {
         controller.state.selectedPlayers['${controller.state.title}']?.firstWhereOrNull((element) => element['_id'] == player['_id']);
 
     if (_existPlayer == null) {
-      if (controller.state.selectedPlayers['${controller.state.title}']!.length < 3) {
+      if (controller.state.selectedPlayers['${controller.state.title}']!.length < controller.getPositionMaxPlayer('${controller.state.title}')) {
         controller.state.selectedPlayers['${controller.state.title}']?.add(player);
       } else {
-        AlertHelper.showFlashAlert(title: 'Уучлаарай', message: 'Нэг байрлал дээр 3 тоглогч сонгох боломжтой', status: FlashStatus.failed);
+        AlertHelper.showFlashAlert(
+          title: 'Уучлаарай',
+          message: 'Энэ байрлал дээр ${controller.getPositionMaxPlayer('${controller.state.title}')} тоглогч сонгох боломжтой',
+          status: FlashStatus.failed,
+        );
       }
     } else {
       controller.state.selectedPlayers['${controller.state.title}']?.remove(player);

@@ -12,7 +12,7 @@ class ChangePlayerItem extends GetView<AllStarController> {
 
   @override
   Widget build(BuildContext context) {
-    String teamColor = controller.state.teams.firstWhereOrNull((element) => element['code'] == teamCode)['colorCode'];
+    String teamColor = controller.state.teams.firstWhereOrNull((element) => element['code'].toLowerCase() == teamCode.toLowerCase())['colorCode'];
 
     return Container(
       width: 40,

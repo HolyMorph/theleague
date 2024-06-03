@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../alert/alert_helper.dart';
@@ -6,9 +5,6 @@ import '../../../../alert/flash_status.dart';
 import '../../../../components/app_back_button.dart';
 import '../../../../route/my_routes.dart';
 import '../../../../style/my_colors.dart';
-import '../../../../utils/constants.dart';
-import '../../../../utils/my_storage.dart';
-import '../component/coach_button.dart';
 import '../component/select_item.dart';
 import '../logic/all_star_controller.dart';
 
@@ -18,31 +14,16 @@ class AllStarScreen extends GetView<AllStarController> {
   @override
   StatelessElement createElement() {
     if (Get.arguments != null) controller.state.selectedPlayers.value = Get.arguments;
-
     return super.createElement();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.primaryColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: controller.state.coachData.isNotEmpty && controller.state.type.value == 'coach'
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 30),
-                  Row(
-                    children: [
-                      CachedNetworkImage(height: 30, width: 30, imageUrl: '${controller.state.coachData['teamLogo']}?size=w50'),
-                      const SizedBox(width: 8),
-                      Text('Тоглогч сонгох'),
-                    ],
-                  ),
-                  const SizedBox(width: 80),
-                ],
-              )
-            : Text('Тоглогч сонгох'),
+        title: Text('Тоглогч сонгох'),
         centerTitle: true,
         leading: AppBackButton(),
         bottom: PreferredSize(
@@ -68,7 +49,6 @@ class AllStarScreen extends GetView<AllStarController> {
                             fontSize: 24,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
-                            fontFamily: 'GIP',
                             shadows: [
                               Shadow(
                                 offset: Offset(5, 5),
@@ -109,17 +89,17 @@ class AllStarScreen extends GetView<AllStarController> {
                               child: Column(
                                 children: [
                                   SelectItem(
-                                    positionName: 'C',
+                                    positionName: 'MB',
                                     onTap: () {
-                                      controller.title = 'C';
+                                      controller.title = 'MB';
                                       Get.toNamed('${MyRoutes.selectPlayer}');
                                     },
                                   ),
                                   const SizedBox(height: 40),
                                   SelectItem(
-                                    positionName: 'PG',
+                                    positionName: 'L',
                                     onTap: () {
-                                      controller.title = 'PG';
+                                      controller.title = 'L';
                                       Get.toNamed('${MyRoutes.selectPlayer}');
                                     },
                                   ),
@@ -161,13 +141,7 @@ class AllStarScreen extends GetView<AllStarController> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: <Color>[
-                          controller.state.type.value == 'coach'
-                              ? Color(
-                                  int.parse(
-                                    '0xFF${controller.state.coachData['teamColor'].substring(1, controller.state.coachData['teamColor'].length)}',
-                                  ),
-                                ).withOpacity(0.5)
-                              : Color(0xFF4C1C1A),
+                          Color(0xFF4C1C1A),
                           Colors.transparent,
                         ],
                         tileMode: TileMode.mirror,
@@ -176,16 +150,14 @@ class AllStarScreen extends GetView<AllStarController> {
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                     child: Column(
                       children: [
-                        controller.state.type.value == 'coach'
-                            ? CoachButton()
-                            : ElevatedButton(
-                                style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
-                                onPressed: controller.state.totalQty.value > 0 ? () async => await checkFunction() : null,
-                                child: Text(
-                                  'Саналаа өгөх',
-                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
-                                ),
-                              ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: MyColors.secondaryColor),
+                          onPressed: controller.state.totalQty.value > 0 ? () async => await checkFunction() : null,
+                          child: Text(
+                            'Саналаа өгөх',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'GIP'),
+                          ),
+                        ),
                         SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
                       ],
                     ),
@@ -194,11 +166,6 @@ class AllStarScreen extends GetView<AllStarController> {
               ),
       ),
     );
-  }
-
-  Future<void> callFunction() async {
-    Get.back();
-    await MyStorage().getData(Constants.TicketCode) != null ? controller.voteArena() : controller.voteOnline();
   }
 
   Future<void> checkFunction() async {
@@ -224,7 +191,7 @@ class AllStarScreen extends GetView<AllStarController> {
             color: Colors.white,
           ),
         ),
-        onTap: () async => await callFunction(),
+        onTap: () async => await controller.voteOnline(),
       );
     }
   }

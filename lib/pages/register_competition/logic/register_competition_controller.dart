@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../../service/method.dart';
 import '../../../service/my_client.dart';
+import '../../../utils/basic_utils.dart';
 import '../state/register_competition_state.dart';
 
 class RegisterCompetitionController extends GetxController {
@@ -20,6 +21,9 @@ class RegisterCompetitionController extends GetxController {
     state.isLoading.value = false;
     if (isSuccess) {
       state.myTeams.value = response['result']['docs'];
+      if (state.myTeams.isEmpty) {
+        BasicUtils().noTeamDialog(from: Get.currentRoute);
+      }
     }
 
     return (isSuccess, response);

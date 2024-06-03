@@ -11,6 +11,8 @@ import 'pages/login/suit/login_pages.dart';
 import 'pages/register/suit/register_pages.dart';
 import 'pages/register_competition/suit/register_competition_pages.dart';
 import 'pages/settings/suit/settings_pages.dart';
+import 'pages/theleague/the_league_splash/suit/league_splash_pages.dart';
+import 'pages/theleague/volleyball_allstar/suit/volleyball_allstar_pages.dart';
 import 'route/my_pages.dart';
 import 'style/my_theme.dart';
 
@@ -35,6 +37,8 @@ class MyApp extends StatelessWidget {
         ..addAll(RegisterPages.pages)
         ..addAll(CompetitionParentPages.pages)
         ..addAll(CreateTeamPages.pages)
+        ..addAll(VolleyballAllStarPages.pages)
+        ..addAll(LeagueSplashPages.pages)
         ..addAll(CompetitionDetailPages.pages),
     );
   }

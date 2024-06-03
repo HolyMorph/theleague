@@ -13,4 +13,5 @@ class CreateTeamState {
   final TextEditingController textEditingController = TextEditingController();
   final RxBool isSearching = RxBool(false);
   final RxBool isLoading = RxBool(false);
+  final RxString from = RxString('');
 }

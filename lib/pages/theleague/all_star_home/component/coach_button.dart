@@ -68,7 +68,6 @@ class CoachButton extends GetView<AllStarController> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  fontFamily: 'GIP',
                   color: Colors.white,
                 ),
               ),
@@ -77,7 +76,6 @@ class CoachButton extends GetView<AllStarController> {
         ),
         onTap: () async {
           Get.back();
-          await controller.voteCoach();
         },
       );
     }

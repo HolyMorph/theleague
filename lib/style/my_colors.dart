@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class MyColors {
   static const Color LightModeBlack02 = Color(0xff666876);
   static const Color permissionGreyColor = Color(0xFF989EAC);
+  static const Color theLeagueColor = Color(0xFF0F0F17);
 
   static const Color LightModeBlack03 = Color(0xff8C8E98);
   static const Color borderGreyColor = Color(0xFFECF0F4);

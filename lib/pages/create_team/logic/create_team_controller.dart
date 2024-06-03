@@ -74,6 +74,7 @@ class CreateTeamController extends GetxController {
 
   @override
   void onInit() {
+    state.from.value = Get.parameters['from'] ?? '';
     getGameTypes();
     super.onInit();
   }

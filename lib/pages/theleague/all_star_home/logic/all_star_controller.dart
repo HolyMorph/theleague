@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../../../../alert/alert_helper.dart';
 import '../../../../alert/flash_status.dart';
 import '../../../../route/my_routes.dart';
@@ -15,49 +14,40 @@ class AllStarController extends GetxController {
   final state = AllStarState();
 
   void set gender(String gender) => state.gender.value = gender;
-  void set isCanVote(bool vote) => state.isCanVote.value = vote;
   void set isLoading(bool loading) => state.isLoading.value = loading;
   void set selectedTeamCode(String code) => state.selectedTeamCode.value = code;
   void set title(String title) => state.title = title;
   void set totalQty(int qty) => state.totalQty.value = qty;
-  void set type(String type) => state.type.value = type;
 
   void calculateTotalQty() {
     state.totalQty.value = 0;
-    state.selectedPlayers.values.forEach((element) {
-      state.totalQty.value += element.length;
-    });
+    if (state.selectedPlayers.isNotEmpty)
+      state.selectedPlayers.values.forEach((element) {
+        state.totalQty.value += element.length;
+      });
   }
 
-  String getPosition({required String positionName}) {
-    switch (positionName) {
-      case 'G':
+  String getPositionName({required String position}) {
+    switch (position) {
+      case 'MB':
         {
-          return 'G';
+          return 'Төвийн хаагч';
         }
-      case 'PG':
+      case 'S':
         {
-          return 'PG';
+          return 'Холбогч';
         }
-      case 'SG':
+      case 'L':
         {
-          return 'G';
+          return 'Хамгаалагч';
         }
-      case 'F':
+      case 'OH':
         {
-          return 'F';
+          return 'Холбогчийн эсрэг';
         }
-      case 'SF':
+      case 'OPH':
         {
-          return 'F';
-        }
-      case 'PF':
-        {
-          return 'F';
-        }
-      case 'C':
-        {
-          return 'C';
+          return 'Хүчний довтлогч';
         }
 
       default:
@@ -65,45 +55,38 @@ class AllStarController extends GetxController {
     }
   }
 
-  String getPositionName({required String position}) {
+  int getPositionMaxPlayer(String position) {
     switch (position) {
-      case 'G':
+      case 'MB':
         {
-          return 'Хамгаалагч';
+          return 4;
         }
-      case 'SG':
+      case 'S':
         {
-          return 'Хамгаалагч';
+          return 2;
         }
-      case 'F':
+      case 'L':
         {
-          return 'Довтлогч';
+          return 2;
         }
-      case 'SF':
+      case 'OH':
         {
-          return 'Довтлогч';
+          return 4;
         }
-      case 'C':
+      case 'OPH':
         {
-          return 'Төв';
+          return 2;
         }
-      case 'PF':
-        {
-          return 'Довтлогч';
-        }
-      case 'PG':
-        {
-          return 'Холбогч';
-        }
+
       default:
-        return '';
+        return 0;
     }
   }
 
   RxInt getTeamPlayersQty({required String teamCode}) {
     RxInt qty = RxInt(0);
     state.selectedPlayers['${state.title}']?.forEach((player) {
-      if (player['teamCode'] == teamCode) qty += 1;
+      if (player['teamCode'].toLowerCase() == teamCode.toLowerCase()) qty += 1;
     });
 
     return qty;
@@ -111,21 +94,25 @@ class AllStarController extends GetxController {
 
   String getTitle() {
     switch (state.title) {
-      case 'G':
+      case 'MB':
         {
-          return 'Хамгаалагч сонгох';
+          return 'Төвийн хаагч';
         }
-      case 'F':
+      case 'S':
         {
-          return 'Довтлогч сонгох';
+          return 'Холбогч';
         }
-      case 'C':
+      case 'L':
         {
-          return 'Төвийн тоглогч сонгох';
+          return 'Хамгаалагч';
         }
-      case 'PG':
+      case 'OH':
         {
-          return 'Холбогч сонгох';
+          return 'Холбогчийн эсрэг';
+        }
+      case 'OPH':
+        {
+          return 'Хүчний довтлогч';
         }
       default:
         return '';
@@ -140,23 +127,37 @@ class AllStarController extends GetxController {
 
   @override
   void onInit() async {
-    state.coachData.value = await MyStorage.instance.getData('coachData');
-    gender = Get.parameters['gender']!;
-    isCanVote = bool.parse(Get.parameters['isCanVote']!);
-    type = Get.parameters['type']!;
+    gender = Get.parameters['gender'] ?? '';
+    state.category.value = Get.parameters['category'] ?? '';
+    state.gameCode.value = Get.parameters['gameCode'] ?? '';
 
-    if (await MyStorage().getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) != null) {
-      state.selectedPlayers.value =
-          Get.arguments != null ? Get.arguments : MyStorage().getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale);
+    await checkVote();
+    state.teams.clear();
+    state.teams.value = await MyStorage().getData(Constants.TEAMS);
+
+    if (Get.arguments != null) {
+      state.selectedPlayers.value = Get.arguments ?? {};
     }
 
-    state.teams.clear();
-    List<dynamic> allTeam = await MyStorage().getData(Constants.TEAMS);
-    allTeam.forEach((element) {
-      if (element['gender'] == state.gender.value) state.teams.add(element);
-    });
-    calculateTotalQty();
+    if (await MyStorage().getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale) != null) {
+      Map<String, dynamic> selected = await MyStorage().getData(state.gender == 'male' ? Constants.PlayersMale : Constants.PlayersFemale);
 
+      state.selectedPlayers.value = {
+        'MB': RxList<Map<String, dynamic>>([]),
+        'L': RxList<Map<String, dynamic>>([]),
+        'S': RxList<Map<String, dynamic>>([]),
+        'OH': RxList<Map<String, dynamic>>([]),
+        'OPH': RxList<Map<String, dynamic>>([]),
+      };
+
+      state.selectedPlayers['MB'] = selected['MB'];
+      state.selectedPlayers['L'] = selected['L'];
+      state.selectedPlayers['S'] = selected['S'];
+      state.selectedPlayers['OH'] = selected['OH'];
+      state.selectedPlayers['OPH'] = selected['OPH'];
+    }
+
+    calculateTotalQty();
     super.onInit();
   }
 
@@ -173,126 +174,155 @@ class AllStarController extends GetxController {
 
   void setPlayersPosition() {
     state.teamPlayers.clear();
-    Map<String, dynamic> team = state.teams.firstWhereOrNull((element) => element['code'] == state.selectedTeamCode.value) ?? {};
+    Map<String, dynamic> team = state.teams.firstWhereOrNull(
+          (element) => element['code'].toLowerCase() == state.selectedTeamCode.value.toLowerCase(),
+        ) ??
+        {};
+
     for (var player in team['players']) {
       for (var position in player['positionCodes']) {
-        if (getPosition(positionName: position) == state.title) {
+        if (position.toLowerCase() == state.title.toLowerCase()) {
           dynamic exist = state.teamPlayers.firstWhereOrNull((element) => element['_id'] == player['_id']);
           if (exist == null) state.teamPlayers.add(player);
         }
       }
     }
+
     state.teamPlayers.refresh();
-  }
-
-  Future<void> voteArena() async {
-    prepareList();
-    var body = {
-      'gender': state.gender.value,
-      'game_code': await MyStorage().getData(Constants.TicketCode),
-      'lat': await MyStorage().getData('lat'),
-      'lon': await MyStorage().getData('lon'),
-      'vote': state.preparedList,
-    };
-    isLoading = true;
-    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/me/vote-arena', method: Method.post, body: body);
-    isLoading = false;
-    if (isSuccess) {
-      if (response.data['statusCode'] == 400) {
-        var message = response.data['message_mn'] ?? response.data['message'] as String;
-        MyStorage().saveData(Constants.TicketCode, null);
-        Get.offNamed(MyRoutes.onboarding);
-
-        AlertHelper.showFlashAlert(
-          title: 'Алдаа гарлаа',
-          message: message,
-          status: FlashStatus.failed,
-        );
-      } else {
-        await _voteController.refreshFunction();
-        AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.');
-        Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
-
-        _clearData();
-      }
-    } else {
-      var message = response.data['error']['message'] as String;
-
-      AlertHelper.showFlashAlert(
-        title: 'Алдаа гарлаа',
-        message: message,
-        status: FlashStatus.failed,
-      );
-    }
-  }
-
-  Future<void> voteCoach() async {
-    prepareList();
-    var body = {
-      'gender': state.gender.value,
-      'vote': state.preparedList,
-    };
-    isLoading = true;
-    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/me/vote-coach', method: Method.post, body: body);
-    isLoading = false;
-    if (isSuccess) {
-      if (response.data['statusCode'] == 400 || response.data['statusCode'] == 404) {
-        var message = response.data['message_mn'] ?? response.data['error']['message'] as String;
-
-        AlertHelper.showFlashAlert(
-          title: 'Алдаа гарлаа',
-          message: message,
-          status: FlashStatus.failed,
-        );
-      } else {
-        await _voteController.refreshFunction();
-        AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Таны саналыг хүлээж авлаа.');
-        Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
-        _clearData();
-      }
-    } else {
-      var message = response.data['error']['message'] as String;
-
-      AlertHelper.showFlashAlert(
-        title: 'Алдаа гарлаа',
-        message: message,
-        status: FlashStatus.failed,
-      );
-    }
   }
 
   Future<void> voteOnline() async {
     prepareList();
     var body = {
+      'gameCode': state.gameCode.value,
+      'category': state.category.value,
       'gender': state.gender.value,
       'vote': state.preparedList,
     };
+
     isLoading = true;
-    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/me/vote-online', method: Method.post, body: body);
+    var (isSuccess, response) = await MyClient().sendHttpRequest(urlPath: '/api/vote/vote-online', method: Method.post, body: body);
     isLoading = false;
     if (isSuccess) {
-      if (response.data['statusCode'] == 400) {
-        var message = response.data['message_mn'] ?? response.data['error']['message'] as String;
-
-        AlertHelper.showFlashAlert(
-          title: 'Алдаа гарлаа',
-          message: message,
-          status: FlashStatus.failed,
-        );
-      } else {
-        await _voteController.refreshFunction();
-        AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.');
-        Get.until((route) => Get.currentRoute == MyRoutes.voteResult);
-        _clearData();
-      }
+      await _voteController.refreshFunction();
+      AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Таны саналыг хүлээж авлаа. Та 24 цагийн дараа дахин санал өгөх боломжтой.');
+      Get.until((route) => Get.currentRoute == '${MyRoutes.voteResult}/${state.category.value}/${state.gameCode.value}/${state.gender.value}');
+      _clearData();
     } else {
-      var message = response.data['error']['message'] as String;
-
+      var message = response['error']['message'] as String;
       AlertHelper.showFlashAlert(
         title: 'Алдаа гарлаа',
         message: message,
         status: FlashStatus.failed,
       );
+    }
+  }
+
+  Future<void> checkVote() async {
+    isLoading = true;
+    Map<String, dynamic> meta = await MyStorage().getData(Constants.META_DATA);
+    List<dynamic> players = meta['players'];
+    var body = {'gameCode': state.gameCode.value, 'gender': state.gender.value};
+    var (isSuccess, response) = await MyClient().sendHttpRequest(
+      urlPath: 'api/vote/check-vote',
+      method: Method.post,
+      body: body,
+    );
+    isLoading = false;
+    if (isSuccess) {
+      if (response['remaining_seconds'] != null && response['remaining_seconds'] > 0) {
+        state.isCanVote.value = false;
+        AlertHelper.showFlashAlert(
+          title: 'Уучлаарай',
+          message: 'Та ${formatDuration(response['remaining_seconds'])} дараа дахин санал өгөх боломжтой.',
+          status: FlashStatus.failed,
+        );
+
+        state.selectedPlayers.value = {
+          'MB': RxList<Map<String, dynamic>>([]),
+          'L': RxList<Map<String, dynamic>>([]),
+          'S': RxList<Map<String, dynamic>>([]),
+          'OH': RxList<Map<String, dynamic>>([]),
+          'OPH': RxList<Map<String, dynamic>>([]),
+        };
+
+        List<dynamic> midBlocker = response['voteData']['MB'] ?? [];
+        List<dynamic> libero = response['voteData']['L'] ?? [];
+        List<dynamic> setter = response['voteData']['S'] ?? [];
+        List<dynamic> outSideHitter = response['voteData']['OH'] ?? [];
+        List<dynamic> outSidePowerHitter = response['voteData']['OPH'] ?? [];
+
+        /// MB
+        if (midBlocker.isNotEmpty)
+          for (var pgIndex = 0; pgIndex < midBlocker.length; pgIndex++) {
+            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+              if (players[playerIndex]['_id'] == midBlocker[pgIndex]) {
+                state.selectedPlayers['MB']?.add(players[playerIndex]);
+              }
+            }
+          }
+
+        /// Libero
+        if (libero.isNotEmpty)
+          for (var fIndex = 0; fIndex < libero.length; fIndex++) {
+            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+              if (players[playerIndex]['_id'] == libero[fIndex]) {
+                state.selectedPlayers['L']?.add(players[playerIndex]);
+              }
+            }
+          }
+
+        /// Setter
+        if (setter.isNotEmpty)
+          for (var gIndex = 0; gIndex < setter.length; gIndex++) {
+            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+              if (players[playerIndex]['_id'] == setter[gIndex]) {
+                state.selectedPlayers['S']?.add(players[playerIndex]);
+              }
+            }
+          }
+
+        /// OPH
+        if (outSidePowerHitter.isNotEmpty)
+          for (var gIndex = 0; gIndex < outSidePowerHitter.length; gIndex++) {
+            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+              if (players[playerIndex]['_id'] == outSidePowerHitter[gIndex]) {
+                state.selectedPlayers['OPH']?.add(players[playerIndex]);
+              }
+            }
+          }
+
+        /// OH
+        if (outSideHitter.isNotEmpty)
+          for (var cIndex = 0; cIndex < outSideHitter.length; cIndex++) {
+            for (var playerIndex = 0; playerIndex < players.length; playerIndex++) {
+              if (players[playerIndex]['_id'] == outSideHitter[cIndex]) {
+                state.selectedPlayers['OH']?.add(players[playerIndex]);
+              }
+            }
+          }
+      } else {
+        state.isCanVote.value = true;
+      }
+    } else {
+      var message = response['error']['message'] as String;
+      AlertHelper.showFlashAlert(
+        title: 'Алдаа гарлаа',
+        message: message,
+        status: FlashStatus.failed,
+      );
+    }
+  }
+
+  String formatDuration(int seconds) {
+    if (seconds >= 3600) {
+      int hours = seconds ~/ 3600;
+      return '$hours цагын';
+    } else if (seconds >= 60) {
+      int minutes = seconds ~/ 60;
+      return '$minutes минутын';
+    } else {
+      return '$seconds секундын';
     }
   }
 

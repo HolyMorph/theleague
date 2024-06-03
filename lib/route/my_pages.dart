@@ -84,7 +84,7 @@ class MyPages {
 
     /// Vote result screen
     GetPage(
-      name: MyRoutes.voteResult,
+      name: MyRoutes.voteResult + '/:category' + '/:gameCode' + '/:gender',
       page: () => VoteResultScreen(),
     ),
 

@@ -14,14 +14,14 @@ class CompetitionHeader extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: '${coverUrl}?size=w500',
+          imageUrl: '${coverUrl}?size=w600',
           imageBuilder: (context, imageProvider) => Container(
             height: 250,
             width: double.infinity,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+              image: DecorationImage(image: imageProvider, fit: BoxFit.fitHeight),
             ),
           ),
           placeholder: (context, url) => Container(

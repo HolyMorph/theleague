@@ -14,7 +14,7 @@ class RightDrawer extends GetView<AllStarController> {
         vertical: MediaQuery.of(context).viewPadding.top + 24,
         horizontal: 16,
       ),
-      color: MyColors.primaryColor,
+      color: MyColors.theLeagueColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -23,7 +23,6 @@ class RightDrawer extends GetView<AllStarController> {
             style: TextStyle(
               color: Colors.white,
               fontSize: 14,
-              fontFamily: 'GIP',
               fontWeight: FontWeight.w700,
             ),
           ),

@@ -54,7 +54,10 @@ class SelectItem extends GetView<AllStarController> {
           children: [
             controller.state.selectedPlayers['${positionName}']!.isEmpty
                 ? Image.asset('assets/icons/ic_selector.png', width: 40)
-                : PlayersFilledItem(players: controller.state.selectedPlayers['${positionName}']),
+                : PlayersFilledItem(
+                    players: controller.state.selectedPlayers['${positionName}'],
+                    maxPlayer: 3,
+                  ),
             const SizedBox(height: 6),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),

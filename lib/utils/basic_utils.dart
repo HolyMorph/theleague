@@ -68,7 +68,7 @@ class BasicUtils {
     }
   }
 
-  void noTeamDialog() {
+  void noTeamDialog({required String from}) {
     Get.dialog(
       AlertDialog(
         backgroundColor: Colors.white,
@@ -117,7 +117,7 @@ class BasicUtils {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () async {
-                Get.toNamed(CreateTeamRoutes.createTeamScreen);
+                Get.toNamed(CreateTeamRoutes.createTeamScreen, parameters: {'from': from});
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

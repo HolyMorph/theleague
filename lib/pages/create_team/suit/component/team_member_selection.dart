@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../alert/alert_helper.dart';
 import '../../../../alert/flash_status.dart';
-import '../../../../qr_scanner.dart';
+import '../../../../utils/qr_scanner.dart';
 import '../../../../style/my_colors.dart';
 import '../../../../style/style_export.dart';
 import '../../../../utils/fa_icon.dart';

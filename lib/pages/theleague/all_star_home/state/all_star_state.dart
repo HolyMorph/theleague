@@ -2,14 +2,17 @@ import 'package:get/get.dart';
 
 class AllStarState {
   final RxString gender = RxString('');
+  final RxString category = RxString('');
+  final RxString gameCode = RxString('');
   final RxBool isCanVote = RxBool(false);
   final RxBool isLoading = RxBool(false);
   final RxBool playerLoading = RxBool(false);
   final RxMap<String, RxList<Map<String, dynamic>>> selectedPlayers = RxMap({
-    'F': RxList<Map<String, dynamic>>(),
-    'G': RxList<Map<String, dynamic>>(),
-    'PG': RxList<Map<String, dynamic>>(),
-    'C': RxList<Map<String, dynamic>>(),
+    'MB': RxList<Map<String, dynamic>>(),
+    'L': RxList<Map<String, dynamic>>(),
+    'S': RxList<Map<String, dynamic>>(),
+    'OH': RxList<Map<String, dynamic>>(),
+    'OPH': RxList<Map<String, dynamic>>(),
   });
 
   final RxMap<String, dynamic> coachData = RxMap();
@@ -17,7 +20,6 @@ class AllStarState {
   final RxList<dynamic> teamPlayers = RxList();
   final RxList<dynamic> teams = RxList();
   final RxInt totalQty = RxInt(0);
-  final RxString type = RxString('');
   Map<String, List<String>> preparedList = {};
   String title = '';
 }

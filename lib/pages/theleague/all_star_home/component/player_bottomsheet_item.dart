@@ -23,7 +23,8 @@ class PlayerBottomSheetItem extends GetView<AllStarController> {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: players.length,
             itemBuilder: (context, index) {
-              String teamColor = controller.state.teams.firstWhere((element) => element['code'] == players[index]['teamCode'])['colorCode'];
+              String teamColor = controller.state.teams
+                  .firstWhere((element) => element['code'].toLowerCase() == players[index]['teamCode'].toLowerCase())['colorCode'];
 
               return Container(
                 padding: const EdgeInsets.all(8),
@@ -71,17 +72,15 @@ class PlayerBottomSheetItem extends GetView<AllStarController> {
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
-                              fontFamily: 'GIP',
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            '${players[index]['jerseyNumber']} - ${controller.state.teams.firstWhere((element) => element['code'] == players[index]['teamCode'])['name']}',
+                            '${players[index]['jerseyNumber']} - ${controller.state.teams.firstWhere((element) => element['code'].toLowerCase() == players[index]['teamCode'].toLowerCase())['name']}',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
-                              fontFamily: 'GIP',
                             ),
                           ),
                         ],
@@ -140,7 +139,6 @@ class PlayerBottomSheetItem extends GetView<AllStarController> {
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
-                            fontFamily: 'GIP',
                           ),
                         ),
                       ],

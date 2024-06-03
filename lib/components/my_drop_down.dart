@@ -61,7 +61,7 @@ class MyDropDown extends StatelessWidget {
                   hint: Text('Cонгох'),
                   isExpanded: true,
                   borderRadius: BorderRadius.circular(16),
-                  value: dictionary != null ? dictionary!['${_value.value}'] ?? '${_value.value}' : _value.value,
+                  value: _value.value,
                   onChanged: (choose) {
                     onChanged(choose ?? '');
                     _value.value = choose;

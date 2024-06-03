@@ -8,9 +8,16 @@ import '../../all_star_home/logic/all_star_controller.dart';
 class PlayerItem extends GetView<AllStarController> {
   final Function(Map<String, dynamic>) onTap;
   final Map<String, dynamic> player;
+  final int maxPlayer;
   final String teamColor;
 
-  PlayerItem({required this.player, required this.onTap, required this.teamColor, super.key});
+  const PlayerItem({
+    required this.player,
+    required this.onTap,
+    required this.teamColor,
+    required this.maxPlayer,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +25,7 @@ class PlayerItem extends GetView<AllStarController> {
 
     return GestureDetector(
       onTap: () {
-        isSelected.value = controller.state.selectedPlayers['${controller.state.title}']!.length < 3
+        isSelected.value = controller.state.selectedPlayers['${controller.state.title}']!.length < maxPlayer
             ? isSelected.value
                 ? false
                 : true

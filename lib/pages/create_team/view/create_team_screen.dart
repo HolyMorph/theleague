@@ -92,12 +92,23 @@ class CreateTeamScreen extends GetWidget<CreateTeamController> {
                       ],
                     ),
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (controller.state.teamName.isNotEmpty &&
                             controller.state.selectedGender.isNotEmpty &&
                             controller.state.selectedType.isNotEmpty &&
                             controller.state.teamMembers.isNotEmpty) {
-                          controller.createTeam();
+                          var (isSuccess, _) = await controller.createTeam();
+                          if (isSuccess) {
+                            if (controller.state.from.isNotEmpty) {
+                              Get.until((route) => Get.currentRoute == controller.state.from.value);
+                            } else {
+                              Get.back();
+                            }
+                            AlertHelper.showFlashAlert(
+                              title: 'Амжилттай',
+                              message: 'Баг амжилттай үүслээ',
+                            );
+                          }
                         } else {
                           AlertHelper.showFlashAlert(
                             title: 'Уучлаарай',

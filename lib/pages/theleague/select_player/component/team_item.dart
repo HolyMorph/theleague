@@ -12,7 +12,7 @@ class TeamItem extends GetView<AllStarController> {
   final String teamCode;
   final String teamColor;
 
-  TeamItem({
+  const TeamItem({
     required this.onTap,
     required this.iconUrl,
     required this.teamColor,

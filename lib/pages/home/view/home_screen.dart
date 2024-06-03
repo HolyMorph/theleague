@@ -5,6 +5,7 @@ import '../../../style/my_colors.dart';
 import '../logic/home_controller.dart';
 import '../suit/component/home_appbar.dart';
 import '../suit/home_competition_item.dart';
+import '../suit/home_poll_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -44,14 +45,16 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
                           shrinkWrap: true,
                           itemCount: controller.state.filteredList.length,
                           itemBuilder: (context, index) {
-                            return HomeCompetitionItem(
-                              data: controller.state.filteredList[index],
-                            );
+                            if (controller.state.filteredList[index]['eventType'] == 'poll') {
+                              return HomePollItem(data: controller.state.filteredList[index]);
+                            } else {
+                              return HomeCompetitionItem(data: controller.state.filteredList[index]);
+                            }
                           },
                           separatorBuilder: (BuildContext context, int index) {
                             return const SizedBox(height: 8);
                           },
-                        ).paddingAll(16),
+                        ).marginAll(16),
             ),
           ),
         );

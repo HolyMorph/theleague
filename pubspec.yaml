@@ -27,7 +27,6 @@ dependencies:
   percent_indicator: ^4.0.1
   geolocator: ^11.0.0
   location: ^6.0.2
-  gesture_x_detector: ^1.1.1
   dio: ^5.4.3+1
   image_picker: ^1.1.1
   flutter_html: ^3.0.0-beta.2

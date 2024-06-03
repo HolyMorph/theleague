@@ -8,7 +8,7 @@ class CompetitionParentController extends GetxController {
 
   @override
   void onInit() {
-    state.gameCode.value = Get.parameters['id']!;
+    state.gameId.value = Get.parameters['id']!;
     state.gameName.value = Get.parameters['name'] ?? '';
     state.coverImage.value = Get.parameters['image'] ?? '';
     getGameList();
@@ -20,7 +20,7 @@ class CompetitionParentController extends GetxController {
     var (isSuccess, response) = await MyClient.instance.sendHttpRequest(
       urlPath: 'api/game/list',
       method: Method.post,
-      body: {'parentGame': state.gameCode.value},
+      body: {'parentGame': state.gameId.value},
     );
     state.isLoading.value = false;
     if (isSuccess) {

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../style/my_colors.dart';
+import '../../../utils/fa_icon.dart';
 import '../../competition_detail/suit/competition_detail_routes.dart';
 import '../../competition_detail_parent/suit/competition_parent_routes.dart';
 
@@ -41,7 +42,7 @@ class HomeCompetitionItem extends StatelessWidget {
           child: Row(
             children: [
               CachedNetworkImage(
-                imageUrl: '${data['logo_square']}?size=w100',
+                imageUrl: '${data['logo_square']}?size=w300',
                 imageBuilder: (context, imageProvider) => Container(
                   height: 90,
                   width: 90,
@@ -83,10 +84,9 @@ class HomeCompetitionItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.location_on,
-                          size: 20,
-                          color: MyColors.grey500,
+                        Text(
+                          FaIcon.location_dot,
+                          style: FaIcon.regular().copyWith(color: MyColors.grey500, fontSize: 12),
                         ),
                         const SizedBox(width: 4),
                         Expanded(
@@ -104,10 +104,9 @@ class HomeCompetitionItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.calendar_today_sharp,
-                          size: 20,
-                          color: MyColors.grey500,
+                        Text(
+                          FaIcon.calendar,
+                          style: FaIcon.light().copyWith(color: MyColors.grey500, fontSize: 12),
                         ),
                         const SizedBox(width: 4),
                         Text(

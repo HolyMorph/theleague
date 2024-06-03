@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../style/my_colors.dart';
@@ -38,15 +39,16 @@ class PlayerList extends GetView<VoteResultController> {
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                fontFamily: 'GIP',
                               ),
                             ),
                           ),
                           CachedNetworkImage(
                             imageUrl:
-                                '${controller.state.teams.firstWhereOrNull((element) => element['code'] == leaderboard[index]['teamCode'])['logoUrl']}?size=w60',
+                                '${controller.state.teams.firstWhereOrNull((element) => element['code'].toLowerCase() == leaderboard[index]['teamCode'].toLowerCase())['logoUrl']}?size=w60',
                             height: 20,
                             width: 20,
+                            placeholder: (context, _) => const CupertinoActivityIndicator(),
+                            errorWidget: (context, url, _) => Icon(Icons.image_outlined, color: MyColors.secondaryColor),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
@@ -58,7 +60,6 @@ class PlayerList extends GetView<VoteResultController> {
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                fontFamily: 'GIP',
                               ),
                             ),
                           ),
@@ -67,7 +68,6 @@ class PlayerList extends GetView<VoteResultController> {
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
-                              fontFamily: 'GIP',
                               fontWeight: FontWeight.w600,
                             ),
                           ),

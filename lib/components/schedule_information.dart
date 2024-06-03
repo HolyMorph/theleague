@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../style/my_colors.dart';
+import '../utils/fa_icon.dart';
 
 class ScheduleInformation extends StatelessWidget {
   final String location;
@@ -15,7 +16,10 @@ class ScheduleInformation extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.location_on, color: MyColors.grey500),
+              Text(
+                FaIcon.location_dot,
+                style: FaIcon.regular().copyWith(color: MyColors.grey500, fontSize: 14),
+              ),
               const SizedBox(width: 4),
               Text(
                 location,
@@ -26,7 +30,10 @@ class ScheduleInformation extends StatelessWidget {
           const SizedBox(height: 8),
           Row(
             children: [
-              Icon(Icons.access_time_outlined, color: MyColors.grey500),
+              Text(
+                FaIcon.clock,
+                style: FaIcon.regular().copyWith(color: MyColors.grey500, fontSize: 14),
+              ),
               const SizedBox(width: 4),
               Text(
                 time,
@@ -37,7 +44,10 @@ class ScheduleInformation extends StatelessWidget {
           const SizedBox(height: 8),
           Row(
             children: [
-              Icon(Icons.date_range, color: MyColors.grey500),
+              Text(
+                FaIcon.calendar,
+                style: FaIcon.regular().copyWith(color: MyColors.grey500, fontSize: 14),
+              ),
               const SizedBox(width: 4),
               Text(
                 date,
