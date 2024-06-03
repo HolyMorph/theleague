@@ -145,7 +145,10 @@ class AllStarController extends GetxController {
 
     await checkVote();
     state.teams.clear();
-    state.teams.value = await MyStorage().getData(Constants.TEAMS);
+    List<dynamic> allTeam = await MyStorage().getData(Constants.TEAMS);
+    allTeam.forEach((element) {
+      if (element['gender'] == state.gender.value) state.teams.add(element);
+    });
 
     if (Get.arguments != null) {
       state.selectedPlayers.value = Get.arguments ?? {};

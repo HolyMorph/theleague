@@ -21,41 +21,42 @@ class RegisterButton extends GetView<CompetitionDetailController> {
         (gameData) => Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      '${gameData['registrationPrice']}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: MyColors.primaryColor,
+            if (gameData['registrationPrice'] > 0)
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        '${gameData['registrationPrice']}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: MyColors.primaryColor,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '₮',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        fontFamily: 'Arial',
-                        color: MyColors.primaryColor,
+                      Text(
+                        '₮',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          fontFamily: 'Arial',
+                          color: MyColors.primaryColor,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Text(
-                  '${gameData['registrationText']}',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: MyColors.grey500,
+                    ],
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(width: 32),
+                  Text(
+                    '${gameData['registrationText']}',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.grey500,
+                    ),
+                  ),
+                ],
+              ),
+            if (gameData['registrationPrice'] > 0) const SizedBox(width: 32),
             Expanded(
               child: ElevatedButton(
                 onPressed: () => onTap!(),

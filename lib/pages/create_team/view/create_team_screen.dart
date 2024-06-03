@@ -6,6 +6,7 @@ import '../../../components/my_drop_down.dart';
 import '../../../components/my_image_picker.dart';
 import '../../../style/my_colors.dart';
 import '../../../utils/fa_icon.dart';
+import '../../register_competition/logic/register_competition_controller.dart';
 import '../../settings/suit/components/settings_textfield.dart';
 import '../logic/create_team_controller.dart';
 import '../suit/component/team_member_selection.dart';
@@ -114,6 +115,7 @@ class CreateTeamScreen extends GetWidget<CreateTeamController> {
                           if (isSuccess) {
                             if (controller.state.from.isNotEmpty) {
                               Get.until((route) => Get.currentRoute == controller.state.from.value);
+                              Get.find<RegisterCompetitionController>().getMyTeams();
                             } else {
                               Get.back();
                             }

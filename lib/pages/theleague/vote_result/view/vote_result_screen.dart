@@ -42,7 +42,7 @@ class VoteResultScreen extends StatelessWidget {
                             Image.asset('assets/images/ic_volleyball_cover.png', scale: 2),
                             const SizedBox(height: 32),
                             Text(
-                              'ВОЛЕЙБОЛ ФЕСТИВАЛ 2024 эрэгтэй санал асуулга'.toUpperCase(),
+                              'ВОЛЕЙБОЛ ФЕСТИВАЛ 2024 ${controller.state.gender.value == 'male' ? 'Эрэгтэй' : 'Эмэгтэй'} санал асуулга'.toUpperCase(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,

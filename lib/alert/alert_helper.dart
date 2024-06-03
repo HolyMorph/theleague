@@ -91,7 +91,7 @@ class AlertHelper {
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: Color(status == FlashStatus.success ? 0xff00ff47 : 0xffFF2E00),
+                    color: getStatusColor(status: status),
                     borderRadius: BorderRadius.horizontal(left: Radius.circular(4)),
                   ),
                   width: 8,
@@ -112,7 +112,6 @@ class AlertHelper {
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
-                            fontFamily: 'GIP',
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -123,7 +122,6 @@ class AlertHelper {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 12,
-                              fontFamily: 'GIP',
                               fontWeight: FontWeight.w400,
                               color: Colors.white.withOpacity(0.8),
                             ),
@@ -139,6 +137,17 @@ class AlertHelper {
         );
       },
     );
+  }
+}
+
+Color getStatusColor({required FlashStatus status}) {
+  switch (status) {
+    case FlashStatus.success:
+      return MyColors.statusSuccess;
+    case FlashStatus.failed:
+      return MyColors.statusFailed;
+    case FlashStatus.warning:
+      return MyColors.statusWarning;
   }
 }
 

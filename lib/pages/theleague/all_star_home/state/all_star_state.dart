@@ -13,6 +13,7 @@ class AllStarState {
     'S': RxList<Map<String, dynamic>>(),
     'OH': RxList<Map<String, dynamic>>(),
     'OPH': RxList<Map<String, dynamic>>(),
+    'CO': RxList<Map<String, dynamic>>(),
   });
 
   final RxMap<String, dynamic> coachData = RxMap();

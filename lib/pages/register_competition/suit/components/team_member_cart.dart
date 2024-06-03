@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../style/my_colors.dart';
 import '../../../core/logic/core_controller.dart';
-import '../../../profile/logic/profile_controller.dart';
 
 class TeamMemberCart extends StatelessWidget {
   final dynamic player;

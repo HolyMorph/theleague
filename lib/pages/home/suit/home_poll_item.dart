@@ -37,7 +37,7 @@ class HomePollItem extends StatelessWidget {
               alignment: Alignment.center,
               height: 120,
               width: 90,
-              child: const CupertinoActivityIndicator(animating: true, radius: 10, color: MyColors.primaryColor),
+              child: Center(child: const CupertinoActivityIndicator(animating: true, radius: 10, color: MyColors.primaryColor)),
             ),
             errorWidget: (context, url, error) => Container(
               height: 120,

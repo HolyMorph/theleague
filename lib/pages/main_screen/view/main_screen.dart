@@ -16,6 +16,9 @@ class MainScreen extends StatelessWidget {
       builder: (MainScreenController controller) => Scaffold(
         body: PageView(
           controller: controller.state.pageController,
+          onPageChanged: (index) {
+            controller.state.bottomIndex.value = index;
+          },
           children: [
             HomeScreen(),
             ProfileScreen(),

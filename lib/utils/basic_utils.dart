@@ -165,7 +165,7 @@ class BasicUtils {
                     style: FaIcon.regular().copyWith(fontSize: 16, color: MyColors.neutral900),
                   ),
                 ),
-                IconButton(onPressed: () => Get.back(), icon: Icon(Icons.close)),
+                IconButton(onPressed: dismissible ? () => Get.back() : null, icon: Icon(Icons.close)),
               ],
             ),
             const SizedBox(height: 12),

@@ -14,4 +14,5 @@ class RegisterCompetitionState {
   final RxMap gameData = RxMap();
   final RxMap teamData = RxMap();
   final RxInt ticketCount = RxInt(1);
+  final RxList entryList = RxList();
 }

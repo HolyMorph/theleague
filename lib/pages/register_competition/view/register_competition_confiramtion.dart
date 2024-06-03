@@ -20,30 +20,31 @@ class RegisterCompetitionConfirmation extends GetView<RegisterCompetitionControl
       body: Column(
         children: [
           Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                const CompetitionInfo(),
-                const SizedBox(height: 16),
-                const PersonalInfo(),
-                const SizedBox(height: 16),
-                Text(
-                  'Багийн мэдээлэл',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: MyColors.greyBlue800,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16),
+                  const CompetitionInfo(),
+                  const SizedBox(height: 16),
+                  const PersonalInfo(),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Багийн мэдээлэл',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: MyColors.greyBlue800,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                RegisterTeamCart(
-                  teamData: controller.state.teamData,
-                  isScrollAble: false,
-                ),
-              ],
-            ).paddingSymmetric(horizontal: 16),
+                  const SizedBox(height: 8),
+                  RegisterTeamCart(
+                    teamData: controller.state.teamData,
+                    isScrollAble: false,
+                  ),
+                ],
+              ).paddingSymmetric(horizontal: 16),
+            ),
           ),
           RegisterButton(onTap: () {}, title: 'Төлбөр төлөх'),
         ],

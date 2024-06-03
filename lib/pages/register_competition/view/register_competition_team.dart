@@ -26,24 +26,26 @@ class RegisterCompetitionTeam extends GetView<RegisterCompetitionController> {
                 children: [
                   RegisterCompetitionAppbar(coverUrl: controller.state.gameData['logo_rectangle']),
                   Expanded(
-                    child: Column(
-                      children: [
-                        TeamDropDown(
-                          title: 'Баг cонгох',
-                          isRequired: true,
-                          onChanged: (team) async {
-                            await controller.getTeamDetail(teamCode: team['code']);
-                          },
-                          selectedAbleList: controller.state.myTeams,
-                        ),
-                        const SizedBox(height: 24),
-                        if (controller.state.teamData.isNotEmpty)
-                          RegisterTeamCart(
-                            teamData: controller.state.teamData,
-                            isScrollAble: true,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          TeamDropDown(
+                            title: 'Баг cонгох',
+                            isRequired: true,
+                            onChanged: (team) async {
+                              await controller.getTeamDetail(teamCode: team['code']);
+                            },
+                            selectedAbleList: controller.state.myTeams,
                           ),
-                      ],
-                    ).paddingAll(16),
+                          const SizedBox(height: 24),
+                          if (controller.state.teamData.isNotEmpty)
+                            RegisterTeamCart(
+                              teamData: controller.state.teamData,
+                              isScrollAble: false,
+                            ),
+                        ],
+                      ).paddingAll(16),
+                    ),
                   ),
                   RegisterButton(
                     title: 'Бүртгүүлэх',

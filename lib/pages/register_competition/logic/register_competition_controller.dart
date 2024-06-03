@@ -64,7 +64,9 @@ class RegisterCompetitionController extends GetxController {
       },
     );
     state.isLoading.value = false;
-    if (isSuccess) {}
+    if (isSuccess) {
+      await myEntries();
+    }
 
     return (isSuccess, response);
   }
@@ -74,12 +76,12 @@ class RegisterCompetitionController extends GetxController {
     var (isSuccess, response) = await MyClient.instance.sendHttpRequest(
       urlPath: 'api/entry/my-entries',
       method: Method.post,
-      body: {
-        'game_code': "UUF-3x3-24-U11M",
-      },
+      body: {'game_code': state.gameData['code']},
     );
     state.isLoading.value = false;
-    if (isSuccess) {}
+    if (isSuccess) {
+      state.entryList.value = response['result'];
+    }
 
     return (isSuccess, response);
   }
