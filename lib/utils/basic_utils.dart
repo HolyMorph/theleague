@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../pages/create_team/suit/create_team_routes.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../pages/login/suit/login_routes.dart';
 import '../pages/register/suit/register_routes.dart';
 import '../style/my_colors.dart';
@@ -11,6 +11,116 @@ import 'fa_icon.dart';
 
 class BasicUtils {
   final ImagePicker _picker = ImagePicker();
+
+  Widget description({required String text}) {
+    String value = text;
+    value = value.split(' ').first;
+    List<String> word_l = text.split(' ');
+    String word = word_l.sublist(1, word_l.length).join(' ').replaceAll('&#', '\n');
+
+    return RichText(
+      text: TextSpan(
+        text: value.capitalizeFirst,
+        style: TextStyle(
+          color: MyColors.grey500,
+          fontSize: 12,
+          fontFamily: 'GIP',
+        ),
+        children: <InlineSpan>[
+          TextSpan(
+            text: ' ${word}',
+            style: TextStyle(
+              color: MyColors.grey500,
+              fontSize: 12,
+              fontFamily: 'GIP',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ///Url -ыг нээх функц
+  static Future<bool> openUrl({required String url, String? storeUrl}) async {
+    try {
+      if (GetPlatform.isAndroid) {
+        String formattedUrl = Uri.encodeFull(url);
+
+        await launchUrlString(formattedUrl, mode: LaunchMode.externalApplication);
+      } else {
+        String encodedUrl = Uri.encodeFull(url);
+        if (await canLaunchUrlString(encodedUrl)) {
+          launchUrlString(encodedUrl, mode: LaunchMode.externalApplication);
+        } else {
+          launchUrl(Uri.parse(storeUrl ?? ''));
+        }
+      }
+
+      return true;
+    } catch (e) {
+      launchUrl(Uri.parse(storeUrl ?? ''));
+    }
+
+    return false;
+  }
+
+  static String getStoreUrl(String paymentName) {
+    bool isAndroid = GetPlatform.isAndroid;
+    switch (paymentName) {
+      case 'socialpay-deeplink':
+        return isAndroid
+            ? 'https://play.google.com/store/apps/details?id=mn.egolomt.socialpay'
+            : 'https://apps.apple.com/mn/app/socialpay/id1152919460';
+      case 'candy':
+        return isAndroid ? 'https://play.google.com/store/apps/details?id=mn.mobicom.candy' : 'https://apps.apple.com/mn/app/monpay/id978594162';
+      case 'toki':
+        return isAndroid ? 'https://play.google.com/store/apps/details?id=com.toki.mn' : 'https://apps.apple.com/af/app/toki/id1504679492';
+      case 'qPay wallet':
+        return isAndroid ? 'https://play.google.com/store/apps/details?id=mn.qpay.wallet' : 'https://apps.apple.com/us/app/qpay-wallet/id1501873159';
+      case 'Khan bank':
+        return isAndroid
+            ? 'https://play.google.com/store/apps/details?id=mn.slide.khaanbank'
+            : 'https://apps.apple.com/us/app/khan-bank/id1555908766';
+      case 'State bank':
+        return isAndroid
+            ? 'https://play.google.com/store/apps/details?id=mn.statebank.mobilebank'
+            : 'https://apps.apple.com/us/app/state-bank/id703343972';
+      case 'Xac bank':
+        return isAndroid ? 'https://play.google.com/store/apps/details?id=com.xacbank.mobile' : 'https://apps.apple.com/us/app/xacbank/id1534265552';
+      case 'Trade and Development bank':
+        return isAndroid ? 'https://play.google.com/store/apps/details?id=mn.tdb.pay' : 'https://apps.apple.com/us/app/tdb-online/id1458831706';
+      case 'Most money':
+        return isAndroid
+            ? 'https://play.google.com/store/apps/details?id=mn.grapecity.mostmoney'
+            : 'https://apps.apple.com/us/app/mostmoney/id487144325';
+      case 'National investment bank':
+        return isAndroid ? 'https://play.google.com/store/apps/details?id=mn.nibank.mobilebank' : '';
+      case 'Chinggis khaan bank':
+        return isAndroid
+            ? 'https://play.google.com/store/apps/details?id=mn.ckbank.smartbank2'
+            : 'https://apps.apple.com/vg/app/smartbank-ckbank/id1180620714';
+      case 'Capitron bank':
+        return isAndroid
+            ? 'https://play.google.com/store/apps/details?id=com.capitron'
+            : 'https://apps.apple.com/mn/app/capitron-digital-bank/id1612591322';
+      case 'Bogd bank':
+        return isAndroid
+            ? 'https://play.google.com/store/apps/details?id=com.bogdbank.ebank.v2'
+            : 'https://apps.apple.com/rs/app/bogd-mobile/id1475442374';
+      case 'Trans bank':
+        return isAndroid
+            ? 'https://play.google.com/store/apps/details?id=com.transbank.transbankmobile'
+            : 'https://apps.apple.com/us/app/transb%D0%B0nk/id1604334470';
+      case 'M bank':
+        return isAndroid ? 'https://play.google.com/store/apps/details?id=mn.mllc.mbank' : 'https://apps.apple.com/ao/app/%D0%BC-bank/id1455928972';
+      case 'Ard App':
+        return isAndroid ? 'https://play.google.com/store/apps/details?id=mn.ard.androidmm' : 'https://apps.apple.com/us/app/ard/id1369846744';
+      case 'Arig bank':
+        return isAndroid ? 'https://play.google.com/store/apps/details?id=mn.arig.online' : 'https://apps.apple.com/bw/app/arig-online/id6444022675';
+    }
+
+    return '';
+  }
 
   Future<void> urlLaunch(String url) async {
     Uri _url = Uri.parse(url);
@@ -68,7 +178,7 @@ class BasicUtils {
     }
   }
 
-  void noTeamDialog({required String from}) {
+  void noTeamDialog({required Function onTap}) {
     Get.dialog(
       AlertDialog(
         backgroundColor: Colors.white,
@@ -116,9 +226,7 @@ class BasicUtils {
             ),
             const SizedBox(height: 32),
             ElevatedButton(
-              onPressed: () async {
-                Get.toNamed(CreateTeamRoutes.createTeamScreen, parameters: {'from': from});
-              },
+              onPressed: () => onTap(),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -134,6 +242,46 @@ class BasicUtils {
             const SizedBox(height: 8),
           ],
         ),
+      ),
+    );
+  }
+
+  void qrDialog({required String title, required String qrData}) {
+    Get.dialog(
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Material(
+            borderRadius: BorderRadius.circular(16),
+            color: Colors.white,
+            child: Container(
+              width: Get.size.width - 32,
+              height: Get.size.width - 32,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: MyColors.neutral900),
+                      ),
+                      IconButton(
+                        onPressed: () => Get.back(),
+                        icon: Icon(Icons.close),
+                      ),
+                    ],
+                  ),
+                  Center(child: QrImageView(data: qrData, size: Get.size.width - 120)),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -202,7 +350,7 @@ class BasicUtils {
                 ),
               ),
               onPressed: () {
-                Get.toNamed(RegisterRoutes.registerEmailScreen);
+                Get.toNamed(RegisterRoutes.registerTypeScreen);
               },
               child: Text(
                 'Бүртгүүлэх',

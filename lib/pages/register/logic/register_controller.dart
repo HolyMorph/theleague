@@ -16,6 +16,9 @@ class RegisterController extends GetxController {
       var (isSuccess, response) = await Get.find<CoreController>().uploadAvatar(file: File(state.selectedImage.value?.path ?? ''));
       if (isSuccess) {
         state.avatarUrl.value = response['result'][0]['fileUrl'];
+      } else {
+        state.isLoading.value = false;
+        return (false, {});
       }
     }
 

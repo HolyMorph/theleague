@@ -3,7 +3,7 @@ import '../../../service/method.dart';
 import '../../../service/my_client.dart';
 import '../state/home_state.dart';
 
-class HomeController extends GetxController {
+class HomeController extends FullLifeCycleController with FullLifeCycleMixin {
   final state = HomeState();
 
   Future<(bool, dynamic)> getHomeData() async {
@@ -25,5 +25,24 @@ class HomeController extends GetxController {
   void onInit() {
     getHomeData();
     super.onInit();
+  }
+
+  @override
+  void onDetached() {}
+
+  @override
+  void onHidden() {}
+
+  @override
+  void onInactive() {}
+
+  @override
+  void onPaused() {}
+
+  @override
+  void onResumed() async {
+    state.isLoading.value = true;
+    await getHomeData();
+    state.isLoading.value = false;
   }
 }

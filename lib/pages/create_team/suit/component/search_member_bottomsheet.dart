@@ -74,21 +74,21 @@ class SearchMemberBottomSheet extends GetView<CreateTeamController> {
           ).paddingSymmetric(horizontal: 16),
           const SizedBox(height: 16),
           ObxValue(
-            (searchMember) => (member.isNotEmpty)
+            (searchMember) => (searchMember.isNotEmpty)
                 ? InkWell(
                     onTap: () {
-                      Get.back();
                       if (controller.state.teamMembers.isEmpty) {
-                        controller.state.teamMembers.add(member);
+                        controller.state.teamMembers.add(searchMember);
                       } else {
-                        controller.state.teamMembers.forEach((element) {
-                          if (element['code'] != member['code']) {
-                            controller.state.teamMembers.add(member);
-                          }
-                        });
+                        Map exist = controller.state.teamMembers.firstWhereOrNull((element) => element['code'] == searchMember['code']) ?? {};
+                        if (exist.isEmpty) {
+                          controller.state.teamMembers.add(searchMember);
+                        }
                       }
+                      Get.back();
+                      controller.state.textEditingController.clear();
                     },
-                    child: SearchMemberCart(player: member),
+                    child: SearchMemberCart(player: searchMember),
                   ).paddingSymmetric(horizontal: 16)
                 : const SizedBox(),
             member,

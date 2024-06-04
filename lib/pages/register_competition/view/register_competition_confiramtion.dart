@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../style/my_colors.dart';
-import '../../competition_detail/suit/component/register_button.dart';
+import '../../competition_detail/logic/competition_detail_controller.dart';
+import '../../payment/view/payment_button.dart';
 import '../logic/register_competition_controller.dart';
 import '../suit/components/competition_info.dart';
 import '../suit/components/personal_info.dart';
@@ -46,7 +47,10 @@ class RegisterCompetitionConfirmation extends GetView<RegisterCompetitionControl
               ).paddingSymmetric(horizontal: 16),
             ),
           ),
-          RegisterButton(onTap: () {}, title: 'Төлбөр төлөх'),
+          PaymentButton(
+            priceText: '${Get.find<CompetitionDetailController>().state.gameData['registrationPrice']}',
+            descText: 'Багийн хураамж',
+          ),
         ],
       ),
     );

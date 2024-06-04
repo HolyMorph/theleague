@@ -7,6 +7,8 @@ import 'pages/competition_detail_parent/suit/competition_parent_pages.dart';
 import 'pages/core/suit/core_pages.dart';
 import 'pages/core/suit/core_routes.dart';
 import 'pages/create_team/suit/create_team_pages.dart';
+import 'pages/edit_team/suit/edit_team_pages.dart';
+import 'pages/judge/suit/judge_pages.dart';
 import 'pages/login/suit/login_pages.dart';
 import 'pages/my_teams/suit/my_teams_pages.dart';
 import 'pages/register/suit/register_pages.dart';
@@ -41,6 +43,8 @@ class MyApp extends StatelessWidget {
         ..addAll(VolleyballAllStarPages.pages)
         ..addAll(LeagueSplashPages.pages)
         ..addAll(MyTeamsPages.pages)
+        ..addAll(EditTeamPages.pages)
+        ..addAll(JudgePages.pages)
         ..addAll(CompetitionDetailPages.pages),
     );
   }

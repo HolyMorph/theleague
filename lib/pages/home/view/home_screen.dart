@@ -44,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
                       : ListView.separated(
                           shrinkWrap: true,
                           itemCount: controller.state.filteredList.length,
+                          padding: const EdgeInsets.all(16),
                           itemBuilder: (context, index) {
                             if (controller.state.filteredList[index]['eventType'] == 'poll') {
                               return HomePollItem(data: controller.state.filteredList[index]);
@@ -54,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
                           separatorBuilder: (BuildContext context, int index) {
                             return const SizedBox(height: 8);
                           },
-                        ).marginAll(16),
+                        ),
             ),
           ),
         );

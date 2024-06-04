@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../style/my_colors.dart';
+import '../../../../utils/basic_utils.dart';
+import '../../../create_team/suit/create_team_routes.dart';
+import '../../logic/register_competition_controller.dart';
 
 class TeamDropDown extends StatelessWidget {
   final Function(dynamic) onChanged;
@@ -48,32 +52,45 @@ class TeamDropDown extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            InputDecorator(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                  borderSide: BorderSide(width: 1, color: Colors.black),
+            InkWell(
+              onTap: selectedAbleList.isEmpty
+                  ? () {
+                      BasicUtils().noTeamDialog(
+                        onTap: () {
+                          Get.back();
+                          Get.toNamed(CreateTeamRoutes.createTeamScreen, parameters: {'from': Get.currentRoute})
+                              ?.then((value) => Get.find<RegisterCompetitionController>().getMyTeams());
+                        },
+                      );
+                    }
+                  : null,
+              child: InputDecorator(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                    borderSide: BorderSide(width: 1, color: Colors.black),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-              ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<dynamic>(
-                  hint: Text('Cонгох'),
-                  isExpanded: true,
-                  borderRadius: BorderRadius.circular(16),
-                  value: _value.value,
-                  onChanged: (choose) {
-                    onChanged(choose ?? '');
-                    _value.value = choose;
-                  },
-                  dropdownColor: Colors.white,
-                  elevation: 8,
-                  items: selectedAbleList.map((dynamic value) {
-                    return DropdownMenuItem(
-                      value: value,
-                      child: Text('${value['name']}'),
-                    );
-                  }).toList(),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<dynamic>(
+                    hint: Text('Cонгох'),
+                    isExpanded: true,
+                    borderRadius: BorderRadius.circular(16),
+                    value: _value.value,
+                    onChanged: (choose) {
+                      onChanged(choose ?? '');
+                      _value.value = choose;
+                    },
+                    dropdownColor: Colors.white,
+                    elevation: 8,
+                    items: selectedAbleList.map((dynamic value) {
+                      return DropdownMenuItem(
+                        value: value,
+                        child: Text('${value['name']}'),
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
             ),

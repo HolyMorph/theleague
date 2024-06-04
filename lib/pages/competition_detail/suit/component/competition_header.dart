@@ -15,15 +15,7 @@ class CompetitionHeader extends StatelessWidget {
       children: [
         CachedNetworkImage(
           imageUrl: '${coverUrl}?size=w600',
-          imageBuilder: (context, imageProvider) => Container(
-            height: 250,
-            width: double.infinity,
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(image: imageProvider, fit: BoxFit.fitHeight),
-            ),
-          ),
+          fit: BoxFit.contain,
           placeholder: (context, url) => Container(
             alignment: Alignment.center,
             height: 250,
@@ -39,17 +31,17 @@ class CompetitionHeader extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          height: 250,
-          width: Get.size.width,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black.withOpacity(0.5),
-                Colors.transparent,
-              ],
+        Positioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.black.withOpacity(0.5),
+                  Colors.transparent,
+                ],
+              ),
             ),
           ),
         ),

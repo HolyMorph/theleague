@@ -33,64 +33,66 @@ class CreateTeamScreen extends GetWidget<CreateTeamController> {
             : Column(
                 children: [
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SettingsTextField(
-                          title: 'Багийн нэр',
-                          isActive: true,
-                          hintText: 'Багийн нэр',
-                          onChanged: (input) => controller.state.teamName.value = input,
-                          isRequired: true,
-                        ),
-                        const SizedBox(height: 16),
-                        MyDropDown(
-                          title: 'Хүйс',
-                          isRequired: true,
-                          onChanged: (value) => controller.state.selectedGender.value = value,
-                          selectedAbleList: ['Эрэгтэй', 'Эмэгтэй'],
-                        ),
-                        const SizedBox(height: 16),
-                        MyDropDown(
-                          title: 'Спортын төрөл',
-                          isRequired: true,
-                          onChanged: (value) => controller.state.selectedType.value = value,
-                          selectedAbleList: List<String>.from(controller.state.sportTypes['list']),
-                          dictionary: controller.state.sportTypes['dictionary'],
-                        ),
-                        const SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Text(
-                              'Багийн Лого',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: MyColors.grey700,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SettingsTextField(
+                            title: 'Багийн нэр',
+                            isActive: true,
+                            hintText: 'Багийн нэр',
+                            onChanged: (input) => controller.state.teamName.value = input,
+                            isRequired: true,
+                          ),
+                          const SizedBox(height: 16),
+                          MyDropDown(
+                            title: 'Хүйс',
+                            isRequired: true,
+                            onChanged: (value) => controller.state.selectedGender.value = value,
+                            selectedAbleList: ['Эрэгтэй', 'Эмэгтэй'],
+                          ),
+                          const SizedBox(height: 16),
+                          MyDropDown(
+                            title: 'Спортын төрөл',
+                            isRequired: true,
+                            onChanged: (value) => controller.state.selectedType.value = value,
+                            selectedAbleList: List<String>.from(controller.state.sportTypes['list']),
+                            dictionary: controller.state.sportTypes['dictionary'],
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Text(
+                                'Багийн Лого',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: MyColors.grey700,
+                                ),
                               ),
-                            ),
-                            Text(
-                              '*',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: MyColors.redColor,
+                              Text(
+                                '*',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: MyColors.redColor,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        MyImagePicker(
-                          selectedImage: controller.state.selectedImage,
-                          isHaveCamera: false,
-                          onDelete: () {
-                            controller.state.logoUrl.value = '';
-                          },
-                        ),
-                        const SizedBox(height: 16),
-                        TeamMemberSelection(),
-                      ],
-                    ).paddingAll(16),
+                            ],
+                          ),
+                          const SizedBox(height: 6),
+                          MyImagePicker(
+                            selectedImage: controller.state.selectedImage,
+                            isHaveCamera: false,
+                            onDelete: () {
+                              controller.state.logoUrl.value = '';
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          TeamMemberSelection(),
+                        ],
+                      ).paddingAll(16),
+                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),

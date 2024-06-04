@@ -38,27 +38,33 @@ class VoteResultScreen extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: GestureDetector(
-                                onTap: () => Get.back(),
-                                child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(8),
+                            SizedBox(
+                              width: Get.size.width,
+                              child: Stack(
+                                children: [
+                                  Center(child: Image.asset('assets/images/ic_volleyball_cover.png', scale: 2)),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: GestureDetector(
+                                      onTap: () => Get.back(),
+                                      child: Container(
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.1),
+                                          borderRadius: BorderRadius.circular(8),
+                                        ),
+                                        child: Icon(
+                                          Icons.chevron_left,
+                                          color: Colors.white,
+                                          size: 24,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                  child: Icon(
-                                    Icons.chevron_left,
-                                    color: Colors.white,
-                                    size: 24,
-                                  ),
-                                ),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 16),
-                            Image.asset('assets/images/ic_volleyball_cover.png', scale: 2),
-                            const SizedBox(height: 32),
+                            const SizedBox(height: 24),
                             Text(
                               'ВОЛЕЙБОЛ ФЕСТИВАЛ 2024 ${controller.state.gender.value == 'male' ? 'Эрэгтэй' : 'Эмэгтэй'} санал асуулга'.toUpperCase(),
                               textAlign: TextAlign.center,
@@ -133,11 +139,6 @@ class VoteResultScreen extends StatelessWidget {
                             Image.asset(
                               'assets/images/ic_logo_small.png',
                               height: 30,
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              '@Sport Lab 2024',
-                              style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.3)),
                             ),
                             const SizedBox(height: 4),
                           ],

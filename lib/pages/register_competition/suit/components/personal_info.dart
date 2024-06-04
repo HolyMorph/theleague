@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../style/my_colors.dart';
-import '../../../../utils/fa_icon.dart';
 import '../../../core/logic/core_controller.dart';
 
 class PersonalInfo extends StatelessWidget {
@@ -79,6 +78,8 @@ class PersonalInfo extends StatelessWidget {
                         children: [
                           Text(
                             '${meData['lastName'][0]}.${meData['firstName']}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -95,10 +96,10 @@ class PersonalInfo extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Text(
-                      FaIcon.user_edit,
-                      style: FaIcon.regular().copyWith(color: MyColors.primaryColor, fontSize: 18),
-                    ),
+                    // Text(
+                    //   FaIcon.user_edit,
+                    //   style: FaIcon.regular().copyWith(color: MyColors.primaryColor, fontSize: 18),
+                    // ),
                     const SizedBox(width: 16),
                   ],
                 ).paddingAll(8),

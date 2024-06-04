@@ -13,37 +13,27 @@ class RegisterCompetitionAppbar extends GetView<RegisterCompetitionController> {
   @override
   Widget build(BuildContext context) {
     return ObxValue(
-      (data) => Container(
-        height: 250,
-        child: Stack(
-          children: [
-            CachedNetworkImage(
-              imageUrl: '${coverUrl}?size=w500',
-              imageBuilder: (context, imageProvider) => Container(
-                height: 250,
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-                ),
-              ),
-              placeholder: (context, url) => Container(
-                alignment: Alignment.center,
-                height: 250,
-                child: CupertinoActivityIndicator(animating: true, radius: 10, color: MyColors.primaryColor),
-              ),
-              errorWidget: (context, url, error) => Container(
-                height: 250,
-                alignment: Alignment.center,
-                child: Image.asset(
-                  'assets/images/ic_logo_bg.png',
-                  color: MyColors.primaryColor,
-                ),
+      (data) => Stack(
+        children: [
+          CachedNetworkImage(
+            imageUrl: '${coverUrl}?size=w500',
+            fit: BoxFit.contain,
+            placeholder: (context, url) => Container(
+              alignment: Alignment.center,
+              height: 150,
+              child: CupertinoActivityIndicator(animating: true, radius: 10, color: MyColors.primaryColor),
+            ),
+            errorWidget: (context, url, error) => Container(
+              height: 150,
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/images/ic_logo_bg.png',
+                color: MyColors.primaryColor,
               ),
             ),
-            Container(
-              height: double.infinity,
-              width: double.infinity,
+          ),
+          Positioned.fill(
+            child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -81,19 +71,19 @@ class RegisterCompetitionAppbar extends GetView<RegisterCompetitionController> {
                 ],
               ),
             ),
-            Positioned(
-              top: MediaQuery.of(context).viewPadding.top,
-              child: IconButton(
-                onPressed: () => Get.back(),
-                icon: Icon(
-                  Icons.chevron_left,
-                  size: 30,
-                  color: Colors.white,
-                ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).viewPadding.top,
+            child: IconButton(
+              onPressed: () => Get.back(),
+              icon: Icon(
+                Icons.chevron_left,
+                size: 30,
+                color: Colors.white,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       controller.state.gameData,
     );

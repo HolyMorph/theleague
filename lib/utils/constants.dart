@@ -14,6 +14,8 @@ class Constants {
   static String BASE_DEV_URL = 'https://app-api.dev.sportlab.mn/';
   static String BASE_UPLOAD_URL = 'https://upload.dev.sportlab.mn/';
   final DELETE_ACCOUNT_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdCA3sDIU4dncVA7t_KpGQ_KsP_8-gMsXaz8NjY_pS8tQHCWA/viewform?usp=sf_link';
+  final AppStoreUrl = 'https://apps.apple.com/us/app/sp%D0%BErt-lab/id6474849692';
+  final PlayStoreUrl = 'https://play.google.com/store/apps/details?id=mn.mezorn.duiz&pli=1';
 
   ///Хөгжүүлэлтийн орчны URL ашиглах эсэх
   ///

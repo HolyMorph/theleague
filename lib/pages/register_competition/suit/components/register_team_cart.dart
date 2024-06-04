@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../style/my_colors.dart';
-import '../../../../utils/fa_icon.dart';
 import 'team_member_cart.dart';
 
 class RegisterTeamCart extends StatelessWidget {
@@ -75,22 +74,23 @@ class RegisterTeamCart extends StatelessWidget {
                     ],
                   ),
                 ),
-                Text(
-                  FaIcon.edit,
-                  style: FaIcon.regular().copyWith(color: MyColors.primaryColor, fontSize: 20),
-                ),
+                // Text(
+                //   FaIcon.edit,
+                //   style: FaIcon.regular().copyWith(color: MyColors.primaryColor, fontSize: 20),
+                // ),
               ],
             ).paddingAll(8),
           ),
-          ListView.builder(
-            physics: isScrollAble ? AlwaysScrollableScrollPhysics() : const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(vertical: 8),
-            itemCount: teamData['members'].length,
-            itemBuilder: (context, index) {
-              return TeamMemberCart(player: teamData['members'][index]);
-            },
-          ),
+          if (teamData['members'].isNotEmpty)
+            ListView.builder(
+              physics: isScrollAble ? AlwaysScrollableScrollPhysics() : const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              padding: EdgeInsets.symmetric(vertical: 8),
+              itemCount: teamData['members'].length,
+              itemBuilder: (context, index) {
+                return TeamMemberCart(player: teamData['members'][index]);
+              },
+            ),
         ],
       ),
     );

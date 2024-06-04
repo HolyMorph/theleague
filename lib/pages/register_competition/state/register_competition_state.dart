@@ -11,8 +11,11 @@ class RegisterCompetitionState {
   final RxList myTeams = RxList();
   final RxBool isLoading = RxBool(false);
   final RxString gameId = RxString('');
+  final RxString from = RxString('');
   final RxMap gameData = RxMap();
   final RxMap teamData = RxMap();
   final RxInt ticketCount = RxInt(1);
   final RxList entryList = RxList();
+  final RxMap entityDetail = RxMap();
+  final RxBool isCallJoin = RxBool(false);
 }

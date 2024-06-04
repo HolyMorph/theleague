@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../style/my_colors.dart';
+import '../../../utils/basic_utils.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/fa_icon.dart';
 import '../../../utils/my_storage.dart';
 import '../../core/logic/core_controller.dart';
 import '../../core/suit/core_type.dart';
+import '../../my_teams/suit/my_teams_routes.dart';
 import '../../webview/my_web_view.dart';
 import '../logic/profile_controller.dart';
 import '../suit/components/personal_info.dart';
@@ -35,9 +36,24 @@ class _ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveCl
           title: Column(
             children: [
               const SizedBox(height: 20),
-              Text(
-                'Миний бүртгэл',
-                style: TextStyle(fontSize: 18),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Миний бүртгэл',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      BasicUtils().qrDialog(title: 'Миний QR код', qrData: '${controller.coreController.state.meData['code']}');
+                    },
+                    icon: Icon(
+                      Icons.qr_code_rounded,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -68,14 +84,14 @@ class _ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveCl
                     //   title: 'Миний мандат',
                     // ),
                     // const SizedBox(height: 4),
-                    // ProfileMenuItem(
-                    //   onTap: () {
-                    //     Get.toNamed(MyTeamsRoutes.myTeamsScreen);
-                    //   },
-                    //   icon: FaIcon.user_group,
-                    //   title: 'Миний багууд',
-                    // ),
-                    //const SizedBox(height: 4),
+                    ProfileMenuItem(
+                      onTap: () {
+                        Get.toNamed(MyTeamsRoutes.myTeamsScreen);
+                      },
+                      icon: FaIcon.user_group,
+                      title: 'Миний багууд',
+                    ),
+                    const SizedBox(height: 4),
                     ProfileMenuItem(
                       onTap: () {
                         Get.to(() => PolicyScreen());

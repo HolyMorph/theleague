@@ -8,7 +8,6 @@ import '../logic/register_competition_controller.dart';
 import '../suit/components/register_competition_appbar.dart';
 import '../suit/components/register_team_cart.dart';
 import '../suit/components/team_drop_down.dart';
-import '../suit/register_competition_routes.dart';
 
 class RegisterCompetitionTeam extends GetView<RegisterCompetitionController> {
   const RegisterCompetitionTeam({super.key});
@@ -50,15 +49,21 @@ class RegisterCompetitionTeam extends GetView<RegisterCompetitionController> {
                   RegisterButton(
                     title: 'Бүртгүүлэх',
                     onTap: () async {
-                      var (isSuccess, response) = await controller.joinGame();
-                      if (isSuccess) {
-                        Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
-                      } else {
+                      if (controller.state.teamData.isEmpty) {
                         AlertHelper.showFlashAlert(
                           title: 'Уучлаарай',
-                          message: response['message'] ?? 'Хүсэлт амжилтгүй',
-                          status: FlashStatus.failed,
+                          message: 'Баг сонгоогүй байна',
+                          status: FlashStatus.warning,
                         );
+                      } else {
+                        var (isSuccess, response) = await controller.myEntries();
+                        if (!isSuccess) {
+                          AlertHelper.showFlashAlert(
+                            title: 'Алдаа',
+                            message: response['message'] ?? 'Хүсэлт амжилтгүй',
+                            status: FlashStatus.failed,
+                          );
+                        }
                       }
                     },
                   ),

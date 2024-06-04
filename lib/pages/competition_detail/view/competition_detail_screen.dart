@@ -5,13 +5,19 @@ import '../../../alert/alert_helper.dart';
 import '../../../alert/flash_status.dart';
 import '../../../components/schedule_information.dart';
 import '../../../style/my_colors.dart';
+import '../../../utils/basic_utils.dart';
+import '../../../utils/fa_icon.dart';
+import '../../../utils/qr_scanner.dart';
 import '../../competition_detail_parent/suit/component/parent_poll_item.dart';
+import '../../judge/suit/judge_routes.dart';
 import '../../register_competition/suit/register_competition_routes.dart';
 import '../../theleague/the_league_splash/suit/league_splash_routes.dart';
 import '../logic/competition_detail_controller.dart';
 import '../suit/component/competition_header.dart';
+import '../suit/component/mandate_bottomsheet.dart';
 import '../suit/component/register_button.dart';
 import '../suit/component/sport_description_item.dart';
+import '../suit/component/ticket_button.dart';
 
 class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
   const CompetitionDetailScreen({super.key});
@@ -27,10 +33,59 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CompetitionHeader(
-                    coverUrl: controller.state.gameData['eventType'] == 'poll'
-                        ? controller.state.gameData['logo_square']
-                        : controller.state.gameData['logo_rectangle'],
+                  Stack(
+                    children: [
+                      CompetitionHeader(
+                        coverUrl: controller.state.gameData['eventType'] == 'poll'
+                            ? controller.state.gameData['logo_square']
+                            : controller.state.gameData['logo_rectangle'],
+                      ),
+                      if (controller.state.isMeJudge.value)
+                        Positioned(
+                          right: 16,
+                          top: MediaQuery.of(context).viewPadding.top,
+                          child: Material(
+                            borderRadius: BorderRadius.circular(8),
+                            color: MyColors.primaryColor,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(8),
+                              onTap: () async {
+                                String? code = await Get.to(() => QrScanner());
+                                if (code != null) {
+                                  var (isSuccess, response) = await controller.checkJudge(code: code);
+                                  if (isSuccess) {
+                                    Get.toNamed(
+                                      JudgeRoutes.judgeScreen,
+                                      arguments: {'entry': response['result']},
+                                      parameters: {'gameCode': '${response['result']['game_code']}'},
+                                    );
+                                  } else {
+                                    AlertHelper.showFlashAlert(
+                                      title: 'Алдаа',
+                                      message: response['message'] ?? 'Хүсэлт амжилтгүй',
+                                      status: FlashStatus.failed,
+                                    );
+                                  }
+                                }
+                              },
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  Icons.qr_code_2_outlined,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   Expanded(
                     child: SingleChildScrollView(
@@ -86,19 +141,85 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(height: 8),
-                          Text(
-                            '${controller.state.gameData['description']}',
-                            style: TextStyle(color: MyColors.grey500, fontSize: 12),
-                          ),
-
+                          BasicUtils().description(text: '${controller.state.gameData['description']}'),
                           const SizedBox(height: 24),
+                          if (controller.state.gameData['allowMultipleRegistration'] != null &&
+                              controller.state.gameData['allowMultipleRegistration'])
+                            InkWell(
+                              onTap: () async {
+                                if (await controller.state.gameData['allowedUserTypes']
+                                    .any((type) => type == controller.coreController.state.meData['type'])) {
+                                  Get.toNamed(
+                                    '${RegisterCompetitionRoutes.registerCompetitionScreen}/${controller.state.gameCode.value}',
+                                    parameters: {'from': Get.currentRoute},
+                                  )?.then((value) => controller.getGameDetail());
+                                } else {
+                                  AlertHelper.showFlashAlert(
+                                    title: 'Уучлаарай',
+                                    message: 'Та тамирчнаар нэвтрэх шаардлагатай',
+                                    status: FlashStatus.warning,
+                                  );
+                                }
+                              },
+                              borderRadius: BorderRadius.circular(8),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 6),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      FaIcon.circlePlus,
+                                      style: FaIcon.regular().copyWith(
+                                        color: MyColors.primaryColor,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      'Бусдийн өмнөөс бүртгүүлэх',
+                                      style: TextStyle(
+                                        color: MyColors.primaryColor,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Icon(Icons.chevron_right, color: Colors.black, size: 28),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          const SizedBox(height: 16),
+
                           // RegisteredButton(),
                           // const SizedBox(height: 24),
                         ],
                       ).paddingSymmetric(horizontal: 16),
                     ),
                   ),
-                  if (controller.state.gameData['hasAppRegistration'] == true && controller.state.gameData['registrationPrice'] > 0)
+                  if (controller.state.isRegistered.value)
+                    TicketButton(
+                      onTap: () {
+                        Get.bottomSheet(
+                          backgroundColor: Colors.white,
+                          isScrollControlled: true,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                          ),
+                          MandateBottomSheet(
+                            mandates: controller.state.mandates,
+                            gameType:
+                                '${controller.state.gameData['meta']['gameCategoriesDictionary']['${controller.state.gameData['gameCategories']}']}',
+                            gameName: '${controller.state.gameData['name']}',
+                            date: '${controller.state.gameData['startDate']}',
+                            orgLogo: '${controller.state.gameData['logo_square']}',
+                          ),
+                        );
+                      },
+                      btnText: 'Мандат',
+                      faIcon: FaIcon.user_square,
+                    ),
+                  if (!controller.state.isRegistered.value &&
+                      controller.state.gameData['hasAppRegistration'] == true &&
+                      controller.state.gameData['registrationPrice'] > 0)
                     RegisterButton(
                       title: 'Оролцох',
                       onTap: () async {
@@ -106,7 +227,8 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
                             .any((type) => type == controller.coreController.state.meData['type'])) {
                           Get.toNamed(
                             '${RegisterCompetitionRoutes.registerCompetitionScreen}/${controller.state.gameCode.value}',
-                          );
+                            parameters: {'from': Get.currentRoute},
+                          )?.then((value) => controller.getGameDetail());
                         } else {
                           AlertHelper.showFlashAlert(
                             title: 'Уучлаарай',

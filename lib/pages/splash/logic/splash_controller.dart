@@ -30,10 +30,9 @@ class SplashController extends GetxController {
     Get.find<CoreController>().state.coreType.value = CoreType.home;
 
     ///Notification Token
-    ///
     if (await MyStorage().getData('fcmSaved') == false) {
       await _updateFcmToken(token: await MyStorage().getData(Constants.FCMToken));
-      FirebaseConfig.subscribeToTopic('theleaguepublic');
+      FirebaseConfig.subscribeToTopic('thesportlabpublic');
     }
   }
 
@@ -127,10 +126,32 @@ class SplashController extends GetxController {
 
   Future<void> _updateFcmToken({required String token}) async {
     final String osType = Platform.operatingSystem;
-    dynamic body = {'os_type': osType, "notification_token": token};
+    String? phoneModel;
+    String? phoneMake;
+    String? osVersion;
+    DeviceInfoPlugin deviceInfo = await DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      phoneMake = androidInfo.device;
+      phoneModel = androidInfo.model;
+      osVersion = androidInfo.version.release;
+    } else if (Platform.isIOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      phoneMake = iosInfo.utsname.machine;
+      phoneModel = iosInfo.name;
+      osVersion = iosInfo.systemVersion;
+    }
+
+    dynamic body = {
+      'notification_token': "",
+      'os_type': osType,
+      'os_version': osVersion,
+      'phone_make': phoneMake,
+      'phone_model': phoneModel ?? (osType == 'ios' ? 'iphone' : 'android'),
+    };
 
     var (isSuccess, _) = await MyClient().sendHttpRequest(
-      urlPath: '/api/me/update-pn-token',
+      urlPath: '/api/me/update-notification-token',
       method: Method.post,
       body: body,
     );

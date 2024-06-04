@@ -16,132 +16,133 @@ class TeamMemberSelection extends GetView<CreateTeamController> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Багийн гишүүд',
-            style: TextStyle(
-              color: MyColors.grey700,
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Багийн гишүүд',
+          style: TextStyle(
+            color: MyColors.grey700,
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
           ),
-          const SizedBox(height: 6),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.bottomSheet(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                      ),
-                      isScrollControlled: true,
-                      SearchMemberBottomSheet(),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
+        ),
+        const SizedBox(height: 6),
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {
+                  Get.bottomSheet(
                     backgroundColor: Colors.white,
-                    surfaceTintColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(width: 1, color: MyColors.grey300),
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                     ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        FaIcon.user,
-                        style: FaIcon.regular().copyWith(color: MyColors.primaryColor),
-                      ),
-                      const SizedBox(width: 6),
-                      Text(
-                        'Тамирчин нэмэх',
-                        style: TextStyle(color: MyColors.primaryColor),
-                      ),
-                    ],
+                    isScrollControlled: true,
+                    SearchMemberBottomSheet(),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  surfaceTintColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(width: 1, color: MyColors.grey300),
                   ),
                 ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      FaIcon.user,
+                      style: FaIcon.regular().copyWith(color: MyColors.primaryColor),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Тамирчин нэмэх',
+                      style: TextStyle(color: MyColors.primaryColor),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(width: 8),
-              ObxValue(
-                (search) => InkWell(
-                  onTap: () async {
-                    String? code = await Get.to(() => QrScanner());
+            ),
+            const SizedBox(width: 8),
+            ObxValue(
+              (search) => InkWell(
+                onTap: () async {
+                  String? code = await Get.to(() => QrScanner());
 
-                    if (code != null) {
-                      var (isSuccess, response) = await controller.searchMember(code: code);
-                      if (isSuccess) {
-                        if (response['result'] == null) {
-                          AlertHelper.showFlashAlert(
-                            title: 'Уучлаарай',
-                            message: 'Илэрц олдсонгүй',
-                            status: FlashStatus.warning,
-                          );
-                        } else {
-                          if (controller.state.teamMembers.isEmpty) {
-                            controller.state.teamMembers.add(response['result']);
-                          } else {
-                            controller.state.teamMembers.forEach((element) {
-                              if (element['code'] != response['result']['code']) {
-                                controller.state.teamMembers.add(response['result']);
-                              }
-                            });
-                          }
-                        }
-                      } else {
+                  if (code != null) {
+                    var (isSuccess, response) = await controller.searchMember(code: code);
+                    if (isSuccess) {
+                      if (response['result'] == null) {
                         AlertHelper.showFlashAlert(
                           title: 'Уучлаарай',
                           message: 'Илэрц олдсонгүй',
                           status: FlashStatus.warning,
                         );
+                      } else {
+                        if (controller.state.teamMembers.isEmpty) {
+                          controller.state.teamMembers.add(response['result']);
+                          AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Тамирчин багт нэмэгдлээ');
+                        } else {
+                          Map exist = controller.state.teamMembers.firstWhereOrNull((element) => element['code'] == response['result']['code']) ?? {};
+                          if (exist.isEmpty) {
+                            controller.state.teamMembers.add(response['result']);
+                            AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Тамирчин багт нэмэгдлээ');
+                          }
+                        }
                       }
+                    } else {
+                      AlertHelper.showFlashAlert(
+                        title: 'Уучлаарай',
+                        message: 'Илэрц олдсонгүй',
+                        status: FlashStatus.warning,
+                      );
                     }
-                  },
-                  child: Container(
-                    height: 45,
-                    width: 45,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(width: 1, color: MyColors.grey300),
-                      color: Colors.white,
-                    ),
-                    child: search.value
-                        ? const CupertinoActivityIndicator(color: MyColors.primaryColor)
-                        : Icon(Icons.qr_code, color: MyColors.primaryColor),
+                  }
+                },
+                child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(width: 1, color: MyColors.grey300),
+                    color: Colors.white,
                   ),
+                  child: search.value
+                      ? const CupertinoActivityIndicator(color: MyColors.primaryColor)
+                      : Icon(Icons.qr_code, color: MyColors.primaryColor),
                 ),
-                controller.state.isSearching,
               ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Expanded(
-            child: ObxValue(
-              (members) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: members.length,
-                  itemBuilder: (context, index) {
-                    return SearchMemberCart(
-                      player: members[index],
-                      onRemove: () {
-                        members.removeWhere((element) => element['code'] == members[index]['code']);
-                      },
-                    );
+              controller.state.isSearching,
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        ObxValue(
+          (members) {
+            return ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: members.length,
+              itemBuilder: (context, index) {
+                return SearchMemberCart(
+                  player: members[index],
+                  onRemove: () {
+                    members.removeWhere((element) => element['code'] == members[index]['code']);
                   },
                 );
               },
-              controller.state.teamMembers,
-            ),
-          ),
-        ],
-      ),
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(height: 8);
+              },
+            );
+          },
+          controller.state.teamMembers,
+        ),
+      ],
     );
   }
 }

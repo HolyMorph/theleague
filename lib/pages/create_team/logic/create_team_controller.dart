@@ -38,16 +38,12 @@ class CreateTeamController extends GetxController {
       'logoUrl': state.logoUrl.value,
       'members': members,
     };
-
     state.isLoading.value = false;
-
     var (isSuccess, response) = await MyClient.instance.sendHttpRequest(
       urlPath: 'api/team',
       method: Method.post,
       body: body,
     );
-
-    if (isSuccess) {}
 
     return (isSuccess, response);
   }

@@ -5,7 +5,9 @@ import '../../../service/method.dart';
 import '../../../service/my_client.dart';
 import '../../../utils/basic_utils.dart';
 import '../../../utils/game_type.dart';
+import '../../create_team/suit/create_team_routes.dart';
 import '../state/register_competition_state.dart';
+import '../suit/register_competition_routes.dart';
 
 class RegisterCompetitionController extends GetxController {
   final state = RegisterCompetitionState();
@@ -24,7 +26,12 @@ class RegisterCompetitionController extends GetxController {
     if (isSuccess) {
       state.myTeams.value = response['result']['docs'];
       if (state.myTeams.isEmpty) {
-        BasicUtils().noTeamDialog(from: Get.currentRoute);
+        BasicUtils().noTeamDialog(
+          onTap: () {
+            Get.back();
+            Get.toNamed(CreateTeamRoutes.createTeamScreen, parameters: {'from': Get.currentRoute})?.then((value) => getMyTeams());
+          },
+        );
       }
     } else {
       Get.back();
@@ -65,9 +72,8 @@ class RegisterCompetitionController extends GetxController {
     );
     state.isLoading.value = false;
     if (isSuccess) {
-      await myEntries();
+      state.entityDetail.value = response['result'];
     }
-
     return (isSuccess, response);
   }
 
@@ -80,9 +86,25 @@ class RegisterCompetitionController extends GetxController {
     );
     state.isLoading.value = false;
     if (isSuccess) {
-      state.entryList.value = response['result'];
-    }
+      state.entryList.value = response['result']['entries'] ?? [];
+      dynamic entry = state.entryList.firstWhereOrNull((entry) => entry['teamCode'] == state.teamData['team']['code']) ?? {};
 
+      if (entry.isEmpty) {
+        var (isSuccess, response) = await joinGame();
+        if (isSuccess) {
+          Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
+        } else {
+          AlertHelper.showFlashAlert(
+            title: 'Уучлаарай',
+            message: response['message'] ?? 'Хүсэлт амжилтгүй',
+            status: FlashStatus.failed,
+          );
+        }
+      } else {
+        state.entityDetail.value = response['result'];
+        Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
+      }
+    }
     return (isSuccess, response);
   }
 
@@ -95,7 +117,6 @@ class RegisterCompetitionController extends GetxController {
     if (isSuccess) {
       state.teamData.value = response['result'];
     }
-
     return (isSuccess, response);
   }
 
@@ -115,6 +136,7 @@ class RegisterCompetitionController extends GetxController {
   @override
   void onInit() async {
     state.gameId.value = Get.parameters['id'] ?? '';
+    state.from.value = Get.parameters['from'] ?? '';
     await getGameDetail();
     super.onInit();
   }

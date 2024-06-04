@@ -69,7 +69,9 @@ class SearchMemberCart extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '${player['lastName']} ${player['firstName']}',
+                      (player['lastName'] != null && player['firstName'] != null)
+                          ? '${player['lastName']} ${player['firstName']}'
+                          : '${player['name']}',
                       style: TextStyle(
                         fontSize: 16,
                         color: MyColors.grey900,
