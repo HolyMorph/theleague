@@ -99,7 +99,7 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                                 Column(
                                   children: [
                                     SelectedPlayers(
-                                      maxPlayer: 4,
+                                      maxPlayer: 2,
                                       positionName: 'MB',
                                       onTap: () {
                                         controller.title = 'MB';

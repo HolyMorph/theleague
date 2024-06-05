@@ -63,7 +63,7 @@ class AllStarController extends GetxController {
     switch (position) {
       case 'MB':
         {
-          return 4;
+          return 2;
         }
       case 'S':
         {
@@ -75,11 +75,11 @@ class AllStarController extends GetxController {
         }
       case 'OH':
         {
-          return 4;
+          return 2;
         }
       case 'OPH':
         {
-          return 2;
+          return 4;
         }
       case 'CO':
         {
@@ -226,7 +226,7 @@ class AllStarController extends GetxController {
       _clearData();
       await _voteController.refreshFunction();
     } else {
-      var message = response['error']['message'] as String;
+      var message = response['message'] ?? response['message_en'] as String;
       AlertHelper.showFlashAlert(
         title: 'Алдаа гарлаа',
         message: message,
