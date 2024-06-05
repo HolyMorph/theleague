@@ -4,6 +4,8 @@ import '../../../alert/alert_helper.dart';
 import '../../../alert/flash_status.dart';
 import '../../../style/my_colors.dart';
 import '../../competition_detail/suit/component/register_button.dart';
+import '../../core/logic/core_controller.dart';
+import '../../edit_team/suit/edit_team_routes.dart';
 import '../logic/register_competition_controller.dart';
 import '../suit/components/register_competition_appbar.dart';
 import '../suit/components/register_team_cart.dart';
@@ -41,6 +43,16 @@ class RegisterCompetitionTeam extends GetView<RegisterCompetitionController> {
                             RegisterTeamCart(
                               teamData: controller.state.teamData,
                               isScrollAble: false,
+                              onTap: controller.state.teamData['team']['owner_code'] == Get.find<CoreController>().state.meData['code']
+                                  ? () {
+                                      Get.toNamed(
+                                        EditTeamRoutes.editTeamScreen + '/${controller.state.teamData['team']['code']}',
+                                        parameters: {'from': Get.currentRoute},
+                                      )?.then(
+                                        (value) => controller.getTeamDetail(teamCode: controller.state.teamData['team']['code']),
+                                      );
+                                    }
+                                  : null,
                             ),
                         ],
                       ).paddingAll(16),

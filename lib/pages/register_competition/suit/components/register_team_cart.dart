@@ -3,12 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../style/my_colors.dart';
+import '../../../../utils/fa_icon.dart';
 import 'team_member_cart.dart';
 
 class RegisterTeamCart extends StatelessWidget {
   final Map teamData;
   final bool isScrollAble;
-  const RegisterTeamCart({required this.teamData, required this.isScrollAble, super.key});
+  final VoidCallback? onTap;
+  const RegisterTeamCart({required this.teamData, required this.isScrollAble, this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class RegisterTeamCart extends StatelessWidget {
       child: Column(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: onTap,
             borderRadius: BorderRadius.circular(8),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,10 +76,11 @@ class RegisterTeamCart extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Text(
-                //   FaIcon.edit,
-                //   style: FaIcon.regular().copyWith(color: MyColors.primaryColor, fontSize: 20),
-                // ),
+                if (onTap != null)
+                  Text(
+                    FaIcon.edit,
+                    style: FaIcon.regular().copyWith(color: MyColors.primaryColor, fontSize: 20),
+                  ),
               ],
             ).paddingAll(8),
           ),

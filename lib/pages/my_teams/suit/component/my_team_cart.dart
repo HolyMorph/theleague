@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../style/my_colors.dart';
+import '../../../../utils/fa_icon.dart';
+import '../../../edit_team/suit/edit_team_routes.dart';
 import '../../logic/my_teams_controller.dart';
 
 class MyTeamCart extends GetView<MyTeamsController> {
@@ -13,7 +15,7 @@ class MyTeamCart extends GetView<MyTeamsController> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //Get.toNamed(EditTeamRoutes.editTeamScreen + '/${team['code']}');
+        Get.toNamed(EditTeamRoutes.editTeamScreen + '/${team['code']}');
       },
       child: Container(
         padding: const EdgeInsets.all(8),
@@ -83,10 +85,10 @@ class MyTeamCart extends GetView<MyTeamsController> {
                 ],
               ),
             ),
-            // Text(
-            //   FaIcon.edit,
-            //   style: FaIcon.regular().copyWith(color: MyColors.primaryColor, fontSize: 16),
-            // ),
+            Text(
+              FaIcon.edit,
+              style: FaIcon.regular().copyWith(color: MyColors.primaryColor, fontSize: 16),
+            ),
           ],
         ),
       ),

@@ -122,9 +122,9 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                                     const SizedBox(height: 50),
                                     SelectedPlayers(
                                       maxPlayer: 2,
-                                      positionName: 'OPH',
+                                      positionName: 'OH',
                                       onTap: () {
-                                        controller.title = 'OPH';
+                                        controller.title = 'OH';
                                         Get.toNamed('${MyRoutes.selectPlayer}');
                                       },
                                     ),
@@ -135,9 +135,9 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                                   children: [
                                     SelectedPlayers(
                                       maxPlayer: 4,
-                                      positionName: 'OH',
+                                      positionName: 'OPH',
                                       onTap: () {
-                                        controller.title = 'OH';
+                                        controller.title = 'OPH';
                                         Get.toNamed('${MyRoutes.selectPlayer}');
                                       },
                                     ),

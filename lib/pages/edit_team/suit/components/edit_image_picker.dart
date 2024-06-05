@@ -47,44 +47,45 @@ class EditImagePicker extends GetView<EditTeamController> {
                   ),
                 ),
                 const SizedBox(width: 16),
-                Material(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  child: InkWell(
-                    onTap: () {
-                      controller.state.myTeam['team']['logoUrl'] = '';
-                      controller.state.myTeam.refresh();
-                    },
+                if (controller.state.isMeOwner.value)
+                  Material(
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: MyColors.grey300),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            FaIcon.trash,
-                            style: FaIcon.regular().copyWith(
-                              color: MyColors.greyBlue800,
-                              fontSize: 14,
+                    child: InkWell(
+                      onTap: () {
+                        controller.state.myTeam['team']['logoUrl'] = '';
+                        controller.state.myTeam.refresh();
+                      },
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1, color: MyColors.grey300),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              FaIcon.trash,
+                              style: FaIcon.regular().copyWith(
+                                color: MyColors.greyBlue800,
+                                fontSize: 14,
+                              ),
                             ),
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            'Устгах',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: MyColors.greyBlue800,
+                            const SizedBox(width: 6),
+                            Text(
+                              'Устгах',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.greyBlue800,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
             )
           : MyImagePicker(

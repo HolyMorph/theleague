@@ -43,6 +43,7 @@ class RegisterCompetitionConfirmation extends GetView<RegisterCompetitionControl
                     teamData: controller.state.teamData,
                     isScrollAble: false,
                   ),
+                  const SizedBox(height: 8),
                 ],
               ).paddingSymmetric(horizontal: 16),
             ),

@@ -7,8 +7,11 @@ class EditTeamState {
   final RxString from = RxString('');
   final RxBool isLoading = RxBool(false);
   final RxBool isSearching = RxBool(false);
+  final RxBool isMeOwner = RxBool(false);
   final RxMap myTeam = RxMap();
   final RxList teamMembers = RxList();
   final Rx<XFile?> selectedImage = Rx(null);
+  final RxString newTeamName = RxString('');
+  final RxString newLogoUrl = RxString('');
   final TextEditingController searchEditingController = TextEditingController();
 }

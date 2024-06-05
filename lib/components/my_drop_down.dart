@@ -6,6 +6,7 @@ class MyDropDown extends StatelessWidget {
   final String title;
   final List<String> selectedAbleList;
   final bool isRequired;
+  final bool? isActive;
   final Map<String, dynamic>? dictionary;
 
   MyDropDown({
@@ -13,6 +14,7 @@ class MyDropDown extends StatelessWidget {
     required this.isRequired,
     required this.onChanged,
     required this.selectedAbleList,
+    this.isActive,
     this.dictionary,
     super.key,
   });
