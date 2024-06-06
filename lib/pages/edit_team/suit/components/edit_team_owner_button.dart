@@ -24,19 +24,8 @@ class EditTeamOwnerButton extends GetView<EditTeamController> {
               side: BorderSide(width: 1, color: MyColors.statusFailed),
             ),
           ),
-          onPressed: () async {
-            var (isSuccess, response) = await controller.deleteTeam();
-            if (isSuccess) {
-              AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Баг устгагдлаа');
-              Get.back();
-              Get.find<MyTeamsController>().getMyTeams();
-            } else {
-              AlertHelper.showFlashAlert(
-                title: 'Алдаа',
-                message: response['message'] ?? 'Хүсэлт амжилтгүй',
-                status: FlashStatus.failed,
-              );
-            }
+          onPressed: () {
+            deleteTeam();
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -87,6 +76,96 @@ class EditTeamOwnerButton extends GetView<EditTeamController> {
           ),
         ),
       ],
+    );
+  }
+
+  void deleteTeam() {
+    Get.dialog(
+      AlertDialog(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 1, color: MyColors.grey200),
+                  ),
+                  child: Text(
+                    FaIcon.quit,
+                    style: FaIcon.regular().copyWith(fontSize: 16, color: MyColors.neutral900),
+                  ),
+                ),
+                IconButton(onPressed: () => Get.back(), icon: Icon(Icons.close)),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Баг устгах',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: MyColors.neutral900,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Та багийн бүртгэлээ устгахдаа итгэлтэй байна уу?',
+              style: TextStyle(
+                fontSize: 14,
+                color: MyColors.grey600,
+              ),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: MyColors.errorColor),
+              onPressed: () async {
+                Get.back();
+                var (isSuccess, response) = await controller.deleteTeam();
+                if (isSuccess) {
+                  AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Баг устгагдлаа');
+                  Get.back();
+                  Get.find<MyTeamsController>().getMyTeams();
+                } else {
+                  AlertHelper.showFlashAlert(
+                    title: 'Алдаа',
+                    message: response['message'] ?? 'Хүсэлт амжилтгүй',
+                    status: FlashStatus.failed,
+                  );
+                }
+              },
+              child: Text('Устгах'),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                surfaceTintColor: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(width: 1, color: MyColors.grey300),
+                ),
+              ),
+              onPressed: () => Get.back(),
+              child: Text(
+                'Болих',
+                style: TextStyle(color: MyColors.primaryColor, fontWeight: FontWeight.w600),
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -18,60 +18,65 @@ class RegisterButton extends GetView<CompetitionDetailController> {
         color: Colors.white,
       ),
       child: ObxValue(
-        (gameData) => Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        (gameData) => Column(
           children: [
-            if (gameData['registrationPrice'] > 0)
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (gameData['registrationPrice'] > 0)
+                  Expanded(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          '${gameData['registrationPrice']}',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                            color: MyColors.primaryColor,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '${gameData['registrationPrice']}',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                color: MyColors.primaryColor,
+                              ),
+                            ),
+                            Text(
+                              '₮',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                fontFamily: 'Arial',
+                                color: MyColors.primaryColor,
+                              ),
+                            ),
+                          ],
                         ),
                         Text(
-                          '₮',
+                          '${gameData['registrationText']}',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontWeight: FontWeight.w600,
                             fontSize: 16,
-                            fontFamily: 'Arial',
-                            color: MyColors.primaryColor,
+                            fontWeight: FontWeight.w500,
+                            color: MyColors.grey500,
                           ),
                         ),
                       ],
                     ),
-                    Text(
-                      '${gameData['registrationText']}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: MyColors.grey500,
-                      ),
+                  ),
+                if (gameData['registrationPrice'] > 0) const SizedBox(width: 32),
+                Expanded(
+                  flex: 1,
+                  child: ElevatedButton(
+                    onPressed: () => onTap(),
+                    child: Text(
+                      '${title}',
+                      maxLines: 1,
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            if (gameData['registrationPrice'] > 0) const SizedBox(width: 32),
-            Expanded(
-              flex: 1,
-              child: ElevatedButton(
-                onPressed: () => onTap(),
-                child: Text(
-                  '${title}',
-                  maxLines: 1,
-                ),
-              ),
+              ],
             ),
+            SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
           ],
         ),
         controller.state.gameData,

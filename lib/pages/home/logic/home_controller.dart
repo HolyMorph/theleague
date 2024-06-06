@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import '../../../service/method.dart';
 import '../../../service/my_client.dart';
+import '../../core/logic/core_controller.dart';
 import '../state/home_state.dart';
 
 class HomeController extends FullLifeCycleController with FullLifeCycleMixin {
@@ -41,8 +42,10 @@ class HomeController extends FullLifeCycleController with FullLifeCycleMixin {
 
   @override
   void onResumed() async {
+    if (Get.isDialogOpen!) Get.back();
     state.isLoading.value = true;
     await getHomeData();
+    await Get.find<CoreController>().getMeData();
     state.isLoading.value = false;
   }
 }

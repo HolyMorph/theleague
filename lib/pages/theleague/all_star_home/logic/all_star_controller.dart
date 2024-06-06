@@ -41,11 +41,11 @@ class AllStarController extends GetxController {
         {
           return 'Хамгаалагч';
         }
-      case 'OH':
+      case 'OPH':
         {
           return 'Холбогчийн эсрэг';
         }
-      case 'OPH':
+      case 'OH':
         {
           return 'Хүчний довтлогч';
         }
@@ -75,11 +75,11 @@ class AllStarController extends GetxController {
         }
       case 'OH':
         {
-          return 2;
+          return 4;
         }
       case 'OPH':
         {
-          return 4;
+          return 2;
         }
       case 'CO':
         {

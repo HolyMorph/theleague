@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../style/my_colors.dart';
 import '../../../utils/basic_utils.dart';
 import '../../../utils/constants.dart';
@@ -90,6 +91,17 @@ class _ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveCl
                       },
                       icon: FaIcon.user_group,
                       title: 'Миний багууд',
+                    ),
+                    const SizedBox(height: 4),
+                    ProfileMenuItem(
+                      onTap: () async {
+                        await BasicUtils.openUrl(
+                          url: GetPlatform.isAndroid ? Constants.PAGE_URL_ANDROID : Constants.PAGE_URL_IOS,
+                          launchMode: LaunchMode.externalNonBrowserApplication,
+                        );
+                      },
+                      icon: FaIcon.message_question,
+                      title: 'Санал хүсэлт',
                     ),
                     const SizedBox(height: 4),
                     ProfileMenuItem(

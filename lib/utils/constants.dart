@@ -13,6 +13,8 @@ class Constants {
   static String BASE_URL = 'https://app-api.sportlab.mn/';
   static String BASE_DEV_URL = 'https://app-api.dev.sportlab.mn/';
   static String BASE_UPLOAD_URL = 'https://upload.dev.sportlab.mn/';
+  static String PAGE_URL_ANDROID = 'fb-messenger://user-thread/61560834650979';
+  static String PAGE_URL_IOS = 'https://m.me/61560834650979';
   final DELETE_ACCOUNT_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdCA3sDIU4dncVA7t_KpGQ_KsP_8-gMsXaz8NjY_pS8tQHCWA/viewform?usp=sf_link';
   final AppStoreUrl = 'https://apps.apple.com/us/app/sp%D0%BErt-lab/id6474849692';
   final PlayStoreUrl = 'https://play.google.com/store/apps/details?id=mn.mezorn.duiz&pli=1';
@@ -38,13 +40,13 @@ class Constants {
     <p>"Sport Lab аппликейшн" нь хэрэглэгчийн мэдээллийг гуравдагч этгээдэд худалдах, арилжаалах, шилжүүлэхгүй. Байршлын өгөгдлийг зөвхөн аппликейшн дотор ашиглана.</p>
     
     <h2>Хэрэглэгчийн мэдээллийг хадгалах:</h2>
-    <p>"Sport Lab аппликейшн" нь хэрэглэгчийн хувийн мэдээллийг үйлчилгээний хэрэгцээнээс гадуур аливаа ашиг олох зорилгоор ашиглахгүй болно. Байршлын мэдээллээ бусдад алдсанаас үүдэлтэй аливаа хор, хохирлыг "Duiz" хариуцахгүй болно.</p>
+    <p>"Sport Lab аппликейшн" нь хэрэглэгчийн хувийн мэдээллийг үйлчилгээний хэрэгцээнээс гадуур аливаа ашиг олох зорилгоор ашиглахгүй болно. Байршлын мэдээллээ бусдад алдсанаас үүдэлтэй аливаа хор, хохирлыг "Sport Lab" хариуцахгүй болно.</p>
     
     <h2>Хэрэглэгч мэдээллээ удирдах:</h2>
     <p>Хэрэглэгч өөрийн төхөөрөмжийн байршлын тохиргоог хэдийд ч өөрчлөх боломжтой.</p>
     
     <h2>Нууцлалын бодлогын шинэчлэл:</h2>
-    <p>"Sport Lab аппликейшн" нь нууцлалын бодлогод өөрчлөлт оруулах эрхтэй. Нууцлалын бодлогод өөрчлөлт оруулсан тохиолдолд тухай бүр "Duiz" мобайл аппликейшн болон сайт дээр нийтэд нээлттэй нийтлэх бөгөөд хэрэглэгч нь танилцах үүрэг хүлээнэ.</p>
+    <p>"Sport Lab аппликейшн" нь нууцлалын бодлогод өөрчлөлт оруулах эрхтэй. Нууцлалын бодлогод өөрчлөлт оруулсан тохиолдолд тухай бүр "Sport Lab" мобайл аппликейшн болон сайт дээр нийтэд нээлттэй нийтлэх бөгөөд хэрэглэгч нь танилцах үүрэг хүлээнэ.</p>
     
     <p>©Sport Lab Application 2024</p>
   """;

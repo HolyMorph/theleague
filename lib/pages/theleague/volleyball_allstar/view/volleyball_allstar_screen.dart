@@ -100,9 +100,9 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                                   children: [
                                     SelectedPlayers(
                                       maxPlayer: 2,
-                                      positionName: 'MB',
+                                      positionName: 'OPH',
                                       onTap: () {
-                                        controller.title = 'MB';
+                                        controller.title = 'OPH';
                                         Get.toNamed('${MyRoutes.selectPlayer}');
                                       },
                                     ),
@@ -117,29 +117,29 @@ class VolleyBallAllStarScreen extends GetView<AllStarController> {
                                     ),
                                   ],
                                 ),
-                                Column(
-                                  children: [
-                                    const SizedBox(height: 50),
-                                    SelectedPlayers(
-                                      maxPlayer: 2,
-                                      positionName: 'OH',
-                                      onTap: () {
-                                        controller.title = 'OH';
-                                        Get.toNamed('${MyRoutes.selectPlayer}');
-                                      },
-                                    ),
-                                  ],
+                                SelectedPlayers(
+                                  maxPlayer: 2,
+                                  positionName: 'MB',
+                                  onTap: () {
+                                    controller.title = 'MB';
+                                    Get.toNamed('${MyRoutes.selectPlayer}');
+                                  },
                                 ),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    SelectedPlayers(
-                                      maxPlayer: 4,
-                                      positionName: 'OPH',
-                                      onTap: () {
-                                        controller.title = 'OPH';
-                                        Get.toNamed('${MyRoutes.selectPlayer}');
-                                      },
+                                    Column(
+                                      children: [
+                                        const SizedBox(height: 50),
+                                        SelectedPlayers(
+                                          maxPlayer: 4,
+                                          positionName: 'OH',
+                                          onTap: () {
+                                            controller.title = 'OH';
+                                            Get.toNamed('${MyRoutes.selectPlayer}');
+                                          },
+                                        ),
+                                      ],
                                     ),
                                     const SizedBox(height: 16),
                                     SelectedPlayers(

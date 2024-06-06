@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart' as Dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import '../../../alert/alert_helper.dart';
 import '../../../alert/flash_status.dart';
 import '../../../service/method.dart';
@@ -16,12 +17,19 @@ class CoreController extends GetxController {
   final state = CoreState();
 
   Future<(bool, dynamic)> getMeData() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
     var (isSuccess, response) = await MyClient.instance.sendHttpRequest(
       urlPath: 'api/me/',
+      queryParameters: {'appVersion': packageInfo.version},
     );
 
     if (isSuccess) {
       state.meData.value = response['result'];
+      if (state.meData['type'] == 'update') {
+        _showForceUpdateDialog(storeUrl: GetPlatform.isAndroid ? state.meData['android'] : state.meData['ios']);
+      }
+
       if (state.meData['type'] == 'athelete' || state.meData['type'] == 'clientuser') {
         state.isLoggedIn.value = true;
       } else {
@@ -58,7 +66,7 @@ class CoreController extends GetxController {
     return (isSuccess, response);
   }
 
-  void _showForceUpdateDialog() {
+  void _showForceUpdateDialog({required String storeUrl}) {
     Get.dialog(
       barrierDismissible: false,
       PopScope(
@@ -82,12 +90,13 @@ class CoreController extends GetxController {
               const SizedBox(height: 8),
               Text(
                 'Sport Lab-н шинэ хувилбар гарсан байна та апп-аа шинэчилнэ үү. Баярлалаа',
+                textAlign: TextAlign.center,
                 style: const TextStyle(color: MyColors.grey500),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  BasicUtils.openUrl(url: GetPlatform.isAndroid ? Constants().PlayStoreUrl : Constants().AppStoreUrl);
+                  BasicUtils.openUrl(url: storeUrl);
                   if (Get.isDialogOpen!) Get.back();
                 },
                 child: Text(

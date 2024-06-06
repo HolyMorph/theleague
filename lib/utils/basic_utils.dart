@@ -41,16 +41,16 @@ class BasicUtils {
   }
 
   ///Url -ыг нээх функц
-  static Future<bool> openUrl({required String url, String? storeUrl}) async {
+  static Future<bool> openUrl({required String url, String? storeUrl, LaunchMode? launchMode}) async {
     try {
       if (GetPlatform.isAndroid) {
         String formattedUrl = Uri.encodeFull(url);
 
-        await launchUrlString(formattedUrl, mode: LaunchMode.externalApplication);
+        await launchUrlString(formattedUrl, mode: launchMode ?? LaunchMode.externalApplication);
       } else {
         String encodedUrl = Uri.encodeFull(url);
         if (await canLaunchUrlString(encodedUrl)) {
-          launchUrlString(encodedUrl, mode: LaunchMode.externalApplication);
+          launchUrlString(encodedUrl, mode: launchMode ?? LaunchMode.externalApplication);
         } else {
           launchUrl(Uri.parse(storeUrl ?? ''));
         }

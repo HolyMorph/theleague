@@ -20,8 +20,7 @@ class SearchMemberBottomSheet extends GetView<CreateTeamController> {
       color: Colors.white,
       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             'Тамирчин нэмэх',

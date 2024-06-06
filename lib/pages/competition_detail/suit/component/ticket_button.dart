@@ -21,27 +21,33 @@ class TicketButton extends StatelessWidget {
           top: BorderSide(width: 1, color: MyColors.grey300),
         ),
       ),
-      child: ElevatedButton(
-        onPressed: onTap,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              faIcon,
-              style: FaIcon.regular().copyWith(color: Colors.white, fontSize: 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: onTap,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  faIcon,
+                  style: FaIcon.regular().copyWith(color: Colors.white, fontSize: 16),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  btnText,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: 8),
-            Text(
-              btnText,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
+          ),
+          SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
+        ],
       ),
     );
   }

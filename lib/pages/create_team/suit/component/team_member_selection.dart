@@ -38,7 +38,6 @@ class TeamMemberSelection extends GetView<CreateTeamController> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                     ),
-                    isScrollControlled: true,
                     SearchMemberBottomSheet(),
                   );
                 },

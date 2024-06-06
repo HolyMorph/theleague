@@ -101,7 +101,7 @@ class RegisterCompetitionController extends GetxController {
           );
         }
       } else {
-        state.entityDetail.value = response['result'];
+        state.entityDetail.value = entry;
         Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
       }
     }

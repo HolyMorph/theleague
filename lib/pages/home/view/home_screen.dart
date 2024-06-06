@@ -23,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
       init: HomeController(),
       builder: (HomeController controller) {
         return Scaffold(
-          backgroundColor: MyColors.grey200,
           appBar: AppBar(
             backgroundColor: MyColors.primaryColor,
             automaticallyImplyLeading: false,
@@ -53,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
                             }
                           },
                           separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(height: 8);
+                            return const SizedBox(height: 12);
                           },
                         ),
             ),

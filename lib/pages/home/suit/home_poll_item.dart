@@ -15,10 +15,17 @@ class HomePollItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(0, 1),
+            blurRadius: 8,
+            color: MyColors.grey200,
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
