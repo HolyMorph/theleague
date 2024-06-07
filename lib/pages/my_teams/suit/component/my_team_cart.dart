@@ -18,7 +18,7 @@ class MyTeamCart extends GetView<MyTeamsController> {
         Get.toNamed(EditTeamRoutes.editTeamScreen + '/${team['code']}');
       },
       child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,

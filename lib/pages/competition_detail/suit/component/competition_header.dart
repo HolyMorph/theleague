@@ -46,11 +46,25 @@ class CompetitionHeader extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 32,
-          left: 8,
-          child: IconButton(
-            icon: Icon(Icons.chevron_left, color: Colors.white, size: 36),
-            onPressed: () => Get.back(),
+          top: 40,
+          left: 16,
+          child: Material(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            child: InkWell(
+              onTap: () => Get.back(),
+              borderRadius: BorderRadius.circular(8),
+              child: Container(
+                width: 40,
+                height: 40,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.transparent,
+                ),
+                child: Icon(Icons.chevron_left, size: 30, color: Colors.black),
+              ),
+            ),
           ),
         ),
       ],
