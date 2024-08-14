@@ -13,7 +13,7 @@ class MandateBottomSheet extends StatelessWidget {
   final String orgLogo;
   final String date;
   final String gameName;
-  final String gameType;
+  final String? gameType;
   MandateBottomSheet({
     required this.mandates,
     required this.gameType,
@@ -124,8 +124,8 @@ class MandateBottomSheet extends StatelessWidget {
                             CachedNetworkImage(
                               imageUrl: controller.state.meData['avatar'],
                               imageBuilder: (context, imageProvider) => Container(
-                                height: 150,
-                                width: 110,
+                                height: Get.size.width * 0.4,
+                                width: Get.size.width * 0.28,
                                 clipBehavior: Clip.hardEdge,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
@@ -134,13 +134,13 @@ class MandateBottomSheet extends StatelessWidget {
                               ),
                               placeholder: (context, url) => Container(
                                 alignment: Alignment.center,
-                                height: 150,
-                                width: 110,
+                                height: Get.size.width * 0.4,
+                                width: Get.size.width * 0.28,
                                 child: CupertinoActivityIndicator(animating: true, radius: 10, color: Colors.white),
                               ),
                               errorWidget: (context, url, error) => Container(
-                                height: 150,
-                                width: 110,
+                                height: Get.size.width * 0.4,
+                                width: Get.size.width * 0.28,
                                 child: Image.asset(
                                   'assets/images/ic_logo_small.png',
                                   color: MyColors.primaryColor,
@@ -169,7 +169,7 @@ class MandateBottomSheet extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  mandates[index]['teamName'],
+                                  mandates[index]['teamName'] ?? '',
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w600,
@@ -198,7 +198,7 @@ class MandateBottomSheet extends StatelessWidget {
                                     ),
                                     const Spacer(),
                                     Text(
-                                      gameType,
+                                      gameType ?? '',
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
@@ -211,11 +211,11 @@ class MandateBottomSheet extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                height: 150,
-                                width: 150,
+                                height: Get.size.width * 0.35,
+                                width: Get.size.width * 0.35,
                                 child: QrImageView(
                                   data: mandates[index]['_id'],
-                                  size: 150,
+                                  size: Get.size.width * 0.4,
                                   backgroundColor: Colors.white,
                                 ),
                               ),

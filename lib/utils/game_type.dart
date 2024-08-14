@@ -1,1 +1,1 @@
-enum GameType { Team, Individual }
+enum GameType { Team, Individual, Ticket }

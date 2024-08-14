@@ -36,7 +36,7 @@ class RegisterController extends GetxController {
     };
 
     var (isSuccess, response) = await MyClient.instance.sendHttpRequest(
-      urlPath: 'api/auth/register-all',
+      urlPath: Get.find<CoreController>().state.meData['type'] == 'appuser' ? 'api/auth/register-all' : 'api/auth/register-athelete',
       method: Method.post,
       body: body,
     );

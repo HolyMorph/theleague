@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../style/my_colors.dart';
 import '../../logic/home_controller.dart';
 
@@ -29,6 +28,7 @@ class HomeAppBar extends GetView<HomeController> {
         const SizedBox(height: 16),
         TextFormField(
           onChanged: (value) => _filterList(value),
+          textAlignVertical: TextAlignVertical.center,
           decoration: InputDecoration(
             prefixIcon: Icon(Icons.search, color: MyColors.grey500, size: 26),
             hintText: 'Хайх',

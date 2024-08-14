@@ -51,15 +51,16 @@ class RegisterButton extends GetView<CompetitionDetailController> {
                             ),
                           ],
                         ),
-                        Text(
-                          '${gameData['registrationText']}',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: MyColors.grey500,
+                        if (gameData['registrationText'] != null)
+                          Text(
+                            '${gameData['registrationText']}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.grey500,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),

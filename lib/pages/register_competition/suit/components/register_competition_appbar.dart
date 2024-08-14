@@ -74,11 +74,12 @@ class RegisterCompetitionAppbar extends GetView<RegisterCompetitionController> {
           ),
           Positioned(
             top: MediaQuery.of(context).viewPadding.top,
+            left: 16,
             child: Material(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
               child: InkWell(
-                onTap: () => Get.back(),
+                onTap: () => Get.back(result: true),
                 borderRadius: BorderRadius.circular(8),
                 child: Container(
                   width: 40,

@@ -286,9 +286,8 @@ class BasicUtils {
     );
   }
 
-  void notLoggedIn({required String route, required bool dismissible}) {
+  void notLoggedIn({required String route}) {
     Get.dialog(
-      barrierDismissible: dismissible,
       AlertDialog(
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
@@ -313,7 +312,7 @@ class BasicUtils {
                     style: FaIcon.regular().copyWith(fontSize: 16, color: MyColors.neutral900),
                   ),
                 ),
-                IconButton(onPressed: dismissible ? () => Get.back() : null, icon: Icon(Icons.close)),
+                IconButton(onPressed: () => Get.back(), icon: Icon(Icons.close)),
               ],
             ),
             const SizedBox(height: 12),

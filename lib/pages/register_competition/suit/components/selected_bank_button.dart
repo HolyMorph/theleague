@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../style/my_colors.dart';
 import '../../../../utils/fa_icon.dart';
+import '../../logic/register_competition_controller.dart';
 
-class SelectedBankButton extends StatelessWidget {
+class SelectedBankButton extends GetView<RegisterCompetitionController> {
   const SelectedBankButton({super.key});
 
   @override
@@ -104,7 +106,9 @@ class SelectedBankButton extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.until((route) => Get.currentRoute == controller.state.from.value);
+            },
             child: Text(
               'Төлбөр хийх',
               style: TextStyle(fontWeight: FontWeight.w600),

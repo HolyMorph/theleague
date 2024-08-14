@@ -74,7 +74,7 @@ class RegisterEmailScreen extends GetView<RegisterController> {
                 isRequired: true,
                 isActive: true,
                 textEditingController: controller.state.clientNameController,
-                hintText: 'Таний нэр',
+                hintText: 'Таны нэр',
                 errorText: 'Нэр оруулна уу',
                 prefix: FittedBox(
                   fit: BoxFit.scaleDown,

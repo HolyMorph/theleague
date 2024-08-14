@@ -5,6 +5,7 @@ import '../../../service/method.dart';
 import '../../../service/my_client.dart';
 import '../../../utils/basic_utils.dart';
 import '../../../utils/game_type.dart';
+import '../../core/logic/core_controller.dart';
 import '../../create_team/suit/create_team_routes.dart';
 import '../state/register_competition_state.dart';
 import '../suit/register_competition_routes.dart';
@@ -54,6 +55,17 @@ class RegisterCompetitionController extends GetxController {
     if (isSuccess) {
       state.gameData.value = response['result'];
       setGameType(gameType: state.gameData['gameType']);
+      if (state.gameType.value == GameType.Individual) {
+        var (isSuccess, response) = await myEntries();
+        if (!isSuccess) {
+          AlertHelper.showFlashAlert(
+            title: 'Алдаа',
+            message: response['message'] ?? 'Хүсэлт амжилтгүй',
+            status: FlashStatus.failed,
+          );
+        }
+      }
+
       if (state.gameType.value == GameType.Team) await getMyTeams();
     }
 
@@ -67,7 +79,7 @@ class RegisterCompetitionController extends GetxController {
       method: Method.post,
       body: {
         'game_code': '${state.gameData['code']}',
-        'team_code': '${state.teamData['team']['code']}',
+        if (state.gameData['gameType'] == 'team') 'team_code': '${state.teamData['team']['code']}',
       },
     );
     state.isLoading.value = false;
@@ -87,13 +99,20 @@ class RegisterCompetitionController extends GetxController {
     state.isLoading.value = false;
     if (isSuccess) {
       state.entryList.value = response['result']['entries'] ?? [];
-      dynamic entry = state.entryList.firstWhereOrNull((entry) => entry['teamCode'] == state.teamData['team']['code']) ?? {};
+      dynamic entry;
+      if (state.gameType.value == GameType.Team)
+        entry = state.entryList.firstWhereOrNull((entry) => entry['teamCode'] == state.teamData['team']['code']) ?? {};
+
+      if (state.gameType.value == GameType.Individual)
+        entry = state.entryList.firstWhereOrNull((entry) => entry['code'] == Get.find<CoreController>().state.meData['code']) ?? {};
 
       if (entry.isEmpty) {
         var (isSuccess, response) = await joinGame();
         if (isSuccess) {
-          Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
+          if (state.gameType.value == GameType.Team) Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
+          if (state.gameType.value == GameType.Individual) Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
         } else {
+          if (state.gameType.value == GameType.Individual) Get.back();
           AlertHelper.showFlashAlert(
             title: 'Уучлаарай',
             message: response['message'] ?? 'Хүсэлт амжилтгүй',
@@ -102,7 +121,8 @@ class RegisterCompetitionController extends GetxController {
         }
       } else {
         state.entityDetail.value = entry;
-        Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
+        if (state.gameType.value == GameType.Team) Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
+        if (state.gameType.value == GameType.Individual) Get.toNamed(RegisterCompetitionRoutes.registerCompetitionConfirmation);
       }
     }
     return (isSuccess, response);
@@ -137,7 +157,7 @@ class RegisterCompetitionController extends GetxController {
   void onInit() async {
     state.gameId.value = Get.parameters['id'] ?? '';
     state.from.value = Get.parameters['from'] ?? '';
-    await getGameDetail();
+    getGameDetail();
     super.onInit();
   }
 }

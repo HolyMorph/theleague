@@ -71,6 +71,7 @@ class SettingsTextField extends StatelessWidget {
           keyboardType: inputType,
           initialValue: initialValue,
           onChanged: onChanged,
+          textAlignVertical: TextAlignVertical.center,
           obscureText: obscureText ?? false,
           decoration: InputDecoration(
             prefixIcon: prefix,

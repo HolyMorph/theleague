@@ -18,12 +18,12 @@ class CompetitionHeader extends StatelessWidget {
           fit: BoxFit.contain,
           placeholder: (context, url) => Container(
             alignment: Alignment.center,
-            height: 250,
+            height: 150,
             width: double.infinity,
             child: CupertinoActivityIndicator(animating: true, radius: 10, color: MyColors.primaryColor),
           ),
           errorWidget: (context, url, error) => Container(
-            height: 250,
+            height: 150,
             width: double.infinity,
             child: Image.asset(
               'assets/images/ic_logo_bg.png',

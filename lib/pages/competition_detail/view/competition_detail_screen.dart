@@ -9,6 +9,7 @@ import '../../../utils/basic_utils.dart';
 import '../../../utils/fa_icon.dart';
 import '../../../utils/qr_scanner.dart';
 import '../../competition_detail_parent/suit/component/parent_poll_item.dart';
+import '../../core/logic/core_controller.dart';
 import '../../judge/suit/judge_routes.dart';
 import '../../register_competition/suit/register_competition_routes.dart';
 import '../../theleague/the_league_splash/suit/league_splash_routes.dart';
@@ -144,15 +145,17 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
                           BasicUtils().description(text: '${controller.state.gameData['description']}'),
                           const SizedBox(height: 24),
                           if (controller.state.gameData['allowMultipleRegistration'] != null &&
-                              controller.state.gameData['allowMultipleRegistration'])
+                              controller.state.gameData['allowMultipleRegistration'] &&
+                              (controller.state.gameData['gameType'] == 'team'))
                             InkWell(
                               onTap: () async {
                                 if (await controller.state.gameData['allowedUserTypes']
                                     .any((type) => type == controller.coreController.state.meData['type'])) {
-                                  Get.toNamed(
+                                  dynamic refresh = await Get.toNamed(
                                     '${RegisterCompetitionRoutes.registerCompetitionScreen}/${controller.state.gameCode.value}',
                                     parameters: {'from': Get.currentRoute},
-                                  )?.then((value) => controller.getGameDetail());
+                                  );
+                                  if (refresh == null) controller.getGameDetail();
                                 } else {
                                   AlertHelper.showFlashAlert(
                                     title: 'Уучлаарай',
@@ -223,12 +226,19 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
                     RegisterButton(
                       title: 'Оролцох',
                       onTap: () async {
+                        if (controller.state.gameData['registrationRequired'] == true && !Get.find<CoreController>().state.isLoggedIn.value) {
+                          BasicUtils().notLoggedIn(route: Get.currentRoute);
+
+                          return;
+                        }
                         if (await controller.state.gameData['allowedUserTypes']
-                            .any((type) => type == controller.coreController.state.meData['type'])) {
-                          Get.toNamed(
+                                .any((type) => type == controller.coreController.state.meData['type']) ||
+                            Get.find<CoreController>().state.isLoggedIn.value) {
+                          dynamic refresh = await Get.toNamed(
                             '${RegisterCompetitionRoutes.registerCompetitionScreen}/${controller.state.gameCode.value}',
                             parameters: {'from': Get.currentRoute},
-                          )?.then((value) => controller.getGameDetail());
+                          );
+                          if (refresh == null) controller.getGameDetail();
                         } else {
                           AlertHelper.showFlashAlert(
                             title: 'Уучлаарай',
