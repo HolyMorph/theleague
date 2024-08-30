@@ -6,6 +6,7 @@ import '../../../service/my_client.dart';
 import '../../../utils/basic_utils.dart';
 import '../../../utils/game_type.dart';
 import '../../core/logic/core_controller.dart';
+import '../../core/suit/core_routes.dart';
 import '../../create_team/suit/create_team_routes.dart';
 import '../state/register_competition_state.dart';
 import '../suit/register_competition_routes.dart';
@@ -43,6 +44,32 @@ class RegisterCompetitionController extends GetxController {
       );
     }
 
+    return (isSuccess, response);
+  }
+
+  Future<(bool, dynamic)> checkInvoice() async {
+    state.isLoading.value = true;
+    var (isSuccess, response) = await MyClient().sendHttpRequest(
+      urlPath: 'api/pmnt/check-payment',
+      method: Method.post,
+      body: {
+        'gameCode': '${state.entityDetail['game_code']}',
+        'entryCode': '${state.entityDetail['entryCode']}',
+      },
+    );
+    state.isLoading.value = false;
+    if (isSuccess) {
+      if (response['result']['entryStatus'] == 'ready' || response['result']['entryStatus'] == 'owner-ready') {
+        if (state.from.value.isNotEmpty) {
+          Get.until((route) => Get.currentRoute == '${state.from.value}');
+        } else {
+          Get.until((route) => Get.currentRoute == CoreRoutes.coreScreen);
+        }
+        AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Төлбөр амжилттай хийгдлээ');
+      }
+    } else {
+      AlertHelper.showFlashAlert(title: 'Уучлаарай', message: response['message'] ?? 'Хүсэлт амжилтгүй');
+    }
     return (isSuccess, response);
   }
 

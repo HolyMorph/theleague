@@ -26,7 +26,7 @@ class JudgeController extends GetxController {
     );
     state.isLoading.value = false;
     if (isSuccess) {
-      state.isChecked.value = true;
+      state.isChecked.value = response['result']['entryStatus'] == 'checked' ? true : false;
     }
     return (isSuccess, response);
   }

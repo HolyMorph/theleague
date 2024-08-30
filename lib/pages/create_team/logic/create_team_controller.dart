@@ -32,7 +32,7 @@ class CreateTeamController extends GetxController {
 
     List<String> members = state.teamMembers.map((entry) => entry['code'].toString()).toList();
     dynamic body = {
-      'gender': state.selectedGender.value == 'Эрэгтэй' ? 'male' : 'female',
+      'gender': setGender(),
       'sportCategory': state.selectedType.value,
       'name': state.teamName.value,
       'logoUrl': state.logoUrl.value,
@@ -74,5 +74,24 @@ class CreateTeamController extends GetxController {
     getGameTypes();
     state.teamMembers.add(Get.find<CoreController>().state.meData);
     super.onInit();
+  }
+
+  String setGender() {
+    switch (state.selectedGender.value) {
+      case 'Эрэгтэй':
+        {
+          return 'male';
+        }
+      case 'Эмэгтэй':
+        {
+          return 'female';
+        }
+      case 'Холимог':
+        {
+          return 'mixed';
+        }
+      default:
+        return '';
+    }
   }
 }

@@ -233,18 +233,26 @@ class CompetitionDetailScreen extends GetView<CompetitionDetailController> {
                         }
                         if (await controller.state.gameData['allowedUserTypes']
                                 .any((type) => type == controller.coreController.state.meData['type']) ||
-                            Get.find<CoreController>().state.isLoggedIn.value) {
+                            (Get.find<CoreController>().state.isLoggedIn.value && controller.state.gameData['status'] == 20)) {
                           dynamic refresh = await Get.toNamed(
                             '${RegisterCompetitionRoutes.registerCompetitionScreen}/${controller.state.gameCode.value}',
                             parameters: {'from': Get.currentRoute},
                           );
                           if (refresh == null) controller.getGameDetail();
                         } else {
-                          AlertHelper.showFlashAlert(
-                            title: 'Уучлаарай',
-                            message: 'Та тамирчнаар нэвтрэх шаардлагатай',
-                            status: FlashStatus.warning,
-                          );
+                          if (controller.state.gameData['status'] != 20 && Get.find<CoreController>().state.isLoggedIn.value) {
+                            AlertHelper.showFlashAlert(
+                              title: 'Уучлаарай',
+                              message: 'Бүртгэл эхлээгүй байна',
+                              status: FlashStatus.warning,
+                            );
+                          } else {
+                            AlertHelper.showFlashAlert(
+                              title: 'Уучлаарай',
+                              message: 'Та тамирчнаар нэвтрэх шаардлагатай',
+                              status: FlashStatus.warning,
+                            );
+                          }
                         }
                       },
                     ),

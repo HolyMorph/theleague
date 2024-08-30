@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import '../../../alert/alert_helper.dart';
+import '../../../alert/flash_status.dart';
 import '../../../style/my_colors.dart';
-import '../../settings/suit/components/settings_textfield.dart';
 import '../logic/register_controller.dart';
 import '../suit/components/register_next_button.dart';
 
@@ -22,22 +23,68 @@ class RegisterPagePersonal extends GetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SettingsTextField(
-                    title: 'Овог',
-                    hintText: 'Овог',
-                    textEditingController: controller.state.lastNameController,
-                    isRequired: true,
-                    errorText: 'Овог оруулна уу',
-                    isActive: true,
+                  TextFormField(
+                    controller: controller.state.lastNameController,
+                    textCapitalization: TextCapitalization.sentences,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp(r'[\u0400-\u04FF\u0500-\u052F\u2DE0-\u2DFF]+'),
+                      ),
+                    ],
+                    decoration: InputDecoration(hintText: 'Овог'),
+                    onChanged: (input) {
+                      if (!RegExp(r'[\u0400-\u04FF\u0500-\u052F\u2DE0-\u2DFF]+').hasMatch(input)) {
+                        AlertHelper.showFlashAlert(
+                          title: 'Уучлаарай',
+                          message: 'Крилл үсгээр бичнэ үү',
+                          status: FlashStatus.warning,
+                        );
+                      }
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Овог оруулна уу';
+                      }
+
+                      return null;
+                    },
                   ),
-                  const SizedBox(height: 16),
-                  SettingsTextField(
-                    title: 'Нэр',
-                    hintText: 'Нэр',
-                    textEditingController: controller.state.firstNameController,
-                    isRequired: true,
-                    errorText: 'Нэр оруулна уу',
-                    isActive: true,
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.warning,
+                        size: 16,
+                        color: MyColors.statusWarning,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Зөвхөн крилл үсгээр бичнэ үү.',
+                        style: TextStyle(fontSize: 12, color: MyColors.grey500),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    controller: controller.state.firstNameController,
+                    textCapitalization: TextCapitalization.sentences,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp(r'[\u0400-\u04FF\u0500-\u052F\u2DE0-\u2DFF]+'),
+                      ),
+                    ],
+                    decoration: InputDecoration(hintText: 'Нэр'),
+                    onChanged: (input) {
+                      if (!RegExp(r'[\u0400-\u04FF\u0500-\u052F\u2DE0-\u2DFF]+').hasMatch(input)) {
+                        AlertHelper.showFlashAlert(title: 'Уучлаарай', message: 'Крилл үсгээр бичнэ үү', status: FlashStatus.warning);
+                      }
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Нэр оруулна уу';
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 16),
                   Column(

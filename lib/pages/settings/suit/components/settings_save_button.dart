@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../alert/alert_helper.dart';
+import '../../../../alert/flash_status.dart';
 import '../../../../style/my_colors.dart';
+import '../../../core/logic/core_controller.dart';
+import '../../logic/settings_controller.dart';
 
-class SettingsSaveButton extends StatelessWidget {
+class SettingsSaveButton extends GetView<SettingsController> {
   const SettingsSaveButton({super.key});
 
   @override
@@ -27,8 +32,28 @@ class SettingsSaveButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
         ),
-        onPressed: () {},
-        child: Text('Хадгалах'),
+        onPressed: () async {
+          if (controller.state.height.isNotEmpty || controller.state.weight.isNotEmpty) {
+            var (isSuccess, response) = await controller.changeHeightWeight();
+            if (isSuccess) {
+              if (isSuccess) {
+                AlertHelper.showFlashAlert(title: 'Амжилттай', message: 'Мэдээлэл амжилттай солигдлоо');
+                Get.find<CoreController>().getMeData();
+              } else {
+                AlertHelper.showFlashAlert(
+                  title: 'Алдаа',
+                  message: '${response['message']}',
+                  status: FlashStatus.failed,
+                );
+              }
+            }
+          }
+        },
+        child: controller.state.isLoading.value
+            ? const Center(
+                child: CircularProgressIndicator(color: Colors.white),
+              )
+            : Text('Хадгалах'),
       ),
     );
   }

@@ -50,7 +50,7 @@ class CreateTeamScreen extends GetWidget<CreateTeamController> {
                             title: 'Хүйс',
                             isRequired: true,
                             onChanged: (value) => controller.state.selectedGender.value = value,
-                            selectedAbleList: ['Эрэгтэй', 'Эмэгтэй'],
+                            selectedAbleList: ['Эрэгтэй', 'Эмэгтэй', 'Холимог'],
                           ),
                           const SizedBox(height: 16),
                           MyDropDown(

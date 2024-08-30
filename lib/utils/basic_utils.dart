@@ -23,7 +23,7 @@ class BasicUtils {
         text: value.capitalizeFirst,
         style: TextStyle(
           color: MyColors.grey500,
-          fontSize: 12,
+          fontSize: 14,
           fontFamily: 'GIP',
         ),
         children: <InlineSpan>[
@@ -31,7 +31,7 @@ class BasicUtils {
             text: ' ${word}',
             style: TextStyle(
               color: MyColors.grey500,
-              fontSize: 12,
+              fontSize: 14,
               fontFamily: 'GIP',
             ),
           ),

@@ -9,6 +9,7 @@ import '../../../utils/my_storage.dart';
 import '../../core/logic/core_controller.dart';
 import '../../core/suit/core_type.dart';
 import '../../my_teams/suit/my_teams_routes.dart';
+import '../../settings/suit/settings_routes.dart';
 import '../../webview/my_web_view.dart';
 import '../logic/profile_controller.dart';
 import '../suit/components/personal_info.dart';
@@ -71,14 +72,15 @@ class _ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveCl
                   children: [
                     Get.find<CoreController>().state.meData['type'] == 'clientuser' ? ProfileNotAthlete() : PersonalInfo(),
                     const SizedBox(height: 16),
-                    // ProfileMenuItem(
-                    //   onTap: () {
-                    //     Get.toNamed(SettingsRoutes.settingsScreen);
-                    //   },
-                    //   icon: FaIcon.user_edit,
-                    //   title: 'Хувийн мэдээлэл',
-                    // ),
-                    // const SizedBox(height: 4),
+                    if (Get.find<CoreController>().state.meData['type'] == 'athelete')
+                      ProfileMenuItem(
+                        onTap: () {
+                          Get.toNamed(SettingsRoutes.settingsScreen);
+                        },
+                        icon: FaIcon.user_edit,
+                        title: 'Хувийн мэдээлэл',
+                      ),
+                    if (Get.find<CoreController>().state.meData['type'] == 'athelete') const SizedBox(height: 4),
                     // ProfileMenuItem(
                     //   onTap: () {},
                     //   icon: FaIcon.user_square,

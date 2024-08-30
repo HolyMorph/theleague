@@ -82,6 +82,7 @@ class MandateBottomSheet extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                                  color: Colors.white,
                                 ),
                               ),
                               placeholder: (context, url) => Container(
@@ -211,11 +212,10 @@ class MandateBottomSheet extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                height: Get.size.width * 0.35,
-                                width: Get.size.width * 0.35,
+                                height: Get.size.width * 0.3,
+                                width: Get.size.width * 0.3,
                                 child: QrImageView(
                                   data: mandates[index]['_id'],
-                                  size: Get.size.width * 0.4,
                                   backgroundColor: Colors.white,
                                 ),
                               ),

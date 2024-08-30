@@ -46,7 +46,7 @@ class CompetitionHeader extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 40,
+          top: MediaQuery.of(context).viewPadding.top,
           left: 16,
           child: Material(
             color: Colors.white,
